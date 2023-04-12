@@ -1,10 +1,10 @@
-import { SignupComponent } from './signup/signup.component';
+import { AdminHomepageComponent } from './components/admin-homepage/admin-homepage.component';
+import { SignupComponent } from './components/signup/signup.component';
 import { AppRoutingModule } from './app.routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     SidenavComponent,
     LoginmodalComponent,
-    SignupComponent
+    SignupComponent,
+    AdminHomepageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     MatCardModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

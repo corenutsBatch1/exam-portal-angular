@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import swal from 'sweetalert';
-import { User } from '../components/model/User';
+import { User } from '../../model/model/User';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +15,10 @@ export class SignupComponent {
 
   registerNewUser(newUser:User){
     console.log(newUser)
-    this.http.post(`http://localhost:8080/registerUser`, newUser).subscribe(data=> this.data = data);
-    swal("Good job!", "Registered successfully", "success");
+    this.http.post(`http://localhost:8080/registerUser`, newUser).subscribe(data=> {
+      if(data !=null){
+        swal("Registered successfully", "", "success");
+      }
+    });
   }
 }

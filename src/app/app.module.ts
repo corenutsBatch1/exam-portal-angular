@@ -1,3 +1,4 @@
+import { AdminSidenavComponent } from './components/admin-homepage/admin-sidenav/admin-sidenav.component';
 import { AdminHomepageComponent } from './components/admin-homepage/admin-homepage.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -26,7 +27,9 @@ import { MatMenuModule } from '@angular/material/menu';
     SidenavComponent,
     LoginmodalComponent,
     SignupComponent,
-    AdminHomepageComponent
+    AdminHomepageComponent,
+    AdminSidenavComponent,
+    AdminSidenavComponent
   ],
   imports: [
     BrowserModule,

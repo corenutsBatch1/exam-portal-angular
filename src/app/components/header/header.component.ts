@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginserviceService } from './../loginmodal/loginservice.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  constructor(public loginservice : LoginserviceService){}
+
+  logOut(){
+    this.loginservice.isLoggedIn = false;
+  }
 }

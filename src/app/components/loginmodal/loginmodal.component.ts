@@ -1,7 +1,8 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { User } from '../../model/model/User';
-import { Component, TemplateRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../../model/model/User';
+import { LoginserviceService } from './loginservice.service';
 
 @Component({
   selector: 'app-loginmodal',
@@ -11,16 +12,24 @@ import { Router } from '@angular/router';
 export class LoginmodalComponent {
   userLogin:User = new User();
   validUser?:User;
-  constructor(private http:HttpClient,private router: Router) {}
+
+
+  constructor(private http:HttpClient,private router: Router, private loginservice: LoginserviceService) {}
 
   login(user:User){
     console.log(user)
     this.http.post(`http://localhost:8080/api/loginUser`, user).subscribe(data => {
       this.validUser = data;
-      console.log(this.validUser.role);
-      if(this.validUser.role == "ADMIN"){
-        this.router.navigate(['/adminpage']);
-        history.pushState(null, '');
+
+      if(this.validUser != null){
+        if(this.validUser.role == "ADMIN"){
+          this.router.navigate(['/adminpage']);
+          this.loginservice.isLoggedIn = true;
+        }else{
+
+        }
+      }else{
+        sweetAlert("Invalid Credentials", "Register and try again", "error");
       }
     })
   }

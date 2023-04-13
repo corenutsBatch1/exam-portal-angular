@@ -15,7 +15,7 @@ export class LoginmodalComponent {
 
   login(user:User){
     console.log(user)
-    this.http.post(`http://localhost:8080/loginUser`, user).subscribe(data => {
+    this.http.post(`http://localhost:8080/api/loginUser`, user).subscribe(data => {
       this.validUser = data;
       console.log(this.validUser.role);
       if(this.validUser.role == "ADMIN"){

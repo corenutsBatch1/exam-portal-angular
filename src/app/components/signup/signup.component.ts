@@ -16,7 +16,7 @@ export class SignupComponent {
 
   registerNewUser(newUser:User){
     console.log(newUser)
-    this.http.post(`http://localhost:8080/registerUser`, newUser).subscribe(data=> {
+    this.http.post(`http://localhost:8080/api/registerUser`, newUser).subscribe(data=> {
       if(data !=null){
         swal("Registered successfully", "", "success");
         this.router.navigate(['/login']);

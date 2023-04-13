@@ -17,7 +17,7 @@ import { LoginmodalComponent } from './components/loginmodal/loginmodal.componen
 import {MatCardModule} from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatMenuModule } from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     FormsModule,
     HttpClientModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],

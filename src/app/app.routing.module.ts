@@ -10,11 +10,10 @@ import { AdminHomepageComponent } from './components/admin-homepage/admin-homepa
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginmodalComponent},
       { path: 'signup', component: SignupComponent},
       {path : 'adminpage', component : AdminHomepageComponent},
-      { path: '**', redirectTo: 'home' }
+      { path: '**', redirectTo: 'login' }
     ])
   ],
   exports: [

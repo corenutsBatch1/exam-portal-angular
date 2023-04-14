@@ -1,4 +1,9 @@
   <form id="loginform">
+    <mat-card class="card">
+      <p class="text-center">
+        <span class="left"><mat-icon>account_circle</mat-icon></span>
+        <span class="right"><h1>Login</h1></span>
+    </p>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="userLogin.email" name="email" required>
@@ -7,6 +12,18 @@
       <label for="exampleInputPassword1">Password</label>
       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="userLogin.password" name="password" required>
     </div>
-    <button (click)="login(this.userLogin)" class="btn btn-primary btn-sm" >Login</button>
+
+    <div class="form-group text-center">
+
+    <button (click)="login(this.userLogin)" class="btn btn-primary btn-sm" >Login
+
+    </button>
+    <button type="reset" class="btn btn-primary btn-sm ml-2" >Clear</button>
+    </div>
+
+
+
+  </mat-card>
   </form>
+
 

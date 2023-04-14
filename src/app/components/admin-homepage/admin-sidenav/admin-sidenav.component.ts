@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-sidenav',
@@ -6,5 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-sidenav.component.css']
 })
 export class AdminSidenavComponent {
+  constructor(private router:Router){}
+
+  name:string='';
+  value:string='';
+
+  clickEvent(name:any){
+    console.log(name);
+    if(name=='result'){
+      this.router.navigateByUrl("adminpage/result");
+    }
+  }
+
+
+
+
 
 }

@@ -19,6 +19,12 @@ import {MatCardModule} from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { UserResultComponent } from './components/user-result/user-result.component';
+import { MatTableModule } from '@angular/material/table'  ;
+import { MatInputModule } from '@angular/material/input';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +35,8 @@ import { MatMenuModule } from '@angular/material/menu';
     SignupComponent,
     AdminHomepageComponent,
     AdminSidenavComponent,
-    AdminSidenavComponent
+    AdminSidenavComponent,
+    UserResultComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,11 @@ import { MatMenuModule } from '@angular/material/menu';
     MatCardModule,
     FormsModule,
     HttpClientModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { LoginmodalComponent } from './components/loginmodal/loginmodal.component';
 import {MatCardModule} from '@angular/material/card';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider';
@@ -24,6 +24,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { UserResultComponent } from './components/user-result/user-result.component';
 import { MatTableModule } from '@angular/material/table'  ;
 import { MatInputModule } from '@angular/material/input';
+import { QuestionBankComponent } from './components/question-bank/question-bank.component';
+import { AddquestionComponent } from './components/addquestion/addquestion.component';
+import {MatSelectModule} from '@angular/material/select';
+import { SettingsComponent } from './components/Settings/Settings.component';
+import { AddSubjectComponent } from './components/AddSubject/AddSubject.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,11 @@ import { MatInputModule } from '@angular/material/input';
     AdminHomepageComponent,
     AdminSidenavComponent,
     AdminSidenavComponent,
-    UserResultComponent
+    UserResultComponent,
+    QuestionBankComponent,
+    AddquestionComponent,
+    SettingsComponent,
+    AddSubjectComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +65,8 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatTableModule,
     MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

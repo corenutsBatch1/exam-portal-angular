@@ -17,7 +17,15 @@ export class AdminSidenavComponent {
     if(name=='result'){
       this.router.navigateByUrl("adminpage/result");
     }
+    if(name=='questionbank'){
+      this.router.navigateByUrl("adminpage/questionbank");
+    }
+    if(name=='settings'){
+      this.router.navigateByUrl("adminpage/settings");
+    }
+
   }
+
 
 
 

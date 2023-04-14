@@ -1,0 +1,23 @@
+<!-- <p>settings works!</p> -->
+
+<div class="allign" *ngIf="show" >
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar ></div>
+      <mat-card-title>ADD SUBJECT</mat-card-title>
+      <mat-card-subtitle class="text-center">adding subjects</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://cdn3.iconfinder.com/data/icons/outline-color-common-5/32/help-add-512.png" alt="ADD QUESTION">
+    <mat-card-content>
+      <p>
+         Adding the Subject and Topic.
+      </p>
+    </mat-card-content>
+    <mat-card-actions >
+      <button mat-button (click)="loadAddSubjectPage()"  >Add Subject</button>
+    </mat-card-actions>
+
+  </mat-card>
+
+  </div>
+  <router-outlet></router-outlet>

@@ -16,21 +16,22 @@ export class LoginmodalComponent {
 
   constructor(private http:HttpClient,private router: Router, private loginservice: LoginserviceService) {}
 
-  login(user:User){
-    console.log(user)
-    this.http.post(`http://localhost:8080/api/loginUser`, user).subscribe(data => {
-      this.validUser = data;
+  login(user: User) {
+    console.log(user);
+    this.http
+      .post(`http://localhost:8088/api/loginUser`, user)
+      .subscribe((data) => {
+        this.validUser = data;
 
-      if(this.validUser != null){
-        if(this.validUser.role == "ADMIN"){
-          this.router.navigate(['/adminpage']);
-          this.loginservice.isLoggedIn = true;
-        }else{
-
-        }
-      }else{
-        sweetAlert("Invalid Credentials", "Register and try again", "error");
-      }
-    })
-  }
+        if (this.validUser != null) {
+          if (this.validUser.role == 'ADMIN') {
+            this.router.navigate(['/adminpage']);
+            this.loginservice.isLoggedIn = true;
+          } else if (this.validUser.role == 'USER') {
+          }
+        } else {
+          sweetAlert("Invalid Credentials", "Register and try again", "error");
+        }
+      });
+  }
 }

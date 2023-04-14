@@ -3,3 +3,39 @@
   margin-left: 30%;
   margin-top: 5%;
 }
+
+
+#card{
+  align-items: center;
+  margin-left: 100px;
+  margin-right:100px;
+}
+
+
+.mat-icon {
+  height: 50px;
+  width: 50px;
+  font-size: 50px;
+}
+
+span {
+  display:inline-block;
+  width:100px;
+  /* background-color:palevioletred; */
+
+}
+
+.left{
+  display: block;
+  margin-left:25%;
+  float:left;
+  width: 100px;
+}
+
+.right{
+  display: block;
+  margin-right: 28%;
+  margin-top: -45px;
+  float:right;
+  width: 100px;
+}

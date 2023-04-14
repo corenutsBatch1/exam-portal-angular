@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container">
+<!-- <mat-drawer-container class="example-container">
   <mat-drawer mode="side" opened>
     <button mat-raised-button class="side-nav-button">
       <mat-icon color="primary">settings</mat-icon>
@@ -12,4 +12,48 @@
       Exam Result</button>
   </mat-drawer>
 
-</mat-drawer-container>
+</mat-drawer-container> -->
+
+
+ <div class="bootstrap-wrapper">
+  <div class="container-fulid">
+    <mat-list>
+      <mat-list-item style="margin-left: -21px;">
+        <button mat-raised-button class="side-nav-button"  (click)="clickEvent('settings')">
+          <mat-icon color="primary" name="settings">settings</mat-icon>
+          Settings
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <button mat-raised-button class="side-nav-button">
+          <mat-icon color="primary">folder</mat-icon>
+          Question Bank
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item style="margin-left:-8px;">
+        <button mat-raised-button class="side-nav-button">
+          <mat-icon color="primary">assignment</mat-icon>
+          Create paper
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <button mat-raised-button class="side-nav-button">
+          <mat-icon color="primary" size="large">event</mat-icon>
+          Schedule Exam
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item style="margin-left:-8px;">
+        <button mat-raised-button class="side-nav-button" (click)="clickEvent('result')">
+          <mat-icon color="primary">event</mat-icon>
+          Exams Result
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
+
+

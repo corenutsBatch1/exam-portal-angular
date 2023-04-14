@@ -30,6 +30,9 @@ span {
   margin-left:25%;
   float:left;
   width: 100px;
+  position: absolute;
+  left: -32px;
+
 }
 
 .right{
@@ -38,4 +41,7 @@ span {
   margin-top: -45px;
   float:right;
   width: 100px;
+  position: absolute;
+    right: 50px;
+    top: 82px;
 }

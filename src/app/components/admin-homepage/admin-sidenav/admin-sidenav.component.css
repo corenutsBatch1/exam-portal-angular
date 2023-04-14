@@ -1,6 +1,7 @@
 .example-container {
   width: 100%;
   height: 90%;
+  border: 1px solid #555;
 }
 mat-drawer{
 width:15%;
@@ -11,7 +12,16 @@ mat-button{
 .side-nav-button{
   width: 100%;
   margin-top: 2px;
-  text-align: left;
 }
 
-
+.mat-drawer-container mat-drawer {
+  display: flex;
+  flex-direction: column;
+}
+.mat-drawer-container mat-drawer button {
+  margin: 10px;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  text-align:left;
+}

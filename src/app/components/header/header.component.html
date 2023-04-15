@@ -1,7 +1,8 @@
-<mat-toolbar color="primary">
-  <span>Corenuts</span>
+<mat-toolbar >
+  <span><mat-icon>assignment</mat-icon>
+    Scoresharp</span>
   <span class="example-spacer"></span>
-  <button *ngIf="!loginservice.isLoggedIn" routerLink="/login" mat-button>Login</button>
-  <button *ngIf="!loginservice.isLoggedIn" mat-button routerLink="/signup">Register</button>
-  <button *ngIf="loginservice.isLoggedIn" (click)="logOut()" mat-button routerLink="/login">Logout</button>
+  <button *ngIf="!loginservice.isLoggedIn"  routerLink="/login" mat-button>Login</button>
+  <button *ngIf="!loginservice.isLoggedIn"   mat-button routerLink="/signup">Register</button>
+  <button *ngIf="loginservice.isLoggedIn"   (click)="logOut()" mat-button routerLink="/login">Logout</button>
 </mat-toolbar>

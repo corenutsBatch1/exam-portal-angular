@@ -3,6 +3,16 @@
 }
 
 button:hover{
-  background-color: darkblue;
+  background-color: white;
+  color: black;
+}
+
+mat-toolbar{
+  background: #1f2937;
+  color: white;
+}
+
+body {
+  background: #eee;
 }
 

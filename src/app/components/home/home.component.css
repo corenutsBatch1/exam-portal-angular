@@ -1,4 +1,14 @@
-*{
-  background-color: red;
-  height: 200px;
+/* img
+{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 50%;
+} */
+.center {
+  display: block;
+  padding: 40px;
+
+ margin: auto;
+  width: 60%;
 }

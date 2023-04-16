@@ -15,12 +15,14 @@ import { AddSubjectComponent } from './components/AddSubject/AddSubject.componen
 @NgModule({
   imports: [
     RouterModule.forRoot([
+      {path:'home',component:HomeComponent},
       { path: 'login', component: LoginmodalComponent },
       { path: 'signup', component: SignupComponent },
       {
         path: 'adminpage',
         component: AdminHomepageComponent,
         children: [
+          {path:'home',component:HomeComponent},
           { path: 'result', component: UserResultComponent },
           {
             path: 'questionbank',component: QuestionBankComponent,

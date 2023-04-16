@@ -57,7 +57,7 @@ addSubjectInfo()
     response=>{
       //console.log(response);
       alert("Submited");
-      this.router.navigate(['adminpage']);
+      this.goBack();
     }
   );
 }

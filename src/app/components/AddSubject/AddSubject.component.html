@@ -1,9 +1,7 @@
-<div class="container mt-5" >
 
-  <form class="container" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <mat-card color="primary" class="card" style="height:300px;width:300%;display:flex;justify-content:center;align-items:center;"  >
 
-    <mat-card color="primary" class="card" style="height:300px;width:300%;display:flex;justify-content:center;align-items:center;">
-
+      <form  [formGroup]="myForm" (ngSubmit)="onSubmit()"  >
       <mat-card-content >
 
       <h2 style="text-align: center;">Add Subject</h2>
@@ -41,11 +39,12 @@
       </div>
 
 
-      </mat-card-content>
+      </mat-card-content></form>
+
     </mat-card>
 
-  </form>
-</div>
+
+
   <!-- <form>
 
     <div class="form-group">

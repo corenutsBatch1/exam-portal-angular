@@ -72,9 +72,13 @@ export class AddquestionComponent implements OnInit{
     console.log(this.subject_id)
     console.log(this.selectedsubject)
     console.log(id)
-    this.http.post(`http://localhost:8088/api/addquestion/${id}`, Questions).subscribe(data=>
-    console.log(data))
-
+    this.http.post(`http://localhost:8088/api/addquestion/${id}`, Questions).subscribe(
+      response=>{
+        //console.log(response);
+        alert("Submited");
+        this.goBack();
+      }
+    );
   }
 //   backClicked() {
 // this.route.navigate(["/adminpage/questionbank"])

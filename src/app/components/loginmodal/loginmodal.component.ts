@@ -25,10 +25,11 @@ export class LoginmodalComponent {
 
         if (this.validUser != null) {
           if (this.validUser.role == 'ADMIN') {
-            this.router.navigate(['/adminpage']);
+            this.router.navigate(['/adminpage/home']);
             this.loginservice.isLoggedIn = true;
           } else if (this.validUser.role == 'USER') {
-           
+            this.router.navigate(['/home']);
+            this.loginservice.isLoggedIn = true;
           }
         } else {
           sweetAlert("Invalid Credentials", "Register and try again", "error");

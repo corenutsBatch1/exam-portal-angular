@@ -7,12 +7,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./Settings.component.css'],
 })
 export class SettingsComponent implements OnInit {
+  show: boolean = true;
   constructor(private route: Router) {}
 
   ngOnInit() {}
-  loadAddSubjectPage() {
-    this.show = false;
-    this.route.navigate(['adminpage/settings/addsubject']);
+  loadAddSubjectPage(flag:boolean) {
+    this.show = flag;
+   // this.route.navigate(['adminpage/settings/addsubject']);
   }
-  show: boolean = true;
+
 }

@@ -2,7 +2,13 @@
   max-width: 300px;
   margin: 20px;
   padding: 20px;
+
 }
 .allign{
      display: flex;
 }
+/* mat-card-title{
+  width:400px ;
+
+} */
+

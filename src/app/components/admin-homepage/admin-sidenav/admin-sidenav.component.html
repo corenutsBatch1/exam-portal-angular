@@ -1,6 +1,6 @@
 <!-- <mat-drawer-container class="example-container">
   <mat-drawer mode="side" opened>
-    <button mat-raised-button class="side-nav-button">
+    <button mat-raised-button class="ide-nav-button d-flex align-items-center text-left">
       <mat-icon color="primary">settings</mat-icon>
       Settings
     </button>
@@ -15,7 +15,7 @@
 </mat-drawer-container> -->
 
 
- <div class="bootstrap-wrapper">
+ <!-- <div class="bootstrap-wrapper">
   <div class="container-fulid">
     <mat-list>
       <mat-list-item style="margin-left: -21px;">
@@ -54,6 +54,48 @@
       </mat-list-item>
     </mat-list>
   </div>
+</div> -->
+<div class="bootstrap-wrapper">
+  <div class="container-fulid">
+    <mat-list>
+      <mat-list-item>
+        <button mat-raised-button class="side-nav-button " (click)="clickEvent('settings')">
+          <mat-icon class="icon-spacing" color="primary">settings</mat-icon>
+          <span class="button-text">Settings</span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <button mat-raised-button type="button" class="side-nav-button" (click)="clickEvent('questionbank')">
+          <mat-icon class="icon-spacing" color="primary">folder</mat-icon>
+          <span class="button-text">Question Bank</span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <button mat-raised-button class="side-nav-button" (click)="clickEvent('createpaper')">
+          <mat-icon class="icon-spacing" color="primary">assignment</mat-icon>
+          <span class="button-text">Create paper</span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <button mat-raised-button class="side-nav-button" (click)="clickEvent('scheduleexam')">
+          <mat-icon class="icon-spacing" color="primary">event</mat-icon>
+          <span class="button-text">Schedule Exam</span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <button mat-raised-button class="side-nav-button" (click)="clickEvent('result')">
+          <mat-icon class="icon-spacing" color="primary">poll</mat-icon>
+          <span class="button-text">Exam Result</span>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
 </div>
+
+
 
 

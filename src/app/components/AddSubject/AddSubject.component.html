@@ -1,39 +1,49 @@
 <div class="container mt-5" >
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-    <mat-card color="primary">
+
+  <form class="container" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+    <mat-card color="primary" class="card" style="height:300px;width:300%;display:flex;justify-content:center;align-items:center;">
+
       <mat-card-content >
+
       <h2 style="text-align: center;">Add Subject</h2>
+
+
+      <div class="form">
       <div class="row">
           <div class="col-25" >
-              <label for="fname">Subject Name:</label>
+              <label for="subject" style="margin-right: 10px;">Subject Name:</label>
           </div>
           <div class="col-75">
               <input type="text" formControlName="name" placeholder="Enter name"  >
               <div *ngIf="myForm.controls['name'].errors?.['required']"style="color: red;">
-                Name is required.
+                <small>Name is required.</small>
               </div>
           </div>
     </div>
 
       <div class="row">
           <div class="col-25">
-              <label for="subject">Description: </label>
+              <label for="topic" style="margin-right: 20px;">Topic Name: </label>
           </div>
           <div class="col-75">
             <input type="text" formControlName="description" placeholder="Enter Topic"  >
             <div *ngIf="myForm.controls['description'].errors?.['required']" style="color: red;">
-              Description is required.
+             <small>Description is required.</small>
             </div>
                <!-- <textarea formControlName="description" placeholder="Write something.." style="height:100px" required></textarea> -->
           </div>
       </div>
+    </div>
       <br>
-
-      <div class="row">
-          <input class="btn" style="margin-top: 23px;" type="submit" value="Submit">
+      <div class="text-center"><input class="btn btn-success btn-sm float-none "  type="submit" value="Submit">
+        <button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>
       </div>
+
+
       </mat-card-content>
     </mat-card>
+
   </form>
 </div>
   <!-- <form>

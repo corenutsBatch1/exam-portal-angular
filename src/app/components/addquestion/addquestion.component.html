@@ -1,5 +1,8 @@
 <div class="container mt-5">
 <form >
+  <h2 class="text-center">Add Question</h2>
+  <button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>
+  <br>
   <mat-form-field appearance="fill">
     <mat-label>Select a subject</mat-label>
     <mat-select [(ngModel)]="selectedsubject" name="selectedSubject" (selectionChange)="onSubjectSelection()">
@@ -44,8 +47,9 @@
       <mat-option value="hard">hard</mat-option>
     </mat-select>
   </mat-form-field>
-  <button (click)="addQuestion(this.Questions,subject_id)" class="btn btn-primary btn-sm" >ADD</button>
+  <button (click)="addQuestion(this.Questions,subject_id)" class="btn btn-primary btn-sm float-right" >ADD</button>
   <!-- <button (click)="backClicked()" class="btn btn-dark btn-sm" >back</button> -->
-  <button (click)="goBack()">Go back to parent component</button>
+
+
 </form>
 </div>

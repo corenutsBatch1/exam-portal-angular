@@ -7,16 +7,16 @@ import { Router, RouterModule } from '@angular/router';
   styleUrls: ['./question-bank.component.css']
 })
 export class QuestionBankComponent implements OnInit {
-
+  showQuestion:boolean=true;
   constructor(private route:Router) { }
 
   ngOnInit() {
-    
+
   }
-  loadAddQuestionPage(){
+  loadAddQuestionPage(flag:boolean){
     // alert("route ")
-    this.showQuestion=false;
-    this.route.navigate(['adminpage/questionbank/addquestions'])
+    this.showQuestion=flag;
   }
-  showQuestion:boolean=true;
+
+
 }

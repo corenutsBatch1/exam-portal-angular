@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Directive } from '@angular/core';
+import { Component, OnInit, Directive, EventEmitter, Output } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -7,6 +7,8 @@ import { FormControl } from '@angular/forms';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
 import { Router } from '@angular/router';
+import { MatSelectChange } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -18,7 +20,7 @@ import { Router } from '@angular/router';
 
 export class AddquestionComponent implements OnInit{
 
-
+  @Output("loadAddQuestionPage") loadAddQuestionPage = new EventEmitter();
   subjectControl = new FormControl();
   Questions :Question=new Question();
    subjects?:Subject[];
@@ -52,12 +54,14 @@ export class AddquestionComponent implements OnInit{
    selectedsubject?:string;
    filteredTopics: Subject[] = [];
    onSubjectSelection() {
+    //const value = event.value;
     if (this.selectedsubject) {
       console.log("==============")
       // Filter topics based on selected subject
       console.log(this.selectedsubject)
       console.log(this.subjects)
       this.filteredTopics = this.subjects!.filter((t) => t.name === this.selectedsubject);
+
     } else {
      // this.filteredTopics = undefined;
     }
@@ -76,7 +80,7 @@ export class AddquestionComponent implements OnInit{
 // this.route.navigate(["/adminpage/questionbank"])
 //   }
 goBack() {
-  this.router.navigate(['/adminpage/questionbank']);
+  this.loadAddQuestionPage.emit(true);
 }
 
 

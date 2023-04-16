@@ -28,6 +28,7 @@ export class LoginmodalComponent {
             this.router.navigate(['/adminpage']);
             this.loginservice.isLoggedIn = true;
           } else if (this.validUser.role == 'USER') {
+           
           }
         } else {
           sweetAlert("Invalid Credentials", "Register and try again", "error");

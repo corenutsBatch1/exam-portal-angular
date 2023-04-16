@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {  FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'src/app/model/model/Subject';
@@ -11,7 +11,7 @@ import { Subject } from 'src/app/model/model/Subject';
 })
 export class AddSubjectComponent implements OnInit {
 
-
+@Output("loadAddSubjectPage") loadAddSubjectPage=new EventEmitter
 Subjects:Subject = new Subject();
 myForm: FormGroup= new FormGroup({});
   constructor(private http:HttpClient, private router:Router,private fb:FormBuilder) {
@@ -61,4 +61,10 @@ addSubjectInfo()
     }
   );
 }
+goBack(){
+this.loadAddSubjectPage.emit(true);
+
 }
+}
+
+

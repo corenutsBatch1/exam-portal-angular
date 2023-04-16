@@ -5,18 +5,20 @@
     <mat-card-header>
       <div mat-card-avatar ></div>
       <mat-card-title>ADD SUBJECT</mat-card-title>
-      <mat-card-subtitle class="text-center">adding subjects</mat-card-subtitle>
+      <mat-card-subtitle>adding subjects</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <p>
+      <p class="text-center">
          Adding the Subject and Topic.
       </p>
     </mat-card-content>
     <mat-card-actions >
-      <button style="margin-left: 40px;" mat-button (click)="loadAddSubjectPage()" ><mat-icon>add_circle_outline</mat-icon>Add Subject</button>
+      <button style="margin-left: 40px;" mat-button (click)="loadAddSubjectPage(false)" ><mat-icon>add_circle_outline</mat-icon>Add Subject</button>
     </mat-card-actions>
 
   </mat-card>
 
   </div>
-  <router-outlet></router-outlet>
+  <div class="allign" *ngIf="!show">
+    <app-AddSubject (loadAddSubjectPage)="loadAddSubjectPage(true)"></app-AddSubject>
+  </div>

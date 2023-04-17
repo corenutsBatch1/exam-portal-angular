@@ -24,7 +24,7 @@ import { AuthGuard } from './components/loginmodal/auth-guard.service';
         component: AdminHomepageComponent,
         canActivate: [AuthGuard],
         children: [
-          {path:'home',component:HomeComponent},
+          // {path:'home',component:HomeComponent},
           { path: 'result', component: UserResultComponent },
           {
             path: 'questionbank',component: QuestionBankComponent,
@@ -43,7 +43,7 @@ import { AuthGuard } from './components/loginmodal/auth-guard.service';
       },
 
       { path: 'adminsidenav', component: AdminSidenavComponent },
-      { path: '**', redirectTo: 'login' },
+      { path: '**', redirectTo: 'home' },
     ]),
   ],
   exports: [RouterModule],

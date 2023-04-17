@@ -1,9 +1,10 @@
 <mat-toolbar >
 
-  <span><mat-icon>assignment</mat-icon>
-    ScoreSharp</span>
+  <span>
+    Scoresharp</span>
   <span class="example-spacer"></span>
+  <button mat-button routerLink="/home">Home</button>
   <button *ngIf="!loginservice.isLoggedIn"  routerLink="/login" mat-button>Login</button>
-  <button *ngIf="!loginservice.isLoggedIn"   mat-button routerLink="/signup">Register</button>
+  <!-- <button *ngIf="!loginservice.isLoggedIn"   mat-button routerLink="/signup">Register</button> -->
   <button *ngIf="loginservice.isLoggedIn"   (click)="logOut()" mat-button routerLink="/login">Logout</button>
 </mat-toolbar>

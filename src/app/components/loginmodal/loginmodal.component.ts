@@ -26,7 +26,7 @@ export class LoginmodalComponent {
           if (this.validUser.role == 'ADMIN') {
             this.loginservice.login()
             // this.loginservice.isLoggedIn = true;
-            this.router.navigate(['/adminpage/home']);
+            this.router.navigate(['/adminpage']);
           } else if (this.validUser.role == 'USER') {
             this.loginservice.login()
             // this.loginservice.isLoggedIn = true;

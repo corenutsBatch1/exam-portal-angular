@@ -12,6 +12,7 @@ import { AddquestionComponent } from './components/addquestion/addquestion.compo
 import { SettingsComponent } from './components/Settings/Settings.component';
 import { AddSubjectComponent } from './components/AddSubject/AddSubject.component';
 import { AuthGuard } from './components/loginmodal/auth-guard.service';
+import { ManageQuestionComponent } from './components/manageQuestion/manageQuestion.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { AuthGuard } from './components/loginmodal/auth-guard.service';
             path: 'questionbank',component: QuestionBankComponent,
             children: [
               { path: 'addquestions', component: AddquestionComponent },
+              {path:'managequestion',component:ManageQuestionComponent}
             ],
           },
           {path:'settings',component:SettingsComponent,

@@ -1,10 +1,11 @@
 export class Question{
+  id?:number;
   content?:string;
-  option_A?:string;
-  option_B?:string;
-  option_C?:string;
-  option_D?:string;
+  optionA?:string;
+  optionB?:string;
+  optionC?:string;
+  optionD?:string;
   answer?:string;
-  q_type?:string;
+  qtype?:string;
 
 }

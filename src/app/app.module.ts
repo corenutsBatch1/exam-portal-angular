@@ -29,6 +29,7 @@ import { AddquestionComponent } from './components/addquestion/addquestion.compo
 import {MatSelectModule} from '@angular/material/select';
 import { SettingsComponent } from './components/Settings/Settings.component';
 import { AddSubjectComponent } from './components/AddSubject/AddSubject.component';
+import { ManageQuestionComponent } from './components/manageQuestion/manageQuestion.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AddSubjectComponent } from './components/AddSubject/AddSubject.componen
     QuestionBankComponent,
     AddquestionComponent,
     SettingsComponent,
-    AddSubjectComponent
+    AddSubjectComponent,
+    ManageQuestionComponent
   ],
   imports: [
     BrowserModule,

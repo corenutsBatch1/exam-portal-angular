@@ -1,5 +1,5 @@
 <!-- <p>question-bank works!</p> -->
-
+<div *ngIf="manageQuestions" >
 <div class="allign" *ngIf="showQuestion" >
   <mat-card class="example-card" >
     <mat-card-header>
@@ -32,12 +32,16 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button style="margin-left: 40px;" mat-button><mat-icon>add_circle_outline</mat-icon>Edit question</button>
+      <button style="margin-left: 40px;" mat-button (click)="loadManageQuestionPage(false)"><mat-icon>add_circle_outline</mat-icon>Edit question</button>
     </mat-card-actions>
   </mat-card>
   </div>
+</div>
 
   <div class="allign" *ngIf="!showQuestion">
     <app-addquestion (loadAddQuestionPage)="loadAddQuestionPage(true)"></app-addquestion>
+  </div>
+  <div class="allign" *ngIf="!manageQuestions">
+    <app-manageQuestion (loadManageQuestionPage)="loadManageQuestionPage(true)"></app-manageQuestion>
   </div>
 

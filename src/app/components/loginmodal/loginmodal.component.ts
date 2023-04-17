@@ -12,24 +12,25 @@ import { LoginserviceService } from './loginservice.service';
 export class LoginmodalComponent {
   userLogin:User = new User();
   validUser?:User;
-
-
-  constructor(private http:HttpClient,private router: Router, private loginservice: LoginserviceService) {}
+  constructor(private http:HttpClient,private router: Router,
+     private loginservice: LoginserviceService,
+     ) {}
 
   login(user: User) {
     console.log(user);
     this.http
-      .post(`http://localhost:8088/api/loginUser`, user)
+      .post(`http://localhost:8088/api/login`, user)
       .subscribe((data) => {
         this.validUser = data;
-
         if (this.validUser != null) {
           if (this.validUser.role == 'ADMIN') {
+            this.loginservice.login()
+            // this.loginservice.isLoggedIn = true;
             this.router.navigate(['/adminpage/home']);
-            this.loginservice.isLoggedIn = true;
           } else if (this.validUser.role == 'USER') {
+            this.loginservice.login()
+            // this.loginservice.isLoggedIn = true;
             this.router.navigate(['/home']);
-            this.loginservice.isLoggedIn = true;
           }
         } else {
           sweetAlert("Invalid Credentials", "Register and try again", "error");

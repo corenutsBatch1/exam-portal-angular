@@ -23,17 +23,17 @@
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput2">Enter first option</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option1" [(ngModel)]="Questions.option_A" name="option_A">
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option1" [(ngModel)]="Questions.optionA" name="option_A">
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput2">Enter second option</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option2" [(ngModel)]="Questions.option_B" name="option_B">
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option2" [(ngModel)]="Questions.optionB" name="option_B">
   </div> <div class="form-group">
     <label for="formGroupExampleInput2">Enter third option</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option3" [(ngModel)]="Questions.option_C" name="option_C">
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option3" [(ngModel)]="Questions.optionC" name="option_C">
   </div> <div class="form-group">
     <label for="formGroupExampleInput2">Enter fourth option</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option4" [(ngModel)]="Questions.option_D" name="option_D">
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option4" [(ngModel)]="Questions.optionD" name="option_D">
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput2">Enter answer</label>
@@ -41,7 +41,7 @@
   </div>
   <mat-form-field appearance="fill">
     <mat-label>Choose an question_type</mat-label>
-    <mat-select  [(ngModel)]="Questions.q_type" name="q_type">
+    <mat-select  [(ngModel)]="Questions.qtype" name="q_type">
       <mat-option value="simple">simple</mat-option>
       <mat-option value="medium" >medium</mat-option>
       <mat-option value="hard">hard</mat-option>

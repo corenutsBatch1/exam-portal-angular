@@ -1,0 +1,26 @@
+.demo-table {
+  width: 100%;
+}
+
+.demo-button-container {
+  padding-bottom: 16px;
+}
+
+.demo-button + .demo-button {
+  margin-left: 8px;
+}
+.modal-dialog {
+  max-width: 400px;
+  max-height: 200px;
+}
+.form-group {
+  display: block;
+  margin-bottom: 1rem; /* Optional: add some space between the elements */
+}
+.mat-form-field {
+  position: static;
+  display: block;
+}
+.mat-form-field {
+  z-index: 9999;
+}

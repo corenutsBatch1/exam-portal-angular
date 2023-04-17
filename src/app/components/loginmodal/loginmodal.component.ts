@@ -19,7 +19,7 @@ export class LoginmodalComponent {
   login(user: User) {
     console.log(user);
     this.http
-      .post(`http://localhost:8088/api/login`, user)
+      .post(`http://localhost:8088/api/loginUser`, user)
       .subscribe((data) => {
         this.validUser = data;
         if (this.validUser != null) {

@@ -11,6 +11,8 @@ export class HeaderComponent {
   constructor(public loginservice : LoginserviceService){}
 
   logOut(){
-    this.loginservice.isLoggedIn = false;
+    localStorage.removeItem('is_logged_in');
+    this.loginservice.logout();
+    // this.loginservice.isLoggedIn = false;
   }
 }

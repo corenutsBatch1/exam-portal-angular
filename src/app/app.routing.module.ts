@@ -11,6 +11,7 @@ import { QuestionBankComponent } from './components/question-bank/question-bank.
 import { AddquestionComponent } from './components/addquestion/addquestion.component';
 import { SettingsComponent } from './components/Settings/Settings.component';
 import { AddSubjectComponent } from './components/AddSubject/AddSubject.component';
+import { AuthGuard } from './components/loginmodal/auth-guard.service';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { AddSubjectComponent } from './components/AddSubject/AddSubject.componen
       {
         path: 'adminpage',
         component: AdminHomepageComponent,
+        canActivate: [AuthGuard],
         children: [
           {path:'home',component:HomeComponent},
           { path: 'result', component: UserResultComponent },

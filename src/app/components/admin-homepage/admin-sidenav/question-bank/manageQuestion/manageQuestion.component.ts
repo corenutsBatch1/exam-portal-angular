@@ -21,13 +21,15 @@ export class ManageQuestionComponent implements OnInit {
    uniqueSubjectNames?:string[];
    Topic_id?:any;
 displayedColumns: any;
-removeData() {
-throw new Error('Method not implemented.');
-}
+selectedsubject?:string;
+   filteredTopics: Subject[] = [];
+// removeData() {
+// throw new Error('Method not implemented.');
+// }
 dataSource: any;
-addData() {
-throw new Error('Method not implemented.');
-}
+// addData() {
+// throw new Error('Method not implemented.');
+// }
   ngOnInit() {
     // this.http.get<Question[]>(`http://localhost:8083/api/getallquestions`).subscribe(data=>{
     //   console.log(data);
@@ -57,8 +59,7 @@ throw new Error('Method not implemented.');
     return [...new Set(uniqueSubjectNames)];
   }
 
-   selectedsubject?:string;
-   filteredTopics: Subject[] = [];
+
    onSubjectSelection() {
     if (this.selectedsubject) {
       console.log("==============")
@@ -96,6 +97,7 @@ throw new Error('Method not implemented.');
        this.http.put<Question>(`http://localhost:8088/api/updatequestion`,question).subscribe(data=>{
        // console.log(data)
        console.log("------------------------------------")
+       console.log(question.qtype)
         console.log(this.Topic_id)
         this. getquestionsbysubid(this.Topic_id);
       });

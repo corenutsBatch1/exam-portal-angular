@@ -1,0 +1,59 @@
+<div class="form-group">
+  <label for="formGroupExampleInput">Enter the exam name</label>
+  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the exam name" [(ngModel)]="exam.name" name="name">
+</div>
+<div class="form-group">
+  <label for="formGroupExampleInput2">Enter total marks</label>
+  <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter total marks" [(ngModel)]="exam.totalMarks" name="total_Marks">
+</div>
+<div class="form-group">
+  <label for="formGroupExampleInput2">Enter no of questions</label>
+  <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter no of questions" [(ngModel)]="exam.numberOfQuestions"  name="noofquestions">
+</div>
+<mat-form-field appearance="fill">
+  <mat-label>Select a subject</mat-label>
+  <mat-select [(ngModel)]="selectedsubject" name="selectedSubject" (selectionChange)="onSubjectSelection()">
+    <mat-option *ngFor="let subject of uniqueSubjectNames" [value]="subject">{{ subject }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Select a topic</mat-label>
+  <mat-select [(ngModel)]="subject_id" name="subject_id" [formControl]="subjectControl" (selectionChange)="getquestions(subject_id)">
+    <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>
+  </mat-select>
+</mat-form-field>
+<button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>
+<table class="table table-striped">
+
+  <thead>
+    <!-- [formControl]="subjectControl" -->
+    <tr>
+      <th>ID</th>
+      <th>content</th>
+      <th>option_A</th>
+      <th>option_B</th>
+      <th>option_C</th>
+      <th>option_D</th>
+      <th>answer</th>
+      <th>q_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let question of question123 let i=index">
+     <td>{{question.id}}</td>
+      <td>{{question.content}}</td>
+      <td>{{question.optionA}}</td>
+      <td>{{question.optionB}}</td>
+      <td>{{question.optionC}}</td>
+      <td>{{question.optionD}}</td>
+      <td>{{question.answer}}</td>
+      <td>{{question.qtype}}</td>
+      <td>
+        <input type="checkbox" (click)="addquestions(question)">
+</td>
+</tr>
+</tbody>
+ </table>
+
+<button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="addpaper(this.exam)" >Add</button>

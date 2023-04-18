@@ -23,7 +23,9 @@ export class AdminSidenavComponent {
     if(name=='settings'){
       this.router.navigateByUrl("adminpage/settings");
     }
-
+    if(name=='createpaper'){
+      this.router.navigateByUrl("adminpage/createpaper");
+    }
   }
 
 

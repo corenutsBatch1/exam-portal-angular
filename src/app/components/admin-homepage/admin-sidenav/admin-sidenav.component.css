@@ -55,8 +55,10 @@ mat-button{
   background-image: url(https://cdn.wallpapersafari.com/94/61/nlXFG9.gif);
 } */
 
+
 * {
-  background-color: rgb(229, 234, 205);
+  background-color: rgb(168, 205, 240);
+
 }
 
 button,

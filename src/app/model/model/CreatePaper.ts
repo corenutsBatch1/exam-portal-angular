@@ -1,9 +1,9 @@
 import { Question } from "./Question";
 
-export class Exam{
+export class CreatePaper{
   id?:number;
   name?:string;
   totalMarks?:string;
   numberOfQuestions?:string;
-  questions?:Question[];
+  questionsListArray?:number[];
 }

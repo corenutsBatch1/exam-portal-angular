@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Exam } from 'src/app/model/model/Exam';
+import { CreatePaper } from 'src/app/model/model/CreatePaper';
 
 @Component({
   selector: 'app-createPaper',
@@ -9,24 +9,24 @@ import { Exam } from 'src/app/model/model/Exam';
 })
 export class CreatePaperComponent implements OnInit {
 
-  exam:Exam=new Exam();
-  exams:Exam[]=[];
+  createPaper:CreatePaper=new CreatePaper();
+  papers:CreatePaper[]=[];
   addpaper:boolean=true;
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
-  this.fetchExam();
+  this.fetchPaper();
   }
   loadAddPaperpage(flag:boolean){
 
     this.addpaper=flag;
   }
 
-  fetchExam(){
-    this.http.get<Exam[]>(`http://localhost:8088/api/getallExams`).subscribe(data=>{
+  fetchPaper(){
+    this.http.get<CreatePaper[]>(`http://localhost:8089/api/getpaper`).subscribe(data=>{
 
     console.log(data)
-    this.exams=data;
+    this.papers=data;
   });
   }
 

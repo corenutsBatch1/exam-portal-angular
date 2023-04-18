@@ -53,7 +53,7 @@ myForm: FormGroup= new FormGroup({});
 addSubjectInfo()
 {
   console.log(this.myForm);
-  this.http.post<any>('http://localhost:8088/api/addsubject',this.myForm.value).subscribe(
+  this.http.post<any>('http://localhost:8089/api/addsubject',this.myForm.value).subscribe(
     response=>{
       //console.log(response);
       alert("Submited");

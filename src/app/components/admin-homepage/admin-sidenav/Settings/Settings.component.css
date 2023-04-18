@@ -6,3 +6,8 @@
 .allign{
      display: flex;
 }
+
+#add-button:hover{
+  background-color: #1f2937;
+  color: white;
+}

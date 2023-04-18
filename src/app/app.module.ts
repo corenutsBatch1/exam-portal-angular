@@ -21,15 +21,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { UserResultComponent } from './components/user-result/user-result.component';
+import { UserResultComponent } from './components/admin-homepage/admin-sidenav/user-result/user-result.component';
 import { MatTableModule } from '@angular/material/table'  ;
 import { MatInputModule } from '@angular/material/input';
-import { QuestionBankComponent } from './components/question-bank/question-bank.component';
-import { AddquestionComponent } from './components/addquestion/addquestion.component';
+import { QuestionBankComponent } from './components/admin-homepage/admin-sidenav/question-bank/question-bank.component';
+import { AddquestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/addquestion/addquestion.component';
 import {MatSelectModule} from '@angular/material/select';
-import { SettingsComponent } from './components/Settings/Settings.component';
-import { AddSubjectComponent } from './components/AddSubject/AddSubject.component';
-import { ManageQuestionComponent } from './components/manageQuestion/manageQuestion.component';
+import { SettingsComponent } from './components/admin-homepage/admin-sidenav/Settings/Settings.component';
+import { AddSubjectComponent } from './components/admin-homepage/admin-sidenav/Settings/AddSubject/AddSubject.component';
+import { ManageQuestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/manageQuestion/manageQuestion.component';
+import { CreatePaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/createPaper.component';
+import { AddPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/addPaper/addPaper.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { ManageQuestionComponent } from './components/manageQuestion/manageQuest
     AddquestionComponent,
     SettingsComponent,
     AddSubjectComponent,
-    ManageQuestionComponent
+    ManageQuestionComponent,
+    CreatePaperComponent,
+    AddPaperComponent
   ],
   imports: [
     BrowserModule,

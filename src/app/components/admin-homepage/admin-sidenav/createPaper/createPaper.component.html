@@ -1,0 +1,29 @@
+
+<div *ngIf="addpaper">
+<button class="btn btn-primary" (click)="loadAddPaperpage(false)">Create Paper</button>
+
+<table class="table table-striped">
+
+  <thead>
+    <!-- [formControl]="subjectControl" -->
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>total Marks</th>
+      <th>Number Of Questions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let exam of exams let i=index">
+      <td>{{exam.id}}</td>
+      <td>{{exam.name}}</td>
+      <td>{{exam.totalMarks}}</td>
+      <td>{{exam.numberOfQuestions}}</td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="!addpaper" >
+<app-addPaper (loadAddPaperpage)="loadAddPaperpage(true)"></app-addPaper>
+</div>

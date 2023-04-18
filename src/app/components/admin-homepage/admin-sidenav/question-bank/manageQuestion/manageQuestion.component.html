@@ -1,3 +1,4 @@
+
 <mat-form-field appearance="fill">
   <mat-label>Select a subject</mat-label>
   <mat-select [(ngModel)]="selectedsubject" name="selectedSubject" (selectionChange)="onSubjectSelection()">
@@ -12,8 +13,9 @@
   </mat-select>
 </mat-form-field>
 
-
+<button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>
 <table class="table table-striped">
+
 
   <thead>
     <!-- [formControl]="subjectControl" -->
@@ -53,7 +55,10 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Update Question</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
         <div class="form-group mb-3">
@@ -62,37 +67,49 @@
         </div>
         <div class="form-group mb-3">
           <label for="formGroupExampleInput2">Enter first option</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option1" [(ngModel)]="question.optionA" name="option_A">
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option1" [(ngModel)]="question.optionA" name="optionA">
         </div>
         <div class="form-group mb-3">
           <label for="formGroupExampleInput2">Enter second option</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option2" [(ngModel)]="question.optionB" name="option_B">
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option2" [(ngModel)]="question.optionB" name="optionB">
         </div>
         <div class="form-group mb-3">
           <label for="formGroupExampleInput2">Enter third option</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option3" [(ngModel)]="question.optionC" name="option_C">
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option3" [(ngModel)]="question.optionC" name="optionC">
         </div>
         <div class="form-group mb-3">
           <label for="formGroupExampleInput2">Enter fourth option</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option4" [(ngModel)]="question.optionD" name="option_D">
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option4" [(ngModel)]="question.optionD" name="optionD">
         </div>
         <div class="form-group mb-3">
           <label for="formGroupExampleInput2">Enter answer</label>
           <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the answer" [(ngModel)]="question.answer" name="answer">
         </div>
-        <div class="form-group mb-3">
+        <!-- <div class="form-group mb-3">
           <mat-form-field appearance="fill">
             <mat-label>Choose an question_type</mat-label>
-            <mat-select  [(ngModel)]="question.qtype" name="q_type">
+            <mat-select  [(ngModel)]="question.qtype" name="qtype">
               <mat-option value="simple">simple</mat-option>
               <mat-option value="medium" >medium</mat-option>
               <mat-option value="hard">hard</mat-option>
             </mat-select>
           </mat-form-field>
+        </div> -->
+        <div class="form-group mb-3">
+          <label for="question_type" class="form-label">Choose a question type</label>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ question.qtype || 'Select a question type' }}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <button class="dropdown-item" type="button" (click)="question.qtype='simple'">Simple</button>
+              <button class="dropdown-item" type="button" (click)="question.qtype='medium'">Medium</button>
+              <button class="dropdown-item" type="button" (click)="question.qtype='hard'">Hard</button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dbquestionediting(this.question)">Edit</button>
       </div>
     </div>
-<button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>

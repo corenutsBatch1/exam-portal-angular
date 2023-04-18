@@ -16,3 +16,21 @@ export class HeaderComponent {
     // this.loginservice.isLoggedIn = false;
   }
 }
+
+
+
+// sweetAlert({
+//   title: "Are you sure?",
+//   text: "Once logOut, you will not be able to ",
+//   icon: "warning",
+//   buttons: [
+//     'No, cancel it!',
+//     'Yes, I am sure!'
+//   ],
+//   dangerMode: true,
+// })
+// .then(
+//   function () { /*Your Code Here*/ },
+//   function () { return false; }
+// );
+

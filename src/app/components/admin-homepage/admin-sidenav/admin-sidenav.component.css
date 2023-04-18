@@ -55,25 +55,27 @@ mat-button{
   background-image: url(https://cdn.wallpapersafari.com/94/61/nlXFG9.gif);
 } */
 
-*{
+
+* {
   background-color: rgb(168, 205, 240);
+
 }
 
-button,span,mat-icon{
+button,
+span,
+mat-icon {
   background-color: whitesmoke;
 }
 
-
-mat-list-item:hover{
+mat-list-item:hover {
   background-color: #1f2937;
   transition-duration: 1s;
+}
 
+.mat-raised-button :hover {
+  background-color: transparent;
+  color: inherit;
+  box-shadow: none;
 }
 
 /* button:onClick,span:onClick,mat-icon */
-
-
-
-
-
-

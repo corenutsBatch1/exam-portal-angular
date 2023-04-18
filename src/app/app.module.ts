@@ -13,7 +13,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { LoginmodalComponent } from './components/loginmodal/loginmodal.component';
 import {MatCardModule} from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,7 +37,6 @@ import { AddPaperComponent } from './components/admin-homepage/admin-sidenav/cre
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    SidenavComponent,
     LoginmodalComponent,
     SignupComponent,
     AdminHomepageComponent,

@@ -1,4 +1,4 @@
-#signup-form{
+/* #signup-form{
   width: 30%;
   margin-left: 30%;
   margin-top: 1%;
@@ -22,11 +22,10 @@
 span {
   display:inline-block;
   width:100px;
-  /* background-color:palevioletred; */
 
-}
+} */
 
-.left{
+/* .left{
   display: block;
   margin-left:25%;
   float:left;
@@ -48,4 +47,39 @@ span {
 }
 body{
   background-image: url(https://wallpaper-house.com/data/out/7/wallpaper2you_161519.jpg);
-}
+} */
+
+
+.card{
+  /* margin-top: 2rem; */
+  height: 100%;
+  /* background-color: rgb(231, 217, 217); */
+ }
+
+ .bootstrap-wrapper{
+  height: 100%;
+  /* background-color: aqua; */
+ }
+
+ .container{
+  height: 100%;
+  /* background-color: blueviolet; */
+ }
+
+ .usericon{
+
+margin-top: 7rem;
+margin-bottom: 7rem;
+margin-left: 1rem;
+height: 20rem;
+ }
+
+ .cardform{
+  margin-top: 2rem;
+  padding-left: 2rem;
+  width: 40rem;
+ }
+
+ .bootstrap-wrapper,.card{
+  background-color: rgb(217, 217, 247);
+ }

@@ -1,4 +1,4 @@
-<body>
+<!-- <body>
 
 
 <header>
@@ -43,6 +43,64 @@
 
 </mat-card>
 </form>
-</body>
+</body> -->
 
+
+
+<div class="bootstrap-wrapper">
+  <header>
+    <app-header></app-header>
+  </header>
+  <div class="container">
+
+      <div class="row">
+        <div class="col-sm-4">
+          <div>
+            <img src="assets/usericon.png" class="usericon" alt="" class="usericon">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <form id="signup-form" class="mat-elevation-z8">
+            <mat-card color="primary" id="form-card" class="cardform">
+              <mat-card-content>
+              <div class="form-group">
+                <p class="text-center">
+                  <!-- <span class="left" ><mat-icon>supervisor_account</mat-icon></span> -->
+                  <span class="right"><h1 style="font-weight: bold;margin-top: 1rem;">Register</h1></span>
+              </p>
+              </div>
+              <br>
+              <br>
+              <div class="form-group">
+                <label for="exampleInputPassword1" style="font-weight: bold;">Name</label>
+                <input type="text" class="form-control" placeholder="Full Name" name="name" [(ngModel)]="userLogin.name" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1" style="font-weight: bold;">Email address</label>
+                <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" name="email" [(ngModel)]="userLogin.email">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1" style="font-weight: bold;">Password</label>
+                <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="userLogin.password">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1" style="font-weight: bold;">Phone number</label>
+                <input type="text" class="form-control" placeholder="Phone number" name="phoneNumber" [(ngModel)]="userLogin.phoneNumber">
+              </div>
+              <div class="text-center">
+                <button type="submit" (click)="registerNewUser(this.userLogin)" class="btn btn-primary btn-sm">Register</button>
+                <button type="reset"  class="btn btn-primary btn-sm ml-2">Clear</button>
+              </div>
+              <br>
+              <div class="text-center">
+                <p>Already have an Account?<a routerLink="/login"> login</a></p>
+              </div>
+              </mat-card-content>
+
+          </mat-card>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>
 

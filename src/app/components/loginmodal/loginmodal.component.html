@@ -1,4 +1,4 @@
-<body class="content">
+<!-- <body class="content">
   <header>
     <app-header></app-header>
   </header>
@@ -12,7 +12,7 @@
     </p>
     <div class="form-group">
       <label for="exampleInputEmail1" style="font-weight: bold;">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="userLogin.email" name="email" required>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="userLogin.email" name="email" required matInput>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1" style="font-weight: bold;">Password</label>
@@ -36,4 +36,57 @@
   </form>
 
 </body>
+ -->
 
+
+ <div class="bootstrap-wrapper">
+  <header>
+    <app-header></app-header>
+  </header>
+    <div class="container">
+       <mat-card class="card">
+        <div class="row">
+        <div class="col-sm-4">
+
+            <div>
+              <img src="assets/usericon.png" class="usericon" alt="">
+            </div>
+        </div>
+        <div class="col-sm-4">
+          <form id="loginform" class="mat-elevation-z8" >
+            <mat-card class="cardform">
+              <p class="text-center">
+                <!-- <span class="left"><mat-icon>account_circle</mat-icon></span>&nbsp;&nbsp;&nbsp; -->
+                <span class="right"><h1 style="font-weight: bold; margin-top: 1rem;">Login</h1></span>
+            </p>
+            <div class="form-group">
+              <label for="exampleInputEmail1" style="font-weight: bold;">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="userLogin.email" name="email" required matInput>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1" style="font-weight: bold;">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="userLogin.password" name="password" required>
+            </div>
+
+            <div class="form-group text-center mt-2">
+
+            <button (click)="login(this.userLogin)" class="btn btn-primary btn-sm" >Login
+
+            </button>
+            <button type="reset" class="btn btn-primary btn-sm ml-4" >Clear</button>
+            </div>
+            <br>
+            <div class="text-center">
+              <p>Don't have an Account Register here?<a routerLink="/signup"> signup</a></p>
+            </div>
+
+
+          </mat-card>
+          </form>
+
+        </div>
+
+       </div>
+      </mat-card>
+    </div>
+ </div>

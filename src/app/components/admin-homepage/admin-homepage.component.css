@@ -58,3 +58,8 @@ main::-webkit-scrollbar-thumb {
   background-color: #ccc;
 }
 
+
+*{
+  background-color: rgb(229, 234, 205);
+}
+

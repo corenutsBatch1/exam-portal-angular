@@ -8,10 +8,12 @@
 
 <mat-form-field appearance="fill">
   <mat-label>Select a topic</mat-label>
-  <mat-select [(ngModel)]="Topic_id" name="Topic_id" (selectionChange)="getquestionsbysubid(Topic_id)">
+  <mat-select [(ngModel)]="Topic_id" name="Topic_id" (selectionChange)="getQuestionsBySubId(Topic_id)">
     <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>
   </mat-select>
 </mat-form-field>
+
+
 
 <button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>
 <table class="table table-striped">
@@ -42,7 +44,7 @@
       <td>{{question.qtype}}</td>
       <td>
        <!-- Button trigger modal -->
-     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" (click)="editquestion(question.id)">edit
+     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" (click)="getQuestionsById(question.id)">edit
 </button>
 </td>
 
@@ -110,6 +112,6 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dbquestionediting(this.question)">Edit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="editquestion(this.question)">Edit</button>
       </div>
     </div>

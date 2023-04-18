@@ -32,7 +32,7 @@ export class AddquestionComponent implements OnInit{
   }
   ngOnInit(): void {
 
-    this.http.get<Subject[]>(`http://localhost:8088/api/getAllSubjects`).subscribe(data=>{
+    this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe(data=>{
       console.log(data);
        this.subjects=data;
        console.log(this.subjects);
@@ -72,7 +72,7 @@ export class AddquestionComponent implements OnInit{
     console.log(this.subject_id)
     console.log(this.selectedsubject)
     console.log(id)
-    this.http.post(`http://localhost:8088/api/addquestion/${id}`, Questions).subscribe(
+    this.http.post(`http://localhost:8089/api/addquestion/${id}`, Questions).subscribe(
       response=>{
         //console.log(response);
         alert("Submited");

@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Exam } from 'src/app/model/model/Exam';
+import { CreatePaper } from 'src/app/model/model/CreatePaper';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
 
@@ -14,21 +14,21 @@ import { Subject } from 'src/app/model/model/Subject';
 export class AddPaperComponent implements OnInit {
   @Output('loadAddPaperpage') loadAddPaperpage = new EventEmitter();
   constructor(private http :HttpClient) { }
-  exam=new Exam();
+  createPaper=new CreatePaper();
   subjects?:Subject[];
-  questions1?:Question[];
+  questionsIdArray:number[]=[];
+
 
   question123?:Question[];
-  //questions1?:Question[];
-
   uniqueSubjectNames?:string[];
   subjectControl = new FormControl();
   subject_id?:number;
   selectedsubject?:string;
   filteredTopics: Subject[] = [];
+  papers:CreatePaper[]=[];
   ngOnInit(): void {
 
-    this.http.get<Subject[]>(`http://localhost:8088/api/getAllSubjects`).subscribe(data=>{
+    this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe(data=>{
       console.log(data);
        this.subjects=data;
        console.log(this.subjects);
@@ -61,31 +61,39 @@ export class AddPaperComponent implements OnInit {
   }
   getquestions(id:any)
   {
-    this.http.get<Question[]>(`http://localhost:8088/api/getallquestions/${id}`).subscribe(data=>{
+    this.http.get<Question[]>(`http://localhost:8089/api/getallquestions/${id}`).subscribe(data=>{
       console.log(data);
         this.question123=data;
              })
 
   }
-  addquestions(question:Question)
+  addquestions(questionId?:number)
   {
-    console.log(question)
-    if (question) {
-      console.log("===============================")
-      this.questions1 = this.questions1 ? this.questions1.concat(question) : [question];
-    }    console.log(this.questions1);
+    console.log(questionId)
+    if (questionId) {
+      console.log("question id is not --null")
+      this. questionsIdArray =  this.questionsIdArray.concat(questionId);
+
+    }    console.log(this.questionsIdArray);
    // console.log(exam.questions);
    // console.log(exam.name)
   }
-addpaper(exam:Exam)
+addpaper(createPaper:CreatePaper)
 {
-  exam.questions=this.questions1;
+  createPaper.questionsListArray=this.questionsIdArray;
   console.log("-------------------------------------")
-  console.log(exam.questions)
-  this.http.post<Exam>(`http://localhost:8088/api/addexam`,exam).subscribe(data=>console.log(data));
+  console.log(createPaper.questionsListArray)
+  this.http.post<CreatePaper>(`http://localhost:8089/api/addpaper`,createPaper).subscribe(data=>{
+  console.log(data);
+  alert("submitted");
+  this.goBack();
+
+});
 }
 goBack() {
      this.loadAddPaperpage.emit(true);
+
      }
+
 
 }

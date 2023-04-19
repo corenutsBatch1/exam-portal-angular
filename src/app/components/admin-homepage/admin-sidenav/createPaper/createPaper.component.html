@@ -20,7 +20,7 @@
       <td>{{paper.name}}</td>
       <td>{{paper.totalMarks}}</td>
       <td>{{paper.numberOfQuestions}}</td>
-      <td><button class="btn btn-info btn-sm " (click)="viewPaper(false)">VIEW</button></td>
+      <td><button class="btn btn-info btn-sm " (click)="viewPaper(false,paper.id)">VIEW</button></td>
 
     </tr>
     </tbody>
@@ -31,5 +31,5 @@
 <app-addPaper (loadAddPaperpage)="loadAddPaperpage(true)"></app-addPaper>
 </div>
 <div *ngIf="!viewpaper">
-<app-viewPaper (viewPaper)="viewPaper(true)"></app-viewPaper>
+<app-viewPaper [paperid]="paperid" (viewPaper)="viewPaper(true,paperid)"></app-viewPaper>
 </div>

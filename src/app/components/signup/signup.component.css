@@ -56,10 +56,10 @@ body{
   /* background-color: rgb(231, 217, 217); */
  }
 
- .bootstrap-wrapper{
+ /* .bootstrap-wrapper{
   height: 100%;
-  /* background-color: aqua; */
- }
+  background-color: aqua;
+ } */
 
  .container{
   height: 100%;
@@ -81,5 +81,8 @@ height: 20rem;
  }
 
  .bootstrap-wrapper,.card{
+  background-color: rgb(217, 217, 247);
+ }
+ body{
   background-color: rgb(217, 217, 247);
  }

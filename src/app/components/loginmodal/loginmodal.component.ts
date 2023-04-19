@@ -30,7 +30,7 @@ export class LoginmodalComponent {
           } else if (this.validUser.role == 'USER') {
             this.loginservice.login()
             // this.loginservice.isLoggedIn = true;
-            this.router.navigate(['/home']);
+            this.router.navigate(['/userpage']);
           }
         } else {
           sweetAlert("Invalid Credentials", "Register and try again", "error");

@@ -21,7 +21,7 @@ export class ForgotPasswordComponent {
   ) { }
 
   resetpassword(user:User) {
-    const resetUrl = 'http://localhost:8089/api/edituser';
+    const resetUrl = 'http://localhost:8088/api/forgotpassword';
     console.log(user.password);
     this.http.put(resetUrl,user).subscribe(data => {
       console.log(user.password);

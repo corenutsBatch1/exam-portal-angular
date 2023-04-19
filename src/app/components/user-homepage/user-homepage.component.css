@@ -1,0 +1,65 @@
+ /* .col md-9{
+  position: relative;
+  left: 1000px;
+  top: 190px;
+} */
+
+/* #side{
+  min-height: 100%
+}
+#content{
+
+  overflow-y: auto;
+} */
+.bootstrap-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* header {
+  height: 80px;
+   background-color: #eee;
+} */
+
+.content-container {
+  display: flex;
+  flex-grow: 1;
+  overflow-y: hidden;
+}
+
+nav {
+  width: 200px;
+  /* background-color: #ccc; */
+  overflow-y: scroll;
+}
+
+main {
+  flex-grow: 1;
+  overflow-y: scroll;
+  padding: 20px;
+  /* background-image: url(https://images.pexels.com/photos/716398/pexels-photo-716398.jpeg?auto=compress&cs=tinysrgb&w=600); */
+}
+
+/* Style the scrollbar for the nav and main content */
+nav::-webkit-scrollbar,
+main::-webkit-scrollbar {
+  width: 8px;
+}
+
+nav::-webkit-scrollbar-track,
+main::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+nav::-webkit-scrollbar-thumb,
+main::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+}
+
+
+*{
+  background-color: rgb(203, 220, 236);
+}
+

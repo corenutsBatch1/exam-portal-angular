@@ -21,24 +21,63 @@
     <label for="formGroupExampleInput">Enter the question</label>
     <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the question"  [(ngModel)]="Questions.content" name="content">
   </div>
+
   <div class="form-group">
-    <label for="formGroupExampleInput2">Enter first option</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option1" [(ngModel)]="Questions.optionA" name="option_A">
-  </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Enter second option</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option2" [(ngModel)]="Questions.optionB" name="option_B">
-  </div> <div class="form-group">
-    <label for="formGroupExampleInput2">Enter third option</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option3" [(ngModel)]="Questions.optionC" name="option_C">
-  </div> <div class="form-group">
-    <label for="formGroupExampleInput2">Enter fourth option</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option4" [(ngModel)]="Questions.optionD" name="option_D">
-  </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Enter answer</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the answer" [(ngModel)]="Questions.answer" name="answer">
-  </div>
+
+    <th>
+    <label for="formGroupExampleInput2">Enter options</label>
+  </th>
+  <th>
+    <label for="formGroupExampleInput2">Select Answer</label>
+  </th>
+    <tr>
+    <td>
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter option 1" [(ngModel)]="Questions.optionA" name="option_A">
+  </td>
+  <td>
+    <label>
+      <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionA">
+      Option A is correct
+    </label>
+  </td>
+  </tr>
+  <tr>
+    <td>
+    <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Enter option 2" [(ngModel)]="Questions.optionB" name="option_B">
+  </td>
+  <td>
+    <label>
+
+      <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionB">
+      Option B is correct
+    </label>
+  </td>
+  </tr>
+  <tr>
+    <td>
+
+    <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Enter option 3" [(ngModel)]="Questions.optionC" name="option_C">
+</td>
+<td>
+    <label>
+      <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionC">
+      Option C is correct
+    </label>
+  </td>
+  </tr>
+  <tr>
+    <td>
+    <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Enter option 4" [(ngModel)]="Questions.optionD" name="option_D">
+    </td>
+    <td>
+    <label>
+      <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionD">
+      Option D is correct
+    </label>
+    </td>
+  </tr>
+   </div>
+
   <mat-form-field appearance="fill">
     <mat-label>Choose an question_type</mat-label>
     <mat-select  [(ngModel)]="Questions.qtype" name="q_type">
@@ -48,7 +87,7 @@
     </mat-select>
   </mat-form-field>
   <button (click)="addQuestion(this.Questions,subject_id)" class="btn btn-primary btn-sm float-right" >ADD</button>
-  <!-- <button (click)="backClicked()" class="btn btn-dark btn-sm" >back</button> -->
+
 
 
 </form>

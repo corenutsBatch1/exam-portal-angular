@@ -33,6 +33,11 @@ import { CreatePaperComponent } from './components/admin-homepage/admin-sidenav/
 import { AddPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/addPaper/addPaper.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ViewPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/viewPaper/viewPaper.component';
+import { UserHomepageComponent } from './components/user-homepage/user-homepage.component';
+import { UserSidenavComponent } from './components/user-homepage/user-sidenav/user-sidenav.component';
+import { ProfileComponent } from './components/user-homepage/user-sidenav/profile/profile.component';
+import { CodeComponent } from './components/user-homepage/user-sidenav/code/code.component';
+import { ExamComponent } from './components/Exam/Exam.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +58,12 @@ import { ViewPaperComponent } from './components/admin-homepage/admin-sidenav/cr
     CreatePaperComponent,
     AddPaperComponent,
     ForgotPasswordComponent,
-    ViewPaperComponent
+    ViewPaperComponent,
+    UserHomepageComponent,
+    UserSidenavComponent,
+    ProfileComponent,
+    CodeComponent,
+    ExamComponent
   ],
   imports: [
     BrowserModule,

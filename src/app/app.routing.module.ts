@@ -15,6 +15,7 @@ import { AuthGuard } from './components/loginmodal/auth-guard.service';
 import { ManageQuestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/manageQuestion/manageQuestion.component';
 import { CreatePaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/createPaper.component';
 import { AddPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/addPaper/addPaper.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { AddPaperComponent } from './components/admin-homepage/admin-sidenav/cre
       {path:'home',component:HomeComponent},
       { path: 'login', component: LoginmodalComponent },
       { path: 'signup', component: SignupComponent },
+      {path:'reset', component:ForgotPasswordComponent},
       {
         path: 'adminpage',
         component: AdminHomepageComponent,

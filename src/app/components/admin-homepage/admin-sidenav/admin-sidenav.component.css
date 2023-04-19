@@ -61,16 +61,19 @@ mat-button{
 
 }
 
-button,
+/* button,
 span,
 mat-icon {
   background-color: whitesmoke;
-}
+} */
 
-mat-list-item:hover {
+.matlistitem:hover  .hove {
   background-color: #1f2937;
   transition-duration: 1s;
+  color: white;
 }
+
+
 
 .mat-raised-button :hover {
   background-color: transparent;
@@ -78,4 +81,7 @@ mat-list-item:hover {
   box-shadow: none;
 }
 
-/* button:onClick,span:onClick,mat-icon */
+button,span,mat-icon{
+
+  background-color: rgb(168, 205, 240);
+}

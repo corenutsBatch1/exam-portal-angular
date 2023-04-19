@@ -1,6 +1,8 @@
 
 .card{
-  max-width: 200%;
+  max-width: 35rem;
   max-height: 100%;
+  margin-left: 15rem;
+  margin-top: 5rem;
 }
 

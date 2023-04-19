@@ -32,6 +32,7 @@ import { ManageQuestionComponent } from './components/admin-homepage/admin-siden
 import { CreatePaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/createPaper.component';
 import { AddPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/addPaper/addPaper.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ViewPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/viewPaper/viewPaper.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     CreatePaperComponent,
     AddPaperComponent,
     ForgotPasswordComponent,
+    ViewPaperComponent
   ],
   imports: [
     BrowserModule,

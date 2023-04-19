@@ -1,4 +1,4 @@
-
+<div *ngIf="viewpaper">
 <div *ngIf="addpaper">
 <button class="btn btn-primary" (click)="loadAddPaperpage(false)">Create Paper</button>
 
@@ -9,8 +9,9 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
-      <th>total Marks</th>
+      <th>Total Marks</th>
       <th>Number Of Questions</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -19,11 +20,16 @@
       <td>{{paper.name}}</td>
       <td>{{paper.totalMarks}}</td>
       <td>{{paper.numberOfQuestions}}</td>
+      <td><button class="btn btn-info btn-sm " (click)="viewPaper(false)">VIEW</button></td>
 
     </tr>
     </tbody>
   </table>
 </div>
+</div>
 <div *ngIf="!addpaper" >
 <app-addPaper (loadAddPaperpage)="loadAddPaperpage(true)"></app-addPaper>
+</div>
+<div *ngIf="!viewpaper">
+<app-viewPaper (viewPaper)="viewPaper(true)"></app-viewPaper>
 </div>

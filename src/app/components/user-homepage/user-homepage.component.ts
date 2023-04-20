@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {  ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/model/model/User';
 
 @Component({
   selector: 'app-user-homepage',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-homepage.component.css']
 })
 export class UserHomepageComponent implements OnInit {
-
-  constructor() { }
+id1?:number;
+  constructor(private route:ActivatedRoute) { }
 
   ngOnInit() {
+    this.id1=this.route.snapshot.params['id'];
+    console.log(this.id1);
   }
 
 }

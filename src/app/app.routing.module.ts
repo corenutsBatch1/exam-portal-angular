@@ -35,7 +35,10 @@ import { ExamComponent } from './components/Exam/Exam.component';
       { path: 'login', component: LoginmodalComponent },
       { path: 'signup', component: SignupComponent },
       {path:'reset', component:ForgotPasswordComponent},
-      {path:'exam',component:ExamComponent},
+      {path:'exam',component:ExamComponent,
+      canActivate: [AuthGuard],
+      },
+
       {
         path: 'adminpage',
         component: AdminHomepageComponent,
@@ -71,7 +74,8 @@ import { ExamComponent } from './components/Exam/Exam.component';
       },
 
       { path: 'adminsidenav', component: AdminSidenavComponent },
-      {path:'userpage',component:UserHomepageComponent,
+      {path:'userpage/:id',component:UserHomepageComponent,
+      canActivate: [AuthGuard],
       children: [
         { path: 'profile', component: ProfileComponent },
         {path:'code',component:CodeComponent}

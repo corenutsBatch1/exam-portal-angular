@@ -11,13 +11,15 @@ import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 export class CodeComponent implements OnInit {
 
   exam:ScheduleExam=new ScheduleExam();
-  constructor(private route:Router) { }
+  constructor(private route:Router,private http:HttpClient) { }
 
   ngOnInit() {
   }
 
   clickEvent(){
-this.route.navigate(['exam'])
+    
+
+  this.route.navigate(['exam'])
 
   }
 

@@ -56,17 +56,10 @@ body{
   /* background-color: rgb(231, 217, 217); */
  }
 
-<<<<<<< Updated upstream
- /* .bootstrap-wrapper{
-  height: 100%;
-  background-color: aqua;
- } */
-=======
  .bootstrap-wrapper{
   height: 120%;
   /* background-color: aqua; */
  }
->>>>>>> Stashed changes
 
  .container{
   height: 80%;
@@ -90,11 +83,9 @@ height: 20rem;
  .bootstrap-wrapper,.card{
   background-color: rgb(217, 217, 247);
  }
-<<<<<<< Updated upstream
  body{
   background-color: rgb(217, 217, 247);
-=======
-
+ }
  button{
   padding: 0.3rem;
   width: 5rem;
@@ -104,5 +95,4 @@ height: 20rem;
   border-radius:0.5rem;
   font-size: 1rem;
   opacity: 0.5;
->>>>>>> Stashed changes
  }

@@ -81,7 +81,7 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/sweetalert/dist/sweetalert.min.js"]
           }
         }
       }

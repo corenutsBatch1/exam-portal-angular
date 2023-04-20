@@ -1,69 +1,43 @@
 
-    <mat-card color="primary" class="card" style="height:300px;width:300%;display:flex;justify-content:center;align-items:center;"  >
+    <mat-card color="primary" class="card mat-elevation-z8" style="height:300px;width:300%;display:flex;justify-content:center;align-items:center;"  >
 
       <form  [formGroup]="myForm" (ngSubmit)="onSubmit()"  >
       <mat-card-content >
-
       <h2 style="text-align: center;">Add Subject</h2>
-
-
-      <div class="form">
+      <div class="form-group">
       <div class="row">
-          <div class="col-25" >
+          <div class="col-25 form-group" >
               <label for="subject" style="margin-right: 10px;">Subject Name:</label>
           </div>
-          <div class="col-75">
-              <input type="text" formControlName="name" placeholder="Enter name"  >
-              <div *ngIf="myForm.controls['name'].errors?.['required']"style="color: red;">
-                <small>Name is required.</small>
+          <div class="col-75 form-group">
+              <input class="form-control" type="text" formControlName="name" placeholder="Enter name" [ngClass]="{ 'is-invalid': submitted || f.name.touched && f.name.errors }" >
+              <div *ngIf="submitted || f.name.touched && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Subject name required</div>
               </div>
           </div>
     </div>
 
-      <div class="row">
-          <div class="col-25">
-              <label for="topic" style="margin-right: 20px;">Topic Name: </label>
+      <div class="row form-group">
+          <div class="col-25 form-group">
+              <label for="topic" style="margin-right: 22px;">Topic Name: </label>
           </div>
-          <div class="col-75">
-            <input type="text" formControlName="description" placeholder="Enter Topic"  >
-            <div *ngIf="myForm.controls['description'].errors?.['required']" style="color: red;">
-             <small>Description is required.</small>
+          <div class="col-75 form-group">
+            <input class="form-control" type="text" formControlName="description" placeholder="Enter Topic"  [ngClass]="{ 'is-invalid': submitted || f.description.touched && f.description.errors }">
+            <div *ngIf="submitted || f.description.touched && f.description.errors" class="invalid-feedback">
+              <div *ngIf="f.description.errors.required">description required</div>
             </div>
-               <!-- <textarea formControlName="description" placeholder="Write something.." style="height:100px" required></textarea> -->
           </div>
       </div>
     </div>
       <br>
-      <div class="text-center"><input class="btn btn-success btn-sm float-none "  type="submit" value="Submit">
-        <button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>
+      <div class="text-center"><input class="btn btn-success btn-sm submit"  type="submit" value="Submit">
+        <button class="btn btn-warning btn-sm ml-4" type="reset">Clear</button>
+        <button class="btn btn-secondary btn-sm ml-4" (click)="goBack()">Back</button>
       </div>
 
 
       </mat-card-content></form>
 
     </mat-card>
-
-
-
-  <!-- <form>
-
-    <div class="form-group">
-
-      <label for="formGroupExampleInput">Enter the Subject:</label>
-
-      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the subject"  [(ngModel)]="Subjects.name" name="name" >
-
-
-
-  <label for="formGroupExampleInput">Enter the Description:</label>
-
-  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the Description"  [(ngModel)]="Subjects.description" name="description">
-
-
-
-  <button (click)="addSubjectInfo(this.Subjects)" class="btn btn-primary btn-sm" >ADD</button>
-
-  </div>
-  </form> -->
 
 

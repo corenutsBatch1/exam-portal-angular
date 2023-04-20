@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import {  FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'src/app/model/model/Subject';
 
 @Component({
@@ -10,29 +10,35 @@ import { Subject } from 'src/app/model/model/Subject';
   styleUrls: ['./AddSubject.component.css']
 })
 export class AddSubjectComponent implements OnInit {
+  myForm:any=FormGroup;
+  submitted=false;
 
 @Output("loadAddSubjectPage") loadAddSubjectPage=new EventEmitter
 Subjects:Subject = new Subject();
-myForm: FormGroup= new FormGroup({});
-  constructor(private http:HttpClient, private router:Router,private fb:FormBuilder) {
-    this.createSubject();
-   }
+  constructor(private http:HttpClient, private router:Router,private formbBuilder:FormBuilder) {}
 
-  createSubject() {
-    this.myForm = this.fb.group({
-      name: ['', Validators.required],
-    description:['', Validators.required],
-  });
-}
-
-
+  get f(){
+   return this.myForm.controls;
+  }
 
   ngOnInit() {
-
-
+   this.myForm=this.formbBuilder.group({
+    name: ['', Validators.required],
+    description:['', Validators.required],
+   });
   }
+
   onSubmit(){
-    this.addSubjectInfo();
+    if (this.myForm.invalid) {
+      console.log(this.myForm);
+      console.log("false");
+      return;
+    }
+    if(this.submitted)
+     {
+      console.log(this.myForm);
+      this.addSubjectInfo();
+     }
   }
 
   //add Subject info
@@ -61,10 +67,11 @@ addSubjectInfo()
     }
   );
 }
+
 goBack(){
 this.loadAddSubjectPage.emit(true);
-
 }
+
 }
 
 

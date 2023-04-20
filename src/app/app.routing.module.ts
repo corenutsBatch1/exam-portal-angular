@@ -15,8 +15,18 @@ import { AuthGuard } from './components/loginmodal/auth-guard.service';
 import { ManageQuestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/manageQuestion/manageQuestion.component';
 import { CreatePaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/createPaper.component';
 import { AddPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/addPaper/addPaper.component';
+
 import { ScheduleExamComponent } from './components/admin-homepage/admin-sidenav/schedule-exam/schedule-exam.component';
 import { AddExamComponent } from './components/admin-homepage/admin-sidenav/schedule-exam/add-exam/add-exam.component';
+
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ViewPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/viewPaper/viewPaper.component';
+import { UserHomepageComponent } from './components/user-homepage/user-homepage.component';
+import { UserSidenavComponent } from './components/user-homepage/user-sidenav/user-sidenav.component';
+import { ProfileComponent } from './components/user-homepage/user-sidenav/profile/profile.component';
+import { CodeComponent } from './components/user-homepage/user-sidenav/code/code.component';
+import { ExamComponent } from './components/Exam/Exam.component';
+
 
 @NgModule({
   imports: [
@@ -24,6 +34,8 @@ import { AddExamComponent } from './components/admin-homepage/admin-sidenav/sche
       {path:'home',component:HomeComponent},
       { path: 'login', component: LoginmodalComponent },
       { path: 'signup', component: SignupComponent },
+      {path:'reset', component:ForgotPasswordComponent},
+      {path:'exam',component:ExamComponent},
       {
         path: 'adminpage',
         component: AdminHomepageComponent,
@@ -34,6 +46,7 @@ import { AddExamComponent } from './components/admin-homepage/admin-sidenav/sche
           {path:'createpaper',component:CreatePaperComponent,
           children: [
             { path: 'addpaper', component: AddPaperComponent },
+            { path: 'viewpaper', component: ViewPaperComponent },
           ],
         },
           {
@@ -58,7 +71,15 @@ import { AddExamComponent } from './components/admin-homepage/admin-sidenav/sche
       },
 
       { path: 'adminsidenav', component: AdminSidenavComponent },
+      {path:'userpage',component:UserHomepageComponent,
+      children: [
+        { path: 'profile', component: ProfileComponent },
+        {path:'code',component:CodeComponent}
+      ],
+    },
+      {path:'usersidenav',component:UserSidenavComponent},
       { path: '**', redirectTo: 'home' },
+
     ]),
   ],
   exports: [RouterModule],

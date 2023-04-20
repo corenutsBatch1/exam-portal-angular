@@ -7,6 +7,10 @@
 .allign{
      display: flex;
 }
+#add-button:hover{
+  background-color: #1f2937;
+  color: white;
+}
 /* mat-card-title{
   width:400px ;
 

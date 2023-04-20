@@ -82,7 +82,7 @@ export class ManageQuestionComponent implements OnInit {
         console.log('------------------------------------');
         console.log(question.qtype);
         console.log(this.Topic_id);
-        this.getquestionsbysubid(this.Topic_id);
+        this.getQuestionsBySubId(this.Topic_id);
       });
   }
   goBack() {

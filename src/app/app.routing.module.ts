@@ -15,6 +15,8 @@ import { AuthGuard } from './components/loginmodal/auth-guard.service';
 import { ManageQuestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/manageQuestion/manageQuestion.component';
 import { CreatePaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/createPaper.component';
 import { AddPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/addPaper/addPaper.component';
+import { ScheduleExamComponent } from './components/admin-homepage/admin-sidenav/schedule-exam/schedule-exam.component';
+import { AddExamComponent } from './components/admin-homepage/admin-sidenav/schedule-exam/add-exam/add-exam.component';
 
 @NgModule({
   imports: [
@@ -46,6 +48,10 @@ import { AddPaperComponent } from './components/admin-homepage/admin-sidenav/cre
             { path: 'addsubject', component: AddSubjectComponent },
           ],
         },
+          { path: 'scheduleexam' ,component: ScheduleExamComponent,
+          children: [
+            { path: 'addexam', component: AddExamComponent}
+          ]},
 
 
         ],

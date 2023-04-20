@@ -1,58 +1,4 @@
-/*
 
-
-#loginform{
-  width: 30%;
-  margin-left: 30%;
-  margin-top: 5%;
-}
-
-.card{
-  padding: 15px;
-}
-
-
-.mat-icon {
-  height: 50px;
-  width: 50px;
-  font-size: 50px;
-}
-
-span {
-  display:inline-block;
-  width:100px;
-
-}
-
-.left{
-  display: block;
-  margin-left:25%;
-  float:left;
-  width: 100px;
-}
-
-.right{
-  display: block;
-  margin-right: 33%;
-  margin-top: -47px;
-  float:right;
-  width: 100px;
-}
-
-body{
-  background-image: url(https://wallpaper-house.com/data/out/7/wallpaper2you_161519.jpg);
-}
- */
-
-
-
-
-
- /* .bootstrap-wrapper{
-  height: 100%;
-  background-color: rgb(217, 217, 247);
-
- } */
 
  .bootstrap-wrapper,.card{
   background-color: rgb(217, 217, 247);
@@ -60,13 +6,13 @@ body{
 
  .container{
   height: 100%;
-  /* background-color: blueviolet; */
+
  }
 
  .usericon{
 margin-top: 7rem;
 margin-bottom: 7rem;
-margin-left: 1rem;
+margin-left: 0.5rem;
 height: 20rem;
  }
 
@@ -75,8 +21,20 @@ height: 20rem;
   margin-top: 6rem;
   margin-left: 0rem;
   width: 40rem;
+  padding-right: 2rem;
  }
 
  body{
   background-color: rgb(217, 217, 247);
 }
+
+button{
+  padding: 0.3rem;
+  width: 5rem;
+ }
+
+ button:hover{
+  border-radius:0.5rem;
+  font-size: 1rem;
+  opacity: 0.5;
+ }

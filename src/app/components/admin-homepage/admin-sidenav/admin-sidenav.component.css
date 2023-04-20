@@ -71,7 +71,7 @@ mat-icon {
 
 .matlistitem:hover  .hove {
   background-color: #1f2937;
-  transition-duration: 1s;
+  transition-duration: 0.3s;
   color: white;
 }
 

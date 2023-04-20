@@ -31,6 +31,9 @@ import { AddSubjectComponent } from './components/admin-homepage/admin-sidenav/S
 import { ManageQuestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/manageQuestion/manageQuestion.component';
 import { CreatePaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/createPaper.component';
 import { AddPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/addPaper/addPaper.component';
+
+import { ScheduleExamComponent } from './components/admin-homepage/admin-sidenav/schedule-exam/schedule-exam.component';
+import { AddExamComponent } from './components/admin-homepage/admin-sidenav/schedule-exam/add-exam/add-exam.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ViewPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/viewPaper/viewPaper.component';
 import { UserHomepageComponent } from './components/user-homepage/user-homepage.component';
@@ -57,6 +60,10 @@ import { ExamComponent } from './components/Exam/Exam.component';
     ManageQuestionComponent,
     CreatePaperComponent,
     AddPaperComponent,
+
+    ScheduleExamComponent,
+    AddExamComponent
+
     ForgotPasswordComponent,
     ViewPaperComponent,
     UserHomepageComponent,
@@ -64,6 +71,7 @@ import { ExamComponent } from './components/Exam/Exam.component';
     ProfileComponent,
     CodeComponent,
     ExamComponent
+
   ],
   imports: [
     BrowserModule,

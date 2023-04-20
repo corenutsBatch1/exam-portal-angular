@@ -1,0 +1,30 @@
+
+<div *ngIf="addexam">
+  <button class="btn btn-primary" (click)="loadAddExampage(false)">Add Exam</button>
+
+  <table class="table table-striped">
+
+    <thead>
+      <!-- [formControl]="subjectControl" -->
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Code</th>
+        <th>StartTime</th>
+        <th>EndTime</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exam of exams let i=index">
+        <td>{{exam.id}}</td>
+        <td>{{exam.name}}</td>
+        <td>{{exam.code}}</td>
+        <td>{{exam.startTime}}</td>
+        <td>{{exam.endTime}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!addexam" >
+  <app-add-exam (loadAddPaperpage)="loadAddExampage(true)"></app-add-exam>
+  </div>

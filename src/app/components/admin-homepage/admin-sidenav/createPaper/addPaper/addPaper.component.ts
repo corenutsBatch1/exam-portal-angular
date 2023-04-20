@@ -91,7 +91,9 @@ addpaper(createPaper:CreatePaper)
 });
 }
 goBack() {
+  console.log(this.loadAddPaperpage)
      this.loadAddPaperpage.emit(true);
+     console.log(this.loadAddPaperpage)
 
      }
 

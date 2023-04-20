@@ -1,5 +1,3 @@
-import { Question } from "./Question";
-
 export class CreatePaper{
   id?:number;
   name?:string;

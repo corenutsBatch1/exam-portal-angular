@@ -38,6 +38,7 @@ import { UserSidenavComponent } from './components/user-homepage/user-sidenav/us
 import { ProfileComponent } from './components/user-homepage/user-sidenav/profile/profile.component';
 import { CodeComponent } from './components/user-homepage/user-sidenav/code/code.component';
 import { ExamComponent } from './components/Exam/Exam.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { ExamComponent } from './components/Exam/Exam.component';
     MatTableModule,
     MatInputModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent],

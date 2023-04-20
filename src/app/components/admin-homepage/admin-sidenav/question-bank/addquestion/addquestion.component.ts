@@ -25,6 +25,7 @@ export class AddquestionComponent implements OnInit{
   Questions :Question=new Question();
    subjects?:Subject[];
    uniqueSubjectNames: string[] = [];
+   answers : string[] = []
   constructor(private http:HttpClient,private router:Router)
   {
     this.subjects=[];
@@ -67,11 +68,14 @@ export class AddquestionComponent implements OnInit{
     }
   }
 
-   addQuestion(Questions:Question,id?:number){
+  addQuestion(Questions:Question,id?:number){
     console.log(Questions)
     console.log(this.subject_id)
     console.log(this.selectedsubject)
     console.log(id)
+    this.answers.sort();
+    this.Questions.answer = this.answers.join('');
+    console.log(this.Questions.answer)
     this.http.post(`http://localhost:8089/api/addquestion/${id}`, Questions).subscribe(
       response=>{
         //console.log(response);
@@ -80,9 +84,19 @@ export class AddquestionComponent implements OnInit{
       }
     );
   }
-//   backClicked() {
-// this.route.navigate(["/adminpage/questionbank"])
-//   }
+  checkboxChanged(event: any, optionValue: string) {
+    if (event.checked) {
+      // Checkbox is checked
+      this.answers.push(optionValue);
+    } else {
+      // Checkbox is unchecked
+      const index = this.answers.indexOf(optionValue);
+      if (index !== -1) {
+        this.answers.splice(index, 1);
+      }
+    }
+  }
+
 goBack() {
   this.loadAddQuestionPage.emit(true);
 }

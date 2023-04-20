@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { User } from '../../model/model/User';
 import { LoginserviceService } from './loginservice.service';
 import { FormGroup,Validators,FormBuilder } from '@angular/forms';
@@ -17,6 +17,7 @@ submitted = false;
 
   userLogin:User = new User();
   validUser?:User;
+  id?:number;
   constructor(private http:HttpClient,private router: Router,
      private loginservice: LoginserviceService,private formBuilder:FormBuilder
      ) {}
@@ -46,7 +47,7 @@ ngOnInit() {
       .post(`http://localhost:8088/api/loginUser`, user)
       .subscribe((data) => {
         this.validUser = data;
-        if (this.validUser != null) {
+        if (this.validUser != null ) {
           if (this.validUser.role == 'ADMIN') {
             this.loginservice.login()
             // this.loginservice.isLoggedIn = true;
@@ -54,7 +55,9 @@ ngOnInit() {
           } else if (this.validUser.role == 'USER') {
             this.loginservice.login()
             // this.loginservice.isLoggedIn = true;
-            this.router.navigate(['/userpage']);
+            this.id=this.validUser.id;
+            this.router.navigate(['/userpage',this.id]);
+            console.log(this.id);
           }
         } else {
           sweetAlert("Invalid Credentials", "Register and try again", "error");

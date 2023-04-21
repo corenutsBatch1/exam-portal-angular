@@ -1,5 +1,5 @@
 export class Question{
-  id?:number;
+  id?:any;
   content?:string;
   optionA?:string;
   optionB?:string;

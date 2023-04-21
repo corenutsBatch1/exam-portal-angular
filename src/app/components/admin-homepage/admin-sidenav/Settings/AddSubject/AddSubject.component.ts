@@ -29,6 +29,7 @@ Subjects:Subject = new Subject();
   }
 
   onSubmit(){
+    this.submitted=true;
     if (this.myForm.invalid) {
       console.log(this.myForm);
       console.log("false");
@@ -61,7 +62,7 @@ addSubjectInfo()
   console.log(this.myForm);
   this.http.post<any>('http://localhost:8089/api/addsubject',this.myForm.value).subscribe(
     response=>{
-      //console.log(response);
+      console.log(response);
       alert("Submited");
       this.goBack();
     }

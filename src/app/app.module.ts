@@ -42,6 +42,7 @@ import { ProfileComponent } from './components/user-homepage/user-sidenav/profil
 import { CodeComponent } from './components/user-homepage/user-sidenav/code/code.component';
 import { ExamComponent } from './components/Exam/Exam.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.component';
 
 @NgModule({
   declarations: [
@@ -61,18 +62,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ManageQuestionComponent,
     CreatePaperComponent,
     AddPaperComponent,
-
     ScheduleExamComponent,
-    AddExamComponent
-
+    AddExamComponent,
     ForgotPasswordComponent,
     ViewPaperComponent,
     UserHomepageComponent,
     UserSidenavComponent,
     ProfileComponent,
     CodeComponent,
-    ExamComponent
-
+    ExamComponent,
+    ExamSidnavComponent
   ],
   imports: [
     BrowserModule,

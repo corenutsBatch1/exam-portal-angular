@@ -1,7 +1,124 @@
 
+<!-- <header>
+  <app-header></app-header>
+</header>
+<div class="container">
+  <nav>
+  <div class="question-list">
+    <ul>
+      <li *ngFor="let question of questions">
+        <a (click)="showQuestion(question.id)">{{ question.id }}</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<main>
+  <div class="question-area">
+    <div *ngIf="currentQuestion" class="question">
+      <h3>Question {{ currentQuestion.id }}</h3>
+      <p>{{ currentQuestion.content }}</p>
+      <p>{{ currentQuestion.optionA }}</p>
+      <p>{{ currentQuestion.optionB }}</p>
+      <p>{{ currentQuestion.optionC }}</p>
+      <p>{{ currentQuestion.optionD }}</p>
+    </div>
+  </div>
+</main>
+</div> -->
+
 <header>
   <app-header></app-header>
 </header>
-<p>
-  Exam works!
-</p>
+<nav class="text-center">
+
+  <h1>JAVA EXAM</h1>
+</nav>
+
+<div class="bootstrap-wrappper">
+  <div class="container-fulid">
+    <div class="row">
+
+      <!----Left Part-->
+      <div class="col-md-9" style="padding: 0rem;padding-left:1rem;">
+
+        <!---Start Left Top part for Swtich Subject---->
+        <div class="row-md-3 lefttop text-center">
+           <button class="text-center mt-3" mat-raised-button color="primary">
+            JAVA
+           </button>
+           <button class="text-center ml-5 mt-3" mat-raised-button color="primary">
+            ANGULAR
+           </button>
+        </div>
+         <!---End Left Top part for Swtich Subject---->
+
+          <!---Start Left Buttom part for Question---->
+        <div class="row-md-9 leftbottom" *ngIf="currentQuestion" class="question">
+
+          <mat-list>
+            <mat-list-item> <h1>{{ currentQuestion.content }}</h1></mat-list-item>
+
+            <mat-list-item>
+              <div style="white-space:nowrap">
+                <input class="radiobutton" type="radio"/>
+                <label  class="option" >{{ currentQuestion.optionA }}</label>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <div style="white-space:nowrap">
+              <input class="radiobutton" type="radio"/>
+              <label  class="option" >{{ currentQuestion.optionB }}</label>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <div class="white-space:nowrap">
+                <input class="radiobutton" type="radio"/>
+              <label class="option">{{ currentQuestion.optionC }}</label>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item>
+             <div class="white-space:nowrap">
+              <input class="radiobutton" type="radio"/>
+              <label class="option">{{ currentQuestion.optionD }}</label>
+             </div>
+            </mat-list-item>
+
+          </mat-list>
+        </div>
+      </div>
+       <!---End Left buttom part for Question---->
+
+        <!---Start Rigth part---->
+      <div class="col-md-3 right" style="padding: 0;">
+        <div class="col" style="padding: 0;">
+          <!---Start Rigth top part for timer---->
+          <div class="row-md-3 righttop">
+            <h1>Time Left :90:00 min</h1>
+
+          </div>
+             <!---End Rigth top part for timer---->
+
+          <!---Start Rigth buttom part for Question Answered---->
+          <div class="row-md-9 rigthbottom">
+            <div class="question-list">
+              <ul>
+                <li *ngFor="let question of questions">
+                  <a (click)="showQuestion(question.id)">{{ question.id }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+             <!---End Rigth buttom part for Question Answered---->
+
+
+        </div>
+      </div>
+      <!---End Rigth part---->
+    </div>
+  </div>
+</div>
+
+

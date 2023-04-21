@@ -26,6 +26,7 @@ import { UserSidenavComponent } from './components/user-homepage/user-sidenav/us
 import { ProfileComponent } from './components/user-homepage/user-sidenav/profile/profile.component';
 import { CodeComponent } from './components/user-homepage/user-sidenav/code/code.component';
 import { ExamComponent } from './components/Exam/Exam.component';
+import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ExamComponent } from './components/Exam/Exam.component';
       { path: 'login', component: LoginmodalComponent },
       { path: 'signup', component: SignupComponent },
       {path:'reset', component:ForgotPasswordComponent},
-      {path:'exam',component:ExamComponent,
+      { path: 'examsidenav', component: ExamSidnavComponent },
+      { path: 'exam/:code', component: ExamComponent ,
       canActivate: [AuthGuard],
       },
 
@@ -68,8 +70,6 @@ import { ExamComponent } from './components/Exam/Exam.component';
           children: [
             { path: 'addexam', component: AddExamComponent}
           ]},
-
-
         ],
       },
 

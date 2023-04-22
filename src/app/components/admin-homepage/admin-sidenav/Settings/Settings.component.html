@@ -1,19 +1,19 @@
-<!-- <p>settings works!</p> -->
+
 
 <div class="allign" *ngIf="show"  >
-  <mat-card class="example-card" >
+  <mat-card class="card" >
     <mat-card-header>
       <div mat-card-avatar ></div>
-      <mat-card-title>ADD SUBJECT</mat-card-title>
-      <mat-card-subtitle>adding subjects</mat-card-subtitle>
+      <mat-card-title class="text-center">ADD SUBJECT</mat-card-title>
+      <mat-card-subtitle class="text-center">adding subjects</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p class="text-center">
-         Adding the Subject and Topic.
+         Adding the Subject and Topic
       </p>
     </mat-card-content>
     <mat-card-actions >
-      <button id="add-button" style="margin-left: 40px;" mat-button (click)="loadAddSubjectPage(false)" ><mat-icon>add_circle_outline</mat-icon>Add Subject</button>
+      <button id="add-button" class="button" mat-button (click)="loadAddSubjectPage(false)" ><mat-icon>add_circle_outline</mat-icon>Add Subject</button>
     </mat-card-actions>
 
   </mat-card>

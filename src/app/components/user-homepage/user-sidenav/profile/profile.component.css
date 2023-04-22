@@ -1,0 +1,32 @@
+.card{
+  width: 40rem;
+}
+
+.row{
+  margin-top: 1rem;
+  margin-left: 13rem;
+}
+
+.mat-icon{
+  height:3.9rem;
+  width: 3rem;
+  font-size: 3rem;
+  /* background-color: aqua; */
+}
+
+.user{
+  height:3.9rem;
+  width: 3rem;
+  margin-left: 0.2rem;
+  margin-top: -5rem;
+  margin-bottom: 5rem;
+  background-color: blue;
+}
+
+.left{
+  margin-left: 12rem;
+}
+.right{
+  margin-top: -3.5rem;
+  margin-right: 15rem;
+}

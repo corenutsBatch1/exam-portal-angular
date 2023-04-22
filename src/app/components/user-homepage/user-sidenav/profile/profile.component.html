@@ -1,12 +1,24 @@
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title"><b>User Profile</b></h5>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"><strong>ID:</strong> {{user2.id}}</li>
-      <li class="list-group-item"><strong>NAME:</strong> {{user2.name}}</li>
-      <li class="list-group-item"><strong>EMAIL:</strong> {{user2.email}}</li>
-      <li class="list-group-item"><strong>PASSWORD:</strong> {{user2.password}}</li>
-      <li class="list-group-item"><strong>PHONENUMBER:</strong> {{user2.phoneNumber}}</li>
-    </ul>
+<div class="bootstrap-wrapper">
+  <div class="container">
+    <div class="row">
+      <mat-card class="card">
+          <div class="card-body">
+            <div class="left">
+              <mat-icon class="mat-18">person</mat-icon>
+            </div>
+            <div class="right float-right">
+              <h1><b>User Profile</b></h1>
+            </div>
+            <!-- <h1 class="card-title text-center"><mat-icon class="mat-icon">person</mat-icon><b class="user">User Profile</b></h1> -->
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>ID:</strong> {{user2.id}}</li>
+              <li class="list-group-item"><strong>NAME:</strong> {{user2.name}}</li>
+              <li class="list-group-item"><strong>EMAIL:</strong> {{user2.email}}</li>
+              <li class="list-group-item"><strong>PASSWORD:</strong> {{user2.password}}</li>
+              <li class="list-group-item"><strong>PHONENUMBER:</strong> {{user2.phoneNumber}}</li>
+            </ul>
+          </div>
+      </mat-card>
+    </div>
   </div>
 </div>

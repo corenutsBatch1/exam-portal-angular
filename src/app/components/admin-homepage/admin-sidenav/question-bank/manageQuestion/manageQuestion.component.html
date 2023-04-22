@@ -6,7 +6,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field appearance="fill" class="ml-4">
   <mat-label>Select a topic</mat-label>
   <mat-select [(ngModel)]="Topic_id" name="Topic_id" (selectionChange)="getQuestionsBySubId(Topic_id)">
     <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>
@@ -15,7 +15,7 @@
 
 
 
-<button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>
+<button class="btn btn-secondary btn-sm float-right" (click)="goBack()">Back</button>
 <table class="table table-striped">
 
 

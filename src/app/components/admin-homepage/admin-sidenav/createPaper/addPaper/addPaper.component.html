@@ -17,7 +17,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field appearance="fill" class="ml-4">
   <mat-label>Select a topic</mat-label>
   <mat-select [(ngModel)]="subject_id" name="subject_id" [formControl]="subjectControl" (selectionChange)="getquestions(subject_id)">
     <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>

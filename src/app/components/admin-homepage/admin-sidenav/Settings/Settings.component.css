@@ -1,8 +1,11 @@
-.example-card {
-  max-width: 300px;
-  margin: 20px;
-  padding: 20px;
+.card {
+  width: 20rem;
+  height:11rem;
+  padding:1rem;
+  border-radius: 1rem;
+  background-color:  rgb(104, 179, 249);;
 }
+
 .allign{
      display: flex;
 }
@@ -10,4 +13,8 @@
 #add-button:hover{
   background-color: #1f2937;
   color: white;
+}
+
+.button{
+  margin-left: 4rem;
 }

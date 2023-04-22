@@ -1,7 +1,49 @@
 th{
   color: rgb(255, 255, 255);
-  background-color: black;
+  background-color:#1f2937;
 }
-.container mt-5{
-  /* width: 100%; */
+
+.card{
+  margin-bottom: 2rem;
+  margin-left: 3rem;
+  width: 60rem;
+  padding: 1rem;
 }
+
+.right{
+  margin-left: 2rem;
+  /* width: 20rem; */
+}
+
+
+.questionPlaceholder{
+  width: 90%;
+}
+
+.option{
+  text-align: center;
+  width: 10rem;
+}
+
+.table{
+  width: 40rem;
+  margin-left: 7rem;
+}
+
+.addButton:hover{
+  opacity: 80%;
+  font-size: 110%;
+  transition-duration: 1sec;
+}
+
+.headingAnswers{
+  width: 50%;
+}
+
+.headingQuestion{
+  width: 50%;
+}
+
+
+
+

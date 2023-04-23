@@ -1,31 +1,3 @@
-
-<!-- <header>
-  <app-header></app-header>
-</header>
-<div class="container">
-  <nav>
-  <div class="question-list">
-    <ul>
-      <li *ngFor="let question of questions">
-        <a (click)="showQuestion(question.id)">{{ question.id }}</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<main>
-  <div class="question-area">
-    <div *ngIf="currentQuestion" class="question">
-      <h3>Question {{ currentQuestion.id }}</h3>
-      <p>{{ currentQuestion.content }}</p>
-      <p>{{ currentQuestion.optionA }}</p>
-      <p>{{ currentQuestion.optionB }}</p>
-      <p>{{ currentQuestion.optionC }}</p>
-      <p>{{ currentQuestion.optionD }}</p>
-    </div>
-  </div>
-</main>
-</div> -->
-
 <header>
   <app-header></app-header>
 </header>
@@ -42,13 +14,14 @@
       <div class="col-md-9" style="padding: 0rem;padding-left:1rem;">
 
         <!---Start Left Top part for Swtich Subject---->
-        <div class="row-md-3 lefttop text-center">
-           <button class="text-center mt-3" mat-raised-button color="primary">
-            JAVA
+        <div class="row-md-3 lefttop text-center" *ngFor="let subjectName of uniqueSubjectNames">
+
+           <button class="text-center mt-3" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)">
+            {{subjectName}}
            </button>
-           <button class="text-center ml-5 mt-3" mat-raised-button color="primary">
+           <!-- <button class="text-center ml-5 mt-3" mat-raised-button color="primary">
             ANGULAR
-           </button>
+           </button> -->
         </div>
          <!---End Left Top part for Swtich Subject---->
 
@@ -60,28 +33,28 @@
 
             <mat-list-item>
               <div style="white-space:nowrap">
-                <input class="radiobutton" type="radio"/>
+                <input class="radiobutton" type="radio" name="correct"/>
                 <label  class="option" >{{ currentQuestion.optionA }}</label>
               </div>
             </mat-list-item>
 
             <mat-list-item>
               <div style="white-space:nowrap">
-              <input class="radiobutton" type="radio"/>
+              <input class="radiobutton" type="radio" name="correct"/>
               <label  class="option" >{{ currentQuestion.optionB }}</label>
               </div>
             </mat-list-item>
 
             <mat-list-item>
               <div class="white-space:nowrap">
-                <input class="radiobutton" type="radio"/>
+                <input class="radiobutton" type="radio" name="correct"/>
               <label class="option">{{ currentQuestion.optionC }}</label>
               </div>
             </mat-list-item>
 
             <mat-list-item>
              <div class="white-space:nowrap">
-              <input class="radiobutton" type="radio"/>
+              <input class="radiobutton" type="radio" name="correct"/>
               <label class="option">{{ currentQuestion.optionD }}</label>
              </div>
             </mat-list-item>
@@ -105,8 +78,8 @@
           <div class="row-md-9 rigthbottom">
             <div class="question-list">
               <ul>
-                <li *ngFor="let question of questions">
-                  <a (click)="showQuestion(question.id)">{{ question.id }}</a>
+                <li *ngFor="let question of questions let i=index">
+                  <a (click)="showQuestion(question.id)">{{i+1 }} </a>
                 </li>
               </ul>
             </div>
@@ -120,5 +93,3 @@
     </div>
   </div>
 </div>
-
-

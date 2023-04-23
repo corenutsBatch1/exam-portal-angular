@@ -17,3 +17,11 @@ body {
   background: #eee;
 }
 
+.header{
+  color: white;
+  font-size: 25px;
+  margin-left: 10px;
+}
+img{
+  height: 50%;
+}

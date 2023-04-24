@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {  ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/model/model/User';
+// import { User } from 'src/app/model/model/User'; 
 
 @Component({
   selector: 'app-user-homepage',

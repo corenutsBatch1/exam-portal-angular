@@ -33,7 +33,7 @@ export class CodeComponent implements OnInit {
           console.log(examObject.id+"senddddddddddddddd")
           this.service.examid(examObject.id)
          // console.log(`Exam code and id present: ${examObject.code} - ${examObject.id}`);
-          this.route.navigate(['exam', examObject.code]);
+          this.route.navigate(['userexam', examObject.code]);
         }
       }
     );

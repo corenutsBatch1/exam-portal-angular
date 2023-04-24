@@ -80,14 +80,14 @@ import { UserexamComponent } from './components/user-homepage/user-sidenav/code/
       children: [
         { path: 'profile', component: ProfileComponent },
         {path:'code',component:CodeComponent,
-       
+
       },
 
       ],
     },
       {path:'usersidenav',component:UserSidenavComponent},
-      {
-        path:'userexam',component:UserexamComponent,
+      { path: 'userexam/:code', component: UserexamComponent ,
+      canActivate: [AuthGuard],
       },
       { path: '**', redirectTo: 'home' },
 

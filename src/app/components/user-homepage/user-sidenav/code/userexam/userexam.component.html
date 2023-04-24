@@ -1,17 +1,95 @@
-<mat-card class="card">
-    <mat-card-header>
-        <mat-card-title>Title</mat-card-title>
-        <mat-card-subtitle>Subtitle</mat-card-subtitle>
-    </mat-card-header>
-    <img matCardImage src="Card wide image source">
-    <mat-card-content>
-        Text content
-    </mat-card-content>
-    <mat-card-actions align="start">
-        <button mat-button>Action1</button>
+<header>
+  <app-header></app-header>
+</header>
+<nav class="text-center">
 
-    </mat-card-actions>
-    <mat-card-footer>
-        Footer
-    </mat-card-footer>
-</mat-card>
+  <h1>JAVA EXAM</h1>
+</nav>
+
+<div class="bootstrap-wrappper">
+  <div class="container-fulid">
+    <div class="row">
+
+      <!----Left Part-->
+      <div class="col-md-9" style="padding: 0rem;padding-left:1rem;">
+
+        <!---Start Left Top part for Swtich Subject---->
+        <div class="row-md-3 lefttop text-center" *ngFor="let subjectName of uniqueSubjectNames">
+
+           <button class="text-center mt-3" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)">
+            {{subjectName}}
+           </button>
+           <!-- <button class="text-center ml-5 mt-3" mat-raised-button color="primary">
+            ANGULAR
+           </button> -->
+        </div>
+         <!---End Left Top part for Swtich Subject---->
+
+          <!---Start Left Buttom part for Question---->
+        <div class="row-md-9 leftbottom" *ngIf="currentQuestion" class="question">
+
+          <mat-list>
+            <mat-list-item> <h1>{{ currentQuestion.content }}</h1></mat-list-item>
+
+            <mat-list-item>
+              <div style="white-space:nowrap">
+                  <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="A" (click)="sendoption(currentQuestion.id, 'A')" [checked]="isOptionSelected(currentQuestion.id, 'A')"/>
+                  <label class="option">{{ currentQuestion.optionA }}</label>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <div style="white-space:nowrap">
+                <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="B" (click)="sendoption(currentQuestion.id, 'B')" [checked]="isOptionSelected(currentQuestion.id, 'B')"/>
+                <label class="option">{{ currentQuestion.optionB }}</label>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <div class="white-space:nowrap">
+                <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="C" (click)="sendoption(currentQuestion.id, 'C')" [checked]="isOptionSelected(currentQuestion.id, 'C')"/>
+                <label class="option">{{ currentQuestion.optionC }}</label>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item>
+             <div class="white-space:nowrap">
+              <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="D" (click)="sendoption(currentQuestion.id, 'D')" [checked]="isOptionSelected(currentQuestion.id, 'D')"/>
+                <label class="option">{{ currentQuestion.optionD }}</label>
+             </div>
+            </mat-list-item>
+
+          </mat-list>
+        </div>
+      </div>
+       <!---End Left buttom part for Question---->
+
+        <!---Start Rigth part---->
+      <div class="col-md-3 right" style="padding: 0;">
+        <div class="col" style="padding: 0;">
+          <!---Start Rigth top part for timer---->
+          <div class="row-md-3 righttop">
+            <h1>Time Left :90:00 min</h1>
+
+          </div>
+             <!---End Rigth top part for timer---->
+
+          <!---Start Rigth buttom part for Question Answered---->
+          <div class="row-md-9 rigthbottom">
+            <div class="question-list__items">
+              <ul>
+                <li *ngFor="let question of questions let i=index">
+                  <a (click)="showQuestion(question.id)">{{i+1 }} </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+             <!---End Rigth buttom part for Question Answered---->
+
+
+        </div>
+      </div>
+      <!---End Rigth part---->
+    </div>
+  </div>
+</div>

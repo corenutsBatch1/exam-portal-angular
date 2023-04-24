@@ -43,6 +43,7 @@ import { CodeComponent } from './components/user-homepage/user-sidenav/code/code
 import { ExamComponent } from './components/Exam/Exam.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.component';
+import { UserexamComponent } from './components/user-homepage/user-sidenav/code/userexam/userexam.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.c
     ProfileComponent,
     CodeComponent,
     ExamComponent,
-    ExamSidnavComponent
+    ExamSidnavComponent,
+    UserexamComponent
   ],
   imports: [
     BrowserModule,

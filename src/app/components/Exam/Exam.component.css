@@ -19,7 +19,8 @@
 
 .rigthbottom{
   height: 25rem;
-  /* background-color: rgb(207, 220, 20); */
+  border: .2rem solid black;
+  background-color: rgb(170, 20, 220);
 }
 
 .lefttop{

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
+import { MyserviceService } from 'src/app/model/myservice';
 
 @Component({
   selector: 'app-code',
@@ -12,38 +13,36 @@ export class CodeComponent implements OnInit {
 
   exam:ScheduleExam=new ScheduleExam();
   exam1:ScheduleExam[]=[];
-  constructor(private route:Router,private http:HttpClient) { }
+  constructor(private route:Router,private http:HttpClient,private service:MyserviceService) { }
 
   ngOnInit() {
   }
 
-  clickEvent(code: any) {
+  clickEvent(exam: any) {
     this.http.get(`http://localhost:8089/api/getallexams`).subscribe(
       data => {
         console.log(data);
-        console.log(this.exam.code)
         this.exam1 = this.exam1.concat(data);
-        console.log(this.exam1)
-        const uniquexamcodes = this.getUniqueexamNames(this.exam1);
-        if (this.exam.code !== undefined) {
-          console.log(uniquexamcodes);
-          const codePresent = uniquexamcodes.includes(this.exam.code);
-          console.log(`Exam code present: ${codePresent}`);
-          if (codePresent == true) {
-            this.route.navigate(['exam', this.exam.code]);
-          }
+        console.log(this.exam1);
+        const uniqueExamNames = this.getUniqueExamNames(this.exam1);
+        console.log(uniqueExamNames+"5555");
+        console.log(this.exam.code)
+        const examObject = uniqueExamNames.find(item => item.code === this.exam.code);
+        console.log(examObject+"6666");
+        if (examObject !== undefined) {
+          console.log(examObject.id+"senddddddddddddddd")
+          this.service.examid(examObject.id)
+         // console.log(`Exam code and id present: ${examObject.code} - ${examObject.id}`);
+          this.route.navigate(['exam', examObject.code]);
         }
-      })
+      }
+    );
   }
 
-
-
-  getUniqueexamNames(exam: ScheduleExam[]): string[] {
-    const uniqueexamNames = exam
-      .map((exam) => exam?.code)
-      .filter((name) => name !== undefined) as string[];
-    return [...new Set(uniqueexamNames)];
-
-
+  getUniqueExamNames(exam: ScheduleExam[]): any[] {
+    const uniqueExamNames = exam
+      .filter((exam) => exam.code !== undefined && exam.id !== undefined)
+      .map((exam) => ({id: exam.id, code: exam.code}));
+    return [...new Set(uniqueExamNames.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MyserviceService } from 'src/app/model/myservice';
 
 @Component({
   selector: 'app-user-sidenav',
@@ -10,10 +11,11 @@ export class UserSidenavComponent implements OnInit {
 
   @Input() id?:any;
   userId?:number;
-  constructor(private router:Router,private route:ActivatedRoute) { }
+  constructor(private router:Router,private route:ActivatedRoute,private service:MyserviceService) { }
 
   ngOnInit() {
     this.userId=this.id;
+    this.service.userid(this.userId);
 
   }
   clickEvent(name:any,event:any){

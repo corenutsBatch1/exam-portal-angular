@@ -36,7 +36,7 @@ ngOnInit(){
     Validators.required,
     Validators.minLength(3),
     Validators.maxLength(30),
-    Validators.pattern('[a-zA-Z]*')
+    Validators.pattern('[a-zA-Z ]*')
    ]
  ],
   semail:

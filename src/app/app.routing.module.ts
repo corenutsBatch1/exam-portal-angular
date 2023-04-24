@@ -27,6 +27,7 @@ import { ProfileComponent } from './components/user-homepage/user-sidenav/profil
 import { CodeComponent } from './components/user-homepage/user-sidenav/code/code.component';
 import { ExamComponent } from './components/Exam/Exam.component';
 import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.component';
+import { UserexamComponent } from './components/user-homepage/user-sidenav/code/userexam/userexam.component';
 
 
 @NgModule({
@@ -85,6 +86,9 @@ import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.c
       ],
     },
       {path:'usersidenav',component:UserSidenavComponent},
+      {
+        path:'userexam',component:UserexamComponent,
+      },
       { path: '**', redirectTo: 'home' },
 
     ]),

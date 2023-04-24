@@ -60,9 +60,9 @@ ngOnInit(){
     '',
     [
       Validators.required,
-      Validators.pattern('[0-9]*'),
-      Validators.minLength(10),
-      Validators.maxLength(11)
+      Validators.pattern('^[0-9]{10}$'),
+      // Validators.minLength(10),
+      // Validators.maxLength(10)
     ]
   ],
   });

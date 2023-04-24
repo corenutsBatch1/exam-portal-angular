@@ -78,7 +78,10 @@ import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.c
       canActivate: [AuthGuard],
       children: [
         { path: 'profile', component: ProfileComponent },
-        {path:'code',component:CodeComponent}
+        {path:'code',component:CodeComponent,
+       
+      },
+
       ],
     },
       {path:'usersidenav',component:UserSidenavComponent},

@@ -44,14 +44,8 @@ button:hover{
   margin-left: 1rem;
 }
 
-.mat-list-item-content {
-  outline:none !important;
-  border: none;
-  padding: 0 !important;
-}
 
-
-.question-list ul li a {
+.question-list__items ul li a {
   display: inline-block;
   width: 25%; /* Set the width of each anchor tag to 25% to display 4 in a row */
   text-align: center; /* Center the text within each anchor tag */
@@ -63,12 +57,17 @@ button:hover{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   grid-gap: 10px;
+  background-color: chocolate;
 }
 
 .question-list__items li {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.question-list ul{
+  list-style-type: none;
 }
 
 

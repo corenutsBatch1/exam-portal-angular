@@ -1,3 +1,5 @@
+import { Subject } from "./Subject";
+
 export class Question{
   id?:any;
   content?:string;
@@ -7,5 +9,6 @@ export class Question{
   optionD?:string;
   answer?:string;
   qtype?:string;
+  subject?:Subject
 
 }

@@ -49,10 +49,7 @@ export class AddExamComponent implements OnInit{
   }
   goBack() {
     console.log("go back")
-    console.log(this.loadAddExampage)
       this.loadAddExampage.emit(true);
-      console.log(this.loadAddExampage)
-
      }
 
 }

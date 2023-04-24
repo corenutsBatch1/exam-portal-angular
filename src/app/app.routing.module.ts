@@ -25,8 +25,8 @@ import { UserHomepageComponent } from './components/user-homepage/user-homepage.
 import { UserSidenavComponent } from './components/user-homepage/user-sidenav/user-sidenav.component';
 import { ProfileComponent } from './components/user-homepage/user-sidenav/profile/profile.component';
 import { CodeComponent } from './components/user-homepage/user-sidenav/code/code.component';
-import { ExamComponent } from './components/Exam/Exam.component';
-import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.component';
+// import { ExamComponent } from './components/Exam/Exam.component';
+// import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.component';
 import { UserexamComponent } from './components/user-homepage/user-sidenav/code/userexam/userexam.component';
 
 
@@ -37,11 +37,6 @@ import { UserexamComponent } from './components/user-homepage/user-sidenav/code/
       { path: 'login', component: LoginmodalComponent },
       { path: 'signup', component: SignupComponent },
       {path:'reset', component:ForgotPasswordComponent},
-      { path: 'examsidenav', component: ExamSidnavComponent },
-      { path: 'exam/:code', component: ExamComponent ,
-      canActivate: [AuthGuard],
-      },
-
       {
         path: 'adminpage',
         component: AdminHomepageComponent,

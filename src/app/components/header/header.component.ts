@@ -6,29 +6,14 @@ import { LoginserviceService } from './../loginmodal/loginservice.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+
 export class HeaderComponent {
 
   constructor(public loginservice : LoginserviceService){}
-
   logOut(){
-
     localStorage.removeItem('is_logged_in');
+    localStorage.clear();
     this.loginservice.logout();
-
-    // this.loginservice.isLoggedIn = false;
   }
-  // confirmLogout(){
-  //   if(confirm('Are you sure to logout?')){
-  //     this.logOut()
-  //     }
-  //     else{
-  //       this.loginservice.login();
-  //     }
-  // }
+
 }
-
-
-
-
-
-

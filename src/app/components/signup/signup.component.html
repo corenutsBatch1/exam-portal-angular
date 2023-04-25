@@ -17,10 +17,10 @@
                   <label for="Name" style="font-weight: bold">Name</label>
                   <input type="text" id="Name" class="form-control" placeholder="Full Name" name="name" [(ngModel)]="userLogin.name" formControlName="sname" [ngClass]="{'is-invalid': (submitted && f.sname.errors) || (f.sname.touched && f.sname.errors) }" />
                  <div *ngIf="submitted ||f.sname.touched && f.sname.errors" class="invalid-feedback">
-                    <div *ngIf="f.sname.errors?.required">Name is required</div>
+                    <div *ngIf="f.sname.errors?.required">Name is mandatory</div>
                      <div *ngIf="f.sname.errors?.pattern">Only alphabets allowed</div>
                      <div *ngIf="f.sname.errors?.maxLength">Maximum 30 letters allowed</div>
-                     <div *ngIf="f.sname.errors?.minlength">Minimum 3 letters required</div>
+                     <div *ngIf="f.sname.errors?.minlength">Please, Enter minimum 3 character's</div>
                   </div>
                 </div>
 
@@ -28,17 +28,21 @@
                   <label for="Email" style="font-weight: bold">Email address</label>
                   <input type="email" class="form-control" id="Email" placeholder="Enter email" name="email" [(ngModel)]="userLogin.email" formControlName="semail" [ngClass]="{ 'is-invalid':(submitted && f.semail.errors)|| (f.semail.touched && f.semail.errors) }"/>
                   <div *ngIf="submitted || f.semail.touched && f.semail.errors" class="invalid-feedback">
-                    <div *ngIf="f.semail.errors?.required">Email is required</div>
-                    <div *ngIf="f.semail.errors?.email">enter valid email</div>
+                    <div *ngIf="f.semail.errors?.required">Email is mandatory</div>
+                    <div *ngIf="f.semail.errors?.email">Please, Enter valid email</div>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="Password" style="font-weight: bold">Password</label>
-                  <input type="password" id="Password" class="form-control" placeholder="Password" name="password" [(ngModel)]="userLogin.password" formControlName="spassword"  [ngClass]="{ 'is-invalid': (submitted &&  f.spassword.errors) || (f.spassword.touched && f.spassword.errors) }"/>
+                  <input matInput [type]="hide ? 'password' : 'text'" type="password" id="Password" class="form-control" placeholder="Password" name="password" [(ngModel)]="userLogin.password" formControlName="spassword"  [ngClass]="{ 'is-invalid': (submitted &&  f.spassword.errors) || (f.spassword.touched && f.spassword.errors) }"/>
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" class="float-right hideshow">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
                   <div *ngIf="submitted || f.spassword.touched && f.spassword.errors" class="invalid-feedback">
-                    <div *ngIf="f.spassword.errors?.required">Password is required</div>
-                    <div *ngIf="f.spassword.errors?.minlength">Minimum length must be 6 letters</div>
+                    <div *ngIf="f.spassword.errors?.required">Password is mandatory</div>
+                    <div *ngIf="f.spassword.errors?.minlength">Please, Enter minimum 6 character's</div>
+                    <div *ngIf="f.spassword.errors?.pattern">Please, Remove space's</div>
                   </div>
                 </div>
 
@@ -46,10 +50,8 @@
                   <label for="PhoneNumber" style="font-weight: bold">Phone number</label>
                   <input class="form-control" id="PhoneNumber" placeholder="Phone number" name="phoneNumber" [(ngModel)]="userLogin.phoneNumber" formControlName="sphoneNumber" type="text" [ngClass]="{'is-invalid': (submitted && f.sphoneNumber.errors)|| (f.sphoneNumber.touched && f.sphoneNumber.errors)}"/>
                   <div *ngIf="submitted || f.sphoneNumber.touched && f.sphoneNumber.errors" class="invalid-feedback">
-                    <div *ngIf="f.sphoneNumber.errors?.required">Phone number is required</div>
-                    <div *ngIf="f.sphoneNumber.errors?.pattern">Please, Enter 10 digit Mobile Number</div>
-                    <!-- <div *ngIf="f.sphoneNumber.errors?.minlength">Minimum length must be 10</div> -->
-                    <!-- <div *ngif="f.sphoneNumber.errors?.maxlength">Length must be 10</div> -->
+                    <div *ngIf="f.sphoneNumber.errors?.required">Phone number is mandatory</div>
+                    <div *ngIf="f.sphoneNumber.errors?.pattern">Please, Enter 10 digit Mobile Number(start with 6/7/8/9)</div>
                   </div>
                 </div>
 

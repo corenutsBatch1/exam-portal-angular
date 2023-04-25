@@ -15,7 +15,12 @@ export class LoginserviceService {
   }
 
   logout() {
+    if(confirm("are you want logout!!!")){
     localStorage.removeItem('is_logged_in');
     this.isLoggedIn = false;
+    }else{
+      localStorage.setItem('is_logged_in', 'true');
+    this.isLoggedIn = true;
+    }
   }
 }

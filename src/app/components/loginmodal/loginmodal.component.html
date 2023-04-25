@@ -21,16 +21,20 @@
               <label for="Email" style="font-weight: bold;">Email address</label>
               <input type="email" class="form-control" id="Email" placeholder="Enter email" [(ngModel)]="userLogin.email" name="email" formControlName="lemail" [ngClass]="{ 'is-invalid': (submitted && f.lemail.errors ) || (f.lemail.touched && f.lemail.errors) }">
               <div *ngIf="submitted || f.lemail.touched && f.lemail.errors" class="invalid-feedback">
-                <div *ngIf="f.lemail.errors?.required">Email is required</div>
+                <div *ngIf="f.lemail.errors?.required">Email is mandatory</div>
                 <div *ngIf="f.lemail.errors?.email">Email must be a valid email address</div>
              </div>
             </div>
             <div class="form-group">
               <label for="Password" style="font-weight: bold;">Password</label>
-              <input type="password" class="form-control" id="Password" placeholder="Password" [(ngModel)]="userLogin.password" name="password" formControlName="lpassword" [ngClass]="{ 'is-invalid': (submitted && f.lpassword.errors) || (f.lpassword.touched && f.lpassword.errors)}">
+              <input  matInput [type]="hide ? 'password' : 'text'" type="password" class="form-control" id="Password" placeholder="Password" [(ngModel)]="userLogin.password" name="password" formControlName="lpassword" [ngClass]="{ 'is-invalid': (submitted && f.lpassword.errors) || (f.lpassword.touched && f.lpassword.errors)}">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" class="float-right hideshow">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
               <div *ngIf="submitted || f.lpassword.touched && f.lpassword.errors" class="invalid-feedback">
-                <div *ngIf="f.lpassword.errors?.required">Password is required</div>
+                <div *ngIf="f.lpassword.errors?.required">Password is mandatory</div>
                 <div *ngIf="f.lpassword.errors?.minlength">Min 6 letter required</div>
+                <div *ngIf="f.lpassword.errors?.pattern">Please, Remove space's</div>
              </div>
             </div>
 

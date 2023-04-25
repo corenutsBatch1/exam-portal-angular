@@ -39,7 +39,6 @@ export class AddExamComponent implements OnInit{
 
   addexam(scheduleExam:ScheduleExam)
   {
-
     this.http.post<ScheduleExam>(`http://localhost:8089/api/addexam/${this.paperId}`,scheduleExam).subscribe(data=>{
     console.log(data);
     alert("submitted");

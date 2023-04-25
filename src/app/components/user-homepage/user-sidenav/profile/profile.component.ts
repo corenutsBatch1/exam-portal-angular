@@ -21,7 +21,7 @@ this.route.paramMap.subscribe(params=>{
   console.log(id2);
   this.user.id= parseInt(id2 ?? '0',10); //using 0 as default value if id2 is null
   console.log(this.user.id+"userid");
-  this.http.post(`http://localhost:8088/api/getUserById`,this.user).subscribe(data=>{
+  this.http.get(`http://localhost:8088/api/getUserById/${id2}`).subscribe(data=>{
     console.log(data);
     this.user2=data;
     console.log(this.user2)

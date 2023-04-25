@@ -1,3 +1,4 @@
+<div class="container">
 
 <mat-form-field appearance="fill">
   <mat-label>Select a subject</mat-label>
@@ -20,7 +21,6 @@
 
 
   <thead >
-    <!-- [formControl]="subjectControl" -->
     <tr>
       <th>ID</th>
       <th>Content</th>
@@ -44,21 +44,21 @@
       <td>{{question.answer}}</td>
       <td>{{question.qtype}}</td>
       <td>
-       <!-- Button trigger modal -->
+
      <mat-icon   type="button" data-toggle="modal" data-target="#staticBackdrop" (click)="getQuestionsById(question.id)">edit
-</mat-icon>
-</td>
-
-
+    </mat-icon>
+    </td>
 </tr>
 </tbody>
  </table>
+</div>
 
-<!-- Modal --><div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Update Question</h5>
+        <h5 class="modal-title text-center" id="staticBackdropLabel">Update Question</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -88,16 +88,6 @@
           <label for="formGroupExampleInput2">Enter answer</label>
           <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the answer" [(ngModel)]="question.answer" name="answer">
         </div>
-        <!-- <div class="form-group mb-3">
-          <mat-form-field appearance="fill">
-            <mat-label>Choose an question_type</mat-label>
-            <mat-select  [(ngModel)]="question.qtype" name="qtype">
-              <mat-option value="simple">simple</mat-option>
-              <mat-option value="medium" >medium</mat-option>
-              <mat-option value="hard">hard</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div> -->
         <div class="form-group mb-3">
           <label for="question_type" class="form-label">Choose a question type</label>
           <div class="dropdown">
@@ -113,6 +103,6 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="editquestion(this.question)">Edit</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="editquestion(this.question)">Update</button>
       </div>
     </div>

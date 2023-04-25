@@ -25,6 +25,7 @@ export class UserexamComponent {
   selectedOptions: string[] = [];
   answer:useranswer=new useranswer() ;
   uniqueSubjectNames: String[] =[];
+  selected:boolean=false;
   constructor(private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService) {}
 
   ngOnInit(): void {
@@ -75,6 +76,7 @@ export class UserexamComponent {
     })
 
   }
+
   sendoption(qid:number,option1:string)
   {
     this.selectedOptions[qid] = option1;
@@ -102,9 +104,10 @@ console.log(this.answer.userAnswer)
    console.log(this.answer.userAnswer);
        this.http.post(`http://localhost:8089/api/saveanswer`,this.answer).subscribe(data=>console.log(data));
 
+
   }
   isOptionSelected(questionId: number, option: string): boolean {
-    return this.selectedOptions[questionId] === option;
+    return this.selectedOptions[questionId] ===option;
   }
 
 }

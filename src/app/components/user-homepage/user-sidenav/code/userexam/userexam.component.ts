@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
+import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 
 
 @Component({
@@ -26,12 +27,15 @@ export class UserexamComponent {
   answer:useranswer=new useranswer() ;
   uniqueSubjectNames: String[] =[];
   selected:boolean=false;
-  constructor(private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService) {}
+  constructor(private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService,private router:Router) {}
+
+
+
 
   ngOnInit(): void {
     this.uid=this.service.sendid();
     this.eid=this.service.sendeid();
-
+    console.log(this.uid,this.eid)
     this.route.params.subscribe(params => {
       this.code = params['code'];
       console.log('Exam code:', this.code);
@@ -109,5 +113,9 @@ console.log(this.answer.userAnswer)
   isOptionSelected(questionId: number, option: string): boolean {
     return this.selectedOptions[questionId] ===option;
   }
+clickEvent(exam: any) {
+
+        this.router.navigate(['answers', this.code]);
+      }
 
 }

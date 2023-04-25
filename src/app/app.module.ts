@@ -31,7 +31,6 @@ import { AddSubjectComponent } from './components/admin-homepage/admin-sidenav/S
 import { ManageQuestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/manageQuestion/manageQuestion.component';
 import { CreatePaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/createPaper.component';
 import { AddPaperComponent } from './components/admin-homepage/admin-sidenav/createPaper/addPaper/addPaper.component';
-
 import { ScheduleExamComponent } from './components/admin-homepage/admin-sidenav/schedule-exam/schedule-exam.component';
 import { AddExamComponent } from './components/admin-homepage/admin-sidenav/schedule-exam/add-exam/add-exam.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
@@ -42,6 +41,7 @@ import { ProfileComponent } from './components/user-homepage/user-sidenav/profil
 import { CodeComponent } from './components/user-homepage/user-sidenav/code/code.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UserexamComponent } from './components/user-homepage/user-sidenav/code/userexam/userexam.component';
+import { UserAnswersComponent } from './components/user-homepage/user-sidenav/code/userexam/userAnswers/userAnswers.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +69,8 @@ import { UserexamComponent } from './components/user-homepage/user-sidenav/code/
     UserSidenavComponent,
     ProfileComponent,
     CodeComponent,
-    UserexamComponent
+    UserexamComponent,
+    UserAnswersComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,7 +92,8 @@ import { UserexamComponent } from './components/user-homepage/user-sidenav/code/
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

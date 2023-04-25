@@ -26,7 +26,7 @@
         <div class="row-md-9 leftbottom" *ngIf="currentQuestion" class="question">
 
           <mat-list >
-            <mat-list-item> <h1><span>{{currentQuestion.id}}</span> {{ currentQuestion.content }}</h1></mat-list-item>
+            <mat-list-item> <h1 ><span>{{this.questionnumber+1}}</span> {{ currentQuestion.content }}</h1></mat-list-item>
 
             <mat-list-item>
               <div style="white-space:nowrap">
@@ -55,6 +55,9 @@
                 <label class="option">{{ currentQuestion.optionD }}</label>
              </div>
             </mat-list-item>
+            <button type="button" class="btn btn-primary" (click)="previousquestion(this.questionnumber)">previous question</button>
+            <button type="button" class="btn btn-primary" (click)="nextquestion()">Save&Next</button>
+
 
           </mat-list>
         </div>
@@ -79,7 +82,9 @@
             <div class="question-list__items">
               <ul>
                 <li *ngFor="let question of questions let i=index">
-                  <a (click)="showQuestion(question.id)" [ngClass]="'change-color-{{question.id}}'" [ngStyle]="{'background-color' : stateChangeCheck(question.id) ? 'green' : 'aqua'}" >{{i+1 }} </a>
+
+                  <a (click)="nextquestions(i)" [ngClass]="'change-color-{{question.id}}'" [ngStyle]="{'background-color' : stateChangeCheck(question.id) ? 'green' : 'aqua'}" >{{i+1 }} </a>
+
                 </li>
 
               </ul>
@@ -91,6 +96,9 @@
         </div>
       </div>
       <!---End Rigth part---->
+      <div>
+        <button type="button" class="btn btn-success btn-sm button"  (click)="clickEvent(this.code)" >Submit</button>
+        </div>
     </div>
   </div>
 </div>

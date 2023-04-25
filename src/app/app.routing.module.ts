@@ -38,8 +38,7 @@ import { UserAnswersComponent } from './components/user-homepage/user-sidenav/co
       { path: 'login', component: LoginmodalComponent },
       { path: 'signup', component: SignupComponent },
       {path:'reset', component:ForgotPasswordComponent},
-      {
-        path: 'adminpage',
+      { path: 'adminpage',
         component: AdminHomepageComponent,
         canActivate: [AuthGuard],
         children: [

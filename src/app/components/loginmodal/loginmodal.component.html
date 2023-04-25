@@ -4,7 +4,6 @@
     <app-header></app-header>
   </header>
     <div class="container">
-       <!-- <mat-card class="card"> -->
         <div class="row">
         <div class="col-sm-4">
             <div>
@@ -23,7 +22,7 @@
               <div *ngIf="submitted || f.lemail.touched && f.lemail.errors" class="invalid-feedback">
                 <div *ngIf="f.lemail.errors?.required">Email is mandatory</div>
                 <div *ngIf="f.lemail.errors?.email">Email must be a valid email address</div>
-             </div>
+              </div>
             </div>
             <div class="form-group">
               <label for="Password" style="font-weight: bold;">Password</label>
@@ -48,14 +47,12 @@
               <p>Forgot Password?<a routerLink="/reset"> reset</a></p>
             </div>
             <div class="text-center">
-              <!-- <p>Don't have an Account Register here?<a routerLink="/signup"> signup</a></p> -->
               <p>Don't have an Account Register here? <a routerLink="/signup">create new account</a></p>
             </div>
           </mat-card>
           </form>
         </div>
        </div>
-      <!-- </mat-card> -->
     </div>
  </div>
 </body>

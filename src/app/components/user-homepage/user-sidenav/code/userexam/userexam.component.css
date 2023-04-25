@@ -1,12 +1,12 @@
 
 .left{
   background-color: aqua;
+  /* background-color: rgb(143, 235, 143); */
   height:30rem;
 }
 
 .right{
   height:30rem;
-
 }
 
 .righttop{
@@ -73,7 +73,7 @@ button:hover{
   padding-left: 20%;
   width:2.5rem;
   height: 2rem;
-  background-color: rgb(221, 221, 247);
+  /* background-color: rgb(221, 221, 247); */
 }
 
 

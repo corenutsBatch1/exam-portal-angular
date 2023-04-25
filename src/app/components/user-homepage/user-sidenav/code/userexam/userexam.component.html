@@ -75,12 +75,18 @@
              <!---End Rigth top part for timer---->
 
           <!---Start Rigth buttom part for Question Answered---->
+          <div class="answered">
+            <h3>Answered Questions = {{stateChange.length}}</h3>
+          </div>
           <div class="row-md-9 rigthbottom">
             <div class="question-list__items">
               <ul>
                 <li *ngFor="let question of questions let i=index">
-                  <a (click)="nextquestions(i)">{{i+1 }} </a>
+
+                  <a (click)="nextquestions(i)" [ngClass]="'change-color-{{question.id}}'" [ngStyle]="{'background-color' : stateChangeCheck(question.id) ? 'green' : 'aqua'}" >{{i+1 }} </a>
+
                 </li>
+
               </ul>
             </div>
           </div>

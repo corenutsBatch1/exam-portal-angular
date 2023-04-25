@@ -27,9 +27,13 @@ export class UserexamComponent {
   answer:useranswer=new useranswer() ;
   uniqueSubjectNames: String[] =[];
   selected:boolean=false;
+
+
+  stateChange:number[]=[];
   questionnumber:number=0;
   subjectnumber:number=0;
   constructor(private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService,private router:Router) {}
+
 
 
 
@@ -90,6 +94,10 @@ export class UserexamComponent {
 
   sendoption(qid:number,option1:string)
   {
+    console.log("---------------");
+    console.log("Kutariya");
+    this.stateChange.push(qid);
+    console.log(this.stateChange);
     this.selectedOptions[qid] = option1;
     console.log(option1)
   this.answer = {
@@ -163,5 +171,10 @@ clickEvent(exam: any) {
 
 
       }
+
+stateChangeCheck(qid:number)
+{
+  return this.stateChange.includes(qid);
+}
 
 }

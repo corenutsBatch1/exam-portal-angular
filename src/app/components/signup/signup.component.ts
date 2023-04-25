@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class SignupComponent {
+  hide=true;
   signUpForm:any=FormGroup;
   submitted = false;
 
@@ -44,7 +45,8 @@ ngOnInit(){
     '',
     [
       Validators.required,
-      Validators.email
+      Validators.email,
+      Validators.pattern( /^\S*$/),
     ]
   ],
   spassword:
@@ -52,7 +54,8 @@ ngOnInit(){
     '',
     [
       Validators.required,
-      Validators.minLength(6)
+      Validators.minLength(6),
+      Validators.pattern( /^\S*$/),
     ]
   ],
   sphoneNumber:
@@ -60,7 +63,7 @@ ngOnInit(){
     '',
     [
       Validators.required,
-      Validators.pattern('^[0-9]{10}$'),
+      Validators.pattern('^[6-9][0-9]{9}$'),
       // Validators.minLength(10),
       // Validators.maxLength(10)
     ]
@@ -81,7 +84,9 @@ if(this.submitted)
 {
     this.http.post(`http://localhost:8088/api/registerUser`, newUser).subscribe(data=> {
       if(data !=null){
-        swal("Registered successfully", "", "success");
+        swal("Registered successfully", 'User Name is '+this.userLogin.email, "success");
+        this.router.navigateByUrl('/login');
+
       }
       else{
         swal("Already have an Account", "", "error");

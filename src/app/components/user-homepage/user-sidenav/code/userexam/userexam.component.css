@@ -5,7 +5,6 @@
 }
 
 .right{
-  /* background-color: violet; */
   height:30rem;
 
 }
@@ -18,9 +17,11 @@
 }
 
 .rigthbottom{
+  margin-top: 1rem;
+  margin-right: 2rem;
   height: 25rem;
-  border: .2rem solid black;
-  background-color: rgb(220, 20, 117);
+  /* border: .2rem solid black; */
+  background-color: rgb(241, 231, 236);
 }
 
 .lefttop{
@@ -46,29 +47,43 @@ button:hover{
 }
 
 
-.question-list__items ul li a {
-  display: inline-block;
-  width: 25%; /* Set the width of each anchor tag to 25% to display 4 in a row */
-  text-align: center; /* Center the text within each anchor tag */
-  padding: 10px; /* Add some padding to the anchor tags for better readability */
-  box-sizing: border-box; /* Make sure the padding is included in the width */
-  border: 1px solid #ccc; /* Add a border to the anchor tags for better visibility */
-}
+
 .question-list__items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  grid-gap: 10px;
-  background-color: chocolate;
+  display: flex;
+  margin-top: 1rem;
+  /* background-color: aqua; */
+  height: 90%;
 }
 
-.question-list__items li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.question-list__items li a:hover{
+  cursor:  pointer;
 }
+
+.question-list__items ul li {
+  display: flex;
+  float: left;
+  width: 25%;
+  /* background-color: rgb(23, 229, 37); */
+  margin-bottom: 1rem;
+}
+
+.question-list__items ul li a{
+  display: flex;
+  align-items: center;
+  padding-left: 20%;
+  width:2.5rem;
+  height: 2rem;
+  background-color: rgb(221, 221, 247);
+}
+
 
 .question-list ul{
+  width: 100%;
   list-style-type: none;
+}
+
+radio::after{
+  color: aqua;
 }
 
 

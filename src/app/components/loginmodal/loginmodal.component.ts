@@ -11,6 +11,7 @@ import { FormGroup,Validators,FormBuilder } from '@angular/forms';
   styleUrls: ['./loginmodal.component.css'],
 })
 export class LoginmodalComponent {
+  hide = true;
     //Form variables
 loginForm:any = FormGroup;
 submitted = false;
@@ -30,19 +31,21 @@ ngOnInit() {
   //Add User form validations
   this.loginForm = this.formBuilder.group({
   lemail: ['', [Validators.required, Validators.email]],
-  lpassword: ['', [Validators.required,Validators.minLength(6)]]
+  lpassword: ['', [Validators.required,Validators.minLength(6),Validators.pattern( /^\S*$/)]]
   });
 }
 
   login(user: User) {
   this.submitted = true;
-    console.log(user);
+
+    // if validation failed
     if (this.loginForm.invalid) {
       console.log("false");
       return;
     }
-    if(this.submitted)
-     {
+
+    if(this.submitted){
+
     this.http
       .post(`http://localhost:8088/api/loginUser`, user)
       .subscribe((data) => {

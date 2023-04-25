@@ -9,14 +9,17 @@
 .demo-button + .demo-button {
   margin-left: 8px;
 }
+
 .modal-dialog {
   max-width: 400px;
   max-height: 200px;
 }
+
 .form-group {
   display: block;
-  margin-bottom: 1rem; /* Optional: add some space between the elements */
+  margin-bottom: .5rem;
 }
+
 .mat-form-field {
   position: static;
   display: block;
@@ -24,11 +27,18 @@
 .mat-form-field {
   z-index: 9999;
 }
+
 th{
   color: rgb(243, 248, 248);
   background-color:#1f2937;
 }
+
 thead
 {
   background-color:#1f2937;
+  width:150%;
+}
+
+.container{
+  width:150%;
 }

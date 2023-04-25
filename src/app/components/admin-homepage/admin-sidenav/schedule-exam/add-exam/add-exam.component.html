@@ -8,11 +8,11 @@
 </div>
 <div class="form-group">
   <label for="formGroupExampleInput2">Enter the Start Time</label>
-  <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the Start Time" [(ngModel)]="scheduleExam.startTime"  name="startTime">
+  <input matInput type="datetime-local" id="formGroupExampleInput2" class="form-control" placeholder="Enter the Start Time" [(ngModel)]="scheduleExam.startTime"  name="startTime">
 </div>
 <div class="form-group">
   <label for="formGroupExampleInput2">Enter the End Time</label>
-  <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the End Time" [(ngModel)]="scheduleExam.endTime"  name="endTime">
+  <input matInput type="datetime-local" class="form-control" id="formGroupExampleInput2" placeholder="Enter the End Time" [(ngModel)]="scheduleExam.endTime"  name="endTime">
 </div>
 
 <button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>
@@ -35,7 +35,7 @@
       <td>{{paper.numberOfQuestions}}</td>
 
       <td>
-        <input type="radio" (click)="addpaper(paper.id)">
+        <input type="radio" [(ngModel)]="selected" [value]="paper.id" (click)="addpaper(paper.id)">
       </td>
     </tr>
 </tbody>

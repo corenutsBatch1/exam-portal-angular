@@ -17,7 +17,7 @@ export class AddExamComponent implements OnInit{
 
   papers: CreatePaper[] = [];
   paperId?: number;
-
+  selected = null;
   subjectControl = new FormControl();
 
   exams:ScheduleExam[]=[];

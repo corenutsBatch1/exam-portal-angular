@@ -1,0 +1,41 @@
+
+<header>
+  <app-header></app-header>
+</header>
+<mat-list *ngFor="let question of questions let i=index">
+            <mat-list-item> <h1>{{i+1 }}.{{ question.content }}</h1></mat-list-item>
+
+            <mat-list-item>
+              <div style="white-space:nowrap">
+                  <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="A" />
+                  <label class="option">{{ question.optionA }}</label>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <div style="white-space:nowrap">
+                <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="B" />
+                <label class="option">{{ question.optionB }}</label>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <div class="white-space:nowrap">
+                <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="C" />
+                <label class="option">{{ question.optionC }}</label>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item>
+             <div class="white-space:nowrap">
+              <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="D" />
+                <label class="option">{{ question.optionD }}</label>
+             </div>
+            </mat-list-item>
+            <mat-list-item>
+              <div class="white-space:nowrap">
+                <label class="option" style="color: rgb(7, 245, 7);">{{ question.answer}}</label>
+              </div>
+             </mat-list-item>
+
+          </mat-list>

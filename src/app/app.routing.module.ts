@@ -28,6 +28,7 @@ import { CodeComponent } from './components/user-homepage/user-sidenav/code/code
 // import { ExamComponent } from './components/Exam/Exam.component';
 // import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.component';
 import { UserexamComponent } from './components/user-homepage/user-sidenav/code/userexam/userexam.component';
+import { UserAnswersComponent } from './components/user-homepage/user-sidenav/code/userexam/userAnswers/userAnswers.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import { UserexamComponent } from './components/user-homepage/user-sidenav/code/
       { path: 'userexam/:code', component: UserexamComponent ,
       canActivate: [AuthGuard],
       },
+      {path:'answers/:code',component:UserAnswersComponent},
       { path: '**', redirectTo: 'home' },
 
     ]),

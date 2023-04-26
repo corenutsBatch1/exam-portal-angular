@@ -1,6 +1,4 @@
-<header>
-  <app-header></app-header>
-</header>
+
 <nav class="text-center">
 
   <!-- <h1>JAVA EXAM</h1> -->
@@ -79,9 +77,11 @@
       <div class="col-md-3 right" style="padding: 0;">
         <div class="col" style="padding: 0;">
           <!---Start Rigth top part for timer---->
-          <div class="row-md-3 righttop">
-            <h1>Time Left :90:00 min</h1>
+          <h2>Timer: {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</h2>
 
+          <!-- Start the timer when the component loads -->
+          <div *ngIf="showTimer">
+            <!-- <button (click)="startTimer()">Start Timer</button> -->
           </div>
              <!---End Rigth top part for timer---->
 
@@ -105,9 +105,11 @@
         </div>
       </div>
       <!---End Rigth part---->
-      <!-- <div class="row">
-        <button type="button" class="btn btn-success submitbutton"  (click)="clickEvent(this.code)" >Submit</button>
-        </div> -->
+
+      <div>
+        <button type="button" class="btn btn-success btn-sm button" id="myButton" (click)="clickEvent(this.code)" >Submit</button>
+        </div>
+
     </div>
   </div>
 </div>

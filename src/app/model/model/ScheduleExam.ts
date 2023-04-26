@@ -4,4 +4,5 @@ export class ScheduleExam{
   code?:string;
   startTime?:string;
   endTime?:string;
+  examduration?:number;
 }

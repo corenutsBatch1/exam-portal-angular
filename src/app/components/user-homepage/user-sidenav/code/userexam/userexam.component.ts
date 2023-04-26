@@ -29,16 +29,59 @@ export class UserexamComponent {
   stateChange:number[]=[];
   questionnumber:number=0;
   subjectnumber:number=0;
+
+  examminutes?:number;
+  remainingTime: number=0
+  timerId: any;
   TotalQuestion:Question[]=[];
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private service: MyserviceService,
+    private router: Router
+  ) {}
 
-  constructor(private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService,private router:Router) {}
+  
 
+
+
+
+  examtime?:ScheduleExam=new ScheduleExam();
 
   ngOnInit(): void {
-    this.uid=this.service.sendid();
-    this.eid=this.service.sendeid();
-    // console.log(this.uid,this.eid);
-    this.route.params.subscribe(params => {
+
+    this.uid = this.service.sendid();
+    this.eid = this.service.sendeid();
+    console.log(this.uid, this.eid);
+    this.startTimer()
+    this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
+  console.log(this.examtime)
+
+    const examtime = this.examtime.examduration;
+
+
+  if(examtime){
+      this.remainingTime=60*examtime;
+    console.log(this.examminutes);
+    console.log(this.remainingTime)
+  }
+
+});
+
+  console.log("-------------------")
+
+    this.timerId = setInterval(() => {
+      if(this.remainingTime){
+      this.remainingTime--;
+      if (this.remainingTime <= 0) {
+        clearInterval(this.timerId);
+        // handle time's up
+      }}
+    }, 1000);
+
+    this.route.params.subscribe((params) => {
+
+
       this.code = params['code'];
       // console.log('Exam code:', this.code);
       this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>this.questions=data);
@@ -49,7 +92,37 @@ export class UserexamComponent {
       });
     });
   }
+// Define the time limit for the timer
+ // 90 minutes in seconds
 
+// Initialize the timer properties
+minutes = this.remainingTime;
+seconds = 0;
+showTimer = true;
+timerExpired = false;
+
+// Start the timer
+startTimer() {
+  const timer = setInterval(() => {
+    // Decrement the time remaining
+    if(this.remainingTime){
+    this.remainingTime--;
+
+    // Calculate the minutes and seconds
+    this.minutes = Math.floor(this.remainingTime / 60);
+    this.seconds = this.remainingTime % 60;
+
+    // Check if the timer has expired
+    if (this.remainingTime === 0) {
+      this.clickEvent(this.code)
+      this.timerExpired = true;
+      clearInterval(timer);
+    }}
+  }, 1000);
+
+  // Hide the timer start button
+  this.showTimer = false;
+}
   getUniqueSubjectNames(subjects: Subject[]): String[] {
     const uniquesubjects = subjects
       .map((subjects) => subjects.name)
@@ -63,7 +136,9 @@ export class UserexamComponent {
       this.code
     );
   }
-
+  ngOnDestroy(): void {
+    clearInterval(this.timerId);
+  }
 
 
   getQuestionsBySubjectName(subjectName:String):void{

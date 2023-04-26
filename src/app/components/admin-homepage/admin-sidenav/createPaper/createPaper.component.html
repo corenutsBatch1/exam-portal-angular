@@ -1,6 +1,6 @@
 <div *ngIf="viewpaper">
 <div *ngIf="addpaper">
-<button class="btn btn-primary" (click)="loadAddPaperpage(false)">Create Paper</button>
+<button class="btn btn-primary mb-2" (click)="loadAddPaperpage(false)">Create Paper</button>
 
 <table class="table table-striped">
 
@@ -20,7 +20,9 @@
       <td>{{paper.name}}</td>
       <td>{{paper.totalMarks}}</td>
       <td>{{paper.numberOfQuestions}}</td>
-      <td><button class="btn btn-info btn-sm " (click)="viewPaper(false,paper.id)">VIEW</button></td>
+      <td><button class="btn btn-info btn-sm " (click)="viewPaper(false,paper.id)"><mat-icon class="material-symbols-outlined">
+        visibility
+      </mat-icon></button></td>
 
     </tr>
     </tbody>

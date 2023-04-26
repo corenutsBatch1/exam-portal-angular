@@ -20,7 +20,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let question of questionsArray let i=index">
-       <td>{{question.id}}</td>
+       <td>{{i+1}}</td>
         <td>{{question.content}}</td>
         <td>{{question.optionA}}</td>
         <td>{{question.optionB}}</td>

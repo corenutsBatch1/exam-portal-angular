@@ -11,9 +11,12 @@
 }
 
 .modal-dialog {
-  max-width: 400px;
+  width:500rem;
+  /* max-width: 400px; */
   max-height: 200px;
 }
+
+
 
 .form-group {
   display: block;
@@ -24,6 +27,7 @@
   position: static;
   display: block;
 }
+
 .mat-form-field {
   z-index: 9999;
 }
@@ -41,4 +45,8 @@ thead
 
 .container{
   width:150%;
+}
+
+.heading{
+  padding-left:8rem;
 }

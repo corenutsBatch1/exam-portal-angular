@@ -7,11 +7,11 @@
       <div class="form-group">
       <div class="row">
           <div class="col-75 form-group labelname" >
-              <label for="subject" style="margin-right: 10px;">Subject Name:</label>
+              <label for="subject" style="margin-right: 10px;">Subject Name </label>
           </div>
           <div class="col-75 form-group">
-              <input class="form-control" type="text" formControlName="name" placeholder="Enter name" [ngClass]="{ 'is-invalid': submitted || f.name.touched && f.name.errors }" >
-              <div *ngIf="submitted || f.name.touched && f.name.errors" class="invalid-feedback">
+              <input class="form-control" type="text" formControlName="name" placeholder="Enter name" [ngClass]="{ 'is-invalid':(submitted && f.name.errors)|| (f.name.touched && f.name.errors) }" >
+              <div *ngIf="(submitted && f.name.errors) || (f.name.touched && f.name.errors)" class="invalid-feedback">
                 <div *ngIf="f.name.errors?.required">Subject name required</div>
               </div>
           </div>
@@ -19,11 +19,11 @@
 
       <div class="row form-group">
           <div class="col-75 form-group labelname">
-              <label for="topic" style="margin-right: 22px;">Topic Name: </label>
+              <label for="topic" style="margin-right: 22px;">Topic Name </label>
           </div>
           <div class="col-75 form-group">
-            <input class="form-control" type="text" formControlName="description" placeholder="Enter Topic"  [ngClass]="{ 'is-invalid': submitted || f.description.touched && f.description.errors }">
-            <div *ngIf="submitted || f.description.touched && f.description.errors" class="invalid-feedback">
+            <input class="form-control" type="text" formControlName="description" placeholder="Enter Topic"  [ngClass]="{ 'is-invalid': (submitted && f.description.errors) || (f.description.touched && f.description.errors) }">
+            <div *ngIf="(submitted && f.description.errors) ||(f.description.touched && f.description.errors)" class="invalid-feedback">
               <div *ngIf="f.description.errors?.required">Description required</div>
             </div>
           </div>

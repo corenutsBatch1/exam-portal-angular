@@ -14,6 +14,10 @@
   <label for="formGroupExampleInput2">Enter the End Time</label>
   <input matInput type="datetime-local" class="form-control" id="formGroupExampleInput2" placeholder="Enter the End Time" [(ngModel)]="scheduleExam.endTime"  name="endTime">
 </div>
+<div class="form-group">
+  <label for="formGroupExampleInput2">Enter the exam duration in minutes</label>
+  <input  type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the Exam duration in minutes" [(ngModel)]="scheduleExam.examduration"  name="examduration">
+</div>
 
 <button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>
 <table class="table table-striped">

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Question } from 'src/app/model/model/Question';
+import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
 
@@ -18,7 +19,6 @@ export class UserAnswersComponent implements OnInit {
   questions:Question[]=[];
   score?:Number;
   userAnswers: useranswer[]=[];
-
   constructor(private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService
     ) { }
 

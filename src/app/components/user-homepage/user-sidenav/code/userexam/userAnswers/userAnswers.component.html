@@ -35,7 +35,7 @@
             </mat-list-item>
             <mat-list-item>
               <div class="white-space:nowrap" *ngFor="let answer of userAnswers">
-                <label class="option" style="color: yellow" *ngIf="question.id==answer.question?.id">YourAnswer : {{ answer.userAnswer}}</label>
+                <label class="option" style="color: red" *ngIf="question.id==answer.question?.id">YourAnswer : {{ answer.userAnswer}}</label>
               </div>
              </mat-list-item>
             <mat-list-item>

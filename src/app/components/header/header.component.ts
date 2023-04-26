@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginserviceService } from './../loginmodal/loginservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,11 +10,10 @@ import { LoginserviceService } from './../loginmodal/loginservice.service';
 
 export class HeaderComponent {
 
-  constructor(public loginservice : LoginserviceService){}
+  constructor(public loginservice : LoginserviceService,public router: Router){}
   logOut(){
     localStorage.removeItem('is_logged_in');
     localStorage.clear();
     this.loginservice.logout();
   }
-
 }

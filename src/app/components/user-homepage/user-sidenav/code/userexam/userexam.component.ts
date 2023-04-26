@@ -6,7 +6,8 @@ import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
-// import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
+import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-userexam',
@@ -117,10 +118,26 @@ export class UserexamComponent {
 
 isOptionSelected(questionId: number, option: string): boolean {
     return this.selectedOptions[questionId] ===option;
-}
 
+  }
 clickEvent(exam: any) {
- this.router.navigate(['answers', this.code]);
+
+  swal({
+    title: "Are you sure you want to Submit?",
+    icon: "warning",
+    buttons: ['Cancel', 'Yes, Submit'],
+    dangerMode: true,
+  })
+  .then((submitConfirmed: any) => {
+    if (submitConfirmed) {
+      this.router.navigate(['answers', this.code]);
+    } else {
+
+    }
+  });
+
+
+
       }
 
       nextquestion(){

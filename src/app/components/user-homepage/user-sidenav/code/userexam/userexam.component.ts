@@ -8,6 +8,7 @@ import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import swal from 'sweetalert';
+
 @Component({
   selector: 'app-userexam',
   templateUrl: './userexam.component.html',
@@ -22,31 +23,24 @@ export class UserexamComponent {
   questions: Question[] = [];
   subjects: Subject[] = [];
   selectedOptions: string[] = [];
-
-  answer: useranswer = new useranswer();
-  uniqueSubjectNames: String[] = [];
-  selected: boolean = false;
+  answer:useranswer=new useranswer() ;
+  uniqueSubjectNames: String[] =[];
+  selected:boolean=false;
   stateChange:number[]=[];
   questionnumber:number=0;
   subjectnumber:number=0;
-  constructor(
-    private http: HttpClient,
-    private route: ActivatedRoute,
-    private service: MyserviceService,
-    private router: Router
-  ) {}
+  TotalQuestion:Question[]=[];
 
+  constructor(private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService,private router:Router) {}
 
 
   ngOnInit(): void {
-
-    this.uid = this.service.sendid();
-    this.eid = this.service.sendeid();
-    console.log(this.uid, this.eid);
-    this.route.params.subscribe((params) => {
-
+    this.uid=this.service.sendid();
+    this.eid=this.service.sendeid();
+    // console.log(this.uid,this.eid);
+    this.route.params.subscribe(params => {
       this.code = params['code'];
-      console.log('Exam code:', this.code);
+      // console.log('Exam code:', this.code);
       this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>this.questions=data);
       this.loadSubjects().subscribe((subjects: Subject[]) => {
         this.subjects = subjects;
@@ -78,7 +72,7 @@ export class UserexamComponent {
     this.subjects.forEach((subject)=>{
                   if(subject.name==subjectName){
                     this.loadQuestions(subject.id).subscribe((data)=>{this.questions=this.questions.concat(data)
-                    console.log(data)
+                    // console.log(data);
                     this.questionnumber=0
                   })
                   }})
@@ -102,41 +96,29 @@ export class UserexamComponent {
 
   sendoption(qid:number,option1:string)
   {
-    console.log("---------------");
-    console.log("Kutariya");
     this.stateChange.push(qid);
-    console.log(this.stateChange);
-
     this.selectedOptions[qid] = option1;
-    console.log(option1);
-    this.answer = {
-      user: {
-        id: this.uid,
-      },
-      exam: {
-        id: this.eid,
-      },
-      question: {
-        id: qid,
-      },
-      userAnswer: option1,
-    };
+    // console.log(option1);
+  this.answer = {
+    user: {
+      id: this.uid
+    },
+    exam: {
+      id: this.eid
+    },
+    question: {
+      id: qid
+    },
+     userAnswer:option1,
+  };
 
-    console.log(this.answer.user?.id + 'uid');
-    console.log(this.answer.exam?.id + 'eid');
-    console.log(this.answer.question?.id + 'qid');
-    console.log(this.answer.userAnswer);
-
-    console.log('+++++++++++++++++++++++++');
-    console.log(this.answer.userAnswer);
-    this.http
-      .post(`http://localhost:8089/api/saveanswer`, this.answer)
-      .subscribe((data) => console.log(data));
+       this.http.post(`http://localhost:8089/api/saveanswer`,this.answer).subscribe(data=>console.log(data));
   }
-  isOptionSelected(questionId: number, option: string): boolean {
 
 
+isOptionSelected(questionId: number, option: string): boolean {
     return this.selectedOptions[questionId] ===option;
+
   }
 clickEvent(exam: any) {
 
@@ -155,43 +137,38 @@ clickEvent(exam: any) {
   });
 
 
+
       }
 
       nextquestion(){
-        console.log(this.questionnumber+"num")
         this.questionnumber++;
-        console.log(this.questions)
         if(this.questions[this.questionnumber]==null)
         {
               this.subjectnumber++;
         }
         this.currentQuestion= this.questions[this.questionnumber];
-        console.log(this.currentQuestion+"cq")
-
-
+        // console.log(this.currentQuestion+"cq")
       }
-      nextquestions(id:any){
-        console.log(this.questionnumber+"num")
 
-             this.questionnumber= id;
-        console.log(this.questions)
+      nextquestions(id:any){
+        // console.log(this.questionnumber+"num");
+        this.questionnumber= id;
+        // console.log(this.questions);
         if(this.questions[id]==null)
         {
               this.subjectnumber++;
         }
         this.currentQuestion= this.questions[id];
         id++;
-        console.log(this.currentQuestion+"cq")
+        // console.log(this.currentQuestion+"cq");
       }
 
       previousquestion(id:any)
       {
-        console.log(id+"pr")
+        // console.log(id+"pr");
         id--;
         this.currentQuestion= this.questions[id];
         this.questionnumber--;
-
-
       }
 
 stateChangeCheck(qid:number)

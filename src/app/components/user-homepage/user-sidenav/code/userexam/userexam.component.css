@@ -1,14 +1,3 @@
-
-.left{
-  background-color: aqua;
-  /* background-color: rgb(143, 235, 143); */
-  height:30rem;
-}
-
-.right{
-  height:30rem;
-}
-
 .righttop{
   padding-top: 1.5rem;
   padding-left: 1rem;
@@ -20,11 +9,13 @@
   margin-top: 1rem;
   margin-right: 2rem;
   height: 25rem;
-  /* border: .2rem solid black; */
+  border: .1rem solid black;
   background-color: rgb(241, 231, 236);
 }
 
 .lefttop{
+  margin-top:1rem;
+  margin-left:10rem;
   height: 5rem;
   /* background-color: rgb(235, 52, 214); */
 }
@@ -35,10 +26,24 @@
   /* background-color: rgb(141, 235, 193); */
 }
 
-button:hover{
+
+.submitbutton:hover{
   opacity: 70%;
   transition-duration:1s;
   font-size:1rem;
+  /* margin-left: 10rem; */
+  background-color:red;
+}
+
+.submitbutton{
+  /* width:100%; */
+  display:flex;
+  align-items:center;
+  text-align:center;
+  margin-left: 45rem;
+  margin-top: -2rem;
+
+
 }
 
 
@@ -67,15 +72,6 @@ button:hover{
   margin-bottom: 1rem;
 }
 
-.question-list__items ul li a{
-  display: flex;
-  align-items: center;
-  padding-left: 20%;
-  width:2.5rem;
-  height: 2rem;
-  /* background-color: rgb(221, 221, 247); */
-}
-
 
 .question-list ul{
   width: 100%;
@@ -84,6 +80,36 @@ button:hover{
 
 radio::after{
   color: aqua;
+}
+
+.subject{
+  margin-left:10rem;
+}
+
+.subject-button{
+  opacity:0.5;
+}
+
+.subject-button:hover{
+  opacity:1;
+
+}
+
+.numberOfQuestion{
+  display: flex;
+  align-items: center;
+  padding-left: 20%;
+  width:2.5rem;
+  height: 2rem;
+  /* background-color: rgb(221, 221, 247); */
+  color:white;
+}
+
+.arrow{
+  padding: 0;
+border: none;
+background: none;
+color: blue;
 }
 
 

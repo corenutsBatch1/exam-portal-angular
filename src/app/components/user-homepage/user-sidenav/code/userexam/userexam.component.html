@@ -14,19 +14,28 @@
       <div class="col-md-9" style="padding: 0rem;padding-left:1rem;">
 
         <!---Start Left Top part for Swtich Subject---->
-        <div class="row-md-3 lefttop text-center" *ngFor="let subjectName of uniqueSubjectNames">
+        <div class="row-md-3 lefttop text-center" >
+          <table class="subject">
+            <tr  >
+              <td *ngFor="let subjectName of uniqueSubjectNames">
+                <button class="text-center mt-2 ml-4 subject-button" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)">
+                  {{subjectName}}
+                 </button>
+              </td>
+            </tr>
 
-           <button class="text-center mt-3" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)">
-            {{subjectName}}
-           </button>
+          </table>
+          <div class="row">
+            <button type="button" class="btn btn-success float-right submitbutton"  (click)="clickEvent(this.code)" >Submit</button>
+          </div>
         </div>
          <!---End Left Top part for Swtich Subject---->
 
           <!---Start Left Buttom part for Question---->
-        <div class="row-md-9 leftbottom" *ngIf="currentQuestion" class="question">
+        <div class="row-md-9 leftbottom ml-2" *ngIf="currentQuestion" class="question">
 
           <mat-list >
-            <mat-list-item> <h1 ><span>{{this.questionnumber+1}}</span> {{ currentQuestion.content }}</h1></mat-list-item>
+            <mat-list-item> <h1 ><span>{{this.questionnumber+1}}</span> <span>)</span> {{ currentQuestion.content }}</h1></mat-list-item>
 
             <mat-list-item>
               <div style="white-space:nowrap">
@@ -55,8 +64,10 @@
                 <label class="option">{{ currentQuestion.optionD }}</label>
              </div>
             </mat-list-item>
-            <button type="button" class="btn btn-primary" (click)="previousquestion(this.questionnumber)">previous question</button>
-            <button type="button" class="btn btn-primary" (click)="nextquestion()">Save&Next</button>
+            <!-- <div > -->
+              <button  *ngIf="this.questionnumber>0" type="none" class="arrow ml-4 mt-2" (click)="previousquestion(this.questionnumber)"><mat-icon>arrow_back_ios</mat-icon></button>
+            <!-- </div> -->
+            <button type="none" class="arrow ml-4 mt-2" (click)="nextquestion()"><mat-icon>arrow_forward_ios</mat-icon></button>
 
 
           </mat-list>
@@ -76,17 +87,15 @@
 
           <!---Start Rigth buttom part for Question Answered---->
           <div class="answered">
-            <h3>Answered Questions = {{stateChange.length}}</h3>
+            <h4>Total Questions= {{questions.length}}</h4>
+            <h4>Answered Questions = {{stateChange.length}}</h4>
           </div>
           <div class="row-md-9 rigthbottom">
             <div class="question-list__items">
               <ul>
                 <li *ngFor="let question of questions let i=index">
-
-                  <a (click)="nextquestions(i)" [ngClass]="'change-color-{{question.id}}'" [ngStyle]="{'background-color' : stateChangeCheck(question.id) ? 'green' : 'aqua'}" >{{i+1 }} </a>
-
+                  <a class="numberOfQuestion" (click)="nextquestions(i)" [ngStyle]="{'background-color' : stateChangeCheck(question.id) ? 'green' : 'Gray'}" >{{i+1 }} </a>
                 </li>
-
               </ul>
             </div>
           </div>
@@ -96,9 +105,9 @@
         </div>
       </div>
       <!---End Rigth part---->
-      <div>
-        <button type="button" class="btn btn-success btn-sm button"  (click)="clickEvent(this.code)" >Submit</button>
-        </div>
+      <!-- <div class="row">
+        <button type="button" class="btn btn-success submitbutton"  (click)="clickEvent(this.code)" >Submit</button>
+        </div> -->
     </div>
   </div>
 </div>

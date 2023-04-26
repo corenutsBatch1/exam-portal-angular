@@ -9,6 +9,7 @@ import { Subject } from 'src/app/model/model/Subject';
 import { Router } from '@angular/router';
 import { MatSelectChange } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import swal from 'sweetalert';
 
 
 
@@ -78,9 +79,8 @@ export class AddquestionComponent implements OnInit{
     console.log(this.Questions.answer)
     this.http.post(`http://localhost:8089/api/addquestion/${id}`, Questions).subscribe(
       response=>{
-        //console.log(response);
-        alert("Submited");
-        this.goBack();
+        swal("Question added successfully","", "success");
+        // this.goBack();
       }
     );
   }

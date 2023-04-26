@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { CreatePaper } from 'src/app/model/model/CreatePaper';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-addPaper',
@@ -78,14 +79,14 @@ export class AddPaperComponent implements OnInit {
    // console.log(exam.questions);
    // console.log(exam.name)
   }
+
 addpaper(createPaper:CreatePaper)
 {
   createPaper.questionsListArray=this.questionsIdArray;
   console.log("-------------------------------------")
   console.log(createPaper.questionsListArray)
   this.http.post<CreatePaper>(`http://localhost:8089/api/addpaper`,createPaper).subscribe(data=>{
-  console.log(data);
-  alert("submitted");
+    swal("Paper created successfully","", "success");
   this.goBack();
 
 });

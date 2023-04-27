@@ -14,31 +14,38 @@
   <label for="formGroupExampleInput2">Enter the End Time</label>
   <input matInput type="datetime-local" class="form-control" id="formGroupExampleInput2" placeholder="Enter the End Time" [(ngModel)]="scheduleExam.endTime"  name="endTime">
 </div>
+<div class="form-group">
+  <label for="formGroupExampleInput2">Enter the exam duration in minutes</label>
+  <input  type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the Exam duration in minutes" [(ngModel)]="scheduleExam.examduration"  name="examduration">
+</div>
 
-<button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>
+<button class="btn btn-secondary btn-sm float-right" (click)="goBack()">Back</button>
 <table class="table table-striped">
 
   <thead>
     <tr>
-      <th>ID</th>
-      <th>name</th>
-      <th>totalMarks</th>
-      <th>numberOfQuestions</th>
+      <th class="text-center">id</th>
+      <th class="text-center">name</th>
+      <th class="text-center">totalMarks</th>
+      <th class="text-center">numberOfQuestions</th>
+      <th >selectPaper</th>
 
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let paper of papers let i=index">
-     <td>{{paper.id}}</td>
-      <td>{{paper.name}}</td>
-      <td>{{paper.totalMarks}}</td>
-      <td>{{paper.numberOfQuestions}}</td>
+     <td class="text-center">{{paper.id}}</td>
+      <td class="text-center">{{paper.name}}</td>
+      <td class="text-center">{{paper.totalMarks}}</td>
+      <td class="text-center">{{paper.numberOfQuestions}}</td>
 
       <td>
-        <input type="radio" [(ngModel)]="selected" [value]="paper.id" (click)="addpaper(paper.id)">
+        <input class="radio_button text-center ml-4" type="radio" [(ngModel)]="selected" [value]="paper.id" (click)="addpaper(paper.id)">
       </td>
     </tr>
 </tbody>
  </table>
 
-<button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="addexam(this.scheduleExam)" >Add</button>
+<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addexam(this.scheduleExam)" >Schedule Exam</button>
+<!-- <button class="btn btn-danger ml-3" type="reset">Clear</button> -->
+<button class="btn btn-secondary ml-3" (click)="goBack()">Go Back</button>

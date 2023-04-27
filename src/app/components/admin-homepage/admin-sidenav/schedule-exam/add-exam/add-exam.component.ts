@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CreatePaper } from 'src/app/model/model/CreatePaper';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-add-exam',
@@ -41,7 +42,7 @@ export class AddExamComponent implements OnInit{
   {
     this.http.post<ScheduleExam>(`http://localhost:8089/api/addexam/${this.paperId}`,scheduleExam).subscribe(data=>{
     console.log(data);
-    alert("submitted");
+    swal("Exam scheduled successfully","", "success");
     this.goBack();
 
   });

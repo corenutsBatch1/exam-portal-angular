@@ -11,19 +11,19 @@ import { FormGroup,Validators,FormBuilder } from '@angular/forms';
   styleUrls: ['./loginmodal.component.css'],
 })
 export class LoginmodalComponent {
-  hide = true;
-    //Form variables
+hide = true;
+//Form variables
 loginForm:any = FormGroup;
 submitted = false;
+userLogin:User = new User();
+validUser?:User;
+id?:number;
 
-  userLogin:User = new User();
-  validUser?:User;
-  id?:number;
-  constructor(private http:HttpClient,private router: Router,
+constructor(private http:HttpClient,private router: Router,
      private loginservice: LoginserviceService,private formBuilder:FormBuilder
      ) {}
 
-     //Add user form actions
+//Add user form actions
 get f()
 { return this.loginForm.controls; }
 
@@ -35,10 +35,10 @@ ngOnInit() {
   });
 }
 
-  login(user: User) {
+login(user: User) {
   this.submitted = true;
 
-    // if validation failed
+  // if validation failed
     if (this.loginForm.invalid) {
       console.log("false");
       return;

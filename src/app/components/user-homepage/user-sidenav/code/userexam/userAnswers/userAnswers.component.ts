@@ -22,6 +22,7 @@ export class UserAnswersComponent implements OnInit {
   questions:Question[]=[];
   score?:number;
   userAnswers: useranswer[]=[];
+
   obtainedMarks?:Marks;
   exam?:ScheduleExam;
 
@@ -31,7 +32,7 @@ export class UserAnswersComponent implements OnInit {
   ngOnInit() {
     this.uid=this.service.sendid();
     this.eid=this.service.sendeid();
-    console.log(this.uid,this.eid)
+    console.log("enter..."+this.uid,this.eid)
     this.route.params.subscribe(params => {
       this.code = params['code'];
       console.log('Exam code:', this.code);

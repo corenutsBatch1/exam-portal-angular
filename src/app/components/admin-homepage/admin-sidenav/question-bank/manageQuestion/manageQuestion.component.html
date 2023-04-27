@@ -13,21 +13,17 @@
     <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>
   </mat-select>
 </mat-form-field>
-
-
-
 <button class="btn btn-secondary btn-sm float-right" (click)="goBack()">Back</button>
+
 <table class="table table-striped">
-
-
   <thead >
     <tr>
       <th>ID</th>
       <th>Content</th>
-      <th>Option_A</th>
-      <th>Option_B</th>
-      <th>Option_C</th>
-      <th>Option_D</th>
+      <th>OptionA</th>
+      <th>OptionB</th>
+      <th>OptionC</th>
+      <th>OptionD</th>
       <th>Answer</th>
       <th>Question type</th>
       <th>Action</th>
@@ -44,8 +40,7 @@
       <td>{{question.answer}}</td>
       <td>{{question.qtype}}</td>
       <td>
-
-     <mat-icon   type="button" data-toggle="modal" data-target="#staticBackdrop" (click)="getQuestionsById(question.id)">edit
+     <mat-icon type="button" data-toggle="modal" data-target="#staticBackdrop" (click)="getQuestionsById(question.id)" class="material-symbols-outlined">edit
     </mat-icon>
     </td>
 </tr>
@@ -58,7 +53,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center" id="staticBackdropLabel">Update Question</h5>
+        <h1 class="modal-title text-center heading" id="staticBackdropLabel">Update Question</h1>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -69,19 +64,19 @@
           <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the question"  [(ngModel)]="question.content" name="content">
         </div>
         <div class="form-group mb-3">
-          <label for="formGroupExampleInput2">Enter first option</label>
+          <label for="formGroupExampleInput2">Enter first option(A)</label>
           <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option1" [(ngModel)]="question.optionA" name="optionA">
         </div>
         <div class="form-group mb-3">
-          <label for="formGroupExampleInput2">Enter second option</label>
+          <label for="formGroupExampleInput2">Enter second option(B)</label>
           <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option2" [(ngModel)]="question.optionB" name="optionB">
         </div>
         <div class="form-group mb-3">
-          <label for="formGroupExampleInput2">Enter third option</label>
+          <label for="formGroupExampleInput2">Enter third option(C)</label>
           <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option3" [(ngModel)]="question.optionC" name="optionC">
         </div>
         <div class="form-group mb-3">
-          <label for="formGroupExampleInput2">Enter fourth option</label>
+          <label for="formGroupExampleInput2">Enter fourth option(D)</label>
           <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option4" [(ngModel)]="question.optionD" name="optionD">
         </div>
         <div class="form-group mb-3">

@@ -1,6 +1,6 @@
 
 <div *ngIf="addexam">
-  <button class="btn btn-primary" (click)="loadAddExampage(false)">Add Exam</button>
+  <button class="btn btn-primary" (click)="loadAddExampage(false)">Schedule Exam</button>
 
   <table class="table table-striped">
 
@@ -26,5 +26,5 @@
     </table>
   </div>
   <div *ngIf="!addexam" >
-  <app-add-exam (loadAddPaperpage)="loadAddExampage(true)"></app-add-exam>
+  <app-add-exam (loadAddExampage)="loadAddExampage(true)"></app-add-exam>
   </div>

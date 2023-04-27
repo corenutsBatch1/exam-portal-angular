@@ -3,6 +3,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {  FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'src/app/model/model/Subject';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-AddSubject',
@@ -42,19 +43,6 @@ Subjects:Subject = new Subject();
      }
   }
 
-  //add Subject info
-//   addSubjectInfo(Subjects:Subject)
-//   {
-//     // console.log(this.createSubject);
-//     this.http.post<any>('http://localhost:8088/api/addsubject',Subjects).subscribe(
-//       response=>{
-//        // console.log(response);
-//         alert("Submited");
-//         this.router.navigate(['adminpage']);
-//       }
-//     );
-// }
-
 
 //add Category info
 addSubjectInfo()
@@ -62,8 +50,7 @@ addSubjectInfo()
   console.log(this.myForm);
   this.http.post<any>('http://localhost:8089/api/addsubject',this.myForm.value).subscribe(
     response=>{
-      console.log(response);
-      alert("Submited");
+      swal("Subject added successfully","", "success");
       this.goBack();
     }
   );

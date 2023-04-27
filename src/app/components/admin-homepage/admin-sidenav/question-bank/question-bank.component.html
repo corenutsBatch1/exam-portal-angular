@@ -1,8 +1,5 @@
 <div *ngIf="showCodingQuestions">
 <div *ngIf="manageQuestions" >
-
-
-
 <div class="allign" *ngIf="showQuestion" >
   <mat-card class="card ml-2" >
     <mat-card-header>
@@ -61,9 +58,6 @@
 </div>
 </div>
 </div>
-
-
-
   <div class="allign" *ngIf="!showCodingQuestions">
     <app-add-coding-question (loadAddCodingQuestionPage)="loadAddCodingQuestionPage(true)"></app-add-coding-question>
   </div>

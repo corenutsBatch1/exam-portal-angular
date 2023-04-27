@@ -14,6 +14,7 @@ export class QuestionBankComponent implements OnInit {
 
   ngOnInit() {
 
+
   }
   loadAddQuestionPage(flag:boolean){
     // alert("route ")

@@ -102,6 +102,7 @@ editSubjectInfo()
 
 goBack(){
 this.loadAddSubjectPage.emit(true);
+location.reload();
 }
 
 }

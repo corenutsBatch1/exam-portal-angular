@@ -50,6 +50,7 @@ export class AddExamComponent implements OnInit{
   goBack() {
     console.log("go back")
       this.loadAddExampage.emit(true);
+      location.reload();
      }
 
 }

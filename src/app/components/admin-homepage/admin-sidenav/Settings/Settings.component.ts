@@ -24,6 +24,7 @@ export class SettingsComponent implements OnInit {
       this.dataSource=data;
       console.log(this.dataSource);
   });
+  // location.reload();
 }
   loadAddSubjectPage(flag:boolean) {
     this.show = flag;

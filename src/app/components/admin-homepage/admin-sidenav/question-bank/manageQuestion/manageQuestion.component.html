@@ -36,7 +36,8 @@
         <th>Option D</th>
         <th>Answer</th>
         <th>Level</th>
-        <th>Action</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -52,7 +53,9 @@
         <td>
        <mat-icon type="button" data-toggle="modal" data-target="#staticBackdrop" (click)="getQuestionsById(question.id)" class="material-symbols-outlined">edit
       </mat-icon>
-      </td>
+        </td>
+      <td> <mat-icon type="button"  class='material-icons-outlined' [ngStyle]="{'color':'red'}"  (click)="deleteQuestionInfo(question.id)">delete</mat-icon></td>
+
   </tr>
   </tbody>
 

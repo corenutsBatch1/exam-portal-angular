@@ -81,7 +81,7 @@ export class AddPaperComponent implements OnInit {
       this.createPaper.totalMarks &&
       this.selectedsubject &&
       this.subject_id &&
-      this.questionsIdArray.length == 0
+      this.questionsIdArray.length >= 0
 
     ) {
       console.log("-------------------------")
@@ -154,6 +154,7 @@ goBack() {
   console.log(this.loadAddPaperpage)
      this.loadAddPaperpage.emit(true);
      console.log(this.loadAddPaperpage)
+     location.reload();
 
      }
      checkboxChanged(event: any, optionValue: number, subjectName?:string) {
@@ -167,7 +168,7 @@ goBack() {
           this.questionsIdArray.push(optionValue);
           console.log(this.questionsIdArray)
           this.questionCount++;
-        } 
+        }
         } else {
 
           setTimeout(() => {

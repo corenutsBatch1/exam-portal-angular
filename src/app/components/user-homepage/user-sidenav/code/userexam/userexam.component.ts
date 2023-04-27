@@ -7,7 +7,11 @@ import { Subject } from 'src/app/model/model/Subject';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
+
+import { Marks } from 'src/app/model/model/Marks';
+
 import swal from 'sweetalert';
+
 
 @Component({
   selector: 'app-userexam',
@@ -30,10 +34,14 @@ export class UserexamComponent {
   questionnumber:number=0;
   subjectnumber:number=0;
 
+
+
+
   examminutes?:number;
   remainingTime: number=0
   timerId: any;
   TotalQuestion:Question[]=[];
+
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -173,28 +181,35 @@ startTimer() {
   {
     this.stateChange.push(qid);
     this.selectedOptions[qid] = option1;
-    // console.log(option1);
-  this.answer = {
-    user: {
-      id: this.uid
-    },
-    exam: {
-      id: this.eid
-    },
-    question: {
-      id: qid
-    },
-     userAnswer:option1,
-  };
 
-       this.http.post(`http://localhost:8089/api/saveanswer`,this.answer).subscribe(data=>console.log(data));
+    console.log(option1);
+    this.answer = {
+      user: {
+        id: this.uid,
+      },
+      exam: {
+        id: this.eid,
+      },
+      question: {
+        id: qid,
+      },
+      userAnswer: option1,
+    };
+
+    this.http
+      .post(`http://localhost:8089/api/saveanswer`, this.answer)
+      .subscribe((data) => console.log(data));
   }
 
-
+ 
 isOptionSelected(questionId: number, option: string): boolean {
     return this.selectedOptions[questionId] ===option;
 
   }
+
+
+
+
 clickEvent(exam: any) {
 
   swal({
@@ -214,6 +229,7 @@ clickEvent(exam: any) {
 
 
       }
+
 
       nextquestion(){
         this.questionnumber++;
@@ -249,6 +265,15 @@ clickEvent(exam: any) {
 stateChangeCheck(qid:number)
 {
   return this.stateChange.includes(qid);
+}
+
+
+
+clickEvent(exam: any) {
+
+
+
+  this.router.navigate(['answers', this.code]);
 }
 
 }

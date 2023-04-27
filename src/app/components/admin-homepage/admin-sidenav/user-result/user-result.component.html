@@ -1,4 +1,17 @@
-<div class="bootstrap-wrapper">
+
+<div  class="col-lg-4" style="height: 300px;">
+  <h1>Exam Report</h1>
+  <canvas  id="abc"></canvas>
+</div>
+<div  class="col-lg-4 float-right" style="height: 300px;">
+  <canvas  id="def"></canvas>
+</div>
+
+<label for="">enter the exam code</label>
+<input type="text" [(ngModel)]="this.examcode1">
+<button type="submit" (click)="exampiechart(this.examcode1)" >submit</button>
+
+   <div class="bootstrap-wrapper">
 <div class="container-fluid">
 <div class="row">
   <div class="col-md-10">
@@ -7,24 +20,24 @@
       <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table  [dataSource]="dataSource"  class="mat-elevation-z8">
 
       <!-- Serial Number Column -->
       <ng-container matColumnDef="serialNumber">
         <th mat-header-cell *matHeaderCellDef>Serial No </th>
-        <td mat-cell *matCellDef="let element"> {{element.serialNumber}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
       </ng-container>
 
       <!-- Exam code Column -->
       <ng-container matColumnDef="examCode">
         <th mat-header-cell *matHeaderCellDef>Exam Code </th>
-        <td mat-cell *matCellDef="let element"> {{element.examCode}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.exam.code}} </td>
       </ng-container>
 
       <!-- Name of Student Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name Of Student </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.user.name}} </td>
       </ng-container>
 
       <!-- Total Marks Column -->
@@ -37,7 +50,7 @@
       <!-- Obtained Marks Column -->
       <ng-container matColumnDef="obtainedMarks">
         <th mat-header-cell *matHeaderCellDef>Obtained Marks </th>
-        <td mat-cell *matCellDef="let element"> {{element.obtainedMarks}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.marks}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

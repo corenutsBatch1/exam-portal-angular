@@ -46,6 +46,19 @@
                   </div>
                 </div>
 
+                <!-- <div class="form-group">
+                  <label for="Confirm-password" style="font-weight: bold">Confirm-Password</label>
+                  <input matInput [type]="hide ? 'password' : 'text'" type="password" id="Cpassword" class="form-control" placeholder="Confirm password" name="Cpassword" [(ngModel)]="userLogin.Cpassword" formControlName="scpassword"  [ngClass]="{ 'is-invalid': (submitted &&  f.scpassword.errors) || (f.scpassword.touched && f.scpassword.errors) }"/>
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" class="float-right hideshow">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <div *ngIf="submitted || f.scpassword.touched && f.scpassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.spassword.errors?.required">Password is mandatory</div>
+                    <div *ngIf="f.spassword.errors?.minlength">Please, Enter minimum 6 character's</div>
+                    <div *ngIf="f.spassword.errors?.pattern">Please, Remove space's</div>
+                  </div>
+                </div> -->
+
                 <div class="form-group">
                   <label for="PhoneNumber" style="font-weight: bold">Phone number</label>
                   <input class="form-control" id="PhoneNumber" placeholder="Phone number" name="phoneNumber" [(ngModel)]="userLogin.phoneNumber" formControlName="sphoneNumber" type="text" [ngClass]="{'is-invalid': (submitted && f.sphoneNumber.errors)|| (f.sphoneNumber.touched && f.sphoneNumber.errors)}"/>

@@ -15,18 +15,21 @@
 nav {
   width: 200px;
   overflow-y: scroll;
+  overflow: hidden !important;
 }
 
 main {
+  width: 50rem;
   flex-grow: 1;
   overflow-y: scroll;
+  /* overflow-x: scroll; */
   padding: 20px;
 }
 
 
 nav::-webkit-scrollbar,
 main::-webkit-scrollbar {
-  width: 8px;
+  width: .5rem;
 }
 
 nav::-webkit-scrollbar-track,

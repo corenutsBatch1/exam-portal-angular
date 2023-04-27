@@ -18,7 +18,10 @@ export class AddPaperComponent implements OnInit {
   createPaper=new CreatePaper();
   subjects?:Subject[];
   questionsIdArray:number[]=[];
+
   codingQuestionsIdArray:number[]=[];
+
+  isDisabled:boolean=false;
 
   question123?:Question[];
   uniqueSubjectNames?:string[];
@@ -27,6 +30,9 @@ export class AddPaperComponent implements OnInit {
   selectedsubject?:string;
   filteredTopics: Subject[] = [];
   papers:CreatePaper[]=[];
+  show:boolean=false;
+  questionCount = 0;
+  noOfQuestions?:number;
   ngOnInit(): void {
 
     this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe(data=>{
@@ -68,21 +74,6 @@ export class AddPaperComponent implements OnInit {
              })
 
   }
-  addquestions(questionId?:number, subjectName?:string)
-  {
-    console.log(questionId)
-    if (questionId) {
-     if(subjectName?.toLowerCase()===('coding')){
-      this.codingQuestionsIdArray=this.codingQuestionsIdArray.concat(questionId);
-     }
-     else{
-      this. questionsIdArray =  this.questionsIdArray.concat(questionId);
-     }
-
-    }    console.log(this.questionsIdArray);
-    console.log(this.codingQuestionsIdArray);
-   // console.log(exam.name)
-  }
 
 addpaper(createPaper:CreatePaper)
 {
@@ -94,14 +85,62 @@ addpaper(createPaper:CreatePaper)
     swal("Paper created successfully","", "success");
   this.goBack();
 
+
 });
 }
+// addquestions(questionId?:number)
+//   {
+//     console.log(questionId)
+//     if (this.noOfQuestions&& questionId && this.questionCount < this.noOfQuestions) {
+//       console.log("question id is not --null")
+//       this. questionsIdArray =  this.questionsIdArray.concat(questionId);
+//       this.questionCount++;
+//     }
+//     else {
+//       alert('You have reached the maximum number of questions.');
+//     }
+//       console.log(this.questionsIdArray);
+
+//   }
 goBack() {
   console.log(this.loadAddPaperpage)
      this.loadAddPaperpage.emit(true);
      console.log(this.loadAddPaperpage)
 
      }
+     checkboxChanged(event: any, optionValue: number, subjectName?:string) {
+      if (event.checked) {
+        // Checkbox is checked
+        if (this.noOfQuestions && this.questionCount < this.noOfQuestions) {
+         if(subjectName?.toLowerCase()===('coding')){
+         this.codingQuestionsIdArray.push(optionValue);
+          this.questionCount++;
+         }else{
+          this.questionsIdArray.push(optionValue);
+          console.log(this.questionsIdArray)
+          this.questionCount++;
+        } 
+        } else {
+          
+          setTimeout(() => {
+            alert('You have reached the maximum number of questions.');
+          }, 0);
+        }
+      } else {
+        // Checkbox is unchecked
+        const index = this.questionsIdArray.indexOf(optionValue);
+        if (index !== -1) {
+          this.questionsIdArray.splice(index, 1);
+          console.log(this.questionsIdArray)
+          this.questionCount--;
+        }
+      }
+    }
 
 
-}
+
+
+
+    }
+
+

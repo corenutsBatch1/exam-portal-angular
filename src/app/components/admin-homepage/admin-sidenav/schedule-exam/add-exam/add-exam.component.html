@@ -1,3 +1,4 @@
+<div class="ExamForm">
 <div class="form-group">
   <label for="formGroupExampleInput">Enter the exam name</label>
   <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the exam name" [(ngModel)]="scheduleExam.name" name="name">
@@ -16,7 +17,8 @@
 </div>
 <div class="form-group">
   <label for="formGroupExampleInput2">Enter the exam duration in minutes</label>
-  <input  type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the Exam duration in minutes" [(ngModel)]="scheduleExam.examduration"  name="examduration">
+  <input  type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the Exam duration in minutes" [(ngModel)]="scheduleExam.examDuration"  name="examduration">
+</div>
 </div>
 
 <button class="btn btn-secondary btn-sm float-right" (click)="goBack()">Back</button>

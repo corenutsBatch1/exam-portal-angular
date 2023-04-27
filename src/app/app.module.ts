@@ -42,6 +42,8 @@ import { CodeComponent } from './components/user-homepage/user-sidenav/code/code
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UserexamComponent } from './components/user-homepage/user-sidenav/code/userexam/userexam.component';
 import { UserAnswersComponent } from './components/user-homepage/user-sidenav/code/userexam/userAnswers/userAnswers.component';
+import { CodingComponent } from './components/user-homepage/user-sidenav/code/userexam/coding/coding.component';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,7 @@ import { UserAnswersComponent } from './components/user-homepage/user-sidenav/co
     CodeComponent,
     UserexamComponent,
     UserAnswersComponent,
+    CodingComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +96,7 @@ import { UserAnswersComponent } from './components/user-homepage/user-sidenav/co
     MatSelectModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-
+    CodemirrorModule
   ],
   providers: [],
   bootstrap: [AppComponent],

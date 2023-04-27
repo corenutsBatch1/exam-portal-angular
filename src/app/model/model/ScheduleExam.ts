@@ -1,3 +1,5 @@
+import { CreatePaper } from "./CreatePaper";
+
 export class ScheduleExam{
   id?:number;
   name?:string;
@@ -5,4 +7,7 @@ export class ScheduleExam{
   startTime?:string;
   endTime?:string;
   examDuration?:number;
+  createPaper?:CreatePaper;
+
+
 }

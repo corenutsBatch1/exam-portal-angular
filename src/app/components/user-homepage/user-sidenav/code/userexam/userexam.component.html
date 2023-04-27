@@ -1,4 +1,8 @@
 
+<header>
+  <!-- <app-header></app-header> -->
+  <h1 class="text-center" style="background-color:#5ab9c1;height: 3rem;padding-top: 0.5rem;">All The Best For Exam !!!</h1>
+</header>
 <nav class="text-center">
 
   <!-- <h1>JAVA EXAM</h1> -->
@@ -15,8 +19,10 @@
         <div class="row-md-3 lefttop text-center" >
           <table class="subject">
             <tr  >
-              <td *ngFor="let subjectName of uniqueSubjectNames">
-                <button class="text-center mt-2 ml-4 subject-button" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)">
+              <td *ngFor="let subjectName of uniqueSubjectNames;let i = index">
+                <button class="text-center mt-2 ml-4 subject-button btn-group-toggle" data-toggle="buttons" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)"
+                [ngClass]="{'active': activeIndex === i}"
+                (click)="setActive(i)">
                   {{subjectName}}
                  </button>
               </td>
@@ -24,7 +30,7 @@
 
           </table>
           <div class="row">
-            <button type="button" class="btn btn-success float-right submitbutton"  (click)="clickEvent(this.code)" >Submit</button>
+            <button type="button" class="btn btn-success float-right submitbutton"  (click)="clickEvent(this.code)" >Submit Exam</button>
           </div>
         </div>
          <!---End Left Top part for Swtich Subject---->
@@ -33,7 +39,7 @@
         <div class="row-md-9 leftbottom ml-2" *ngIf="currentQuestion" class="question">
 
           <mat-list >
-            <mat-list-item> <h1 ><span>{{this.questionnumber+1}}</span> <span>)</span> {{ currentQuestion.content }}</h1></mat-list-item>
+            <mat-list-item> <h1 ><span>{{this.questionnumber+1}} )</span> {{ currentQuestion.content }}</h1></mat-list-item>
 
             <mat-list-item>
               <div style="white-space:nowrap">
@@ -51,8 +57,9 @@
 
             <mat-list-item>
               <div class="white-space:nowrap">
-                <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="C" (click)="sendoption(currentQuestion.id, 'C')" [checked]="isOptionSelected(currentQuestion.id, 'C')" ng-class="{checked: isChecked == C}"/>
+                <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="C" (click)="sendoption(currentQuestion.id, 'C')" [checked]="isOptionSelected(currentQuestion.id, 'C')" ng-class="{checked: isChecked == C}">
                 <label class="option">{{ currentQuestion.optionC }}</label>
+
               </div>
             </mat-list-item>
 
@@ -63,9 +70,9 @@
              </div>
             </mat-list-item>
             <!-- <div > -->
-              <button  *ngIf="this.questionnumber>0" type="none" class="arrow ml-4 mt-2" (click)="previousquestion(this.questionnumber)"><mat-icon>arrow_back_ios</mat-icon></button>
+              <button  *ngIf="this.questionnumber>0" type="none" class="arrow ml-4 mt-3" (click)="previousquestion(this.questionnumber)"><mat-icon>arrow_back_ios</mat-icon></button>
             <!-- </div> -->
-            <button type="none" class="arrow ml-4 mt-2" (click)="nextquestion()"><mat-icon>arrow_forward_ios</mat-icon></button>
+            <button type="none" *ngIf="this.questionnumber<(questions.length-1)" class="arrow ml-4 mt-3" (click)="nextquestion()"><mat-icon>arrow_forward_ios</mat-icon></button>
 
 
           </mat-list>
@@ -81,20 +88,21 @@
 
           <!-- Start the timer when the component loads -->
           <div *ngIf="showTimer">
-            <!-- <button (click)="startTimer()">Start Timer</button> -->
+          <!-- <button (click)="startTimer()">Start Timer</button> -->
           </div>
-             <!---End Rigth top part for timer---->
+          <!---End Rigth top part for timer---->
 
           <!---Start Rigth buttom part for Question Answered---->
           <div class="answered">
-            <h4>Total Questions= {{questions.length}}</h4>
+
+            <h4>Total Questions= {{totalQuestions}}</h4>
             <h4>Answered Questions = {{stateChange.length}}</h4>
           </div>
           <div class="row-md-9 rigthbottom">
             <div class="question-list__items">
               <ul>
                 <li *ngFor="let question of questions let i=index">
-                  <a class="numberOfQuestion" (click)="nextquestions(i)" [ngStyle]="{'background-color' : stateChangeCheck(question.id) ? 'green' : 'Gray'}" >{{i+1 }} </a>
+                  <a class="numberOfQuestion ml-1.2" (click)="nextquestions(i)" [ngStyle]="{'background-color' : stateChangeCheck(question.id) ? 'green' : 'Gray'}" >{{i+1 }} </a>
                 </li>
               </ul>
             </div>
@@ -106,8 +114,10 @@
       </div>
       <!---End Rigth part---->
 
-      
 
+      
     </div>
   </div>
 </div>
+
+<app-coding></app-coding>

@@ -1,58 +1,7 @@
-/* #signup-form{
-  width: 30%;
-  margin-left: 30%;
-  margin-top: 1%;
-}
-
-
-
-#card{
-  align-items: center;
-  margin-left: 100px;
-  margin-right:100px;
-}
-
-
-.mat-icon {
-  height: 50px;
-  width: 50px;
-  font-size: 50px;
-}
-
-span {
-  display:inline-block;
-  width:100px;
-
-} */
-
-/* .left{
-  display: block;
-  margin-left:25%;
-  float:left;
-  width: 100px;
-  position: absolute;
-  left: -32px;
-
-}
-
-.right{
-  display: block;
-  margin-right: 28%;
-  margin-top: -45px;
-  float:right;
-  width: 100px;
-  position: absolute;
-    right: 50px;
-    top: 82px;
-}
-body{
-  background-image: url(https://wallpaper-house.com/data/out/7/wallpaper2you_161519.jpg);
-} */
-
 
 .card{
   /* margin-top: 2rem; */
-  height: 80%;
+  height: 40%;
   /* background-color: rgb(231, 217, 217); */
  }
 
@@ -101,4 +50,4 @@ height: 20rem;
  {
    margin-top: -2.8rem;
    margin-right: 1.5rem;
- }  
+ }

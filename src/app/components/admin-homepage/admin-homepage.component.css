@@ -15,6 +15,7 @@
 nav {
   width: 200px;
   overflow-y: scroll;
+  overflow: hidden !important;
 }
 
 main {

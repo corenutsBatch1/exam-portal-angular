@@ -18,7 +18,9 @@ import swal from 'sweetalert';
   templateUrl: './userexam.component.html',
   styleUrls: ['./userexam.component.css'],
 })
+
 export class UserexamComponent {
+  activeIndex: number = -1;
   code?: any;
   currentQuestion?: Question;
   subjectId?: number;
@@ -42,6 +44,9 @@ export class UserexamComponent {
   timerId: any;
   TotalQuestion:Question[]=[];
 
+  totalQuestions:number=0;
+  remainingQuestion:number=0;
+  // remainingQuestion:string="";
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -49,7 +54,7 @@ export class UserexamComponent {
     private router: Router
   ) {}
 
-  
+
 
 
 
@@ -60,21 +65,20 @@ export class UserexamComponent {
 
     this.uid = this.service.sendid();
     this.eid = this.service.sendeid();
-    console.log(this.uid, this.eid);
+
     this.startTimer()
-    this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
-  console.log(this.examtime)
-
-    const examtime = this.examtime.examduration;
-
-
-  if(examtime){
+    this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data;
+     console.log("start");
+     console.log("2"+this.examtime);
+    //  console.log(this.examtime);
+     const examtime = this.examtime.examduration;
+     console.log("end");
+      if(examtime){
       this.remainingTime=60*examtime;
-    console.log(this.examminutes);
-    console.log(this.remainingTime)
-  }
-
-});
+      console.log("3"+this.examminutes);
+      console.log("4"+this.remainingTime)
+     }
+        });
 
   console.log("-------------------")
 
@@ -88,17 +92,21 @@ export class UserexamComponent {
     }, 1000);
 
     this.route.params.subscribe((params) => {
-
-
       this.code = params['code'];
       // console.log('Exam code:', this.code);
-      this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>this.questions=data);
+      this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>{this.questions=data,
+        this.totalQuestions=data.length;
+    });
+      // console.log("question"+this.questions+"end");
       this.loadSubjects().subscribe((subjects: Subject[]) => {
         this.subjects = subjects;
         this.uniqueSubjectNames = this.getUniqueSubjectNames(this.subjects);
-        //console.log(this.questions)
+        console.log("5"+this.questions);
+
       });
     });
+  console.log("onit"+this.questions.length);
+
   }
 // Define the time limit for the timer
  // 90 minutes in seconds
@@ -130,22 +138,31 @@ startTimer() {
 
   // Hide the timer start button
   this.showTimer = false;
+
+  console.log("start timer"+this.questions.length);
 }
+
   getUniqueSubjectNames(subjects: Subject[]): String[] {
+
     const uniquesubjects = subjects
       .map((subjects) => subjects.name)
       .filter((name) => name !== undefined) as String[];
+      console.log("gusn"+this.questions.length);
     return [...new Set(uniquesubjects)];
   }
 
   loadSubjects(): Observable<Subject[]> {
+
+      console.log("loadsubject"+this.questions.length);
     return this.http.post<Subject[]>(
       `http://localhost:8089/api/getsubjectsBycode/${this.code}`,
       this.code
     );
   }
+
   ngOnDestroy(): void {
     clearInterval(this.timerId);
+    console.log("destroy"+this.questions.length);
   }
 
 
@@ -160,20 +177,27 @@ startTimer() {
                   })
                   }})
 
+                  console.log("gqbsn"+this.questions.length);
   }
 
   loadQuestions(subjectid?: number): Observable<Question[]> {
+    console.log("lq"+this.questions.length);
     return this.http.get<Question[]>(
       `http://localhost:8089/api/getquestionsBySubjectId/${subjectid}/${this.code}`
+
     );
+
   }
 
   showQuestion(questionId: number): void {
+
     this.questions.forEach((question) => {
       if (question.id == questionId) {
         this.currentQuestion = question;
       }
+      console.log("showq"+this.questions.length);
     });
+
   }
 
 
@@ -196,13 +220,13 @@ startTimer() {
       userAnswer: option1,
     };
 
-    this.http
-      .post(`http://localhost:8089/api/saveanswer`, this.answer)
-      .subscribe((data) => console.log(data));
+       this.http.post(`http://localhost:8089/api/saveanswer`,this.answer).subscribe(data=>console.log("188"+data));
+       console.log("sop"+this.questions.length);
   }
 
- 
+
 isOptionSelected(questionId: number, option: string): boolean {
+
     return this.selectedOptions[questionId] ===option;
 
   }
@@ -211,24 +235,37 @@ isOptionSelected(questionId: number, option: string): boolean {
 
 
 clickEvent(exam: any) {
-
-  swal({
-    title: "Are you sure you want to Submit?",
-    icon: "warning",
-    buttons: ['Cancel', 'Yes, Submit'],
-    dangerMode: true,
-  })
-  .then((submitConfirmed: any) => {
-    if (submitConfirmed) {
-      this.router.navigate(['answers', this.code]);
-    } else {
-
-    }
-  });
-
-
-
+  var remainingQuestion=(this.totalQuestions-this.stateChange.length);
+  console.log("remainingQuestion"+remainingQuestion);
+  if(remainingQuestion>0){
+    swal({
+      title: "Remaining questions are "+ remainingQuestion + " , Are you sure you want to Submit?",
+      icon: "warning",
+      buttons: ['Cancel', 'Yes, Submit'],
+      dangerMode: true,
+    })
+    .then((submitConfirmed: any) => {
+      if (submitConfirmed) {
+        this.router.navigate(['answers', this.code]);
+      } else {
       }
+       });
+  }else{
+    swal({
+      title: "Are you sure you want to Submit? ",
+      icon: "warning",
+      buttons: ['Cancel', 'Yes, Submit'],
+      dangerMode: true,
+    })
+    .then((submitConfirmed: any) => {
+      if (submitConfirmed) {
+        this.router.navigate(['answers', this.code]);
+      } else {
+      }
+       });
+  }
+
+}
 
 
       nextquestion(){
@@ -239,9 +276,11 @@ clickEvent(exam: any) {
         }
         this.currentQuestion= this.questions[this.questionnumber];
         // console.log(this.currentQuestion+"cq")
+        console.log("nq"+this.questions.length);
       }
 
       nextquestions(id:any){
+
         // console.log(this.questionnumber+"num");
         this.questionnumber= id;
         // console.log(this.questions);
@@ -252,6 +291,7 @@ clickEvent(exam: any) {
         this.currentQuestion= this.questions[id];
         id++;
         // console.log(this.currentQuestion+"cq");
+        console.log("nqs"+this.questions.length);
       }
 
       previousquestion(id:any)
@@ -267,13 +307,10 @@ stateChangeCheck(qid:number)
   return this.stateChange.includes(qid);
 }
 
-
-
-clickEvent(exam: any) {
-
-
-
-  this.router.navigate(['answers', this.code]);
+setActive(index: number) {
+  this.activeIndex = index;
 }
+
+
 
 }

@@ -78,12 +78,18 @@ export class AddquestionComponent implements OnInit{
     this.Questions.answer = this.answers.join('');
     console.log(this.Questions.answer)
     this.http.post(`http://localhost:8089/api/addquestion/${id}`, Questions).subscribe(
+
       response=>{
         swal("Question added successfully","", "success");
         // this.goBack();
+      },
+
+      error=>{
+        swal("All field must be required","", "error");
       }
     );
   }
+
   checkboxChanged(event: any, optionValue: string) {
     if (event.checked) {
       // Checkbox is checked

@@ -28,25 +28,17 @@ export class UserexamComponent {
   selected:boolean=false;
   stateChange:number[]=[];
   questionnumber:number=0;
-  subjectnumber:number=0;
-
   examminutes?:number;
   remainingTime: number=0
   timerId: any;
   TotalQuestion:Question[]=[];
+  examtime?:ScheduleExam=new ScheduleExam();
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     private service: MyserviceService,
     private router: Router
   ) {}
-
-  
-
-
-
-
-  examtime?:ScheduleExam=new ScheduleExam();
 
   ngOnInit(): void {
 
@@ -57,8 +49,7 @@ export class UserexamComponent {
     this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
   console.log(this.examtime)
 
-    const examtime = this.examtime.examduration;
-
+    const examtime = this.examtime.examDuration;
 
   if(examtime){
       this.remainingTime=60*examtime;
@@ -67,17 +58,6 @@ export class UserexamComponent {
   }
 
 });
-
-  console.log("-------------------")
-
-    this.timerId = setInterval(() => {
-      if(this.remainingTime){
-      this.remainingTime--;
-      if (this.remainingTime <= 0) {
-        clearInterval(this.timerId);
-        // handle time's up
-      }}
-    }, 1000);
 
     this.route.params.subscribe((params) => {
 
@@ -107,14 +87,15 @@ startTimer() {
     // Decrement the time remaining
     if(this.remainingTime){
     this.remainingTime--;
-
+    console.log(this.remainingTime);
     // Calculate the minutes and seconds
     this.minutes = Math.floor(this.remainingTime / 60);
     this.seconds = this.remainingTime % 60;
 
     // Check if the timer has expired
     if (this.remainingTime === 0) {
-      this.clickEvent(this.code)
+      console.log("working")
+      this.clickEvent2();
       this.timerExpired = true;
       clearInterval(timer);
     }}
@@ -193,7 +174,6 @@ startTimer() {
 
 isOptionSelected(questionId: number, option: string): boolean {
     return this.selectedOptions[questionId] ===option;
-
   }
 clickEvent(exam: any) {
 
@@ -211,16 +191,14 @@ clickEvent(exam: any) {
     }
   });
 
-
-
       }
+clickEvent2(){
+  this.router.navigate(['answers', this.code]);
+
+}
 
       nextquestion(){
         this.questionnumber++;
-        if(this.questions[this.questionnumber]==null)
-        {
-              this.subjectnumber++;
-        }
         this.currentQuestion= this.questions[this.questionnumber];
         // console.log(this.currentQuestion+"cq")
       }
@@ -229,10 +207,6 @@ clickEvent(exam: any) {
         // console.log(this.questionnumber+"num");
         this.questionnumber= id;
         // console.log(this.questions);
-        if(this.questions[id]==null)
-        {
-              this.subjectnumber++;
-        }
         this.currentQuestion= this.questions[id];
         id++;
         // console.log(this.currentQuestion+"cq");

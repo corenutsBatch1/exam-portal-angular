@@ -68,7 +68,7 @@ export class UserexamComponent {
     const examtime = this.examtime.examDuration;
 
   if(examtime){
-  
+
       this.remainingTime=60*examtime;
       console.log("3"+this.examminutes);
       console.log("4"+this.remainingTime)
@@ -217,7 +217,7 @@ isOptionSelected(questionId: number, option: string): boolean {
 
 
 
-      
+
 
 
 clickEvent(exam: any) {
@@ -251,6 +251,9 @@ clickEvent(exam: any) {
        });
   }
 
+}
+clickEvent2(){
+  this.router.navigate(['answers', this.code]);
 }
 
 

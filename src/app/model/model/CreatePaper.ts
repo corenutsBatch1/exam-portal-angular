@@ -1,7 +1,9 @@
 export class CreatePaper{
   id?:number;
   name?:string;
+
   totalMarks?:number;
-  numberOfQuestions?:string;
+  numberOfQuestions?:number;
+
   questionsListArray?:number[];
 }

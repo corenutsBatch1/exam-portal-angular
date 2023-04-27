@@ -1,0 +1,23 @@
+
+<div class="code-editor">
+    <ngx-codemirror [(ngModel)]="code"
+  [options]="codeMirrorOptions"
+></ngx-codemirror>
+  <mat-form-field appearance="fill">
+    <mat-label>Select language</mat-label>
+    <mat-select [(ngModel)]="selectedLanguage" name="language">
+        <mat-option value="java">Java</mat-option>
+        <mat-option value="py">Python</mat-option>
+        <mat-option value="c">C</mat-option>
+        <mat-option value="cpp">C++</mat-option>
+        <mat-option value="go">GoLang</mat-option>
+        <mat-option value="cs">C#</mat-option>
+        <mat-option value="js">JavaScript</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="runCode(code)">Run Code</button>
+  <button mat-raised-button color="primary">Submit Code</button>
+  <br>
+  
+<textarea>{{codeOutput?.output}}</textarea>
+</div>

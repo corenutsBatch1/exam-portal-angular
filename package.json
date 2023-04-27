@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+
     "@types/chart.js": "^2.9.37",
     "@types/luxon": "^3.3.0",
     "bootstrap": "^4.6.2",
@@ -27,6 +28,7 @@
     "chartjs-plugin-datalabels": "^2.2.0",
     "luxon": "^3.3.0",
     "ng2-charts": "^4.1.1",
+
     "ngx-bootstrap": "^10.2.0",
     "rxjs": "~7.8.0",
     "sweetalert": "^2.1.2",

@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { ScheduleExam } from './../../../../model/model/ScheduleExam';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-schedule-exam',
   templateUrl: './schedule-exam.component.html',
   styleUrls: ['./schedule-exam.component.css']
 })
-export class ScheduleExamComponent {
+export class ScheduleExamComponent implements OnInit {
 
   scheduleExam:ScheduleExam=new ScheduleExam();
   exams:ScheduleExam[]=[];
@@ -15,6 +15,7 @@ export class ScheduleExamComponent {
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
+
    this.fetchExam();
   }
   loadAddExampage(flag:boolean){
@@ -29,5 +30,6 @@ export class ScheduleExamComponent {
     this.exams=data;
   });
   }
+
 
 }

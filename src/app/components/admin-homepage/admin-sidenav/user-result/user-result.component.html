@@ -1,4 +1,17 @@
-<div class="bootstrap-wrapper">
+
+<div  class="col-lg-4" style="height: 300px;">
+  <h1>Exam Report</h1>
+  <canvas  id="abc"></canvas>
+</div>
+<div  class="col-lg-4 float-right" style="height: 300px;">
+  <canvas  id="def"></canvas>
+</div>
+
+<label for="">enter the exam code</label>
+<input type="text" [(ngModel)]="this.examcode1">
+<button type="submit" (click)="exampiechart(this.examcode1)" >submit</button>
+
+   <div class="bootstrap-wrapper">
 <div class="container-fluid">
 <div class="row">
   <div class="col-md-10">

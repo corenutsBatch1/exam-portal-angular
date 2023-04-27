@@ -73,7 +73,9 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
     CodeComponent,
     UserexamComponent,
     UserAnswersComponent,
+
     CodingComponent
+
   ],
   imports: [
     BrowserModule,
@@ -96,9 +98,12 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
     MatSelectModule,
     ReactiveFormsModule,
     MatCheckboxModule,
+
     CodemirrorModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],
+ // bootstrap: [ ... ],
 })
 export class AppModule {}

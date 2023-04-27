@@ -19,7 +19,10 @@ export class AddPaperComponent implements OnInit {
   subjects?:Subject[];
   questionsIdArray:number[]=[];
 
+  codingQuestionsIdArray:number[]=[];
+
   isDisabled:boolean=false;
+
   question123?:Question[];
   uniqueSubjectNames?:string[];
   subjectControl = new FormControl();
@@ -72,10 +75,10 @@ export class AddPaperComponent implements OnInit {
 
   }
 
-
 addpaper(createPaper:CreatePaper)
 {
   createPaper.questionsListArray=this.questionsIdArray;
+  createPaper.codingQuestionsListArray=this.codingQuestionsIdArray
   console.log("-------------------------------------")
   console.log(createPaper.questionsListArray)
   this.http.post<CreatePaper>(`http://localhost:8089/api/addpaper`,createPaper).subscribe(data=>{
@@ -105,13 +108,18 @@ goBack() {
      console.log(this.loadAddPaperpage)
 
      }
-     checkboxChanged(event: any, optionValue: number) {
+     checkboxChanged(event: any, optionValue: number, subjectName?:string) {
       if (event.checked) {
         // Checkbox is checked
         if (this.noOfQuestions && this.questionCount < this.noOfQuestions) {
+         if(subjectName?.toLowerCase()===('coding')){
+         this.codingQuestionsIdArray.push(optionValue);
+          this.questionCount++;
+         }else{
           this.questionsIdArray.push(optionValue);
           console.log(this.questionsIdArray)
           this.questionCount++;
+        } 
         } else {
           
           setTimeout(() => {

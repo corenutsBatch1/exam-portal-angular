@@ -59,7 +59,9 @@
       <td>{{question.answer}}</td>
       <td>{{question.qtype}}</td>
       <td>
-        <mat-checkbox [disabled]="isDisabled" class="example-margin" color="primary" (change)="checkboxChanged($event,question.id)"></mat-checkbox>
+
+        <mat-checkbox [disabled]="isDisabled" class="example-margin" color="primary" (change)="checkboxChanged($event,question.id,question.subject?.name)"></mat-checkbox>
+
         <!-- <input type="checkbox" class="checkbox" (click)="addquestions(question.id)"> -->
 
 </td>

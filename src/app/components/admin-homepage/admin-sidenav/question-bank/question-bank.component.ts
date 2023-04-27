@@ -9,6 +9,7 @@ import { Router, RouterModule } from '@angular/router';
 export class QuestionBankComponent implements OnInit {
   showQuestion:boolean=true;
   manageQuestions:boolean=true;
+  showCodingQuestions:boolean=true;
   constructor(private route:Router) { }
 
   ngOnInit() {
@@ -21,6 +22,10 @@ export class QuestionBankComponent implements OnInit {
   loadManageQuestionPage(flag:boolean){
     // alert("route ")
     this.manageQuestions=flag;
+  }
+
+  loadAddCodingQuestionPage(flag:boolean){
+    this.showCodingQuestions=flag;
   }
 
 

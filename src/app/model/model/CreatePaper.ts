@@ -6,4 +6,5 @@ export class CreatePaper{
   numberOfQuestions?:number;
 
   questionsListArray?:number[];
+  codingQuestionsListArray?:number[];
 }

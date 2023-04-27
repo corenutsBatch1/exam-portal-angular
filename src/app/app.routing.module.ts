@@ -1,6 +1,6 @@
 import { HomeComponent } from './components/home/home.component';
 
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginmodalComponent } from './components/loginmodal/loginmodal.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -29,6 +29,7 @@ import { CodeComponent } from './components/user-homepage/user-sidenav/code/code
 // import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.component';
 import { UserexamComponent } from './components/user-homepage/user-sidenav/code/userexam/userexam.component';
 import { UserAnswersComponent } from './components/user-homepage/user-sidenav/code/userexam/userAnswers/userAnswers.component';
+import { AddCodingQuestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/add-coding-question/add-coding-question.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { UserAnswersComponent } from './components/user-homepage/user-sidenav/co
             path: 'questionbank',component: QuestionBankComponent,
             children: [
               { path: 'addquestions', component: AddquestionComponent },
-              {path:'managequestion',component:ManageQuestionComponent}
+              {path:'managequestion',component:ManageQuestionComponent},
+              {path:'addcodingquestion', component:AddCodingQuestionComponent}
             ],
           },
           {path:'settings',component:SettingsComponent,

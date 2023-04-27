@@ -53,9 +53,9 @@
       <td>{{question.answer}}</td>
       <td>{{question.qtype}}</td>
       <td>
-        <mat-checkbox class="example-margin" color="primary" (click)="addquestions(question.id)"></mat-checkbox>
+        <mat-checkbox class="example-margin" color="primary" (click)="addquestions(question.id,question.subject?.name)"></mat-checkbox>
         <!-- <input type="checkbox" class="checkbox" (click)="addquestions(question.id)"> -->
-        
+
 </td>
 </tr>
 </tbody>

@@ -4,4 +4,5 @@ export class CreatePaper{
   totalMarks?:string;
   numberOfQuestions?:string;
   questionsListArray?:number[];
+  codingQuestionsListArray?:number[];
 }

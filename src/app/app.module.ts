@@ -42,6 +42,7 @@ import { CodeComponent } from './components/user-homepage/user-sidenav/code/code
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UserexamComponent } from './components/user-homepage/user-sidenav/code/userexam/userexam.component';
 import { UserAnswersComponent } from './components/user-homepage/user-sidenav/code/userexam/userAnswers/userAnswers.component';
+import { AddCodingQuestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/add-coding-question/add-coding-question.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { UserAnswersComponent } from './components/user-homepage/user-sidenav/co
     CodeComponent,
     UserexamComponent,
     UserAnswersComponent,
+    AddCodingQuestionComponent
   ],
   imports: [
     BrowserModule,

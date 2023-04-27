@@ -18,7 +18,7 @@ export class AddPaperComponent implements OnInit {
   createPaper=new CreatePaper();
   subjects?:Subject[];
   questionsIdArray:number[]=[];
-
+  codingQuestionsIdArray:number[]=[];
 
   question123?:Question[];
   uniqueSubjectNames?:string[];
@@ -68,21 +68,26 @@ export class AddPaperComponent implements OnInit {
              })
 
   }
-  addquestions(questionId?:number)
+  addquestions(questionId?:number, subjectName?:string)
   {
     console.log(questionId)
     if (questionId) {
-      console.log("question id is not --null")
+     if(subjectName?.toLowerCase()===('coding')){
+      this.codingQuestionsIdArray=this.codingQuestionsIdArray.concat(questionId);
+     }
+     else{
       this. questionsIdArray =  this.questionsIdArray.concat(questionId);
+     }
 
     }    console.log(this.questionsIdArray);
-   // console.log(exam.questions);
+    console.log(this.codingQuestionsIdArray);
    // console.log(exam.name)
   }
 
 addpaper(createPaper:CreatePaper)
 {
   createPaper.questionsListArray=this.questionsIdArray;
+  createPaper.codingQuestionsListArray=this.codingQuestionsIdArray
   console.log("-------------------------------------")
   console.log(createPaper.questionsListArray)
   this.http.post<CreatePaper>(`http://localhost:8089/api/addpaper`,createPaper).subscribe(data=>{

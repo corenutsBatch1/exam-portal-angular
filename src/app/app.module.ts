@@ -71,6 +71,8 @@ import { UserAnswersComponent } from './components/user-homepage/user-sidenav/co
     CodeComponent,
     UserexamComponent,
     UserAnswersComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -93,9 +95,10 @@ import { UserAnswersComponent } from './components/user-homepage/user-sidenav/co
     MatSelectModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
+ // bootstrap: [ ... ],
 })
 export class AppModule {}

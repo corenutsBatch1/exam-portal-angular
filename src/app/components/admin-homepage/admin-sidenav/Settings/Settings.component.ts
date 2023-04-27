@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'src/app/model/model/Subject';
-
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-Settings',
@@ -11,7 +11,7 @@ import { Subject } from 'src/app/model/model/Subject';
 })
 export class SettingsComponent implements OnInit {
   show: boolean = true;
-  displayedColumns: string[] = ['id', 'name', 'description', 'Action'];
+  displayedColumns: string[] = ['id', 'name', 'description', 'edit','delete'];
   dataSource:Subject[]=[];
   subject:Subject=new Subject();
   subjectId?:number;
@@ -35,5 +35,31 @@ export class SettingsComponent implements OnInit {
     this.route.navigate(['adminpage/settings/addsubject'], { queryParams: { action: 'edit' } });
 
   }
+  deleteSubjectInfo(id?:number){
+    swal({
+      title: "Are you sure you want to Delete? ",
+      icon: "warning",
+      buttons: ['Cancel', 'Yes, Delete'],
+      dangerMode: true,
+    })
+    .then((deleteConfirmed: any) => {
+      if (deleteConfirmed) {
+        this.deleteSubject(id).subscribe(
+      reponse=>{
+        console.log(reponse);
+        console.log(id);
+        this.ngOnInit();
+      }
+      );
+      } else {
+      }
+       });
 
+
+  }
+  deleteSubject(id?:number){
+    console.log(id);
+  return  this.http.delete(`http://localhost:8089/api/deleteSubject/${id}`);
+
+}
 }

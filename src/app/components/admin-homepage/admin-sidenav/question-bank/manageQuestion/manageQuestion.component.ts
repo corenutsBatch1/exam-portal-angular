@@ -22,6 +22,21 @@ export class ManageQuestionComponent implements OnInit {
   filteredTopics: Subject[] = [];
   dataSource: any;
 
+  allFieldsFilled=false;
+  checkAllFieldsFilled(){
+    if(
+    this.selectedsubject&&this.Topic_id
+    )
+    {
+      console.log("-------------------------")
+      this.allFieldsFilled = true;
+    } else {
+      // console.log("-------------------------")
+      this.allFieldsFilled = false;
+    }
+  }
+
+
   ngOnInit() {
     this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe((data) => {
         console.log(data);

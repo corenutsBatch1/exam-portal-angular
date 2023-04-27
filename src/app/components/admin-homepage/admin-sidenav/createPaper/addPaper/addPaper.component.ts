@@ -33,6 +33,7 @@ export class AddPaperComponent implements OnInit {
   show:boolean=false;
   questionCount = 0;
   noOfQuestions?:number;
+
   ngOnInit(): void {
 
     this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe(data=>{
@@ -42,6 +43,53 @@ export class AddPaperComponent implements OnInit {
        console.log("---------------")
       this.uniqueSubjectNames= this.getUniqueSubjectNames(this.subjects);
     })
+    const noOfQuestionsInput = document.getElementById('noOfQuestions') as HTMLInputElement;
+      const noOfQuestionsError = document.getElementById('noOfQuestionsError') as HTMLElement;
+      const totalMarksInput = document.getElementById('totalMarks') as HTMLInputElement;
+      const totalMarksError = document.getElementById('totalMarksError') as HTMLElement;
+
+      noOfQuestionsInput.addEventListener('input', (event) => {
+        const inputElement = event.target as HTMLInputElement;
+        const numQuestions = inputElement.value;
+        if (!isNaN(Number(numQuestions))) {
+          inputElement.classList.remove('is-invalid');
+          noOfQuestionsError.style.display = 'none';
+        } else {
+          inputElement.classList.add('is-invalid');
+          noOfQuestionsError.style.display = 'block';
+        }
+      });
+
+      totalMarksInput.addEventListener('input', (event) => {
+        const inputElement = event.target as HTMLInputElement;
+        const totalMarks = inputElement.value;
+        if (!isNaN(Number(totalMarks))) {
+          inputElement.classList.remove('is-invalid');
+          totalMarksError.style.display = 'none';
+        } else {
+          inputElement.classList.add('is-invalid');
+          totalMarksError.style.display = 'block';
+        }
+      });
+  }
+  allFieldsFilled = false;
+
+  checkAllFieldsFilled() {
+    if (
+      this.createPaper.name &&
+      this.createPaper.numberOfQuestions &&
+      this.createPaper.totalMarks &&
+      this.selectedsubject &&
+      this.subject_id &&
+      this.questionsIdArray.length == 0
+
+    ) {
+      console.log("-------------------------")
+      this.allFieldsFilled = true;
+    } else {
+      // console.log("-------------------------")
+      this.allFieldsFilled = false;
+    }
   }
 
   getUniqueSubjectNames(subjects: Subject[]): string[] {
@@ -121,7 +169,7 @@ goBack() {
           this.questionCount++;
         } 
         } else {
-          
+
           setTimeout(() => {
             alert('You have reached the maximum number of questions.');
           }, 0);

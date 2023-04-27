@@ -1,103 +1,120 @@
 <div class="container">
 
-<mat-form-field appearance="fill">
-  <mat-label>Select a subject</mat-label>
-  <mat-select [(ngModel)]="selectedsubject" name="selectedSubject" (selectionChange)="onSubjectSelection()">
-    <mat-option *ngFor="let subject of uniqueSubjectNames" [value]="subject">{{ subject }}</mat-option>
-  </mat-select>
-</mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Select a subject</mat-label>
+    <mat-select [(ngModel)]="selectedsubject" name="selectedSubject" (selectionChange)="onSubjectSelection()" (ngModelChange)="checkAllFieldsFilled()">
+      <mat-option *ngFor="let subject of uniqueSubjectNames" [value]="subject">{{ subject }}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<mat-form-field appearance="fill" class="ml-4">
-  <mat-label>Select a topic</mat-label>
-  <mat-select [(ngModel)]="Topic_id" name="Topic_id" (selectionChange)="getQuestionsBySubId(Topic_id)">
-    <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>
-  </mat-select>
-</mat-form-field>
-<button class="btn btn-secondary btn-sm float-right" (click)="goBack()">Back</button>
+  <mat-form-field appearance="fill" class="ml-4">
+    <mat-label>Select a topic</mat-label>
+    <mat-select [(ngModel)]="Topic_id" name="Topic_id" (selectionChange)="getQuestionsBySubId(Topic_id)" (ngModelChange)="checkAllFieldsFilled()">
+      <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button class="btn btn-secondary btn-sm float-right" (click)="goBack()">Back</button>
 
-<table class="table table-striped">
-  <thead >
-    <tr>
-      <th>ID</th>
-      <th>Content</th>
-      <th>OptionA</th>
-      <th>OptionB</th>
-      <th>OptionC</th>
-      <th>OptionD</th>
-      <th>Answer</th>
-      <th>Level</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let question of Questions let i=index">
-      <td>{{question.id}}</td>
-      <td>{{question.content}}</td>
-      <td>{{question.optionA}}</td>
-      <td>{{question.optionB}}</td>
-      <td>{{question.optionC}}</td>
-      <td>{{question.optionD}}</td>
-      <td>{{question.answer}}</td>
-      <td>{{question.qtype}}</td>
-      <td>
-     <mat-icon type="button" data-toggle="modal" data-target="#staticBackdrop" (click)="getQuestionsById(question.id)" class="material-symbols-outlined">edit
-    </mat-icon>
-    </td>
-</tr>
-</tbody>
- </table>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title text-center heading" id="staticBackdropLabel">Update Question</h1>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group mb-3">
-          <label for="formGroupExampleInput">Enter the question</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the question"  [(ngModel)]="question.content" name="content">
+  <div class="d-flex justify-content-center" *ngIf="allFieldsFilled">
+
+    <div class="noquestionfound" *ngIf="Questions.length === 0">
+      <br>
+  <br><br><br><br>
+  <br>
+      <p>No questions found.</p>
+    </div>
+
+    <table class="table table-striped" *ngIf="allFieldsFilled && Questions.length > 0">
+    <thead >
+      <tr>
+        <th>S.No</th>
+        <th>Question</th>
+        <th>Option A</th>
+        <th>Option B</th>
+        <th>Option C</th>
+        <th>Option D</th>
+        <th>Answer</th>
+        <th>Level</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let question of Questions let i=index">
+        <td>{{question.id}}</td>
+        <td>{{question.content}}</td>
+        <td>{{question.optionA}}</td>
+        <td>{{question.optionB}}</td>
+        <td>{{question.optionC}}</td>
+        <td>{{question.optionD}}</td>
+        <td>{{question.answer}}</td>
+        <td>{{question.qtype}}</td>
+        <td>
+       <mat-icon type="button" data-toggle="modal" data-target="#staticBackdrop" (click)="getQuestionsById(question.id)" class="material-symbols-outlined">edit
+      </mat-icon>
+      </td>
+  </tr>
+  </tbody>
+
+  <!-- <div *ngIf="Questions.length === 0" class="emptytable">
+    <p class="text-center">No questions found.</p>
+  </div> -->
+   </table>
+  </div>
+
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title text-center heading" id="staticBackdropLabel">Update Question</h1>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="form-group mb-3">
-          <label for="formGroupExampleInput2">Enter first option(A)</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option1" [(ngModel)]="question.optionA" name="optionA">
-        </div>
-        <div class="form-group mb-3">
-          <label for="formGroupExampleInput2">Enter second option(B)</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option2" [(ngModel)]="question.optionB" name="optionB">
-        </div>
-        <div class="form-group mb-3">
-          <label for="formGroupExampleInput2">Enter third option(C)</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option3" [(ngModel)]="question.optionC" name="optionC">
-        </div>
-        <div class="form-group mb-3">
-          <label for="formGroupExampleInput2">Enter fourth option(D)</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option4" [(ngModel)]="question.optionD" name="optionD">
-        </div>
-        <div class="form-group mb-3">
-          <label for="formGroupExampleInput2">Enter answer</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the answer" [(ngModel)]="question.answer" name="answer">
-        </div>
-        <div class="form-group mb-3">
-          <label for="question_type" class="form-label">Choose a question type</label>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{ question.qtype || 'Select a question type' }}
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <button class="dropdown-item" type="button" (click)="question.qtype='simple'">Simple</button>
-              <button class="dropdown-item" type="button" (click)="question.qtype='medium'">Medium</button>
-              <button class="dropdown-item" type="button" (click)="question.qtype='hard'">Hard</button>
+        <div class="modal-body">
+          <div class="form-group mb-3">
+            <label for="formGroupExampleInput">Enter the question</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the question"  [(ngModel)]="question.content" name="content">
+          </div>
+          <div class="form-group mb-3">
+            <label for="formGroupExampleInput2">Enter first option(A)</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option1" [(ngModel)]="question.optionA" name="optionA">
+          </div>
+          <div class="form-group mb-3">
+            <label for="formGroupExampleInput2">Enter second option(B)</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option2" [(ngModel)]="question.optionB" name="optionB">
+          </div>
+          <div class="form-group mb-3">
+            <label for="formGroupExampleInput2">Enter third option(C)</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option3" [(ngModel)]="question.optionC" name="optionC">
+          </div>
+          <div class="form-group mb-3">
+            <label for="formGroupExampleInput2">Enter fourth option(D)</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the option4" [(ngModel)]="question.optionD" name="optionD">
+          </div>
+          <div class="form-group mb-3">
+            <label for="formGroupExampleInput2">Enter answer</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the answer" [(ngModel)]="question.answer" name="answer">
+          </div>
+          <div class="form-group mb-3">
+            <label for="question_type" class="form-label">Choose a question type</label>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ question.qtype || 'Select a question type' }}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" type="button" (click)="question.qtype='simple'">Simple</button>
+                <button class="dropdown-item" type="button" (click)="question.qtype='medium'">Medium</button>
+                <button class="dropdown-item" type="button" (click)="question.qtype='hard'">Hard</button>
+              </div>
             </div>
           </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="editquestion(this.question)">Update</button>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="editquestion(this.question)">Update</button>
-      </div>
-    </div>

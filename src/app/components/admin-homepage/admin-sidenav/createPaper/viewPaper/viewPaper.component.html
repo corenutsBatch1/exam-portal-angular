@@ -1,21 +1,20 @@
 
 <button class="btn btn-dark btn-sm float-right" (click)="goBack()">Back</button>
-
-<table class="table table-striped">
-
+<br>
+<br>
   <table class="table table-striped">
 
     <thead>
       <!-- [formControl]="subjectControl" -->
       <tr>
-        <th>ID</th>
+        <th>S.No</th>
         <th>Content</th>
-        <th>Option_A</th>
-        <th>Option_B</th>
-        <th>Option_C</th>
-        <th>Option_D</th>
+        <th>Option A</th>
+        <th>Option B</th>
+        <th>Option C</th>
+        <th>Option D</th>
         <th>Answer</th>
-        <th>Question type</th>
+        <th>Level</th>
       </tr>
     </thead>
     <tbody>
@@ -28,9 +27,6 @@
         <td>{{question.optionD}}</td>
         <td>{{question.answer}}</td>
         <td>{{question.qtype}}</td>
-        <td>
-          <!-- <input type="checkbox" (click)="addquestions(question.id)"> -->
-  </td>
   </tr>
   </tbody>
    </table>

@@ -91,9 +91,11 @@ export class AddquestionComponent implements OnInit{
   }
 
   checkboxChanged(event: any, optionValue: string) {
+    console.log(event.checked)
     if (event.checked) {
       // Checkbox is checked
       this.answers.push(optionValue);
+      console.log(this.answers)
     } else {
       // Checkbox is unchecked
       const index = this.answers.indexOf(optionValue);

@@ -6,9 +6,8 @@ export class ScheduleExam{
   code?:string;
   startTime?:string;
   endTime?:string;
-
+  examDuration?:number;
   createPaper?:CreatePaper;
 
-  examduration?:number;
 
 }

@@ -34,9 +34,6 @@ export class UserexamComponent {
   selected:boolean=false;
   stateChange:number[]=[];
   questionnumber:number=0;
-  subjectnumber:number=0;
-
-
 
 
   examminutes?:number;
@@ -44,9 +41,13 @@ export class UserexamComponent {
   timerId: any;
   TotalQuestion:Question[]=[];
 
+  examtime?:ScheduleExam=new ScheduleExam();
+
+
   totalQuestions:number=0;
   remainingQuestion:number=0;
   // remainingQuestion:string="";
+
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -54,42 +55,25 @@ export class UserexamComponent {
     private router: Router
   ) {}
 
-
-
-
-
-
-  examtime?:ScheduleExam=new ScheduleExam();
-
   ngOnInit(): void {
 
     this.uid = this.service.sendid();
     this.eid = this.service.sendeid();
 
+    console.log(this.uid, this.eid);
     this.startTimer()
-    this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data;
-     console.log("start");
-     console.log("2"+this.examtime);
-    //  console.log(this.examtime);
-     const examtime = this.examtime.examduration;
-     console.log("end");
-      if(examtime){
+    this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
+  console.log(this.examtime)
+
+    const examtime = this.examtime.examDuration;
+
+  if(examtime){
+  
       this.remainingTime=60*examtime;
       console.log("3"+this.examminutes);
       console.log("4"+this.remainingTime)
      }
         });
-
-  console.log("-------------------")
-
-    this.timerId = setInterval(() => {
-      if(this.remainingTime){
-      this.remainingTime--;
-      if (this.remainingTime <= 0) {
-        clearInterval(this.timerId);
-        // handle time's up
-      }}
-    }, 1000);
 
     this.route.params.subscribe((params) => {
       this.code = params['code'];
@@ -123,14 +107,15 @@ startTimer() {
     // Decrement the time remaining
     if(this.remainingTime){
     this.remainingTime--;
-
+    console.log(this.remainingTime);
     // Calculate the minutes and seconds
     this.minutes = Math.floor(this.remainingTime / 60);
     this.seconds = this.remainingTime % 60;
 
     // Check if the timer has expired
     if (this.remainingTime === 0) {
-      this.clickEvent(this.code)
+      console.log("working")
+      this.clickEvent2();
       this.timerExpired = true;
       clearInterval(timer);
     }}
@@ -228,10 +213,11 @@ startTimer() {
 isOptionSelected(questionId: number, option: string): boolean {
 
     return this.selectedOptions[questionId] ===option;
-
   }
 
 
+
+      
 
 
 clickEvent(exam: any) {
@@ -268,12 +254,9 @@ clickEvent(exam: any) {
 }
 
 
+
       nextquestion(){
         this.questionnumber++;
-        if(this.questions[this.questionnumber]==null)
-        {
-              this.subjectnumber++;
-        }
         this.currentQuestion= this.questions[this.questionnumber];
         // console.log(this.currentQuestion+"cq")
         console.log("nq"+this.questions.length);
@@ -284,10 +267,6 @@ clickEvent(exam: any) {
         // console.log(this.questionnumber+"num");
         this.questionnumber= id;
         // console.log(this.questions);
-        if(this.questions[id]==null)
-        {
-              this.subjectnumber++;
-        }
         this.currentQuestion= this.questions[id];
         id++;
         // console.log(this.currentQuestion+"cq");

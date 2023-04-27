@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
-
+import swal from 'sweetalert';
 @Component({
   selector: 'app-manageQuestion',
   templateUrl: './manageQuestion.component.html',
@@ -99,6 +99,30 @@ export class ManageQuestionComponent implements OnInit {
         console.log(this.Topic_id);
         this.getQuestionsBySubId(this.Topic_id);
       });
+  }
+  deleteQuestionInfo(id?:number){
+    swal({
+      title: "Are you sure you want to Delete? ",
+      icon: "warning",
+      buttons: ['Cancel', 'Yes, Delete'],
+      dangerMode: true,
+    })
+    .then((deleteConfirmed: any) => {
+      if (deleteConfirmed) {
+        this.deleteQuestion(id).subscribe(
+      reponse=>{
+        console.log(reponse);
+        console.log(id);
+        location.reload();
+      }
+      );
+      } else {
+      }
+       });
+  }
+  deleteQuestion(id?:number){
+    console.log(id);
+   return this.http.delete(`http://localhost:8089/api/deleteQuestion/${id}`)
   }
   goBack() {
     this.loadManageQuestionPage.emit(true);

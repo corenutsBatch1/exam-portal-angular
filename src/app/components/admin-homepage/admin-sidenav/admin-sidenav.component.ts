@@ -19,16 +19,16 @@ export class AdminSidenavComponent {
 
     }
     if(name=='questionbank'){
-      this.router.navigateByUrl("adminpage/questionbank");
+      this.router.navigate(["adminpage/questionbank"]);
     }
     if(name=='settings'){
-      this.router.navigateByUrl("adminpage/settings");
+      this.router.navigate(["adminpage/settings"]);
     }
     if(name=='createpaper'){
-      this.router.navigateByUrl("adminpage/createpaper");
+      this.router.navigate(["adminpage/createpaper"]);
     }
     if(name=='scheduleexam'){
-      this.router.navigateByUrl("adminpage/scheduleexam");
+      this.router.navigate(["adminpage/scheduleexam"]);
     }
   }
 

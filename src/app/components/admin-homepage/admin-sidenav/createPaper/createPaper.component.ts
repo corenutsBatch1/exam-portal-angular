@@ -37,5 +37,12 @@ export class CreatePaperComponent implements OnInit {
   console.log(id)
   console.log(this.paperid)
   }
+  delete(id:any)
+  {
+    this.http.delete(`http://localhost:8089/api/deletePaper/${id}`).subscribe(data=>{
+     this.ngOnInit();
+    console.log(data)})
+
+  }
 
 }

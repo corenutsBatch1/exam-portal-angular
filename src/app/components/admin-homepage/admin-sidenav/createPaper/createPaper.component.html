@@ -24,6 +24,7 @@
       <td><button class="btn btn-info btn-sm " (click)="viewPaper(false,paper.id)"><mat-icon class="material-symbols-outlined">
         visibility
       </mat-icon></button></td>
+      <td> <mat-icon type="button"  class='material-icons-outlined' (click)="delete(paper.id)" [ngStyle]="{'color':'red'}" >delete</mat-icon></td>
 
     </tr>
     </tbody>

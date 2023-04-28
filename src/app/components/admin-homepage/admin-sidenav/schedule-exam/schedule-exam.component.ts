@@ -28,6 +28,12 @@ export class ScheduleExamComponent implements OnInit {
     this.exams=data;
   });
   }
+  deleteexam(id:any,id2:any){
+        this.http.delete(`http://localhost:8089/api/deleteExamWithPaper/${id}/${id2}`).subscribe(data=>{
 
+          console.log(data);
+          this.ngOnInit();
+        })
+  }
 
 }

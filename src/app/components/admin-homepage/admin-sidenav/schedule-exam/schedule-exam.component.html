@@ -28,6 +28,8 @@
         <td>{{exam.code}}</td>
         <td>{{exam.startTime}}</td>
         <td>{{exam.endTime}}</td>
+         <td><button type="button" class="btn btn-danger" (click)="deleteexam(exam.id,exam.createPaper?.id)">Delete</button>
+         </td>
       </tr>
       </tbody>
     </table>
@@ -35,3 +37,4 @@
   <div *ngIf="!addexam" >
   <app-add-exam (loadAddExampage)="loadAddExampage(true)"></app-add-exam>
   </div>
+

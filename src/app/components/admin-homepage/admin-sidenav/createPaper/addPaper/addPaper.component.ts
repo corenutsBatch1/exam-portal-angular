@@ -170,9 +170,9 @@ goBack() {
           this.questionCount++;
         }
         } else {
-
           setTimeout(() => {
             alert('You have reached the maximum number of questions.');
+            event.source.checked = false;
           }, 0);
         }
       } else {

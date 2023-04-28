@@ -4,7 +4,7 @@
       <form >
         <mat-card class="card">
         <div>
-        <h2 class="text-center title">Add Question<button class="btn btn-secondary btn-sm back float-right" (click)="goBack()">Back</button></h2>
+        <h2 class="text-center title">Add Question<button class="btn btn-secondary btn-sm back float-left" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button></h2>
 
         </div>
 
@@ -110,7 +110,7 @@
         <div class="text-center">
           <button (click)="addQuestion(this.Questions,subject_id)" class="btn btn-primary btn-sm addButton" >Add question</button>
           <button type="reset" class="btn btn-danger ml-3 btn-sm clear">Clear</button>
-          <button (click)="goBack()" class="btn btn-secondary btn-sm Back ml-3">Back</button>
+          <button (click)="goBack()" class="btn btn-secondary btn-sm Back ml-3" style="background-color: #1f2937;"><mat-icon>arrow_back</mat-icon></button>
         </div>
 
       </mat-card>

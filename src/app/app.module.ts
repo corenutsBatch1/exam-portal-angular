@@ -42,9 +42,7 @@ import { CodeComponent } from './components/user-homepage/user-sidenav/code/code
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UserexamComponent } from './components/user-homepage/user-sidenav/code/userexam/userexam.component';
 import { UserAnswersComponent } from './components/user-homepage/user-sidenav/code/userexam/userAnswers/userAnswers.component';
-
 import { AddCodingQuestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/add-coding-question/add-coding-question.component';
-
 import { CodingComponent } from './components/user-homepage/user-sidenav/code/userexam/coding/coding.component';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';

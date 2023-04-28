@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { Observable } from 'rxjs';
 // import { Marks } from 'src/app/model/model/Marks';
@@ -10,8 +10,8 @@ Chart.register(...registerables);
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import 'chartjs-plugin-datalabels';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 
 export interface PeriodicElement {
@@ -39,6 +39,8 @@ export class UserResultComponent {
   fail:number=0;
   userMarks?:Marks[]=[];
   username?:string;
+
+
   constructor(private http:HttpClient){}
 
   ngOnInit(): void {
@@ -136,7 +138,18 @@ export class UserResultComponent {
       }
     });
   }
-
+  public openPDF(): void {
+    const TABLE: any = document.querySelector('#my-table');
+    html2canvas(TABLE).then((canvas) => {
+      const fileWidth = 208;
+      const fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      const PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('table-demo.pdf');
+    });
+  }
 
 
 }

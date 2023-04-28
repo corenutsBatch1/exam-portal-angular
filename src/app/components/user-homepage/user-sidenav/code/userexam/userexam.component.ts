@@ -188,7 +188,9 @@ startTimer() {
 
   sendoption(qid:number,option1:string)
   {
-    this.stateChange.push(qid);
+    if(!this.stateChange.includes(qid)){
+      this.stateChange.push(qid);
+    }
     this.selectedOptions[qid] = option1;
 
     console.log(option1);

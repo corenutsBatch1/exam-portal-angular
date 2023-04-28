@@ -20,3 +20,17 @@
 
 } */
 
+.wrapper {
+  display: grid;
+  grid-template-columns:repeat(2,2fr);
+}
+
+.div2{
+  margin-top: -10rem;
+  margin-left: 26rem;
+}
+
+.div3{
+  margin-top: 2rem;
+}
+

@@ -25,8 +25,6 @@ export class ScheduleExamComponent implements OnInit {
 
   fetchExam(){
     this.http.get<ScheduleExam[]>(`http://localhost:8089/api/getallexams`).subscribe(data=>{
-
-    console.log(data)
     this.exams=data;
   });
   }

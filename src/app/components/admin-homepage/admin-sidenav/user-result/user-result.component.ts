@@ -9,6 +9,9 @@ import{Chart,registerables}from 'node_modules/chart.js';
 Chart.register(...registerables);
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import 'chartjs-plugin-datalabels';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
+
 
 
 export interface PeriodicElement {
@@ -27,7 +30,7 @@ export interface PeriodicElement {
   styleUrls: ['./user-result.component.css']
 })
 export class UserResultComponent {
-
+  showPieChart: boolean = false;
   marks:Marks[]=[];
   examcode1?:string;
   above80:number=0;
@@ -59,24 +62,20 @@ export class UserResultComponent {
   getMarks():Observable<Marks[]>{
     return this.http.get<Marks[]>(`http://localhost:8089/api/getmarks`)
   }
+
+
  exampiechart(code?:string){
-
-  console.log(this.marks)
   this.marks.forEach(a=>{
-
-
       if(a.exam && a.exam.code==code) {
-        this.userMarks?.push(a);      }
-
+        this.userMarks?.push(a);
+          }
   })
-  console.log(this.userMarks)
+
   if(this.userMarks){
     this.userMarks.forEach(a=>{
       if(a.marks != null && a.totalMarks != null)
       {
-        if(a.totalMarks === 0 || (a.marks/a.totalMarks) === 0) {
-          this.fail++;
-        } else if((a.marks/a.totalMarks)>0.8) {
+         if((a.marks/a.totalMarks)>0.8) {
           this.above80++;
         } else if((a.marks/a.totalMarks)>0.6) {
           this.above60++;
@@ -95,39 +94,6 @@ export class UserResultComponent {
   }
  }
 
-//  exampiechart2(name?:string){
-
-//   console.log(this.marks)
-//   this.marks.forEach(a=>{
-
-//     this.marks.forEach(a=>{
-//       if(a.exam && a.exam.code==code) {
-//         this.userMarks?.push(a);      }
-//     });
-//   })
-//   console.log(this.userMarks)
-//   if(this.userMarks){
-//     this.userMarks.forEach(a=>{
-//       if(a.marks != null && a.totalMarks != null)
-//       {
-//         if(a.totalMarks === 0 || (a.marks/a.totalMarks) === 0) {
-//           this.fail++;
-//         } else if((a.marks/a.totalMarks)>0.8) {
-//           this.above80++;
-//         } else if((a.marks/a.totalMarks)>0.6) {
-//           this.above60++;
-//         } else if((a.marks/a.totalMarks)>0.35) {
-//           this.above35++;
-//         } else {
-//           this.fail++;
-//         }
-//       }
-
-//     })
-
-//     this.RenderDailyChart();
-//   }
-//  }
 
   RenderDailyChart() {
     new Chart("abc", {
@@ -135,7 +101,7 @@ export class UserResultComponent {
       data: {
         labels: ['above80', 'above60','above35','fail'],
         datasets: [{
-          label: 'Day Report',
+          label: 'Exam Report',
           data: [this.above80, this.above60,this.above35,this.fail], // converted string values to numbers
           borderWidth: 1
         }]
@@ -154,11 +120,11 @@ export class UserResultComponent {
     new Chart("def", {
       type: 'bar',
       data: {
-        labels: ['> 80% '+this.above80, '> 60% '+this.above60,'> 35% '+this.above35,'fail '+this.fail],
+        labels: ['>80% :'+this.above80, '>60% : '+this.above60,'>35% : '+this.above35,'fail : '+this.fail],
         datasets: [{
-          label: 'Day Report',
+          label: 'Exam Report',
           data: [this.above80, this.above60,this.above35,this.fail], // converted string values to numbers
-          borderWidth: 1
+          borderWidth:9.2
         }]
       },
       options: {
@@ -170,6 +136,7 @@ export class UserResultComponent {
       }
     });
   }
+
 
 
 }

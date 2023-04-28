@@ -6,6 +6,7 @@
   <!-- Show table here -->
   <div class="row">
     <div class="col-md-10 mt-6">
+
       <mat-form-field class="ml-2">
         <mat-label>Search</mat-label>
         <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
@@ -13,8 +14,11 @@
         <input matInput [(ngModel)]="codeFilterValue" (keyup)="applyFilter()" #input>
 
       </mat-form-field>
+      <div class="col-md-4 text-right">
+        <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
+    </div>
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="my-table">
 
         <!-- Serial Number Column -->
         <ng-container matColumnDef="serialNumber">

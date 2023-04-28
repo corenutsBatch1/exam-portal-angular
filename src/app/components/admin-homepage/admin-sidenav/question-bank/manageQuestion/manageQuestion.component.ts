@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { catchError, throwError } from 'rxjs';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
 import swal from 'sweetalert';
@@ -109,16 +110,26 @@ export class ManageQuestionComponent implements OnInit {
     })
     .then((deleteConfirmed: any) => {
       if (deleteConfirmed) {
-        this.deleteQuestion(id).subscribe(
-      reponse=>{
-        console.log(reponse);
-        console.log(id);
-        location.reload();
-      }
-      );
+        this.deleteQuestion(id)
+          .pipe(
+            catchError((error: any) => {
+              console.error('Error deleting question:', error);
+            swal({
+              title: "Unable to delete",
+              text: "This question present in one paper set, first delete the paper set",
+              icon: "error",
+            });
+            return throwError(error);
+            })
+          )
+          .subscribe(response => {
+            console.log('Question deleted:', response);
+            location.reload();
+          });
       } else {
+        console.log('Delete cancelled by user');
       }
-       });
+    });
   }
   deleteQuestion(id?:number){
     console.log(id);

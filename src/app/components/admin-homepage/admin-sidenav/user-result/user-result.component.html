@@ -8,7 +8,10 @@
     <div class="col-md-10 mt-6">
       <mat-form-field class="ml-2">
         <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" #input>
+        <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
+
+        <input matInput [(ngModel)]="codeFilterValue" (keyup)="applyFilter()" #input>
+
       </mat-form-field>
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

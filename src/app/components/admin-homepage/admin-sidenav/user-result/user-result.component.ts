@@ -21,6 +21,7 @@ export interface PeriodicElement {
   totalMarks: number;
   obtainedMarks :number;
 
+
 }
 
 
@@ -39,7 +40,11 @@ export class UserResultComponent {
   fail:number=0;
   userMarks?:Marks[]=[];
   username?:string;
-  constructor(private http:HttpClient){}
+  chart1: any;
+chart2: any;
+nameFilterValue = '';
+  codeFilterValue = '';
+   constructor(private http:HttpClient){}
 
   ngOnInit(): void {
 
@@ -50,24 +55,44 @@ export class UserResultComponent {
 
   }
 
-  displayedColumns: string[] = ['serialNumber','examCode', 'name', 'totalMarks', 'obtainedMarks'];
+  displayedColumns: string[] = ['serialNumber', 'examCode', 'name', 'totalMarks', 'obtainedMarks'];
   dataSource = new MatTableDataSource<Marks>([]);
-  applyFilter(event: Event) {
-    console.log(this.dataSource+" datsource----------");
-    console.log()
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
+  applyFilter(): void {
+    const nameFilterValue = this.nameFilterValue.trim().toLowerCase();
+    const codeFilterValue = this.codeFilterValue.trim().toLowerCase();
+    console.log(this.nameFilterValue)
+    console.log(this.codeFilterValue)
+
+    this.dataSource.filterPredicate = (data: Marks, filter: string) => {
+      const nameMatch = data.user?.name?.trim().toLowerCase().includes(nameFilterValue);
+      const codeMatch = data.exam?.code?.trim().toLowerCase().includes(nameFilterValue );
+      const marksMatch = data.marks === parseInt(nameFilterValue);
+      const totalmarksMatch = data.totalMarks === parseInt(nameFilterValue);
+      const idMatch = data.id === parseInt(nameFilterValue);
+      return !!(nameMatch || codeMatch ||  marksMatch || totalmarksMatch || idMatch);
+    };
+
+    const filterValue = `${nameFilterValue} ${codeFilterValue}`;
+    this.dataSource.filter = filterValue;
+    console.log(this.dataSource.filter)
+  }
   getMarks():Observable<Marks[]>{
     return this.http.get<Marks[]>(`http://localhost:8089/api/getmarks`)
   }
 
 
  exampiechart(code?:string){
+  this.userMarks?.splice(0, this.userMarks.length);
+  this.above80 = 0; // reset variables to zero
+  this.above60 = 0;
+  this.above35 = 0;
+  this.fail = 0;
   this.marks.forEach(a=>{
       if(a.exam && a.exam.code==code) {
         this.userMarks?.push(a);
+        console.log("exampiexhart")
+        console.log(this.userMarks)
           }
   })
 
@@ -96,7 +121,11 @@ export class UserResultComponent {
 
 
   RenderDailyChart() {
-    new Chart("abc", {
+    if (this.chart1) {
+      this.chart1.destroy();
+
+    }
+    this.chart1 = new Chart("abc", {
       type: 'pie',
       data: {
         labels: ['above80', 'above60','above35','fail'],
@@ -117,7 +146,10 @@ export class UserResultComponent {
   }
 
   RenderDailyChart2() {
-    new Chart("def", {
+    if (this.chart2) {
+      this.chart2.destroy();
+    }
+    this.chart2=new Chart("def", {
       type: 'bar',
       data: {
         labels: ['>80% :'+this.above80, '>60% : '+this.above60,'>35% : '+this.above35,'fail : '+this.fail],
@@ -135,8 +167,13 @@ export class UserResultComponent {
         }
       }
     });
+
   }
 
 
 
 }
+function includes(nameFilterValue: string) {
+  throw new Error('Function not implemented.');
+}
+

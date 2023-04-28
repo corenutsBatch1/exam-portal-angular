@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { response } from 'express';
 import { CreatePaper } from 'src/app/model/model/CreatePaper';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import swal from 'sweetalert';
@@ -40,12 +41,19 @@ export class AddExamComponent implements OnInit{
 
   addexam(scheduleExam:ScheduleExam)
   {
-    this.http.post<ScheduleExam>(`http://localhost:8089/api/addexam/${this.paperId}`,scheduleExam).subscribe(data=>{
-    console.log(data);
-    swal("Exam scheduled successfully","", "success");
-    this.goBack();
+    this.http.post<ScheduleExam>(`http://localhost:8089/api/addexam/${this.paperId}`,scheduleExam).subscribe(
 
-  });
+    response=>{
+      swal("Exam scheduled successfully","", "success");
+      this.goBack();
+    },
+    error=>{
+      swal("All field must be required","", "error");
+    }
+
+
+
+  );
   }
   goBack() {
     console.log("go back")

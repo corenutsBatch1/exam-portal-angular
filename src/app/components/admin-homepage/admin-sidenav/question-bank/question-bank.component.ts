@@ -29,5 +29,4 @@ export class QuestionBankComponent implements OnInit {
     this.showCodingQuestions=flag;
   }
 
-
 }

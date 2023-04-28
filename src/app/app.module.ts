@@ -47,6 +47,7 @@ import { AddCodingQuestionComponent } from './components/admin-homepage/admin-si
 
 import { CodingComponent } from './components/user-homepage/user-sidenav/code/userexam/coding/coding.component';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -103,7 +104,7 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
     MatSelectModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-
+    MatSlideToggleModule,
     CodemirrorModule,
 
   ],

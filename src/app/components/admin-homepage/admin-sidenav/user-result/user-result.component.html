@@ -9,7 +9,10 @@
 
       <mat-form-field class="ml-2">
         <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" #input>
+        <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
+
+        <input matInput [(ngModel)]="codeFilterValue" (keyup)="applyFilter()" #input>
+
       </mat-form-field>
       <div class="col-md-4 text-right">
         <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>

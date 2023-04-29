@@ -25,7 +25,7 @@
       <p>No questions found.</p>
     </div>
 
-    <table class="table table-striped" *ngIf="allFieldsFilled && Questions.length > 0">
+    <table class="table table-striped" *ngIf="allFieldsFilled && Questions.length > 0 && selectedsubject != 'Coding'">
     <thead >
       <tr>
         <th>S.No</th>
@@ -63,6 +63,31 @@
     <p class="text-center">No questions found.</p>
   </div> -->
    </table>
+
+
+  <table class="table table-striped" *ngIf="allFieldsFilled && Questions.length > 0 && selectedsubject === 'Coding'">
+    <thead >
+      <tr>
+        <th>S.No</th>
+        <th>Question</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let question of codingQuestion let i=index">
+        <td>{{question.id}}</td>
+        <td>{{question.content}}</td>
+        <td>
+       <mat-icon type="button" data-toggle="modal" data-target="#staticBackdrop" (click)="getQuestionsById(question.id)" class="material-symbols-outlined">edit
+      </mat-icon>
+        </td>
+      <td> <mat-icon type="button"  class='material-icons-outlined' [ngStyle]="{'color':'red'}"  (click)="deleteQuestionInfo(question.id)">delete</mat-icon></td>
+  </tr>
+  </tbody>
+   </table>
+
+
   </div>
 
 

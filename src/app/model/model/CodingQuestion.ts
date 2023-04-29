@@ -5,5 +5,4 @@ export class CodingQuestion{
   content?:string;
   subject?:Subject
 
-
 }

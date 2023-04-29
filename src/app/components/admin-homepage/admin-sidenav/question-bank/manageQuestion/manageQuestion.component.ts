@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
+import { CodingQuestion } from 'src/app/model/model/CodingQuestion';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
 import swal from 'sweetalert';
@@ -15,6 +16,7 @@ export class ManageQuestionComponent implements OnInit {
 
   question: Question = new Question();
   Questions: Question[] = [];
+  codingQuestion : CodingQuestion[] = []
   subjects: Subject[] = [];
   uniqueSubjectNames?: string[];
   Topic_id?: any;
@@ -74,13 +76,27 @@ export class ManageQuestionComponent implements OnInit {
     console.log('=====================================');
     console.log(id);
     this.Topic_id = id;
-    this.http
+    if(this.selectedsubject != 'Coding'){
+      this.http
       .get<Question[]>(`http://localhost:8089/api/getallquestions/${id}`)
       .subscribe((data) => {
         console.log(data);
         this.Questions = data;
       });
+    }else{
+      this.http
+      .get<CodingQuestion[]>(`http://localhost:8089/api/fetchcodingquestions`)
+      .subscribe((data) => {
+        console.log(data);
+        this.codingQuestion = data;
+        console.log(this.codingQuestion);
+      });
+    }
   }
+
+
+
+
   getQuestionsById(id: any) {
     this.http
       .get<Question>(`http://localhost:8089/api/getquestionbyid/${id}`)

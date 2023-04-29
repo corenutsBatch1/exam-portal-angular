@@ -2,6 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { CodingQuestion } from 'src/app/model/model/CodingQuestion';
 import { CreatePaper } from 'src/app/model/model/CreatePaper';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
@@ -24,6 +25,7 @@ export class AddPaperComponent implements OnInit {
   isDisabled:boolean=false;
 
   question123?:Question[];
+  codingQuestion?:CodingQuestion[];
   uniqueSubjectNames?:string[];
   subjectControl = new FormControl();
   subject_id?:number;
@@ -116,10 +118,20 @@ export class AddPaperComponent implements OnInit {
   }
   getquestions(id:any)
   {
-    this.http.get<Question[]>(`http://localhost:8089/api/getallquestions/${id}`).subscribe(data=>{
+    if(this.selectedsubject != 'Coding'){
+      this.http.get<Question[]>(`http://localhost:8089/api/getallquestions/${id}`).subscribe(data=>{
       console.log(data);
         this.question123=data;
              })
+    }else{
+      this.http
+      .get<CodingQuestion[]>(`http://localhost:8089/api/fetchcodingquestions`)
+      .subscribe((data) => {
+        console.log(data);
+        this.codingQuestion = data;
+        console.log(this.codingQuestion);
+      });
+    }
 
   }
 
@@ -157,15 +169,16 @@ goBack() {
      location.reload();
 
      }
-     checkboxChanged(event: any, optionValue: number, subjectName?:string) {
+checkboxChanged(event: any, optionValue?: number, subjectName?:string) {
       if (event.checked) {
         // Checkbox is checked
         if (this.noOfQuestions && this.questionCount < this.noOfQuestions) {
          if(subjectName?.toLowerCase()===('coding')){
-         this.codingQuestionsIdArray.push(optionValue);
+         this.codingQuestionsIdArray.push(optionValue as number);
           this.questionCount++;
+          console.log(this.codingQuestionsIdArray) 
          }else{
-          this.questionsIdArray.push(optionValue);
+          this.questionsIdArray.push(optionValue as number);
           console.log(this.questionsIdArray)
           this.questionCount++;
         }
@@ -177,7 +190,7 @@ goBack() {
         }
       } else {
         // Checkbox is unchecked
-        const index = this.questionsIdArray.indexOf(optionValue);
+        const index = this.questionsIdArray.indexOf(optionValue as number);
         if (index !== -1) {
           this.questionsIdArray.splice(index, 1);
           console.log(this.questionsIdArray)

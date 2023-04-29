@@ -32,7 +32,7 @@
   </mat-select>
 </mat-form-field>
 
-<table class="table table-striped"*ngIf="allFieldsFilled">
+<table class="table table-striped"*ngIf="allFieldsFilled && selectedsubject != 'Coding'" >
 
   <thead>
     <!-- [formControl]="subjectControl" -->
@@ -64,6 +64,25 @@
 
         <!-- <input type="checkbox" class="checkbox" (click)="addquestions(question.id)"> -->
 
+</td>
+</tr>
+</tbody>
+ </table>
+
+<table class="table table-striped" *ngIf="allFieldsFilled && selectedsubject === 'Coding'">
+  <thead >
+    <tr>
+      <th>S.No</th>
+      <th>Question</th>
+      <th>Select</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let question of codingQuestion let i=index">
+      <td>{{question.id}}</td>
+      <td>{{question.content}}</td>
+      <td>
+        <mat-checkbox [disabled]="isDisabled" class="example-margin" color="primary" (change)="checkboxChanged($event,question.id,question.subject?.name)"></mat-checkbox>
 </td>
 </tr>
 </tbody>

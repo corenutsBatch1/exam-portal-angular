@@ -11,8 +11,10 @@
         <mat-label>Search</mat-label>
         <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
       </mat-form-field>
-      <div class="col-md-4 text-right">
-        <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
+      <div class="col-md-4 text-left">
+        <button mat-icon-button color="primary" (click)="openPDF()" aria-label="Download PDF">
+          <mat-icon class="download-icon">cloud_download</mat-icon>
+        </button>
     </div>
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="my-table">

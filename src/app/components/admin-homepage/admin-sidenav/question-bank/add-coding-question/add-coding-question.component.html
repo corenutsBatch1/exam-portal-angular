@@ -1,16 +1,34 @@
-<!-- <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="questionForm" >
+
+  <div>
+    <mat-form-field appearance="fill" classs="left">
+      <mat-label>Select a subject</mat-label>
+      <mat-select [(ngModel)]="selectedsubject" name="selectedSubject" [ngModelOptions]="{standalone: true}"
+        (selectionChange)="onSubjectSelection()">
+        <mat-option *ngFor="let subject of uniqueSubjectNames" [value]="subject">{{ subject }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="right">
+      <mat-label>Select a topic</mat-label>
+      <mat-select [(ngModel)]="subject_id" name="subject_id" [formControl]="subjectControl">
+        <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+   </div>
+
   <div class="form-group">
     <label for="question">Question:</label>
-    <textarea class="form-control" id="question" formControlName="question"></textarea>
+    <textarea class="form-control" id="question" formControlName="question" [(ngModel)]="questionContent"></textarea>
   </div>
-  <div formArrayName="options">
-    <div class="form-group" *ngFor="let option of questionForm.get('options').controls; let i=index" [formGroupName]="i">
-      <input type="text" class="form-control" placeholder="Enter option" formControlName="value">
-      <input type="checkbox" formControlName="isCorrect">
-      <button type="button" (click)="removeOption(i)">Remove Option</button>
-    </div>
+  <div *ngFor="let input of inputs; let i = index">
+    <label for="input-{{i}}">Input {{i + 1}}:</label>
+    <input type="text" id="input-{{i}}" name="input{{i}}" [(ngModel)]="input.input" [ngModelOptions]="{standalone: true}">
+    <label for="input-{{i}}">expected output {{i + 1}}:</label>
+    <input type="text" id="input-{{i}}" name="input{{i}}" [(ngModel)]="input.output" [ngModelOptions]="{standalone: true}">
   </div>
-  <button type="button" (click)="addOption()">Add Option</button>
-  <button type="submit">Save Question</button>
+  <button (click)="addInput()">Add Input</button>
+  <button (click)="removeInput()">Remove Input</button>
+  <button type="submit" (click)="onSubmit(subject_id)">Save Question</button>
+
 </form>
- -->

@@ -180,7 +180,8 @@ nameFilterValue = '';
       const PDF = new jsPDF('p', 'mm', 'a4');
       let position = 0;
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-      PDF.save('table-demo.pdf');
+      const currentDate=new Date();
+      PDF.save('Exam-result '+currentDate+'.pdf');
     });
   }
 

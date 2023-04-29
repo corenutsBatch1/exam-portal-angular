@@ -55,6 +55,7 @@ export class AddquestionComponent implements OnInit{
    subject_id?:number;
    selectedsubject?:string;
    filteredTopics: Subject[] = [];
+   
    onSubjectSelection() {
     //const value = event.value;
     if (this.selectedsubject) {

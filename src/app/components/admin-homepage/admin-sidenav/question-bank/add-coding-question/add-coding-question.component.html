@@ -1,16 +1,20 @@
-<!-- <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+ <form [formGroup]="questionForm" (ngSubmit)="onSubmit(codingQuestion,codingQuestion.id)">
   <div class="form-group">
     <label for="question">Question:</label>
     <textarea class="form-control" id="question" formControlName="question"></textarea>
   </div>
-  <div formArrayName="options">
-    <div class="form-group" *ngFor="let option of questionForm.get('options').controls; let i=index" [formGroupName]="i">
-      <input type="text" class="form-control" placeholder="Enter option" formControlName="value">
-      <input type="checkbox" formControlName="isCorrect">
-      <button type="button" (click)="removeOption(i)">Remove Option</button>
-    </div>
+  <div *ngFor="let input of inputs; let i = index">
+    <label for="input-{{i}}">Input {{i + 1}}:</label>
+    <input type="text" id="input-{{i}}" name="input{{i}}">
+    <label for="input-{{i}}">expected output {{i + 1}}:</label>
+    <input type="text" id="input-{{i}}" name="input{{i}}">
   </div>
-  <button type="button" (click)="addOption()">Add Option</button>
+  <button (click)="addInput()">Add Input</button>
+  <button (click)="removeInput()">Remove Input</button>
   <button type="submit">Save Question</button>
+
 </form>
- -->
+
+
+
+

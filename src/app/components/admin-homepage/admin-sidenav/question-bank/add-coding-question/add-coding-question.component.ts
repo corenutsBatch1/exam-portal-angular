@@ -2,8 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CodingQuestion } from 'src/app/model/model/CodingQuestions';
 import { Subject } from 'src/app/model/model/Subject';
-
+interface InputField {
+  value: string;
+}
 @Component({
   selector: 'app-add-coding-question',
   templateUrl: './add-coding-question.component.html',
@@ -17,7 +20,7 @@ export class AddCodingQuestionComponent {
     subjects?:Subject[];
     uniqueSubjectNames: string[] = [];
   //  answers : string[] = []
-
+  codingQuestion: CodingQuestion=new CodingQuestion();
   questionForm: FormGroup;
 
   constructor(private http:HttpClient,private router:Router,private formBuilder: FormBuilder)
@@ -67,7 +70,14 @@ export class AddCodingQuestionComponent {
   }
 
 
+  inputs: InputField[] = [];
 
+  addInput() {
+    this.inputs.push({ value: '' });
+  }
+  removeInput(){
+    this.inputs.pop();
+  }
 //This is chatgpt code
 
   createOption(): FormGroup {
@@ -77,18 +87,21 @@ export class AddCodingQuestionComponent {
     });
   }
 
-  addOption(): void {
-    const options = this.questionForm.get('options') as FormArray;
-    options.push(this.createOption());
-  }
+  // addOption(): void {
+  //   const options = this.questionForm.get('options') as FormArray;
+  //   options.push(this.createOption());
+  // }
 
-  removeOption(index: number): void {
-    const options = this.questionForm.get('options') as FormArray;
-    options.removeAt(index);
-  }
+  // removeOption(index: number): void {
+  //   const options = this.questionForm.get('options') as FormArray;
+  //   options.removeAt(index);
+  // }
 
-  onSubmit(): void {
-    console.log(this.questionForm.value);
+  onSubmit(codingQuestions:CodingQuestion,id?:number): void {
+    this.http.post(`http://localhost:8089/api/addquestion/${id}`,codingQuestions )
+  }
+  addTestCases(){
+    
   }
 
 

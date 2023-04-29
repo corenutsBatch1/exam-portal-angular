@@ -40,11 +40,17 @@ export class UserResultComponent {
   fail:number=0;
   userMarks?:Marks[]=[];
   username?:string;
-
+  username2?:string;
+  examchart?:boolean;
+  userchart?:boolean;
   chart1: any;
 chart2: any;
+examchart1:any
+examchart2:any;
 nameFilterValue = '';
   codeFilterValue = '';
+  ueseexammarks?:number[]=[];
+  examcode:string[]=[]
    constructor(private http:HttpClient){}
 
 
@@ -62,9 +68,7 @@ nameFilterValue = '';
 
   applyFilter(): void {
     const nameFilterValue = this.nameFilterValue.trim().toLowerCase();
-    const codeFilterValue = this.codeFilterValue.trim().toLowerCase();
     console.log(this.nameFilterValue)
-    console.log(this.codeFilterValue)
 
     this.dataSource.filterPredicate = (data: Marks, filter: string) => {
       const nameMatch = data.user?.name?.trim().toLowerCase().includes(nameFilterValue);
@@ -75,7 +79,7 @@ nameFilterValue = '';
       return !!(nameMatch || codeMatch ||  marksMatch || totalmarksMatch || idMatch);
     };
 
-    const filterValue = `${nameFilterValue} ${codeFilterValue}`;
+    const filterValue = `${nameFilterValue}`;
     this.dataSource.filter = filterValue;
     console.log(this.dataSource.filter)
   }
@@ -85,6 +89,8 @@ nameFilterValue = '';
 
 
  exampiechart(code?:string){
+  this.userchart=false;
+  this.examchart=true
   this.userMarks?.splice(0, this.userMarks.length);
   this.above80 = 0; // reset variables to zero
   this.above60 = 0;
@@ -120,55 +126,168 @@ nameFilterValue = '';
 
   }
  }
+  userpiechart(name:any){
+    this.examcode?.splice(0, this.examcode.length);
+    this.ueseexammarks?.splice(0, this.ueseexammarks.length);
 
+    this.userchart=true;
+    this.examchart=false;
+    console.log(name)
+    this.marks.forEach(a=>{
+        if(a.marks && a.user?.name==name && a?.exam?.code ) {
+          console.log(a)
+          this.examcode.push(a.exam.code);
+           this.ueseexammarks?.push(a.marks)
+           console.log(this.examcode)
+           console.log(this.ueseexammarks)
+
+            }
+    })
+    console.log(this.examcode)
+    console.log(this.ueseexammarks)
+    if(this.examcode)
+    {
+      console.log("calling render")
+    this.RenderDailyChart();
+    this.RenderDailyChart2();
+
+    }
+
+  }
 
   RenderDailyChart() {
     if (this.chart1) {
       this.chart1.destroy();
-
     }
-    this.chart1 = new Chart("abc", {
-      type: 'pie',
-      data: {
-        labels: ['above80', 'above60','above35','fail'],
-        datasets: [{
-          label: 'Exam Report',
-          data: [this.above80, this.above60,this.above35,this.fail], // converted string values to numbers
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+    if (this.examchart1) {
+      this.examchart1.destroy();
+    }
+
+    if (this.examchart) {
+      // Create exam chart
+      console.log("exampiechat123")
+      this.chart1 = new Chart("abc", {
+        type: 'pie',
+        data: {
+          labels: ['above80', 'above60', 'above35', 'fail'],
+          datasets: [{
+            label: 'Exam Report',
+            data: [this.above80, this.above60, this.above35, this.fail], // converted string values to numbers
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
+      });
+    } else {
+      console.log("userexampiechart")
+      // Initialize empty arrays for labels and data
+      let labels = [];
+      let data = [0, 0, 0, 0];
+
+      // Iterate over exam codes and marks to populate labels and data
+      for (let i = 0; i < this.examcode.length; i++) {
+        if (this.ueseexammarks) {
+          let code = this.examcode[i];
+          let marks = this.ueseexammarks[i];
+          data[i]=marks;
+          labels.push(code);
+        }
       }
-    });
+
+      // Create user chart
+      this.examchart1 = new Chart("abc", {
+        type: 'pie',
+        data: {
+          labels: labels, // use dynamically generated labels
+          datasets: [{
+            label: 'Exam Report',
+            data: data, // use dynamically generated data
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
   }
 
   RenderDailyChart2() {
     if (this.chart2) {
       this.chart2.destroy();
     }
-    this.chart2=new Chart("def", {
-      type: 'bar',
-      data: {
-        labels: ['>80% :'+this.above80, '>60% : '+this.above60,'>35% : '+this.above35,'fail : '+this.fail],
-        datasets: [{
-          label: 'Exam Report',
-          data: [this.above80, this.above60,this.above35,this.fail], // converted string values to numbers
-          borderWidth:9.2
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+    if (this.examchart2) {
+      this.examchart2.destroy();
+    }
+
+    if (this.examchart) {
+      // Create exam chart
+      console.log("exambar")
+      this.chart2 = new Chart("def", {
+        type: 'bar',
+        data: {
+          labels: ['>80% :'+this.above80, '>60% : '+this.above60,'>35% : '+this.above35,'fail : '+this.fail],
+
+          datasets: [{
+            label: 'Exam Report',
+            data: [this.above80, this.above60, this.above35, this.fail], // converted string values to numbers
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
+      });
+    } else {
+      console.log("userexambar")
+      // Initialize empty arrays for labels and data
+      let labels = [];
+      let data = [0, 0, 0, 0];
+
+      // Iterate over exam codes and marks to populate labels and data
+      for (let i = 0; i < this.examcode.length; i++) {
+        if (this.ueseexammarks) {
+          let code = this.examcode[i];
+          let marks = this.ueseexammarks[i];
+          data[i]=marks;
+          labels.push(code);
+        }
       }
-    });
+
+      // Create user chart
+      this.examchart2 = new Chart("def", {
+        type: 'bar',
+        data: {
+          labels: labels, // use dynamically generated labels
+          datasets: [{
+            label: 'Exam Report',
+            data: data, // use dynamically generated data
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
 
   }
   public openPDF(): void {

@@ -176,7 +176,7 @@ checkboxChanged(event: any, optionValue?: number, subjectName?:string) {
          if(subjectName?.toLowerCase()===('coding')){
          this.codingQuestionsIdArray.push(optionValue as number);
           this.questionCount++;
-          console.log(this.codingQuestionsIdArray) 
+          console.log(this.codingQuestionsIdArray)
          }else{
           this.questionsIdArray.push(optionValue as number);
           console.log(this.questionsIdArray)
@@ -184,7 +184,8 @@ checkboxChanged(event: any, optionValue?: number, subjectName?:string) {
         }
         } else {
           setTimeout(() => {
-            alert('You have reached the maximum number of questions.');
+            swal("You have reached the maximum number of questions.", "", "error");
+            // alert('You have reached the maximum number of questions.');
             event.source.checked = false;
           }, 0);
         }

@@ -2,3 +2,11 @@
     /* width:150%;  */
     position:relative;
 }
+th{
+  color: rgb(243, 248, 248);
+  background-color:#1f2937;
+}
+thead
+{
+  background-color: #1f2937;
+}

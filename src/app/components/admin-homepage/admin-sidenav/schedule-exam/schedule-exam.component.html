@@ -19,6 +19,7 @@
         <th>Code</th>
         <th>StartTime</th>
         <th>EndTime</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -28,7 +29,7 @@
         <td>{{exam.code}}</td>
         <td>{{exam.startTime}}</td>
         <td>{{exam.endTime}}</td>
-         <td><button type="button" class="btn btn-danger" (click)="deleteexam(exam.id,exam.createPaper?.id)">Delete</button>
+         <td><mat-icon type="button"  class='material-icons-outlined' [ngStyle]="{'color':'red'}"  (click)="deleteexam(exam.id,exam.createPaper?.id)">delete</mat-icon>
          </td>
       </tr>
       </tbody>

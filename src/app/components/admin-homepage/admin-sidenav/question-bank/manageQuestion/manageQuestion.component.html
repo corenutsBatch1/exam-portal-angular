@@ -16,14 +16,14 @@
   <button class="btn btn-secondary btn-sm float-left" style="background-color: #1f2937;" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
 
 
-  <div class="d-flex justify-content-center" *ngIf="allFieldsFilled">
+  <!-- <div class="d-flex justify-content-center" *ngIf="allFieldsFilled">
 
     <div class="noquestionfound" *ngIf="Questions.length === 0">
       <br>
   <br><br><br><br>
   <br>
       <p>No questions found.</p>
-    </div>
+    </div> -->
 
     <table class="table table-striped" *ngIf="allFieldsFilled && Questions.length > 0 && selectedsubject != 'Coding'">
     <thead >
@@ -65,7 +65,7 @@
    </table>
 
 
-  <table class="table table-striped" *ngIf="allFieldsFilled && Questions.length > 0 && selectedsubject === 'Coding'">
+  <table class="table table-striped" *ngIf="allFieldsFilled && selectedsubject === 'Coding'">
     <thead >
       <tr>
         <th>S.No</th>

@@ -10,12 +10,11 @@
       <mat-form-field class="ml-2">
         <mat-label>Search</mat-label>
         <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
-
-        <input matInput [(ngModel)]="codeFilterValue" (keyup)="applyFilter()" #input>
-
       </mat-form-field>
-      <div class="col-md-4 text-right">
-        <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
+      <div class="col-md-4 text-left">
+        <button mat-icon-button color="primary" (click)="openPDF()" aria-label="Download PDF">
+          <mat-icon class="download-icon">cloud_download</mat-icon>
+        </button>
     </div>
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="my-table">
@@ -76,6 +75,11 @@
       <label for="" class="canvassearch">Enter the exam code &nbsp;</label>
       <input type="text" [(ngModel)]="examcode1"/> &nbsp;
       <button class="btn-sm btn-primary" type="submit" (click)="exampiechart(examcode1)">
+        Submit
+      </button>
+      <label for="" class="canvassearch">Enter the user name &nbsp;</label>
+      <input type="text" [(ngModel)]="username2"/> &nbsp;
+      <button class="btn-sm btn-primary" type="submit" (click)="userpiechart(username2)">
         Submit
       </button>
               <div class="leftcanvas" style="height: 15rem;">

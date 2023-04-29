@@ -24,7 +24,7 @@
 }
 
 .left{
-  margin-left: 12rem;
+  float: left;
 }
 .right{
   margin-top: -3.5rem;

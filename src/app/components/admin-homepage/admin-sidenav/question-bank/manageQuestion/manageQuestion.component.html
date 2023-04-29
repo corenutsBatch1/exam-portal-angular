@@ -16,16 +16,16 @@
   <button class="btn btn-secondary btn-sm float-left" style="background-color: #1f2937;" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
 
 
-  <div class="d-flex justify-content-center" *ngIf="allFieldsFilled">
+  <!-- <div class="d-flex justify-content-center" *ngIf="allFieldsFilled">
 
     <div class="noquestionfound" *ngIf="Questions.length === 0">
       <br>
   <br><br><br><br>
   <br>
       <p>No questions found.</p>
-    </div>
+    </div> -->
 
-    <table class="table table-striped" *ngIf="allFieldsFilled && Questions.length > 0">
+    <table class="table table-striped" *ngIf="allFieldsFilled && Questions.length > 0 && selectedsubject != 'Coding'">
     <thead >
       <tr>
         <th>S.No</th>
@@ -63,7 +63,29 @@
     <p class="text-center">No questions found.</p>
   </div> -->
    </table>
-  </div>
+
+
+  <table class="table table-striped" *ngIf="allFieldsFilled && selectedsubject === 'Coding'">
+    <thead >
+      <tr>
+        <th>S.No</th>
+        <th>Question</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let question of codingQuestion let i=index">
+        <td>{{question.id}}</td>
+        <td>{{question.content}}</td>
+        <td>
+       <mat-icon type="button" data-toggle="modal" data-target="#staticBackdrop" (click)="getQuestionsById(question.id)" class="material-symbols-outlined">edit
+      </mat-icon>
+        </td>
+      <td> <mat-icon type="button"  class='material-icons-outlined' [ngStyle]="{'color':'red'}"  (click)="deleteQuestionInfo(question.id)">delete</mat-icon></td>
+  </tr>
+  </tbody>
+   </table>
 
 
   </div>

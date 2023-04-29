@@ -1,3 +1,4 @@
+
 <form [formGroup]="questionForm" >
 
   <div>
@@ -17,12 +18,14 @@
     </mat-form-field>
    </div>
 
+
   <div class="form-group">
     <label for="question">Question:</label>
     <textarea class="form-control" id="question" formControlName="question" [(ngModel)]="questionContent"></textarea>
   </div>
   <div *ngFor="let input of inputs; let i = index">
     <label for="input-{{i}}">Input {{i + 1}}:</label>
+
     <input type="text" id="input-{{i}}" name="input{{i}}" [(ngModel)]="input.input" [ngModelOptions]="{standalone: true}">
     <label for="input-{{i}}">expected output {{i + 1}}:</label>
     <input type="text" id="input-{{i}}" name="input{{i}}" [(ngModel)]="input.output" [ngModelOptions]="{standalone: true}">

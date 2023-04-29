@@ -1,7 +1,6 @@
 import { Subject } from "./Subject";
-
 export class CodingQuestion{
-  id?:number;
+  id?:any;
   content?:string;
   subject?:Subject
 

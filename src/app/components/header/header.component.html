@@ -1,11 +1,12 @@
 <mat-toolbar >
-  <img src="assets/writing.png">
-
+  <img src="assets/test.png">
+  &nbsp;&nbsp;
   <span>
     Scoresharp</span>
   <span class="example-spacer"></span>
   <button *ngIf="router.url !== '/home' && !loginservice.isLoggedIn " mat-button routerLink="/home">Home</button>
   <button *ngIf="!loginservice.isLoggedIn"  routerLink="/login" mat-button>Login</button>
   <!-- <button *ngIf="!loginservice.isLoggedIn"   mat-button routerLink="/signup">Register</button> -->
-  <button id="logout-button" *ngIf="loginservice.isLoggedIn"   (click)="logOut()" mat-button>Logout</button>
+  <button id="logout-button" *ngIf="loginservice.isLoggedIn"   (click)="logOut()" mat-button>
+    Logout</button>
 </mat-toolbar>

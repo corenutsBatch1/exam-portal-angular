@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { CodingQuestion } from 'src/app/model/model/CodingQuestion';
 import { Subject } from 'src/app/model/model/Subject';
 import { TestCases } from 'src/app/model/model/TestCases';
@@ -12,7 +13,6 @@ interface InputField {
   output: string;
 
 }
-
 
 @Component({
   selector: 'app-add-coding-question',
@@ -28,8 +28,10 @@ export class AddCodingQuestionComponent {
     uniqueSubjectNames: string[] = [];
   //  answers : string[] = []
   codingQuestion: CodingQuestion=new CodingQuestion();
+
   testCases: TestCases=new TestCases();
   testCasesArray:TestCases[]=[];
+
   questionForm: FormGroup;
 
   constructor(private http:HttpClient,private router:Router,private formBuilder: FormBuilder)
@@ -82,6 +84,7 @@ export class AddCodingQuestionComponent {
 
   inputs: InputField[] = [];
 
+
   addInput() {
     this.inputs.push({ value: '', input: '', output: ''});
 
@@ -92,6 +95,7 @@ export class AddCodingQuestionComponent {
     this.inputs.pop();
 
   }
+
 
   createOption(): FormGroup {
     return this.formBuilder.group({
@@ -104,6 +108,7 @@ export class AddCodingQuestionComponent {
   //   const options = this.questionForm.get('options') as FormArray;
   //   options.push(this.createOption());
   // }
+
 
   // removeOption(index: number): void {
   //   const options = this.questionForm.get('options') as FormArray;

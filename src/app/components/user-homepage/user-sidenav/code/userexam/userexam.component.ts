@@ -86,7 +86,7 @@ export class UserexamComponent {
         this.subjects = subjects;
         this.uniqueSubjectNames = this.getUniqueSubjectNames(this.subjects);
         console.log("5"+this.questions);
-
+        console.log(subjects);
       });
     });
   console.log("onit"+this.questions.length);

@@ -1,6 +1,7 @@
+<div id="createpaper-form">
+  <button class="btn btn-secondary ml-3 float-left" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+  <br><br>  <br>  <br>
 <div class="form-group maindiv">
-  <button class="btn btn-secondary ml-3 float-right" (click)="goBack()">Back</button>
-  <br>
   <label for="formGroupExampleInput">Enter the paper name</label>
   <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the exam name" [(ngModel)]="createPaper.name" name="name" (ngModelChange)="checkAllFieldsFilled()">
 </div>
@@ -17,6 +18,7 @@
   <div class="invalid-feedback" id="totalMarksError">
     Please enter only numbers
   </div>
+</div>
 </div>
 <mat-form-field appearance="fill">
   <mat-label>Select a subject</mat-label>

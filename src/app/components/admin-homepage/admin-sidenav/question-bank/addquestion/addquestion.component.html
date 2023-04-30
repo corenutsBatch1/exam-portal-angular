@@ -1,119 +1,134 @@
 <div class="bootstrap-wrapper">
   <div class="container">
     <div class="row">
-      <form >
+      <form>
         <mat-card class="card">
-        <div>
-        <h2 class="text-center title">Add Question<button class="btn btn-secondary btn-sm back float-left" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button></h2>
+          <div>
+            <h2 class="text-center title">Add Question<button class="btn btn-secondary btn-sm back float-left"
+                (click)="goBack()"><mat-icon>arrow_back</mat-icon></button></h2>
 
-        </div>
+          </div>
 
-         <div>
-          <mat-form-field appearance="fill" classs="left">
-            <mat-label>Select a subject</mat-label>
-            <mat-select [(ngModel)]="selectedsubject" name="selectedSubject" (selectionChange)="onSubjectSelection()">
-              <mat-option *ngFor="let subject of uniqueSubjectNames" [value]="subject">{{ subject }}</mat-option>
+          <div>
+            <mat-form-field appearance="fill" classs="left">
+              <mat-label>Select a subject</mat-label>
+              <mat-select [(ngModel)]="selectedsubject" name="selectedSubject" (selectionChange)="onSubjectSelection()">
+                <mat-option *ngFor="let subject of uniqueSubjectNames" [value]="subject">{{ subject }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="right">
+              <mat-label>Select a topic</mat-label>
+              <mat-select [(ngModel)]="subject_id" name="subject_id" [formControl]="subjectControl">
+                <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description
+                  }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <h3><b>Enter the question</b></h3>
+            <!-- <input type="text" class="form-control questionPlaceholder" id="formGroupExampleInput" placeholder="Enter the question"  [(ngModel)]="Questions.content" name="content">
+           -->
+            <div id="question-editor">
+              <ngx-codemirror [options]="{
+    theme: 'paraiso-light',
+    mode: 'markdown'
+  }"></ngx-codemirror>
+            </div>
+          </div>
+
+          <table class="table">
+
+            <!-----Heading-->
+            <tr>
+              <th class="headingQuestion">Enter Options</th>
+              <th class="headingAnswers">Correct answers</th>
+            </tr>
+
+
+            <!------for option 1-->
+            <tr>
+              <td>
+                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter option A"
+                  [(ngModel)]="Questions.optionA" name="option_A">
+              </td>
+              <td>
+                <label>
+                  <mat-checkbox (change)="checkboxChanged($event, 'A')"></mat-checkbox>
+                  Option A is correct
+                </label>
+              </td>
+            </tr>
+
+            <!------for option 2-->
+            <tr>
+              <td>
+                <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Enter option B"
+                  [(ngModel)]="Questions.optionB" name="option_B">
+              </td>
+              <td>
+                <label>
+
+                  <!-- <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionB"> -->
+                  <mat-checkbox (change)="checkboxChanged($event, 'B')"></mat-checkbox>
+                  Option B is correct
+                </label>
+              </td>
+            </tr>
+
+            <!------for option 3-->
+            <tr>
+              <td>
+
+                <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Enter option C"
+                  [(ngModel)]="Questions.optionC" name="option_C">
+              </td>
+              <td>
+                <label>
+                  <!-- <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionC"> -->
+                  <mat-checkbox (change)="checkboxChanged($event, 'C')"></mat-checkbox>
+                  Option C is correct
+                </label>
+              </td>
+            </tr>
+
+            <!------for option 4-->
+            <tr>
+              <td>
+                <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Enter option D"
+                  [(ngModel)]="Questions.optionD" name="option_D">
+              </td>
+              <td>
+                <label>
+                  <!-- <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionD"> -->
+                  <mat-checkbox (change)="checkboxChanged($event, 'D')"></mat-checkbox>
+                  Option D is correct
+                </label>
+              </td>
+            </tr>
+
+          </table>
+
+
+
+          <mat-form-field appearance="fill">
+            <mat-label>Choose an question_type</mat-label>
+            <mat-select [(ngModel)]="Questions.qtype" name="q_type">
+              <mat-option value="simple">simple</mat-option>
+              <mat-option value="medium">medium</mat-option>
+              <mat-option value="hard">hard</mat-option>
             </mat-select>
           </mat-form-field>
+          <div class="text-center">
+            <button (click)="addQuestion(this.Questions,subject_id)" class="btn btn-primary btn-sm addButton">Add
+              question</button>
+            <button type="reset" class="btn btn-danger ml-3 btn-sm clear">Clear</button>
+            <button (click)="goBack()" class="btn btn-secondary btn-sm Back ml-3"
+              style="background-color: #1f2937;"><mat-icon>arrow_back</mat-icon></button>
+          </div>
 
-          <mat-form-field appearance="fill" class="right">
-            <mat-label>Select a topic</mat-label>
-            <mat-select [(ngModel)]="subject_id" name="subject_id" [formControl]="subjectControl">
-              <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-         </div>
-
-        <div class="form-group">
-          <label for="formGroupExampleInput">Enter the question</label>
-          <input type="text" class="form-control questionPlaceholder" id="formGroupExampleInput" placeholder="Enter the question"  [(ngModel)]="Questions.content" name="content">
-        </div>
-
-        <table class="text-center table">
-
-          <!-----Heading-->
-          <tr>
-            <th class="headingQuestion">Enter Options</th>
-            <th class="headingAnswers">Correct answers</th>
-          </tr>
-
-
-          <!------for option 1-->
-          <tr>
-            <td>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter option A" [(ngModel)]="Questions.optionA" name="option_A">
-            </td>
-          <td>
-            <label>
-              <mat-checkbox (change)="checkboxChanged($event, 'A')" ></mat-checkbox>
-              Option A is correct
-            </label>
-          </td>
-          </tr>
-
-           <!------for option 2-->
-           <tr>
-            <td>
-            <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Enter option B" [(ngModel)]="Questions.optionB" name="option_B">
-          </td>
-          <td>
-            <label>
-
-              <!-- <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionB"> -->
-              <mat-checkbox (change)="checkboxChanged($event, 'B')"></mat-checkbox>
-              Option B is correct
-            </label>
-          </td>
-          </tr>
-
-           <!------for option 3-->
-           <tr>
-            <td>
-
-            <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Enter option C" [(ngModel)]="Questions.optionC" name="option_C">
-          </td>
-          <td>
-            <label>
-              <!-- <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionC"> -->
-              <mat-checkbox (change)="checkboxChanged($event, 'C')"></mat-checkbox>
-              Option C is correct
-            </label>
-          </td>
-          </tr>
-
-           <!------for option 4-->
-           <tr>
-            <td>
-            <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Enter option D" [(ngModel)]="Questions.optionD" name="option_D">
-            </td>
-            <td>
-            <label>
-              <!-- <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionD"> -->
-              <mat-checkbox (change)="checkboxChanged($event, 'D')"></mat-checkbox>
-              Option D is correct
-            </label>
-            </td>
-          </tr>
-
-        </table>
-
-
-
-        <mat-form-field appearance="fill">
-          <mat-label>Choose an question_type</mat-label>
-          <mat-select  [(ngModel)]="Questions.qtype" name="q_type">
-            <mat-option value="simple">simple</mat-option>
-            <mat-option value="medium" >medium</mat-option>
-            <mat-option value="hard">hard</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div class="text-center">
-          <button (click)="addQuestion(this.Questions,subject_id)" class="btn btn-primary btn-sm addButton" >Add question</button>
-          <button type="reset" class="btn btn-danger ml-3 btn-sm clear">Clear</button>
-          <button (click)="goBack()" class="btn btn-secondary btn-sm Back ml-3" style="background-color: #1f2937;"><mat-icon>arrow_back</mat-icon></button>
-        </div>
-
-      </mat-card>
+        </mat-card>
 
       </form>
 

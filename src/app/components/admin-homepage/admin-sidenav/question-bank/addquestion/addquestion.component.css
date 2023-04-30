@@ -28,7 +28,7 @@ th{
 
 .table{
   width: 40rem;
-  margin-left: 7rem;
+  /* margin-left: 7rem; */
 }
 
 .addButton:hover{
@@ -45,6 +45,9 @@ th{
   width: 50%;
 }
 
+#question-editor{
+  width:70%;
+}
 
 
 

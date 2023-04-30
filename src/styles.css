@@ -4,4 +4,4 @@ html, body { height: 100%; }
 body { margin: 0; }
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import '~codemirror/lib/codemirror';
-@import '~codemirror/theme/material';
+@import '~codemirror/theme/paraiso-light';

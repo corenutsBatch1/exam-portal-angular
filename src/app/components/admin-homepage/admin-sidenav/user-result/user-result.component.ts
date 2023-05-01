@@ -43,6 +43,11 @@ export class UserResultComponent {
   username2?:string;
   examchart?:boolean;
   userchart?:boolean;
+  userexamresult?:false;
+  username3?:string;
+  examname?:string;
+  totalmarks?:number;
+  gotmarks?:number;
   chart1: any;
 chart2: any;
 examchart1:any
@@ -96,6 +101,7 @@ nameFilterValue = '';
   this.above60 = 0;
   this.above35 = 0;
   this.fail = 0;
+
   this.marks.forEach(a=>{
       if(a.exam && a.exam.code==code) {
         this.userMarks?.push(a);
@@ -154,6 +160,20 @@ nameFilterValue = '';
     }
 
   }
+  examresult(name?:string,code?:string)
+{
+
+  this.marks.forEach(a=>{
+    if(a.exam && a.exam.code==code &&  a.user?.name==name) {
+          this.username3=a.user?.name;
+          this.examname=a.exam.name;
+          this.totalmarks=a.totalMarks;
+          this.gotmarks=a.marks;
+        }
+})
+
+
+}
 
   RenderDailyChart() {
     if (this.chart1) {
@@ -292,6 +312,7 @@ nameFilterValue = '';
   }
   public openPDF(): void {
     const TABLE: any = document.querySelector('#my-table');
+
     html2canvas(TABLE).then((canvas) => {
       const fileWidth = 208;
       const fileHeight = (canvas.height * fileWidth) / canvas.width;
@@ -303,9 +324,23 @@ nameFilterValue = '';
       PDF.save('Exam-result '+currentDate+'.pdf');
     });
   }
+  public openPDF2(): void {
+    const userexamresult: any = document.querySelector('#result');
+
+    html2canvas(userexamresult).then((canvas) => {
+      const fileWidth = 208;
+      const fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      const PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('userexamresult-demo.pdf');
+    });
+  }
 
 
 }
+
 function includes(nameFilterValue: string) {
   throw new Error('Function not implemented.');
 }

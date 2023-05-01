@@ -16,14 +16,13 @@ export class CodingApiService {
   runCode(code: string, language: string,input: string): Observable<any> {
     const url = 'https://api.codex.jaagrav.in';
 
-    const javaUrl='http://localhost:8089/api/savecode'
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'
     });
     const data = {
       'code': code,
       'language': language,
-       'input': input
+     //  'input': input
     };
     const headersInJava = new HttpHeaders({
       'Content-Type': 'application/octet-stream'
@@ -37,25 +36,7 @@ export class CodingApiService {
 // const userCode: { code?: Uint8Array } = { code: bytes };
 
 
-    this.userCode={
-      language:'java',
-      userInputCode:code,
-      exam:{
-        id:1
-      },
-      user:{
-        id:2
-      },
-      codingQuestion:{
-        id:1
-      }
 
-    }
-      this.http.post(javaUrl,this.userCode).subscribe(response => {
-        console.log('Upload successful!');
-      }, error => {
-        console.error('Upload failed:', error);
-      });
 
 
     return this.http.post(url, qs.stringify(data), { headers: headers });

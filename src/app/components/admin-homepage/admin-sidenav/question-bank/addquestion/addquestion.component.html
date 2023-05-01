@@ -31,7 +31,7 @@
             <!-- <input type="text" class="form-control questionPlaceholder" id="formGroupExampleInput" placeholder="Enter the question"  [(ngModel)]="Questions.content" name="content">
            -->
             <div id="question-editor">
-              <ngx-codemirror [options]="{
+              <ngx-codemirror [(ngModel)]="Questions.content" name="content" [options]="{
     theme: 'paraiso-light',
     mode: 'markdown'
   }"></ngx-codemirror>

@@ -33,10 +33,10 @@
 
           </table>
           <div class="row">
-            
+
           </div>
         </div>
-        
+
          <!---End Left Top part for Swtich Subject---->
 
           <!---Start Left Buttom part for Question---->
@@ -104,14 +104,13 @@
        <!---End Left buttom part for Question---->
 
         <!---Start Rigth part---->
-      <div class="col-md-3 right" style="padding: 0;">
+        <div class="col-md-3 right" style="padding: 0;">
         <div class="col" style="padding: 0;">
           <!---Start Rigth top part for timer---->
-          
+
 
           <!-- Start the timer when the component loads -->
           <div *ngIf="showTimer">
-          <!-- <button (click)="startTimer()">Start Timer</button> -->
           </div>
           <!---End Rigth top part for timer---->
 
@@ -119,6 +118,7 @@
           <div class="answered">
 
             <h4>Total Questions= {{totalQuestions}}</h4>
+            <h4>Answered Questions= {{stateChange.length}}</h4>
             <!-- <h4>Answered Questions = {{stateChange.length}}</h4> -->
           </div>
           <div class="row-md-9 rigthbottom">

@@ -10,6 +10,7 @@ import { Question } from 'src/app/model/model/Question';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-userAnswers',
@@ -23,7 +24,7 @@ export class UserAnswersComponent implements OnInit {
   questions:Question[]=[];
   score?:number;
   userAnswers: useranswer[]=[];
-
+  totalmarks?:number;
   obtainedMarks?:Marks;
   exam?:ScheduleExam;
 
@@ -74,6 +75,7 @@ export class UserAnswersComponent implements OnInit {
 
   insertMarks(){
     console.log(this.exam)
+    this.totalmarks=this.exam?.createPaper?.totalMarks;
     console.log(this.exam?.createPaper?.totalMarks+"+++")
     console.log(this.score)
     this.obtainedMarks={

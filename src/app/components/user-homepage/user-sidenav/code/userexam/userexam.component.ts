@@ -81,6 +81,7 @@ export class UserexamComponent {
       this.http.get<any>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>{this.questions=data,
         this.totalQuestions=data.length;
     });
+    
       // console.log("question"+this.questions+"end");
       this.loadSubjects().subscribe((subjects: Subject[]) => {
         this.subjects = subjects;

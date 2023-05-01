@@ -10,6 +10,7 @@ import { CodingApiService } from '../coding-api.service';
 export class CodingComponent {
 
   code:string ="";
+  input:string="";
   codeOutput ?: Output;
 
   selectedLanguage : string = "";
@@ -17,7 +18,7 @@ export class CodingComponent {
   constructor(private apiService:CodingApiService){}
 
   runCode(code:string) {
-    this.apiService.runCode(code,this.selectedLanguage).subscribe(response => {
+    this.apiService.runCode(code,this.selectedLanguage,this.input).subscribe(response => {
       console.log(response)
       this.codeOutput = response
     }, error => {

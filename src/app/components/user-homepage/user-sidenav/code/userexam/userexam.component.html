@@ -36,37 +36,37 @@
          <!---End Left Top part for Swtich Subject---->
 
           <!---Start Left Buttom part for Question---->
-        <div class="row-md-9 leftbottom ml-2" *ngIf="currentQuestion" class="question">
+        <div class="row-md-9 leftbottom ml-2" *ngIf="currentQuestion?.subject?.name?.toLowerCase()!='coding'" class="question">
 
           <mat-list >
-            <mat-list-item> <h1 ><span>{{this.questionnumber+1}} )</span> {{ currentQuestion.content }}</h1></mat-list-item>
+            <mat-list-item> <h1 ><span>{{this.questionnumber+1}}</span> {{ currentQuestion?.content }}</h1></mat-list-item>
 
             <mat-list-item>
               <div style="white-space:nowrap">
-                  <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="A" (click)="sendoption(currentQuestion.id, 'A')" [checked]="isOptionSelected(currentQuestion.id, 'A')" ng-class="{checked: isChecked == A}"/>
-                  <label class="option">{{ currentQuestion.optionA }}</label>
+                  <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion?.id" value="A" (click)="sendoption(currentQuestion?.id, 'A')" [checked]="isOptionSelected(currentQuestion?.id, 'A')" ng-class="{checked: isChecked == A}"/>
+                  <label class="option">{{ currentQuestion?.optionA }}</label>
               </div>
             </mat-list-item>
 
             <mat-list-item>
               <div style="white-space:nowrap">
-                <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="B" (click)="sendoption(currentQuestion.id, 'B')" [checked]="isOptionSelected(currentQuestion.id, 'B')" ng-class="{checked: isChecked == B}"/>
-                <label class="option">{{ currentQuestion.optionB }}</label>
+                <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion?.id" value="B" (click)="sendoption(currentQuestion?.id, 'B')" [checked]="isOptionSelected(currentQuestion?.id, 'B')" ng-class="{checked: isChecked == B}"/>
+                <label class="option">{{ currentQuestion?.optionB }}</label>
               </div>
             </mat-list-item>
 
             <mat-list-item>
               <div class="white-space:nowrap">
-                <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="C" (click)="sendoption(currentQuestion.id, 'C')" [checked]="isOptionSelected(currentQuestion.id, 'C')" ng-class="{checked: isChecked == C}">
-                <label class="option">{{ currentQuestion.optionC }}</label>
+                <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion?.id" value="C" (click)="sendoption(currentQuestion?.id, 'C')" [checked]="isOptionSelected(currentQuestion?.id, 'C')" ng-class="{checked: isChecked == C}">
+                <label class="option">{{ currentQuestion?.optionC }}</label>
 
               </div>
             </mat-list-item>
 
             <mat-list-item>
              <div class="white-space:nowrap">
-              <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="D" (click)="sendoption(currentQuestion.id, 'D')" [checked]="isOptionSelected(currentQuestion.id, 'D')" ng-class="{checked: isChecked == D}"/>
-                <label class="option">{{ currentQuestion.optionD }}</label>
+              <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion?.id" value="D" (click)="sendoption(currentQuestion?.id, 'D')" [checked]="isOptionSelected(currentQuestion?.id, 'D')" ng-class="{checked: isChecked == D}"/>
+                <label class="option">{{ currentQuestion?.optionD }}</label>
              </div>
             </mat-list-item>
             <!-- <div > -->
@@ -75,6 +75,11 @@
             <button type="none" *ngIf="this.questionnumber<(questions.length-1)" class="arrow ml-4 mt-3" (click)="nextquestion()"><mat-icon>arrow_forward_ios</mat-icon></button>
 
 
+          </mat-list>
+        </div>
+        <div class="row-md-9 leftbottom ml-2" *ngIf="currentQuestion?.subject?.name?.toLowerCase()=='coding'" class="question">
+          <mat-list >
+            <mat-list-item> <h1 ><span>{{this.questionnumber+1}}</span> {{ currentQuestion?.content }}</h1></mat-list-item>
           </mat-list>
         </div>
       </div>
@@ -114,8 +119,6 @@
       </div>
       <!---End Rigth part---->
 
-
-      
     </div>
   </div>
 </div>

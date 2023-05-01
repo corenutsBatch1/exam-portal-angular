@@ -13,7 +13,7 @@ export class CodingApiService {
 
   constructor(private http : HttpClient) { }
 
-  runCode(code: string, language: string): Observable<any> {
+  runCode(code: string, language: string,input: string): Observable<any> {
     const url = 'https://api.codex.jaagrav.in';
 
     const javaUrl='http://localhost:8089/api/savecode'
@@ -22,8 +22,8 @@ export class CodingApiService {
     });
     const data = {
       'code': code,
-      'language': language
-      // 'input': input
+      'language': language,
+       'input': input
     };
     const headersInJava = new HttpHeaders({
       'Content-Type': 'application/octet-stream'
@@ -57,7 +57,7 @@ export class CodingApiService {
         console.error('Upload failed:', error);
       });
 
-      
+
     return this.http.post(url, qs.stringify(data), { headers: headers });
   }
 

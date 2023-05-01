@@ -7,7 +7,7 @@
   /* background-color: rgb(104, 179, 249); */
   background-color: #ffffff;
   text-align:center;
-  
+
 }
 
 .card:hover{
@@ -15,7 +15,7 @@
   box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
     0 24px 46px var(--box-shadow-color);
 }
- 
+
 .allign{
      display: flex;
 }
@@ -40,6 +40,10 @@
 
 .div3{
   margin-top: 2rem;
+}
+
+.mgm{
+  padding: 0rem;
 }
 
 

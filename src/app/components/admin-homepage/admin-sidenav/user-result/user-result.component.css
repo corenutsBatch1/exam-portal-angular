@@ -34,7 +34,18 @@ th{
   display: flex;
   margin-left: 17rem;
   color: rgb(0, 11, 11);
+}
 
+.search{
+  height: 5rem;
+}
 
+.pdf{
+  margin-left: 15rem;
+  margin-top: -5rem;
+}
+
+.table{
+  margin-top: 3rem;
 }
 

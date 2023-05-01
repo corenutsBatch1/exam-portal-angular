@@ -7,9 +7,6 @@ import { Subject } from 'src/app/model/model/Subject';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
-
-import { Marks } from 'src/app/model/model/Marks';
-
 import swal from 'sweetalert';
 
 
@@ -37,7 +34,6 @@ export class UserexamComponent {
   questionnumber:number=0;
   clickedSubject:String="";
   selectedOption: string = '';
-
   examminutes?:number;
   remainingTime: number=0
   timerId: any;
@@ -45,11 +41,9 @@ export class UserexamComponent {
   showbuttons?:boolean=false;
   codingquestionid?:number;
   examtime?:ScheduleExam=new ScheduleExam();
-
-
   totalQuestions:number=0;
   remainingQuestion:number=0;
-  // remainingQuestion:string="";
+
 
   constructor(
     private http: HttpClient,
@@ -62,43 +56,26 @@ export class UserexamComponent {
 
     this.uid = this.service.sendid();
     this.eid = this.service.sendeid();
-
-    console.log("ngonit"+this.uid, this.eid);
     this.startTimer()
     this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
-       console.log("inside getquestions");
-      // console.log(this.examtime)
-
     const examtime = this.examtime.examDuration;
-
   if(examtime){
-
       this.remainingTime=60*examtime;
-      // console.log("3"+this.examminutes);
-      // console.log("4"+this.remainingTime)
      }
         });
 
     this.route.params.subscribe((params) => {
       this.code = params['code'];
-      // console.log('Exam code:', this.code);
       this.http.get<any>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>{this.questions=data,
         this.totalQuestions=data.length;
     });
-
-      // console.log("question"+this.questions+"end");
       this.loadSubjects().subscribe((subjects: Subject[]) => {
         this.subjects = subjects;
         this.uniqueSubjectNames = this.getUniqueSubjectNames(this.subjects);
-        console.log("5"+this.questions);
         console.log(subjects);
       });
     });
-  console.log("onit"+this.questions.length);
-
   }
-// Define the time limit for the timer
- // 90 minutes in seconds
 
 // Initialize the timer properties
 minutes = this.remainingTime;
@@ -112,38 +89,27 @@ startTimer() {
     // Decrement the time remaining
     if(this.remainingTime){
     this.remainingTime--;
-    // console.log(this.remainingTime);
-    // Calculate the minutes and seconds
     this.minutes = Math.floor(this.remainingTime / 60);
     this.seconds = this.remainingTime % 60;
 
     // Check if the timer has expired
     if (this.remainingTime === 0) {
-      console.log("working")
       this.clickEvent2();
       this.timerExpired = true;
       clearInterval(timer);
     }}
   }, 1000);
-
-  // Hide the timer start button
   this.showTimer = false;
-
-  // console.log("start timer"+this.questions.length);
 }
 
   getUniqueSubjectNames(subjects: Subject[]): String[] {
-
     const uniquesubjects = subjects
       .map((subjects) => subjects.name)
       .filter((name) => name !== undefined) as String[];
-      // console.log("gusn"+this.questions.length);
     return [...new Set(uniquesubjects)];
   }
 
   loadSubjects(): Observable<Subject[]> {
-
-      console.log("loadsubject"+this.questions.length);
     return this.http.post<Subject[]>(
       `http://localhost:8089/api/getsubjectsBycode/${this.code}`,
       this.code
@@ -152,52 +118,42 @@ startTimer() {
 
   ngOnDestroy(): void {
     clearInterval(this.timerId);
-    console.log("destroy"+this.questions.length);
   }
 
 
   getQuestionsBySubjectName(subjectName:String):void{
     this.questions=[];
-   // this.currentQuestion={};
     this.subjects.forEach((subject)=>{
                   if(subject.name==subjectName){
                     this.loadQuestions(subject.id).subscribe((data)=>{this.questions=this.questions.concat(data)
-                    // console.log(data);
                     this.questionnumber=0
                   })
                   }})
-
-                  console.log("gqbsn"+this.questions.length);
   }
 
   loadQuestions(subjectid?: number) {
     console.log("lq"+this.questions.length);
     return this.http.get(
       `http://localhost:8089/api/getquestionsBySubjectId/${subjectid}/${this.code}`
-
     );
 
   }
 
   showQuestion(questionId: number): void {
-
     this.questions.forEach((question) => {
       if (question.id == questionId) {
         this.currentQuestion = question;
       }
       console.log("showq"+this.questions.length);
     });
-
   }
 
 
 
   sendoption(qid:number,option1:string)
   {
-
     this.stateChange.push(qid);
     this.selectedOptions[qid] = option1;
-
     console.log("option"+option1);
     this.answer = {
       user: {
@@ -211,14 +167,11 @@ startTimer() {
       },
       userAnswer: option1,
     };
-
        this.http.post(`http://localhost:8089/api/saveanswer`,this.answer).subscribe(data=>{
        console.log("188");
        this.selectedOption=option1;
       });
   }
-
-
 
         //deselect opation
   deselect(deselectqid:number){
@@ -230,18 +183,15 @@ startTimer() {
     console.log("delete"+deselectqid+" "+this.uid);
   this.http.delete(`http://localhost:8089/api/deleteAnswer/${deselectqid}/${this.uid}`).subscribe(
   response => {
-
   },
 );
-
 }
 
 
 isOptionSelected(questionId: number, option: string): boolean {
        this.selectedOption=option;
-
     return this.selectedOptions[questionId] ===option;
-  }
+  }
 
 
 
@@ -278,19 +228,16 @@ clickEvent(exam: any) {
       }
        });
   }
-
 }
+
 clickEvent2(){
   this.router.navigate(['answers', this.code]);
 }
 
 
-
       nextquestion(){
         this.questionnumber++;
         this.currentQuestion= this.questions[this.questionnumber];
-        // console.log(this.currentQuestion+"cq")
-        // console.log("nq"+this.questions.length);
       }
 
       nextquestions(id:any,option?:any,qid?:any){
@@ -299,20 +246,14 @@ clickEvent2(){
           this.codingquestionid=qid
         }
         console.log(option)
-            this.showbuttons=true;
-        // console.log(this.questionnumber+"num");
+        this.showbuttons=true;
         this.questionnumber= id;
-        // console.log(this.questions);
         this.currentQuestion= this.questions[id];
-
         id++;
-        // console.log(this.currentQuestion+"cq");
-        // console.log("nqs"+this.questions.length);
       }
 
       previousquestion(id:any)
       {
-        // console.log(id+"pr");
         id--;
         this.currentQuestion= this.questions[id];
         this.questionnumber--;
@@ -324,8 +265,7 @@ stateChangeCheck(qid:number)
 }
 
 setActive(index: number, subjectName:String) {
-  console.log(index);
-  console.log(subjectName);
+  console.log(subjectName)
   this.clickedSubject = subjectName;
   this.activeIndex = index;
 }

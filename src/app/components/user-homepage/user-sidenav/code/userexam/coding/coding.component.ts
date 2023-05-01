@@ -6,6 +6,7 @@ import { MyserviceService } from 'src/app/model/myservice';
 import { UserCode } from 'src/app/model/model/UserCode';
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-coding',
   templateUrl: './coding.component.html',
@@ -34,6 +35,18 @@ export class CodingComponent {
 
   }
   runCode(code:string) {
+    console.log("code")
+    console.log(code)
+    if(!this.selectedLanguage){
+      sweetAlert("Fill All Fields", "Must be select the any programming language", "error");
+      return;
+    }
+
+
+    if (this.code=='') {
+      sweetAlert("Fill All Fields", "Must be write programming code", "error");
+      return;
+    }
     const javaUrl='http://localhost:8089/api/savecode'
 
     this.userCode={

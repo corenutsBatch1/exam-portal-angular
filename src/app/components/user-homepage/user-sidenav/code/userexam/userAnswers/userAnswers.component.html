@@ -2,8 +2,10 @@
 <header>
   <app-header></app-header>
 </header>
-<div class="container">
-  <div><h1 style="text-align: center;">Your Score is : {{score}} </h1></div>
+
+<div class="container" id="resultpdf">
+
+  <div><h1 style="text-align: center;">Your Score is : {{score}} /{{totalmarks}} </h1></div>
 <mat-list *ngFor="let question of questions let i=index">
             <mat-list-item> <h1>{{i+1 }}.{{ question.content }}</h1></mat-list-item>
 
@@ -14,21 +16,21 @@
                     <label class="option">A : {{ question.optionA }}</label>
                 </div>
               </mat-list-item>
-  
+
               <mat-list-item>
                 <div style="white-space:nowrap">
                   <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="B" /> -->
                   <label class="option">B : {{ question.optionB }}</label>
                 </div>
               </mat-list-item>
-  
+
               <mat-list-item>
                 <div class="white-space:nowrap">
                   <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="C" /> -->
                   <label class="option">C : {{ question.optionC }}</label>
                 </div>
               </mat-list-item>
-  
+
               <mat-list-item>
                <div class="white-space:nowrap">
                 <!-- <input class="radiobutton" type="" [name]="'answer'+question.id" value="D" /> -->
@@ -37,10 +39,8 @@
               </mat-list-item>
               <mat-list-item>
                 <div class="white-space:nowrap" *ngFor="let answer of userAnswers">
-  
-  
-                  <label class="option" style="color: rgb(71, 9, 240);font-size: large;" *ngIf="question.id==answer.question?.id">YourAnswer : {{ answer.userAnswer}}</label>
-  
+                  <label class="option" style="color: red;font-size: large;" *ngIf="question.id==answer.question?.id && answer.userAnswer!=question.answer">YourAnswer : {{ answer.userAnswer}}</label>
+                  <label class="option" style="color:blue;font-size: large;" *ngIf="question.id==answer.question?.id && answer.userAnswer==question.answer ">YourAnswer : {{ answer.userAnswer}}</label>
                 </div>
                </mat-list-item>
               <mat-list-item>

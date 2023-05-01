@@ -1,8 +1,12 @@
-
-<header>
-  <!-- <app-header></app-header> -->
-  <h1 class="text-center" style="background-color:#5ab9c1;height: 3rem;padding-top: 0.5rem;">All The Best For Exam !!!</h1>
-</header>
+<mat-toolbar>
+  <img src="assets/test.png">
+  &nbsp;&nbsp;
+  <span>
+    Scoresharp</span>
+  <span class="example-spacer"></span>
+  <h2 id="timer">Remaining Time: {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button type="button" class="btn btn-success submitbutton"  (click)="clickEvent(this.code)" >Submit Exam</button>
+</mat-toolbar>
 <nav class="text-center">
 
   <!-- <h1>JAVA EXAM</h1> -->
@@ -14,7 +18,6 @@
 
       <!----Left Part-->
       <div class="col-md-9" style="padding: 0rem;padding-left:1rem;">
-
         <!---Start Left Top part for Swtich Subject---->
         <div class="row-md-3 lefttop text-center" >
           <table class="subject">
@@ -30,9 +33,10 @@
 
           </table>
           <div class="row">
-            <button type="button" class="btn btn-success float-right submitbutton"  (click)="clickEvent(this.code)" >Submit Exam</button>
+            
           </div>
         </div>
+        
          <!---End Left Top part for Swtich Subject---->
 
           <!---Start Left Buttom part for Question---->
@@ -40,7 +44,8 @@
 
           <mat-list >
             <div *ngIf="clickedSubject != 'Coding'">
-            <mat-list-item> <h1 ><span>{{this.questionnumber+1}} )</span> {{ currentQuestion?.content }}</h1></mat-list-item>
+              <h3><b> Question No {{this.questionnumber+1}}</b></h3>
+            <mat-list-item> <h1> {{ currentQuestion?.content }}</h1></mat-list-item>
 
               <mat-list-item>
                 <div style="white-space:nowrap">
@@ -102,7 +107,7 @@
       <div class="col-md-3 right" style="padding: 0;">
         <div class="col" style="padding: 0;">
           <!---Start Rigth top part for timer---->
-          <h2>Timer: {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</h2>
+          
 
           <!-- Start the timer when the component loads -->
           <div *ngIf="showTimer">
@@ -114,13 +119,15 @@
           <div class="answered">
 
             <h4>Total Questions= {{totalQuestions}}</h4>
-            <h4>Answered Questions = {{stateChange.length}}</h4>
+            <!-- <h4>Answered Questions = {{stateChange.length}}</h4> -->
           </div>
           <div class="row-md-9 rigthbottom">
             <div class="question-list__items">
               <ul>
                 <li *ngFor="let question of questions let i=index">
+
                   <a class="numberOfQuestion ml-1.2" (click)="nextquestions(i,question.optionA,question.id)" [ngStyle]="{'background-color' : stateChangeCheck(question.id) ? 'green' : 'Gray'}" >{{i+1 }} </a>
+
                 </li>
               </ul>
             </div>

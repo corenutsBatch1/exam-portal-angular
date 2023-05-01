@@ -139,8 +139,7 @@ addpaper(createPaper:CreatePaper)
 {
   createPaper.questionsListArray=this.questionsIdArray;
   createPaper.codingQuestionsListArray=this.codingQuestionsIdArray
-  console.log("-------------------------------------")
-  console.log(createPaper.questionsListArray)
+
   this.http.post<CreatePaper>(`http://localhost:8089/api/addpaper`,createPaper).subscribe(data=>{
     swal("Paper created successfully","", "success");
   this.goBack();
@@ -170,10 +169,14 @@ goBack() {
 
      }
 checkboxChanged(event: any, optionValue?: number, subjectName?:string) {
+
       if (event.checked) {
         // Checkbox is checked
+
         if (this.noOfQuestions && this.questionCount < this.noOfQuestions) {
+
          if(subjectName?.toLowerCase()===('coding')){
+
          this.codingQuestionsIdArray.push(optionValue as number);
           this.questionCount++;
           console.log(this.codingQuestionsIdArray)

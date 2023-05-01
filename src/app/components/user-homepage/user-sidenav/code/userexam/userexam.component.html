@@ -36,7 +36,7 @@
          <!---End Left Top part for Swtich Subject---->
 
           <!---Start Left Buttom part for Question---->
-        <div class="row-md-9 leftbottom ml-2" *ngIf="currentQuestion" class="question">
+        <div class="row-md-9 leftbottom ml-2" *ngIf="currentQuestion?.subject?.name?.toLowerCase()!='coding'" class="question">
 
           <mat-list >
             <div *ngIf="clickedSubject != 'Coding'">
@@ -77,13 +77,17 @@
               <app-coding></app-coding>
             </div>
 
-
             <!-- <div > -->
               <button  *ngIf="this.questionnumber>0" type="none" class="arrow ml-4 mt-3" (click)="previousquestion(this.questionnumber)"><mat-icon>arrow_back_ios</mat-icon></button>
             <!-- </div> -->
             <button type="none" *ngIf="this.questionnumber<(questions.length-1)" class="arrow ml-4 mt-3" (click)="nextquestion()"><mat-icon>arrow_forward_ios</mat-icon></button>
 
 
+          </mat-list>
+        </div>
+        <div class="row-md-9 leftbottom ml-2" *ngIf="currentQuestion?.subject?.name?.toLowerCase()=='coding'" class="question">
+          <mat-list >
+            <mat-list-item> <h1 ><span>{{this.questionnumber+1}}</span> {{ currentQuestion?.content }}</h1></mat-list-item>
           </mat-list>
         </div>
       </div>
@@ -123,8 +127,6 @@
       </div>
       <!---End Rigth part---->
 
-
-      
     </div>
   </div>
 </div>

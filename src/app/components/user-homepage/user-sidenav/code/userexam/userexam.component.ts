@@ -26,7 +26,7 @@ export class UserexamComponent {
   subjectId?: number;
   uid: any;
   eid: any;
-  questions: Question[] = [];
+  questions: any[] =[]
   subjects: Subject[] = [];
   selectedOptions: string[] = [];
   answer:useranswer=new useranswer() ;
@@ -78,7 +78,7 @@ export class UserexamComponent {
     this.route.params.subscribe((params) => {
       this.code = params['code'];
       // console.log('Exam code:', this.code);
-      this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>{this.questions=data,
+      this.http.get<any>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>{this.questions=data,
         this.totalQuestions=data.length;
     });
       // console.log("question"+this.questions+"end");
@@ -165,9 +165,9 @@ startTimer() {
                   console.log("gqbsn"+this.questions.length);
   }
 
-  loadQuestions(subjectid?: number): Observable<Question[]> {
+  loadQuestions(subjectid?: number) {
     console.log("lq"+this.questions.length);
-    return this.http.get<Question[]>(
+    return this.http.get(
       `http://localhost:8089/api/getquestionsBySubjectId/${subjectid}/${this.code}`
 
     );
@@ -273,6 +273,7 @@ clickEvent2(){
         this.questionnumber= id;
         // console.log(this.questions);
         this.currentQuestion= this.questions[id];
+        
         id++;
         // console.log(this.currentQuestion+"cq");
         console.log("nqs"+this.questions.length);

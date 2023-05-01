@@ -34,7 +34,7 @@ export class UserexamComponent {
   selected:boolean=false;
   stateChange:number[]=[];
   questionnumber:number=0;
-
+  clickedSubject:String="";
 
   examminutes?:number;
   remainingTime: number=0
@@ -293,10 +293,10 @@ stateChangeCheck(qid:number)
   return this.stateChange.includes(qid);
 }
 
-setActive(index: number) {
+setActive(index: number, subjectName:String) {
+  console.log(index);
+  console.log(subjectName);
+  this.clickedSubject = subjectName;
   this.activeIndex = index;
 }
-
-
-
 }

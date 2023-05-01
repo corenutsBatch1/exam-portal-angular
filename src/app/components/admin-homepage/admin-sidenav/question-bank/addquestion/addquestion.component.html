@@ -1,11 +1,10 @@
-<div class="bootstrap-wrapper">
+<div class="bootstrap-wrapper mb-6">
   <div class="container">
     <div class="row">
       <form>
         <mat-card class="card">
-          <div>
-            <h2 class="text-center title">Add Question<button class="btn btn-secondary btn-sm back float-left"
-                (click)="goBack()"><mat-icon>arrow_back</mat-icon></button></h2>
+        <div>
+        <h2 class="text-center title">Add Question<button class="btn btn-secondary btn-sm back float-left" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button></h2>
 
           </div>
 
@@ -112,21 +111,19 @@
 
 
 
-          <mat-form-field appearance="fill">
-            <mat-label>Choose an question_type</mat-label>
-            <mat-select [(ngModel)]="Questions.qtype" name="q_type">
-              <mat-option value="simple">simple</mat-option>
-              <mat-option value="medium">medium</mat-option>
-              <mat-option value="hard">hard</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div class="text-center">
-            <button (click)="addQuestion(this.Questions,subject_id)" class="btn btn-primary btn-sm addButton">Add
-              question</button>
-            <button type="reset" class="btn btn-danger ml-3 btn-sm clear">Clear</button>
-            <button (click)="goBack()" class="btn btn-secondary btn-sm Back ml-3"
-              style="background-color: #1f2937;"><mat-icon>arrow_back</mat-icon></button>
-          </div>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose an question_type</mat-label>
+          <mat-select  [(ngModel)]="Questions.qtype" name="q_type">
+            <mat-option value="simple">simple</mat-option>
+            <mat-option value="medium" >medium</mat-option>
+            <mat-option value="hard">hard</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="text-center">
+          <button (click)="addQuestion(this.Questions,subject_id)" class="btn btn-primary btn-sm addButton" >Add question</button>
+          <button type="reset" class="btn btn-danger ml-3 btn-sm clear">Clear</button>
+          <button (click)="goBack()" class="btn btn-secondary btn-sm Back ml-3" style="background-color: #1f2937;"><mat-icon>arrow_back</mat-icon></button>
+        </div>
 
         </mat-card>
 

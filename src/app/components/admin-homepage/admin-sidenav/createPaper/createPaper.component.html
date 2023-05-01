@@ -12,8 +12,8 @@
       <th>Name</th>
       <th>Total Marks</th>
       <th>Number Of Questions</th>
-      <th>View</th>
-      <th>Delete</th>
+      <th class="view">View</th>
+      <!-- <th>Delete</th> -->
     </tr>
   </thead>
   <tbody>
@@ -22,10 +22,14 @@
       <td>{{paper.name}}</td>
       <td>{{paper.totalMarks}}</td>
       <td>{{paper.numberOfQuestions}}</td>
-      <td><button class="btn btn-info btn-sm " (click)="viewPaper(false,paper.id)"><mat-icon class="material-symbols-outlined">
+      <td>
+       <mat-icon class="viewicon" (click)="viewPaper(false,paper.id)">
         visibility
-      </mat-icon></button></td>
-      <td> <mat-icon type="button"  class='material-icons-outlined' (click)="delete(paper.id)" [ngStyle]="{'color':'red'}" >delete</mat-icon></td>
+      </mat-icon>
+      <mat-icon class="ml-4 delete" (click)="deletePaper(paper.id)">
+        delete
+      </mat-icon>
+    </td>
 
     </tr>
     </tbody>

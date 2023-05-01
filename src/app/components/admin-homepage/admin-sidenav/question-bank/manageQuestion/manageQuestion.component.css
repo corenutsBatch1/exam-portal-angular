@@ -53,6 +53,14 @@ thead
 .noquestionfound{
 
   font-size: 25px;
-  
 
+}
+
+.arrow{
+  border: none;
+  background-color: rgb(203, 220, 236);
+}
+
+.arrow:hover{
+  transform: scale(1.2);
 }

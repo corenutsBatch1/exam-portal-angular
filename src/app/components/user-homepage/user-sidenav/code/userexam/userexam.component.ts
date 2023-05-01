@@ -20,6 +20,7 @@ import swal from 'sweetalert';
 })
 
 export class UserexamComponent {
+  public isRadioButtonSelected = false;
   activeIndex: number = -1;
   code?: any;
   currentQuestion?: Question;
@@ -35,6 +36,7 @@ export class UserexamComponent {
   stateChange:number[]=[];
   questionnumber:number=0;
   clickedSubject:String="";
+  selectedOption: string = '';
 
   examminutes?:number;
   remainingTime: number=0
@@ -60,18 +62,19 @@ export class UserexamComponent {
     this.uid = this.service.sendid();
     this.eid = this.service.sendeid();
 
-    console.log(this.uid, this.eid);
+    console.log("ngonit"+this.uid, this.eid);
     this.startTimer()
     this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
-  console.log(this.examtime)
+       console.log("inside getquestions");
+      // console.log(this.examtime)
 
     const examtime = this.examtime.examDuration;
 
   if(examtime){
 
       this.remainingTime=60*examtime;
-      console.log("3"+this.examminutes);
-      console.log("4"+this.remainingTime)
+      // console.log("3"+this.examminutes);
+      // console.log("4"+this.remainingTime)
      }
         });
 
@@ -81,7 +84,7 @@ export class UserexamComponent {
       this.http.get<any>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>{this.questions=data,
         this.totalQuestions=data.length;
     });
-    
+
       // console.log("question"+this.questions+"end");
       this.loadSubjects().subscribe((subjects: Subject[]) => {
         this.subjects = subjects;
@@ -108,7 +111,7 @@ startTimer() {
     // Decrement the time remaining
     if(this.remainingTime){
     this.remainingTime--;
-    console.log(this.remainingTime);
+    // console.log(this.remainingTime);
     // Calculate the minutes and seconds
     this.minutes = Math.floor(this.remainingTime / 60);
     this.seconds = this.remainingTime % 60;
@@ -125,7 +128,7 @@ startTimer() {
   // Hide the timer start button
   this.showTimer = false;
 
-  console.log("start timer"+this.questions.length);
+  // console.log("start timer"+this.questions.length);
 }
 
   getUniqueSubjectNames(subjects: Subject[]): String[] {
@@ -133,7 +136,7 @@ startTimer() {
     const uniquesubjects = subjects
       .map((subjects) => subjects.name)
       .filter((name) => name !== undefined) as String[];
-      console.log("gusn"+this.questions.length);
+      // console.log("gusn"+this.questions.length);
     return [...new Set(uniquesubjects)];
   }
 
@@ -187,14 +190,14 @@ startTimer() {
   }
 
 
+
   sendoption(qid:number,option1:string)
   {
-    if(!this.stateChange.includes(qid)){
-      this.stateChange.push(qid);
-    }
+
+    this.stateChange.push(qid);
     this.selectedOptions[qid] = option1;
 
-    console.log(option1);
+    console.log("option"+option1);
     this.answer = {
       user: {
         id: this.uid,
@@ -208,12 +211,33 @@ startTimer() {
       userAnswer: option1,
     };
 
-       this.http.post(`http://localhost:8089/api/saveanswer`,this.answer).subscribe(data=>console.log("188"+data));
-       console.log("sop"+this.questions.length);
+       this.http.post(`http://localhost:8089/api/saveanswer`,this.answer).subscribe(data=>{
+       console.log("188");
+       this.selectedOption=option1;
+      });
   }
 
 
+
+        //deselect opation
+  deselect(deselectqid:number){
+    var index = this.stateChange.indexOf(deselectqid);
+    if (index !== -1) {
+      this.stateChange.splice(index, 1);
+    }
+    this.selectedOption = '';
+    console.log("delete"+deselectqid+" "+this.uid);
+  this.http.delete(`http://localhost:8089/api/deleteAnswer/${deselectqid}/${this.uid}`).subscribe(
+  response => {
+
+  },
+);
+
+}
+
+
 isOptionSelected(questionId: number, option: string): boolean {
+       this.selectedOption=option;
 
     return this.selectedOptions[questionId] ===option;
   }
@@ -265,7 +289,7 @@ clickEvent2(){
         this.questionnumber++;
         this.currentQuestion= this.questions[this.questionnumber];
         // console.log(this.currentQuestion+"cq")
-        console.log("nq"+this.questions.length);
+        // console.log("nq"+this.questions.length);
       }
 
       nextquestions(id:any){
@@ -274,10 +298,10 @@ clickEvent2(){
         this.questionnumber= id;
         // console.log(this.questions);
         this.currentQuestion= this.questions[id];
-        
+
         id++;
         // console.log(this.currentQuestion+"cq");
-        console.log("nqs"+this.questions.length);
+        // console.log("nqs"+this.questions.length);
       }
 
       previousquestion(id:any)

@@ -49,5 +49,26 @@ th{
   width:70%;
 }
 
+.back{
+  border: none;
+  background-color: white;
+}
+
+.back:hover{
+  transform: scale(1.2);
+}
+
+.backdown{
+  margin-top: 2rem;
+  padding-top: 2rem;
+  /* background-color: blue; */
+}
+
+.maticondown{
+  padding-top: 0.2rem;
+  margin-top: 0.5rem;
+  /* background-color: aqua; */
+}
+
 
 

@@ -7,17 +7,15 @@
   <!-- Show table here -->
   <div class="row">
     <div class="col-md-10 mt-6">
-
       <mat-form-field class="ml-2">
         <mat-label>Search</mat-label>
         <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
       </mat-form-field>
-      <div class="col-md-4 text-left">
-        <button mat-icon-button color="primary" (click)="openPDF()" aria-label="Download PDF">
-          <mat-icon class="download-icon">cloud_download</mat-icon>
-        </button>
+      <div class="col-md-4 text-right pdf">
+        <button class="btn btn-sm btn-success btn-block" (click)="openPDF()">Download PDF</button>
     </div>
 
+    <div class="row table">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="my-table">
 
         <!-- Serial Number Column -->
@@ -60,6 +58,9 @@
           </tr>
         </ng-container>
       </table>
+    </div>
+
+
     </div>
   </div>
 

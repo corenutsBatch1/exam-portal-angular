@@ -14,7 +14,8 @@
       <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>
     </mat-select>
   </mat-form-field>
-  
+
+  <button class="float-left mr-4 arrow"  (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
 
 
   <!-- <div class="d-flex justify-content-center" *ngIf="allFieldsFilled">

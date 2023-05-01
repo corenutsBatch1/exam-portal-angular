@@ -42,7 +42,8 @@ export class UserexamComponent {
   remainingTime: number=0
   timerId: any;
   TotalQuestion:Question[]=[];
-
+  showbuttons?:boolean=false;
+  codingquestionid?:number;
   examtime?:ScheduleExam=new ScheduleExam();
 
 
@@ -292,8 +293,13 @@ clickEvent2(){
         // console.log("nq"+this.questions.length);
       }
 
-      nextquestions(id:any){
-
+      nextquestions(id:any,option?:any,qid?:any){
+        if(option==undefined)
+        {
+          this.codingquestionid=qid
+        }
+        console.log(option)
+            this.showbuttons=true;
         // console.log(this.questionnumber+"num");
         this.questionnumber= id;
         // console.log(this.questions);

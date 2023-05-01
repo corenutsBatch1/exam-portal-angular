@@ -1,4 +1,5 @@
 
+import { LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -26,10 +27,14 @@ export class UserAnswersComponent implements OnInit {
   obtainedMarks?:Marks;
   exam?:ScheduleExam;
 
-  constructor(private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService
+  constructor(private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService, private locationStrategy: LocationStrategy
     ) { }
 
   ngOnInit() {
+    this.locationStrategy.onPopState(() => {
+      history.forward();
+    });
+
     this.uid=this.service.sendid();
     this.eid=this.service.sendeid();
     console.log("enter..."+this.uid,this.eid)
@@ -84,6 +89,7 @@ export class UserAnswersComponent implements OnInit {
 
     }
     this.saveScore()
+
   }
 
 

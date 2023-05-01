@@ -3,6 +3,9 @@
 <br>
 <br>
 
+<!-- <div *ngFor="let subject of subjectsArray"> -->
+  <div >
+  <h1>Questions</h1>
   <table class="table table-striped">
 
     <thead>
@@ -18,8 +21,9 @@
         <th>Level</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let question of questionsArray let i=index">
+    <tbody *ngFor="let question of questionsArray let i=index">
+      <!-- <tr *ngIf="question.subject?.name?.toLowerCase()!='coding'"> -->
+        <tr  *ngIf="question.subject?.name?.toLowerCase()!='coding'" >
        <td>{{i+1}}</td>
         <td>{{question.content}}</td>
         <td>{{question.optionA}}</td>
@@ -31,3 +35,22 @@
   </tr>
   </tbody>
    </table>
+
+    <h1>Coding Questions</h1>
+    <table class="table table-striped" >
+    <thead>
+      <th>S.No</th>
+      <th>Content</th>
+   </thead>
+   <tbody *ngFor="let question of questionsArray let i=index">
+
+      <tr *ngIf="question.subject?.name?.toLowerCase()=='coding'">
+      <td>{{i+1}}</td>
+      <td>{{question.content}}</td>
+    </tr>
+   </tbody>
+  </table>
+  </div>
+
+
+

@@ -1,7 +1,8 @@
 
-<ng-container *ngIf="!showPieChart">
+<ng-container *ngIf="(!showPieChart && !userexamresult)">
 
-  <mat-slide-toggle class="mb-3" [(ngModel)]="showPieChart"><h3 class="chartspan">&nbsp;Charts</h3></mat-slide-toggle>
+  <mat-slide-toggle class="mb-3" [(ngModel)]="showPieChart"><h3 class="chartspan">&nbsp;Charts</h3></mat-slide-toggle><br>
+  <mat-slide-toggle class="mb-3" [(ngModel)]="userexamresult"><h3 class="userexam">&nbsp;userexamresult</h3></mat-slide-toggle>
 
   <!-- Show table here -->
   <div class="row">
@@ -89,4 +90,45 @@
       </div>
 
 </ng-container>
+<ng-container *ngIf="userexamresult" >
+  <mat-slide-toggle class="mb-3" [(ngModel)]="userexamresult"><h3 class="userexam">&nbsp;userexamresult</h3></mat-slide-toggle>
+  <button class="btn btn-success btn-block" (click)="openPDF2()">Download PDF</button>
+  <div class="userexampage">
+    <div class="col-lg-4 canvasheading">
+     <h1 class="text-center ml-6" >Exam Report for a user</h1>
+   </div>
 
+   <label for="" class="canvassearch">Enter the exam code &nbsp;</label>
+   <input type="text" [(ngModel)]="examcode1"/> &nbsp;
+
+   <label for="" class="canvassearch">Enter the user name &nbsp;</label>
+   <input type="text" [(ngModel)]="username2"/> &nbsp;
+   <button class="btn-sm btn-primary" type="submit" (click)="examresult(username2,examcode1)">
+     Submit
+   </button>
+   <div class="bootstrap-wrapper" id="result">
+    <div class="container">
+      <div class="row">
+        <mat-card class="card col-md-12">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-center">
+              <div class="left">
+                <mat-icon class="mat-24" style="margin-right: 10px;">person</mat-icon>
+              </div>
+              <div class="right float-right">
+                <h1><b>User Exam Result</b></h1>
+              </div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>NAME:</strong> {{this.username3}}</li>
+              <li class="list-group-item"><strong>EXAM NAME:</strong> {{this.examname}}</li>
+              <li class="list-group-item"><strong>TOTAL MARKS:</strong> {{ this.totalmarks}}</li>
+              <li class="list-group-item"><strong>MARKS:</strong> {{ this.gotmarks}}</li>
+            </ul>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+   </div>
+</ng-container>

@@ -43,7 +43,7 @@ export class UserexamComponent {
   examtime?:ScheduleExam=new ScheduleExam();
   totalQuestions:number=0;
   remainingQuestion:number=0;
-
+  timeexpire?:boolean=false;
 
   constructor(
     private http: HttpClient,
@@ -93,7 +93,7 @@ startTimer() {
     this.seconds = this.remainingTime % 60;
 
     // Check if the timer has expired
-    if (this.remainingTime === 0) {
+    if (this.remainingTime === 0 && !this.timeexpire ) {
       this.clickEvent2();
       this.timerExpired = true;
       clearInterval(timer);
@@ -199,6 +199,7 @@ isOptionSelected(questionId: number, option: string): boolean {
 
 
 clickEvent(exam: any) {
+  this.timeexpire=true;
   var remainingQuestion=(this.totalQuestions-this.stateChange.length);
   console.log("remainingQuestion"+remainingQuestion);
   if(remainingQuestion>0){

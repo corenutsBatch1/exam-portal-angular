@@ -13,16 +13,18 @@ export class CodingApiService {
 
   constructor(private http : HttpClient) { }
 
-  runCode(code: string, language: string,input: string): Observable<any> {
+  runCode(code: string, language: string,input?: string): Observable<any> {
     const url = 'https://api.codex.jaagrav.in';
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'
     });
+
+
     const data = {
       'code': code,
       'language': language,
-     //  'input': input
+       'input': input
     };
     const headersInJava = new HttpHeaders({
       'Content-Type': 'application/octet-stream'

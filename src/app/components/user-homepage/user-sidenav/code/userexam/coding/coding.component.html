@@ -32,7 +32,7 @@
     </div>
 
     <div class="row mt-4 ml-2">
-      <textarea placeholder="your coding output">{{codeOutput?.output}}</textarea>
+      <textarea  *ngFor="let item of codeOutput" placeholder="your coding output">{{item?.output}}</textarea>
     </div>
   </div>
 </div>

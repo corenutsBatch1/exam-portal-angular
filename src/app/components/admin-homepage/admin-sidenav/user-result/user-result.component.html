@@ -11,11 +11,8 @@
         <mat-label>Search</mat-label>
         <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
       </mat-form-field>
-      <div class="col-md-4 text-right pdf">
-        <button class="btn btn-sm btn-success btn-block" (click)="openPDF()">Download PDF</button>
-    </div>
-
     <div class="row table">
+      <img id="pdf-icon"  (click)="openPDF()" src="assets/5467016.svg" alt="">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="my-table">
 
         <!-- Serial Number Column -->
@@ -95,12 +92,12 @@
 </ng-container>
 <ng-container *ngIf="userexamresult" >
   <mat-slide-toggle class="mb-3" [(ngModel)]="userexamresult"><h3 class="userexam">&nbsp;userexamresult</h3></mat-slide-toggle>
-  <button class="btn btn-success btn-block" (click)="openPDF2()">Download PDF</button>
+  
   <div class="userexampage">
     <div class="col-lg-4 canvasheading">
      <h1 class="text-center ml-6" >Exam Report for a user</h1>
    </div>
-
+   <img id="pdf-icon"  (click)="openPDF2()" src="assets/5467016.svg" alt="deleted">
    <label for="" class="canvassearch">Enter the exam code &nbsp;</label>
    <input type="text" [(ngModel)]="examcode1"/> &nbsp;
 

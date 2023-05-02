@@ -140,12 +140,16 @@ addpaper(createPaper:CreatePaper)
   createPaper.questionsListArray=this.questionsIdArray;
   createPaper.codingQuestionsListArray=this.codingQuestionsIdArray
 
-  this.http.post<CreatePaper>(`http://localhost:8089/api/addpaper`,createPaper).subscribe(data=>{
+  this.http.post<CreatePaper>(`http://localhost:8089/api/addpaper`,createPaper).subscribe(
+    data=>{
     swal("Paper created successfully","", "success");
   this.goBack();
+},
+  error=>{
+    swal("All field must be required","", "error");
+  }
 
-
-});
+  );
 }
 // addquestions(questionId?:number)
 //   {
@@ -208,5 +212,6 @@ checkboxChanged(event: any, optionValue?: number, subjectName?:string) {
 
 
     }
+  
 
 

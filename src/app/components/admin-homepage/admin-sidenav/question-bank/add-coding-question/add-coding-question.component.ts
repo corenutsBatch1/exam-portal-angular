@@ -8,7 +8,7 @@ import { Subject } from 'src/app/model/model/Subject';
 import { TestCases } from 'src/app/model/model/TestCases';
 
 interface InputField {
-  value: string;
+  // value: string;
   input: string;
   output: string;
 
@@ -22,18 +22,24 @@ interface InputField {
 export class AddCodingQuestionComponent {
 
   @Output("loadAddCodingQuestionPage") loadAddCodingQuestionPage = new EventEmitter();
-  subjectControl = new FormControl();
+
   // Questions :Question=new Question();
     subjects?:Subject[];
     uniqueSubjectNames: string[] = [];
   //  answers : string[] = []
   codingQuestion: CodingQuestion=new CodingQuestion();
-
   testCases: TestCases=new TestCases();
   testCasesArray:TestCases[]=[];
-
   questionForm: FormGroup;
-
+  subjectControl = new FormControl();
+  selectedsubject?: string;
+  subject_id?: number;
+  questionContent?: string;
+  inputs: InputField[] = [];
+  filteredTopics: Subject[] = [];
+  codingQuestionId?:number
+  getCodingQuestion: CodingQuestion[]=[]
+  testcases:TestCases[]=[];
   constructor(private http:HttpClient,private router:Router,private formBuilder: FormBuilder)
   {
     // this.subjects=[];
@@ -63,9 +69,8 @@ export class AddCodingQuestionComponent {
     return [...new Set(uniqueSubjectNames)];
   }
 
-   subject_id?:number;
-   selectedsubject?:string;
-   filteredTopics: Subject[] = [];
+
+
 
    onSubjectSelection() {
     //const value = event.value;
@@ -82,18 +87,21 @@ export class AddCodingQuestionComponent {
   }
 
 
-  inputs: InputField[] = [];
+
 
 
   addInput() {
-    this.inputs.push({ value: '', input: '', output: ''});
+    console.log('Adding input');
+    this.inputs.push({ input: '', output: ''});
+    console.log(this.inputs);
 
 
    // this.inputOutput.push({ input: '', output: '' });
   }
   removeInput(){
+    console.log('Removing input');
     this.inputs.pop();
-
+    console.log(this.inputs);
   }
 
 
@@ -104,22 +112,8 @@ export class AddCodingQuestionComponent {
     });
   }
 
-  // addOption(): void {
-  //   const options = this.questionForm.get('options') as FormArray;
-  //   options.push(this.createOption());
-  // }
 
 
-  // removeOption(index: number): void {
-  //   const options = this.questionForm.get('options') as FormArray;
-  //   options.removeAt(index);
-  // }
-
-  //inputOutput:InputOutputTestCases[]=[];
-  questionContent?:string;
-
-  codingQuestionId?:number
-  getCodingQuestion: CodingQuestion[]=[]
 
   onSubmit(id?:number): void {
 
@@ -136,8 +130,6 @@ export class AddCodingQuestionComponent {
       this.addTestCases()
     })
   }
-
-
   addTestCases()
   {
     this.getCodingQuestion.forEach((data)=>{
@@ -146,17 +138,20 @@ export class AddCodingQuestionComponent {
         this.codingQuestionId=data.id
       }
     })
-
+console.log(this.inputs)
     this.inputs.forEach((data)=>{
-
+      console.log(data)
       this.testCases.input=data.input;
       this.testCases.expectedOutput=data.output
-
-      this.testCasesArray.push(this.testCases)
+      console.log(this.testCases)
+      this.http.post(`http://localhost:8089/api/addtestcases/${this.codingQuestionId}`,this.testCases).subscribe((data)=>console.log(data))
+      // this.testCasesArray=this.testCasesArray.concat(this.testCases)
+      // console.log(this.testCasesArray);
+      // console.log("*************")
 
     })
 
-    this.http.post(`http://localhost:8089/api/addtestcases/${this.codingQuestionId}`,this.testCasesArray).subscribe((data)=>console.log(data))
+    // this.http.post(`http://localhost:8089/api/addtestcases/${this.codingQuestionId}`,this.testCasesArray).subscribe((data)=>console.log(data))
 
   }
 

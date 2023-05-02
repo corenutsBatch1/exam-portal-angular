@@ -16,22 +16,29 @@
         <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>
       </mat-select>
     </mat-form-field>
+    <button class="float-left mr-4 arrow"  (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
    </div>
 
 
   <div class="form-group">
-    <label for="question">Question:</label>
-    <textarea class="form-control" id="question" formControlName="question" [(ngModel)]="questionContent"></textarea>
+    <!-- <textarea class="form-control" id="question" formControlName="question" [(ngModel)]="questionContent"></textarea> -->
+    <div id="question-editor">
+      <label for="question">Question:</label>
+    <ngx-codemirror formControlName="question" [(ngModel)]="questionContent" name="content" [options]="{
+      theme: 'paraiso-light',
+      mode: 'markdown'
+      }">
+    </ngx-codemirror>
+    </div>
   </div>
   <div *ngFor="let input of inputs; let i = index">
     <label for="input-{{i}}">Input {{i + 1}}:</label>
-
     <input type="text" id="input-{{i}}" name="input{{i}}" [(ngModel)]="input.input" [ngModelOptions]="{standalone: true}">
-    <label for="input-{{i}}">expected output {{i + 1}}:</label>
-    <input type="text" id="input-{{i}}" name="input{{i}}" [(ngModel)]="input.output" [ngModelOptions]="{standalone: true}">
+    &nbsp;
+    <label for="output-{{i}}">Expected output {{i + 1}}:</label>
+    <input type="text" id="output-{{i}}" name="output{{i}}" [(ngModel)]="input.output" [ngModelOptions]="{standalone: true}">
   </div>
-  <button (click)="addInput()">Add Input</button>
-  <button (click)="removeInput()">Remove Input</button>
-  <button type="submit" (click)="onSubmit(subject_id)">Save Question</button>
-
+  <button class="btn btn-primary btn-sm" (click)="addInput()">Add Input</button>&nbsp;
+  <button class="btn btn-warning btn-sm" (click)="removeInput()">Remove Input</button>&nbsp;
+  <button class="btn btn-success btn-sm submit" type="submit" (click)="onSubmit(subject_id)">Save Question</button>
 </form>

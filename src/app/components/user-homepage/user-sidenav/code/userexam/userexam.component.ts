@@ -152,7 +152,9 @@ startTimer() {
 
   sendoption(qid:number,option1:string)
   {
-    this.stateChange.push(qid);
+    if(!this.stateChange.includes(qid)){
+      this.stateChange.push(qid);
+    }
     this.selectedOptions[qid] = option1;
     console.log("option"+option1);
     this.answer = {
@@ -173,19 +175,7 @@ startTimer() {
       });
   }
 
-        //deselect opation
-  deselect(deselectqid:number){
-    var index = this.stateChange.indexOf(deselectqid);
-    if (index !== -1) {
-      this.stateChange.splice(index, 1);
-    }
-    this.selectedOption = '';
-    console.log("delete"+deselectqid+" "+this.uid);
-  this.http.delete(`http://localhost:8089/api/deleteAnswer/${deselectqid}/${this.uid}`).subscribe(
-  response => {
-  },
-);
-}
+
 
 
 isOptionSelected(questionId: number, option: string): boolean {
@@ -239,6 +229,12 @@ clickEvent2(){
       nextquestion(){
         this.questionnumber++;
         this.currentQuestion= this.questions[this.questionnumber];
+
+        if(this.stateChange.includes(this.currentQuestion?.id)){
+          this.isRadioButtonSelected = true;
+        }else{
+          this.isRadioButtonSelected =false;
+        }
       }
 
       nextquestions(id:any,option?:any,qid?:any){
@@ -251,6 +247,11 @@ clickEvent2(){
         this.questionnumber= id;
         this.currentQuestion= this.questions[id];
         id++;
+        if(this.stateChange.includes(this.currentQuestion?.id)){
+          this.isRadioButtonSelected = true;
+        }else{
+          this.isRadioButtonSelected =false;
+        }
       }
 
       previousquestion(id:any)
@@ -258,6 +259,11 @@ clickEvent2(){
         id--;
         this.currentQuestion= this.questions[id];
         this.questionnumber--;
+        if(this.stateChange.includes(this.currentQuestion?.id)){
+          this.isRadioButtonSelected = true;
+        }else{
+          this.isRadioButtonSelected =false;
+        }
       }
 
 stateChangeCheck(qid:number)

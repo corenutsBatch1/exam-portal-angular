@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class MyserviceService {
   uid?:any;
   eid?:any;
+  codingmark=0;
 constructor() { }
 
 userid(id:any)
@@ -25,5 +26,12 @@ examid(eid:any)
 sendeid()
 {
   return this.eid;
+}
+codingmarks(marks:any){
+  this.codingmark=this.codingmark+marks;
+  console.log(this.codingmark +"in service")
+}
+getcodingmarks(){
+  return this.codingmark;
 }
 }

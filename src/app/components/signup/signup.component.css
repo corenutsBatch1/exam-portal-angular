@@ -1,17 +1,12 @@
 
-.card{
-  /* margin-top: 2rem; */
-  height: 40%;
-  /* background-color: rgb(231, 217, 217); */
- }
 
  .bootstrap-wrapper{
-  height: 120%;
+  height: 140%;
   /* background-color: aqua; */
  }
 
  .container{
-  height: 80%;
+  height: 90%;
   /* background-color: blueviolet; */
  }
 
@@ -27,12 +22,15 @@ height: 20rem;
   margin-top: 2rem;
   padding-left: 2rem;
   width: 40rem;
+  height: 120%;
+  /* background-color: aqua; */
  }
 
  .bootstrap-wrapper,.card{
   background-color: rgb(217, 217, 247);
  }
  body{
+  height: 38rem;
   background-color: rgb(217, 217, 247);
  }
  button{
@@ -50,4 +48,8 @@ height: 20rem;
  {
    margin-top: -2.8rem;
    margin-right: 1.5rem;
+ }
+
+ header{
+  height: 3rem;
  }

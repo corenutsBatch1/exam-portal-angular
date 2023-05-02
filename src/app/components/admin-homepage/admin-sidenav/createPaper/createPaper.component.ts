@@ -49,6 +49,7 @@ export class CreatePaperComponent implements OnInit {
     this.paperid=id;
     console.log(id)
     console.log(this.paperid)
+    this.delete(this.paperid)
     }
 
 }

@@ -6,9 +6,6 @@
   <br>
   <br>
 
-
-
-
   <table class="table table-striped">
 
     <thead>
@@ -25,7 +22,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let exam of exams let i=index">
-        <td>{{exam.id}}</td>
+        <td>{{i+1}}</td>
         <td>{{exam.name}}</td>
         <td>{{exam.code}}</td>
         <td>{{exam.startTime}}</td>

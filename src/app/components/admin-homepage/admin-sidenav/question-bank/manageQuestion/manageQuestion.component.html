@@ -1,5 +1,5 @@
 <div class="container">
-  <button class="btn btn-secondary btn-sm float-left" style="background-color: #1f2937;" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+  <!-- <button class="btn btn-secondary btn-sm float-left" style="background-color: #1f2937;" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button> -->
   &nbsp;&nbsp;&nbsp;&nbsp;
   <mat-form-field appearance="fill">
     <mat-label>Select a subject</mat-label>
@@ -67,7 +67,7 @@
    </table>
 
 
-  <table class="table table-striped" *ngIf="allFieldsFilled && selectedsubject === 'Coding'">
+  <table class="table table-striped" *ngIf="allFieldsFilled && selectedsubject!.toLowerCase() === 'coding'">
     <thead >
       <tr>
         <th>S.No</th>

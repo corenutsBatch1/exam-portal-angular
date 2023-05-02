@@ -269,5 +269,6 @@ setActive(index: number, subjectName:String) {
   console.log(subjectName)
   this.clickedSubject = subjectName;
   this.activeIndex = index;
+  this.nextquestions(this.activeIndex)
 }
 }

@@ -127,6 +127,7 @@ export class ManageQuestionComponent implements OnInit {
 
     .then((deleteConfirmed: any) => {
       if (deleteConfirmed) {
+
         this.deleteQuestion(id).subscribe((data)=>console.log(data))
           // .pipe(
           //   catchError((error: any) => {
@@ -143,6 +144,7 @@ export class ManageQuestionComponent implements OnInit {
           //   console.log('Question deleted:', response);
           //   location.reload();
           // });
+
       } else {
         console.log('Delete cancelled by user');
       }

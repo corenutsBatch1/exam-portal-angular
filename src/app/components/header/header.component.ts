@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginserviceService } from './../loginmodal/loginservice.service';
 import { Router } from '@angular/router';
 
@@ -7,13 +7,19 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+export class HeaderComponent implements OnInit {
+  isLoginPage: boolean = false;
 
-export class HeaderComponent {
+  constructor(public loginservice : LoginserviceService, public router: Router){}
 
-  constructor(public loginservice : LoginserviceService,public router: Router){}
+  ngOnInit() {
+    this.isLoginPage = this.router.url === '/login';
+  }
+
   logOut(){
     localStorage.removeItem('is_logged_in');
     localStorage.clear();
     this.loginservice.logout();
   }
 }
+

@@ -28,7 +28,7 @@
         <td>{{exam.startTime}}</td>
         <td>{{exam.endTime}}</td>
         <td>{{exam.createPaper?.id}}</td>
-         <td><mat-icon type="button"  class='material-icons-outlined' [ngStyle]="{'color':'red'}"  (click)="deleteexam(exam.id,exam.createPaper?.id)">delete</mat-icon>
+         <td><mat-icon type="button"  class='material-icons-outlined' [ngStyle]="{'color':'red'}"  (click)="delete(exam.id,exam.createPaper?.id)">delete</mat-icon>
          </td>
       </tr>
       </tbody>

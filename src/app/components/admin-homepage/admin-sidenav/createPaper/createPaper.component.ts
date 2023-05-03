@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CreatePaper } from 'src/app/model/model/CreatePaper';
-
+import swal from 'sweetalert';
 @Component({
   selector: 'app-createPaper',
   templateUrl: './createPaper.component.html',
@@ -39,9 +39,10 @@ export class CreatePaperComponent implements OnInit {
   }
   delete(id:any)
   {
-    this.http.delete(`http://localhost:8089/api/deletePaper/${id}`).subscribe(data=>{
-     this.ngOnInit();
-    console.log(data)})
+    return this.http.delete(`http://localhost:8089/api/deletePaper/${id}`);
+    // .subscribe(data=>{
+    //  this.ngOnInit();
+    // console.log(data)})
 
   }
 
@@ -49,7 +50,26 @@ export class CreatePaperComponent implements OnInit {
     this.paperid=id;
     console.log(id)
     console.log(this.paperid)
-    this.delete(this.paperid)
+    swal({
+      title: "Are you sure you want to Delete? ",
+      icon: "warning",
+      buttons: ['Cancel', 'Yes, Delete'],
+      dangerMode: true,
+    })
+    .then((deleteConfirmed: any) => {
+      if (deleteConfirmed) {
+        this.delete(this.paperid).subscribe(
+      reponse=>{
+        swal("Deleted successfully", '', "success");
+        console.log(reponse);
+        console.log(id);
+        this.ngOnInit();
+      }
+      );
+      } else {
+      }
+       });
+
     }
 
 }

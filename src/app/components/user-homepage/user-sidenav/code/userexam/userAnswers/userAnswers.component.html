@@ -5,7 +5,15 @@
 
 <div class="container" id="resultpdf">
 
-  <div><h1 style="text-align: center;">Your Score is : {{score}} /{{totalmarks}} </h1></div>
+
+
+
+  <div>
+    <button class="matbuuton">
+      <mat-icon (click)="generatePDF()" class="maticon mt-4">picture_as_pdfdownload</mat-icon>
+      <mat-icon (click)="generatePDF()"  class="maticon mt-4">download</mat-icon>
+     </button>
+    <h1 style="text-align: center;" class="score">Your Score is : {{score}} /{{totalmarks}} </h1></div>
 <mat-list *ngFor="let question of questions let i=index">
             <mat-list-item> <h1>{{i+1 }}.{{ question.content }}</h1></mat-list-item>
 

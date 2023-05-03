@@ -11,6 +11,11 @@ import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
 import * as jsPDF from 'jspdf';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+import { TDocumentDefinitions } from 'pdfmake/interfaces';
+
 
 @Component({
   selector: 'app-userAnswers',
@@ -18,6 +23,8 @@ import * as jsPDF from 'jspdf';
   styleUrls: ['./userAnswers.component.css']
 })
 export class UserAnswersComponent implements OnInit {
+
+
   code?: any;
   uid:any;
   eid:any;
@@ -94,6 +101,61 @@ export class UserAnswersComponent implements OnInit {
     this.saveScore()
 
   }
+
+
+  generatePDF() {
+    const docDefinition: TDocumentDefinitions = {
+      content: [
+        {
+
+          text: `Your Score is : ${this.score} / ${this.totalmarks}`,
+          style: 'header'
+        },
+        {
+          ol: this.questions.map((question, i) => {
+            const listItems = [
+              `${question.content}`
+            ];
+
+            if (question.subject?.name !== 'Coding') {
+              listItems.push(`A : ${question.optionA}`);
+              listItems.push(`B : ${question.optionB}`);
+              listItems.push(`C : ${question.optionC}`);
+              listItems.push(`D : ${question.optionD}`);
+
+              const answer = this.userAnswers.find(answer => answer.question?.id === question.id);
+
+              if (answer) {
+                  listItems.push(JSON.stringify(`YourAnswer : ${answer.userAnswer}`));
+              }
+
+              listItems.push(JSON.stringify(`CorrectAnswer : ${question.answer}`));
+              listItems.push('\n');
+
+            }else{
+              listItems.push('\n');
+            }
+
+            // Map each list item string to an ordered list item object with a `text` property
+            return listItems.map(item => ({ text: item }));
+          })
+        }
+
+      ],
+      styles: {
+        header: {
+          alignment: 'center',
+          fontSize: 20,
+          margin: [0, 0, 0, 10]
+        }
+      }
+    };
+
+    pdfMake.createPdf(docDefinition).download('exam-result.pdf');
+  }
+
+
+
 
 
 }

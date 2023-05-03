@@ -6,6 +6,7 @@ import { CodingQuestion } from 'src/app/model/model/CodingQuestion';
 import { CreatePaper } from 'src/app/model/model/CreatePaper';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import swal from 'sweetalert';
 
 @Component({
@@ -35,6 +36,7 @@ export class AddPaperComponent implements OnInit {
   show:boolean=false;
   questionCount = 0;
   noOfQuestions?:number;
+  name:string='';
 
   ngOnInit(): void {
 
@@ -212,6 +214,6 @@ checkboxChanged(event: any, optionValue?: number, subjectName?:string) {
 
 
     }
-  
+
 
 

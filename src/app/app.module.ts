@@ -80,7 +80,7 @@ import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/
     UserAnswersComponent,
     AddCodingQuestionComponent,
     CodingComponent,
-    UsersComponent,
+    UsersComponent
 
   ],
   imports: [

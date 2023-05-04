@@ -15,7 +15,7 @@
      </button>
     <h1 style="text-align: center;" class="score">Your Score is : {{score}} /{{totalmarks}} </h1></div>
 <mat-list *ngFor="let question of questions let i=index">
-            <mat-list-item> <h1>{{i+1 }}.{{ question.content }}</h1></mat-list-item>
+            <h1 [innerHTML]="question.content">{{i+1}}</h1>
 
             <div *ngIf="question.subject?.name != 'Coding'">
               <mat-list-item>

@@ -24,11 +24,12 @@
     <!-- <textarea class="form-control" id="question" formControlName="question" [(ngModel)]="questionContent"></textarea> -->
     <div id="question-editor">
       <label for="question">Question:</label>
-    <ngx-codemirror formControlName="question" [(ngModel)]="questionContent" name="content" [options]="{
+    <!-- <ngx-codemirror formControlName="question" [(ngModel)]="questionContent" name="content" [options]="{
       theme: 'paraiso-light',
       mode: 'markdown'
       }">
-    </ngx-codemirror>
+    </ngx-codemirror> -->
+    <ckeditor [editor]="Editor" [(ngModel)]="questionContent" data="<p>Add question</p>"></ckeditor>
     </div>
   </div>
   <div *ngFor="let input of inputs; let i = index">

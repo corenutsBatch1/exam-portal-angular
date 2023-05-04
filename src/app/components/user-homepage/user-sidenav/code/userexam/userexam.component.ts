@@ -44,8 +44,10 @@ export class UserexamComponent {
   totalQuestions:number=0;
   remainingQuestion:number=0;
   timeexpire?:boolean=false;
+
   checkboxoption?:string[]=[];
   checkboxState: { [key: number]: string[] } = {};
+
 
   constructor(
     private http: HttpClient,
@@ -78,6 +80,8 @@ export class UserexamComponent {
       });
     });
   }
+
+
 
 // Initialize the timer properties
 minutes = this.remainingTime;

@@ -7,13 +7,15 @@
   <!-- Show table here -->
   <div class="row">
     <div class="col-md-10 mt-6">
+   <!-- <div class="row table">-->
+      <img id="pdf-icon"  (click)="generatePDF()" src="assets/Button.svg" alt="">
       <mat-form-field class="ml-2">
         <mat-label>Search</mat-label>
         <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
       </mat-form-field>
 
     <!-- <div class="row table"> -->
-      <img id="pdf-icon" class="pdfImg" (click)="generatePDF()" src="assets/5467016.svg" alt="">
+      <img id="pdf-icon"  (click)="generatePDF()" src="assets/Button.svg" alt="">
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="my-table">
 

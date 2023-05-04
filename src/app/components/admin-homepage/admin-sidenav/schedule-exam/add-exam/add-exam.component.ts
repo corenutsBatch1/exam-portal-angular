@@ -48,6 +48,8 @@ export class AddExamComponent implements OnInit{
       this.goBack();
     },
     error=>{
+      //console.error('Error:', error.message);
+      //console.log('Error details:', JSON.stringify(error));
       swal("All field must be required","", "error");
     }
 

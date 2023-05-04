@@ -46,6 +46,7 @@ import { AddCodingQuestionComponent } from './components/admin-homepage/admin-si
 import { CodingComponent } from './components/user-homepage/user-sidenav/code/userexam/coding/coding.component';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/users.component';
 
 
@@ -79,7 +80,7 @@ import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/
     UserAnswersComponent,
     AddCodingQuestionComponent,
     CodingComponent,
-    UsersComponent
+    UsersComponent,
 
   ],
   imports: [
@@ -105,7 +106,7 @@ import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/
     MatCheckboxModule,
     MatSlideToggleModule,
     CodemirrorModule,
-
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

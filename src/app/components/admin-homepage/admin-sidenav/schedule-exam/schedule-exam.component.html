@@ -1,40 +1,54 @@
 
-
-
 <div *ngIf="addexam">
   <button class="btn btn-primary" (click)="loadAddExampage(false)">Schedule Exam</button>
   <br>
   <br>
 
-  <table class="table table-striped">
+  <mat-table class="table table-striped" [dataSource]="dataSource">
+    <ng-container matColumnDef="sNo">
+      <mat-header-cell id="head" *matHeaderCellDef>S.No</mat-header-cell>
+      <mat-cell *matCellDef="let exam; let i = index">{{i + 1}}</mat-cell>
+    </ng-container>
 
-    <thead>
-      <!-- [formControl]="subjectControl" -->
-      <tr>
-        <th>S.No</th>
-        <th>Name</th>
-        <th>Code</th>
-        <th>StartTime</th>
-        <th>EndTime</th>
-        <th>PaperId</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let exam of exams let i=index">
-        <td>{{i+1}}</td>
-        <td>{{exam.name}}</td>
-        <td>{{exam.code}}</td>
-        <td>{{exam.startTime}}</td>
-        <td>{{exam.endTime}}</td>
-        <td>{{exam.createPaper?.id}}</td>
+    <ng-container matColumnDef="name">
+      <mat-header-cell id="head" *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let exam">{{exam.name}}</mat-cell>
+    </ng-container>
 
-         <td><mat-icon type="button"  class='material-icons-outlined' [ngStyle]="{'color':'red'}"  (click)="deleteexam(exam.id)">delete</mat-icon>
+    <ng-container matColumnDef="code">
+      <mat-header-cell id="head" *matHeaderCellDef>Code</mat-header-cell>
+      <mat-cell *matCellDef="let exam">{{exam.code}}</mat-cell>
+    </ng-container>
 
-         </td>
-      </tr>
-      </tbody>
-    </table>
+    <ng-container matColumnDef="startTime">
+      <mat-header-cell id="head" *matHeaderCellDef>StartTime</mat-header-cell>
+      <mat-cell *matCellDef="let exam">{{exam.startTime}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="endTime">
+      <mat-header-cell id="head" *matHeaderCellDef>EndTime</mat-header-cell>
+      <mat-cell *matCellDef="let exam">{{exam.endTime}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="paperId">
+      <mat-header-cell id="head" *matHeaderCellDef>PaperId</mat-header-cell>
+      <mat-cell *matCellDef="let exam">{{exam.createPaper?.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell id="head" *matHeaderCellDef>Delete</mat-header-cell>
+      <mat-cell *matCellDef="let exam">
+        <button mat-icon-button color="warn" (click)="delete(exam.id, exam.createPaper?.id)">
+          <mat-icon aria-label="Delete" class="material-icons-outlined">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['sNo', 'name', 'code', 'startTime', 'endTime', 'paperId', 'delete']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['sNo', 'name', 'code', 'startTime', 'endTime', 'paperId', 'delete']"></mat-row>
+  </mat-table>
+  <mat-paginator class="paginator" #paginator  [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 40]" showFirstLastButtons></mat-paginator>
+
   </div>
   <div *ngIf="!addexam" >
   <app-add-exam (loadAddExampage)="loadAddExampage(true)"></app-add-exam>

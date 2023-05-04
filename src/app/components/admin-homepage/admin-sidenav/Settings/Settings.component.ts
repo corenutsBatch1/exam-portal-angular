@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'src/app/model/model/Subject';
 import swal from 'sweetalert';
-
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-Settings',
   templateUrl: './Settings.component.html',
@@ -15,6 +16,8 @@ export class SettingsComponent implements OnInit {
   dataSource:Subject[]=[];
   subject:Subject=new Subject();
   subjectId?:number;
+  datasource = new MatTableDataSource<Subject>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private route: Router,private http:HttpClient) {}
 
   ngOnInit() {
@@ -22,6 +25,8 @@ export class SettingsComponent implements OnInit {
     this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe(data=>{
       console.log(data);
       this.dataSource=data;
+      this.datasource.data=this.dataSource
+      this.datasource.paginator = this.paginator;
       console.log(this.dataSource);
   });
   // location.reload();

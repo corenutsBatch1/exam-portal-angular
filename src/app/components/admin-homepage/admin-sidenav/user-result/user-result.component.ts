@@ -8,9 +8,11 @@ Chart.register(...registerables);
 import 'chartjs-plugin-datalabels';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { MatPaginator } from '@angular/material/paginator';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { Title } from '@angular/platform-browser';
+
 
 
 
@@ -30,6 +32,7 @@ export interface PeriodicElement {
   templateUrl: './user-result.component.html',
   styleUrls: ['./user-result.component.css']
 })
+
 export class UserResultComponent {
   showPieChart: boolean = false;
   marks:Marks[]=[];
@@ -49,29 +52,32 @@ export class UserResultComponent {
   totalmarks?:number;
   gotmarks?:number;
   chart1: any;
-chart2: any;
-examchart1:any
-examchart2:any;
-nameFilterValue = '';
+  chart2: any;
+  examchart1:any
+  examchart2:any;
+  nameFilterValue = '';
   codeFilterValue = '';
   ueseexammarks?:number[]=[];
   examcode:string[]=[]
+
+  dataSource = new MatTableDataSource<Marks>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(private titleService: Title,private http:HttpClient) {
   }
 
 
   ngOnInit(): void {
-
-
     this.getMarks().subscribe((data)=>{this.marks=data
                                     this.dataSource.data=this.marks
+                                    this.dataSource.paginator = this.paginator;
                                 })
-
   }
 
   displayedColumns: string[] = ['serialNumber', 'examCode', 'name', 'totalMarks', 'obtainedMarks'];
-  dataSource = new MatTableDataSource<Marks>([]);
 
+
+//For Searching
   applyFilter(): void {
     const nameFilterValue = this.nameFilterValue.trim().toLowerCase();
     console.log(this.nameFilterValue)
@@ -89,6 +95,8 @@ nameFilterValue = '';
     this.dataSource.filter = filterValue;
     console.log(this.dataSource.filter)
   }
+
+
 
   generatePDF(): void {
     var i=1;
@@ -155,12 +163,9 @@ nameFilterValue = '';
     pdfMake.createPdf(docDefinition).open();
   }
 
-
-
   getMarks():Observable<Marks[]>{
     return this.http.get<Marks[]>(`http://localhost:8089/api/getmarks`)
   }
-
 
  exampiechart(code?:string){
   this.userchart=false;

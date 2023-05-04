@@ -11,8 +11,10 @@
         <mat-label>Search</mat-label>
         <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
       </mat-form-field>
+
     <div class="row table">
       <img id="pdf-icon" class="pdfImg" (click)="generatePDF()" src="assets/5467016.svg" alt="">
+
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="my-table">
 
         <!-- Serial Number Column -->
@@ -55,7 +57,8 @@
           </tr>
         </ng-container>
       </table>
-    </div>
+      <mat-paginator class="paginator" #paginator  [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 40]" showFirstLastButtons></mat-paginator>
+    <!-- </div> -->
 
 
     </div>

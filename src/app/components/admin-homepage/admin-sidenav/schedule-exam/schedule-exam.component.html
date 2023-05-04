@@ -69,7 +69,7 @@
     <ng-container matColumnDef="delete">
       <mat-header-cell id="head" *matHeaderCellDef>Delete</mat-header-cell>
       <mat-cell *matCellDef="let exam">
-        <button mat-icon-button color="warn" (click)="delete(exam.id, exam.createPaper?.id)">
+        <button mat-icon-button color="warn" (click)="delete(exam.id)">
           <mat-icon aria-label="Delete" class="material-icons-outlined">delete</mat-icon>
         </button>
       </mat-cell>

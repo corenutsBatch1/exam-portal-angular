@@ -44,6 +44,8 @@ export class UserexamComponent {
   totalQuestions:number=0;
   remainingQuestion:number=0;
   timeexpire?:boolean=false;
+  checkboxoption?:string[]=[];
+  checkboxState: { [key: number]: string[] } = {};
 
   constructor(
     private http: HttpClient,
@@ -174,8 +176,58 @@ startTimer() {
        this.selectedOption=option1;
       });
   }
+  sendoption2(qid:number,option2:string){
 
 
+    //this.checkboxoption=this.checkboxoption?.concat(option2);
+    const selectedOptions = this.checkboxState[qid] || [];
+    if (selectedOptions.includes(option2)) {
+      // Remove the option if it is already selected
+      this.checkboxState[qid] = selectedOptions.filter((o) => o !== option2);
+    } else {
+      // Add the option if it is not already selected
+      this.checkboxState[qid] = [...selectedOptions, option2];
+    }
+  }
+  submitoption(qid:any,optionarray?:any){
+    // optionarray.sort();
+    // //this.Questions.answer = this.answers.join('');
+    // this.answer = {
+    //   user: {
+    //     id: this.uid,
+    //   },
+    //   exam: {
+    //     id: this.eid,
+    //   },
+    //   question: {
+    //     id: qid,
+    //   },
+    //   userAnswer:optionarray.join(''),
+    // };
+    //    this.http.post(`http://localhost:8089/api/saveanswer`,this.answer).subscribe(data=>{
+    //    this.selectedOption=optionarray;
+    //   });
+     if(!this.stateChange.includes(qid)){
+      this.stateChange.push(qid);
+    }
+    const selectedOptions = this.checkboxState[qid] || [];
+    selectedOptions.sort();
+    this.answer = {
+      user: {
+        id: this.uid,
+      },
+      exam: {
+        id: this.eid,
+      },
+      question: {
+        id: qid,
+      },
+      userAnswer: selectedOptions.join(''),
+    };
+    this.http.post(`http://localhost:8089/api/saveanswer`, this.answer).subscribe((data) => {
+      //this.selectedOption = selectedOptions;
+    });
+  }
 
 
 isOptionSelected(questionId: number, option: string): boolean {
@@ -183,6 +235,10 @@ isOptionSelected(questionId: number, option: string): boolean {
     return this.selectedOptions[questionId] ===option;
   }
 
+  isOptionSelected2(qid: number, option: string) {
+    const selectedOptions = this.checkboxState[qid] || [];
+    return selectedOptions.includes(option);
+  }
 
 
 

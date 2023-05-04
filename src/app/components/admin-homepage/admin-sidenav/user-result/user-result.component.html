@@ -12,7 +12,7 @@
         <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
       </mat-form-field>
 
-    <div class="row table">
+    <!-- <div class="row table"> -->
       <img id="pdf-icon" class="pdfImg" (click)="generatePDF()" src="assets/5467016.svg" alt="">
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="my-table">

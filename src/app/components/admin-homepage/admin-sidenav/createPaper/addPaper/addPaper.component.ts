@@ -77,7 +77,7 @@ export class AddPaperComponent implements OnInit {
       });
   }
   allFieldsFilled = false;
-
+  
   checkAllFieldsFilled() {
     if (
       this.createPaper.name &&

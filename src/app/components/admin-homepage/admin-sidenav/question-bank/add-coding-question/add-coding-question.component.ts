@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { CodingQuestion } from 'src/app/model/model/CodingQuestion';
 import { Subject } from 'src/app/model/model/Subject';
@@ -40,6 +41,7 @@ export class AddCodingQuestionComponent {
   codingQuestionId?:number
   getCodingQuestion: CodingQuestion[]=[]
   testcases:TestCases[]=[];
+  public Editor = ClassicEditor;
   constructor(private http:HttpClient,private router:Router,private formBuilder: FormBuilder)
   {
     // this.subjects=[];

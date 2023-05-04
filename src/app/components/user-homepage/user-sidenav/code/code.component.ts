@@ -34,8 +34,12 @@ export class CodeComponent implements OnInit {
         console.log(this.exam.code)
         const examObject = uniqueExamNames.find(item => item.code === this.exam.code);
         console.log(examObject+"6666");
+        if(examObject==null){
+          swal("Enter Correct Code", "", "error");
+        }
 
-    this.http.get(`http://localhost:8089/api/getquestions/${examObject.id}`).subscribe(data=>{this.examtime=data
+    this.http.get(`http://localhost:8089/api/getquestions/${examObject.id}`).subscribe
+    ( data=>{this.examtime=data
       console.log("7777777777777");
 
       if (this.examtime.startTime && this.examtime.endTime) {
@@ -65,16 +69,17 @@ const isSameDate = currentDate === examStartDate;
 const isOver = !isBeforeEnd || (isOnSameDate && !isAfterStart);
 
 this.isOver = isOver;
-
-if (this.isOver) {
-  console.log('The exam is over.');
-  swal("Enter Correct Code", "", "error");
-} else if (this.isBetween) {
-  console.log('The exam is currently ongoing.');
-  swal("Enter Correct Code", "", "error");
-} else if (isSameDate && now < startTime) {
+if (isSameDate && now < startTime) {
   console.log('The exam has not started yet.');
-  swal("Enter Correct Code", "", "error");
+   swal("The exam has not started yet.", "", "error");
+}
+else if (this.isBetween) {
+  console.log('The exam is currently ongoing.');
+  // swal("Enter Correct Code", "", "error");
+}
+ else if (this.isOver) {
+  console.log('The exam is over.');
+  swal("The exam is over", "", "error");
 }
 }
     if (examObject !== undefined && this.isBetween) {
@@ -84,6 +89,7 @@ if (this.isOver) {
      swal("Exam Started", "", "success");
       this.route.navigate(['userexam', examObject.code]);
     }
+
 
   })
 

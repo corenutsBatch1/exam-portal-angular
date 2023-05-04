@@ -80,6 +80,7 @@ export class AddquestionComponent implements OnInit{
     console.log(id)
     this.answers.sort();
     this.Questions.answer = this.answers.join('');
+    
     console.log(this.Questions.answer)
     this.http.post(`http://localhost:8089/api/addquestion/${id}`, Questions).subscribe(
 

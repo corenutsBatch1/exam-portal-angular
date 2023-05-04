@@ -30,6 +30,7 @@ import { CodeComponent } from './components/user-homepage/user-sidenav/code/code
 import { UserexamComponent } from './components/user-homepage/user-sidenav/code/userexam/userexam.component';
 import { UserAnswersComponent } from './components/user-homepage/user-sidenav/code/userexam/userAnswers/userAnswers.component';
 import { AddCodingQuestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/add-coding-question/add-coding-question.component';
+import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/users.component';
 
 
 @NgModule({
@@ -45,6 +46,9 @@ import { AddCodingQuestionComponent } from './components/admin-homepage/admin-si
         children: [
           // {path:'home',component:HomeComponent},
           { path: 'result', component: UserResultComponent },
+          {
+            path: 'allusers' ,component: UsersComponent
+          },
           {path:'createpaper',component:CreatePaperComponent,
           children: [
             { path: 'addpaper', component: AddPaperComponent },
@@ -68,6 +72,7 @@ import { AddCodingQuestionComponent } from './components/admin-homepage/admin-si
           children: [
             { path: 'addexam', component: AddExamComponent}
           ]},
+
         ],
       },
 
@@ -75,11 +80,9 @@ import { AddCodingQuestionComponent } from './components/admin-homepage/admin-si
       {path:'userpage/:id',component:UserHomepageComponent,
       canActivate: [AuthGuard],
       children: [
+        {path:'code',component:CodeComponent},
         { path: 'profile', component: ProfileComponent },
-        {path:'code',component:CodeComponent,
-
-      },
-
+        { path: '**', redirectTo: 'code' },
       ],
     },
       {path:'usersidenav',component:UserSidenavComponent},

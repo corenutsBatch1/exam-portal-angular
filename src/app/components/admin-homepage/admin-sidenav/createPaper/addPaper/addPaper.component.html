@@ -92,6 +92,6 @@
  </table>
 
 <div>
-  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addpaper(this.createPaper)" >Create Paper</button>
+  <button *ngIf="allFieldsFilled"  type="button" class="btn btn-primary" data-dismiss="modal" (click)="addpaper(this.createPaper)"  >Create Paper</button>
 <button class="btn btn-dark ml-3" (click)="goBack()">Back</button>
 </div>

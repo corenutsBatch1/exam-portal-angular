@@ -1,0 +1,12 @@
+table{
+  width: 100%;
+  margin-left: 10px;
+}
+
+th{
+  color: rgb(243, 248, 248);
+  background-color: black;
+}
+.mat-mdc-header-row{
+  background-color: rgb(0, 11, 11);
+}

@@ -63,7 +63,7 @@ export class AddquestionComponent implements OnInit{
       // Filter topics based on selected subject
       console.log(this.selectedsubject)
       console.log(this.subjects)
-      this.filteredTopics = this.subjects!.filter((t) => t.name === this.selectedsubject);
+      this.filteredTopics = this.subjects!.filter((t) => t.name=== this.selectedsubject);
 
     } else {
      // this.filteredTopics = undefined;

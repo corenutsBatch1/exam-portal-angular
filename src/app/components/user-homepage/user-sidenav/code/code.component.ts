@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { MyserviceService } from 'src/app/model/myservice';
 import { DateTime } from 'luxon';
+import swal from 'sweetalert';
 @Component({
   selector: 'app-code',
   templateUrl: './code.component.html',
@@ -42,12 +43,12 @@ export class CodeComponent implements OnInit {
 const endTime = DateTime.fromISO(this.examtime.endTime);
 const now = DateTime.local();
 
-const startHour = startTime.hour;
-const startMinute = startTime.minute;
-const endHour = endTime.hour;
-const endMinute = endTime.minute;
-const currentHour = now.hour;
-const currentMinute = now.minute;
+// const startHour = startTime.hour;
+// const startMinute = startTime.minute;
+// const endHour = endTime.hour;
+// const endMinute = endTime.minute;
+// const currentHour = now.hour;
+// const currentMinute = now.minute;
 
 const isOnSameDate = startTime.hasSame(now, 'day');
 const isOverlappingDates = now >= startTime && now <= endTime;
@@ -67,15 +68,20 @@ this.isOver = isOver;
 
 if (this.isOver) {
   console.log('The exam is over.');
+  swal("Enter Correct Code", "", "error");
 } else if (this.isBetween) {
   console.log('The exam is currently ongoing.');
+  swal("Enter Correct Code", "", "error");
 } else if (isSameDate && now < startTime) {
-  console.log('The exam has not started yet.');}
+  console.log('The exam has not started yet.');
+  swal("Enter Correct Code", "", "error");
+}
 }
     if (examObject !== undefined && this.isBetween) {
       console.log(examObject.id+"senddddddddddddddd")
       this.service.examid(examObject.id)
      // console.log(`Exam code and id present: ${examObject.code} - ${examObject.id}`);
+     swal("Exam Started", "", "success");
       this.route.navigate(['userexam', examObject.code]);
     }
 

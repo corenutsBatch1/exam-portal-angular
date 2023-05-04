@@ -16,7 +16,6 @@ export class AdminSidenavComponent {
     console.log(name);
     if(name=='result'){
       this.router.navigateByUrl("adminpage/result");
-
     }
     if(name=='questionbank'){
       this.router.navigate(["adminpage/questionbank"]);
@@ -29,6 +28,9 @@ export class AdminSidenavComponent {
     }
     if(name=='scheduleexam'){
       this.router.navigate(["adminpage/scheduleexam"]);
+    }
+    if(name=='users'){
+      this.router.navigate(["adminpage/allusers"]);
     }
   }
 

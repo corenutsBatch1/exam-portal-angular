@@ -9,12 +9,27 @@
           <div class="col-75 form-group labelname" >
               <label for="subject" style="margin-right: 10px;">Subject Name </label>
           </div>
-          <div class="col-75 form-group">
-              <input class="form-control" type="text" formControlName="name" placeholder="Enter name" [ngModel]="subject.name" [ngClass]="{ 'is-invalid':(submitted && f.name.errors)|| (f.name.touched && f.name.errors) }"  >
+
+          <!-- <div class="col-75 form-group">
+              <input class="form-control" type="text" formControlName="name" placeholder="Enter name" [ngModel]="subject.name" [ngClass]="{ 'is-invalid':(submitted && f.name.errors)|| (f.name.touched && f.name.errors) }" >
               <div *ngIf="(submitted && f.name.errors) || (f.name.touched && f.name.errors)" class="invalid-feedback">
                 <div *ngIf="f.name.errors?.required">Subject name required</div>
               </div>
+          </div> -->
+          <div class="col-75 form-group">
+            <input class="form-control" type="text" formControlName="name" placeholder="Enter name"
+              (ngModelChange)="subject.name = $event.toUpperCase(); inputvalue = subject.name"
+              [ngModel]="subject.name" [ngClass]="{ 'is-invalid':(submitted && f.name.errors)|| (f.name.touched && f.name.errors) }">
+            
+            <div *ngIf="(submitted && f.name.errors) || (f.name.touched && f.name.errors)" class="invalid-feedback">
+              <div *ngIf="f.name.errors?.required">Subject name required</div>
+            </div>
           </div>
+
+        </div>
+
+
+
     </div>
 
       <div class="row form-group">
@@ -28,7 +43,7 @@
             </div>
           </div>
       </div>
-    </div>
+
       <br>
       <div class="text-center"><input class="btn btn-success btn-sm submit"  type="submit" value="{{ subject.id ? 'Update' : 'Add' }}">
         <button class="btn btn-warning btn-sm ml-4" type="reset">Clear</button>

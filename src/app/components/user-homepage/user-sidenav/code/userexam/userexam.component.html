@@ -47,6 +47,38 @@
               <h3><b> Question No {{this.questionnumber+1}}</b></h3>
              <h3 [innerHTML]="currentQuestion.content"></h3>
 
+    <!-- <ng-container *ngIf="currentQuestion.answer && currentQuestion.answer.length()>1; else radioButtons"> -->
+      <ng-container *ngIf="currentQuestion.answer && currentQuestion.answer.length > 1; else radioButtons">
+      <mat-list-item>
+        <div style="white-space:nowrap">
+          <input type="checkbox" [name]="'answer'+currentQuestion.id" value="A" (click)="sendoption2(currentQuestion.id, 'A')" [checked]="isOptionSelected(currentQuestion.id, 'A')" [checked]="isOptionSelected2(currentQuestion.id, 'A')" ng-class="{checked: isChecked == A}">
+          <label class="option">{{currentQuestion.optionA}}</label>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item>
+        <div style="white-space:nowrap">
+          <input type="checkbox" [name]="'answer'+currentQuestion.id" value="B" (click)="sendoption2(currentQuestion.id, 'B')" [checked]="isOptionSelected(currentQuestion.id, 'B')"  [checked]="isOptionSelected2(currentQuestion.id, 'B')" ng-class="{checked: isChecked == C}">
+          <label class="option">{{currentQuestion.optionB}}</label>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item>
+        <div class="white-space:nowrap">
+          <input type="checkbox" [name]="'answer'+currentQuestion.id" value="C" (click)="sendoption2(currentQuestion.id, 'C')" [checked]="isOptionSelected(currentQuestion.id, 'C')"  [checked]="isOptionSelected2(currentQuestion.id, 'C')" ng-class="{checked: isChecked == C}">
+          <label class="option">{{currentQuestion.optionC}}</label>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item>
+        <div class="white-space:nowrap">
+          <input type="checkbox" [name]="'answer'+currentQuestion.id" value="D" (click)="sendoption2(currentQuestion.id, 'D')" [checked]="isOptionSelected(currentQuestion.id, 'D')"  [checked]="isOptionSelected2(currentQuestion.id, 'D')" ng-class="{checked: isChecked == D}">
+          <label class="option">{{currentQuestion.optionD}}</label>
+        </div>
+      </mat-list-item>
+       <button class="btn-success" (click)="submitoption(currentQuestion.id,this.checkboxoption)" isRadioButtonSelected = true;>Save</button>
+    </ng-container>
+    <ng-template #radioButtons>
               <mat-list-item>
                 <div style="white-space:nowrap">
                     <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="A" (click)="sendoption(currentQuestion.id, 'A');isRadioButtonSelected = true;" [checked]="isOptionSelected(currentQuestion.id, 'A')" ng-class="{checked: isChecked == A}"/>
@@ -75,6 +107,7 @@
                   <label class="option">{{ currentQuestion.optionD }}</label>
                </div>
               </mat-list-item>
+            </ng-template>
             </div>
 
             <div *ngIf="clickedSubject === 'Coding' && this.currentQuestion != null">

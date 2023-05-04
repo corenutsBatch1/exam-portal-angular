@@ -45,7 +45,7 @@
           <mat-list >
             <div *ngIf="clickedSubject != 'Coding' && this.currentQuestion != null">
               <h3><b> Question No {{this.questionnumber+1}}</b></h3>
-            <mat-list-item> <h1> {{ currentQuestion.content }}</h1></mat-list-item>
+             <h3 [innerHTML]="currentQuestion.content"></h3>
 
               <mat-list-item>
                 <div style="white-space:nowrap">

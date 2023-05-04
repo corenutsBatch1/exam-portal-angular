@@ -47,7 +47,7 @@ import { CodingComponent } from './components/user-homepage/user-sidenav/code/us
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/users.component';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -105,7 +105,7 @@ import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/
     MatCheckboxModule,
     MatSlideToggleModule,
     CodemirrorModule,
-
+    CKEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent],

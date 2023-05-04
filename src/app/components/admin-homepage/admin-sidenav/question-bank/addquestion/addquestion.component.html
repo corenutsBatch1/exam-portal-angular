@@ -29,12 +29,13 @@
             <h3><b>Enter the question</b></h3>
             <!-- <input type="text" class="form-control questionPlaceholder" id="formGroupExampleInput" placeholder="Enter the question"  [(ngModel)]="Questions.content" name="content">
            -->
-            <div id="question-editor">
+            <!-- <div id="question-editor">
               <ngx-codemirror [(ngModel)]="Questions.content" name="content" [options]="{
     theme: 'paraiso-light',
     mode: 'markdown'
-  }"></ngx-codemirror>
-            </div>
+  }"></ngx-codemirror> -->
+  <ckeditor [editor]="Editor" [(ngModel)]="Questions.content" name="content" data="<p>Add question</p>"></ckeditor>
+            <!-- </div> -->
           </div>
 
           <table class="table">

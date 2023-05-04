@@ -44,7 +44,6 @@ export class UserexamComponent {
   totalQuestions:number=0;
   remainingQuestion:number=0;
   timeexpire?:boolean=false;
-
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -76,6 +75,8 @@ export class UserexamComponent {
       });
     });
   }
+
+
 
 // Initialize the timer properties
 minutes = this.remainingTime;

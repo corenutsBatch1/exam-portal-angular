@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { MatSelectChange } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import swal from 'sweetalert';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
 
@@ -27,6 +28,8 @@ export class AddquestionComponent implements OnInit{
    subjects?:Subject[];
    uniqueSubjectNames: string[] = [];
    answers : string[] = []
+   public Editor = ClassicEditor;
+
   constructor(private http:HttpClient,private router:Router)
   {
     this.subjects=[];
@@ -55,7 +58,7 @@ export class AddquestionComponent implements OnInit{
    subject_id?:number;
    selectedsubject?:string;
    filteredTopics: Subject[] = [];
-   
+
    onSubjectSelection() {
     //const value = event.value;
     if (this.selectedsubject) {

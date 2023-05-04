@@ -17,6 +17,7 @@ export class AddSubjectComponent implements OnInit {
   objectData: any = {};
   isAddOperation?: boolean;
   subject:Subject=new Subject();
+  inputvalue?:string;
 @Input() id:any;
 @Output("loadAddSubjectPage") loadAddSubjectPage=new EventEmitter
 Subjects:Subject = new Subject();
@@ -80,7 +81,9 @@ this.submitted=true;
 //add Category info
 addSubjectInfo()
 {
-  console.log(this.myForm);
+  console.log(this.myForm.value.name);
+
+
   this.http.post<any>('http://localhost:8089/api/addsubject',this.myForm.value).subscribe(
     response=>{
       swal("Subject added successfully","", "success");

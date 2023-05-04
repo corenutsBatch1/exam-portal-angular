@@ -4,6 +4,37 @@
   <br>
   <br>
 
+
+  <table class="table table-striped">
+
+    <thead>
+      <!-- [formControl]="subjectControl" -->
+      <tr>
+        <th>S.No</th>
+        <th>Name</th>
+        <th>Code</th>
+        <th>StartTime</th>
+        <th>EndTime</th>
+        <th>PaperId</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exam of exams let i=index">
+        <td>{{i+1}}</td>
+        <td>{{exam.name}}</td>
+        <td>{{exam.code}}</td>
+        <td>{{exam.startTime}}</td>
+        <td>{{exam.endTime}}</td>
+        <td>{{exam.createPaper?.id}}</td>
+
+         <td><mat-icon type="button"  class='material-icons-outlined' [ngStyle]="{'color':'red'}"  (click)="delete(exam.id)">delete</mat-icon>
+
+         </td>
+      </tr>
+      </tbody>
+    </table>
+
   <mat-table class="table table-striped" [dataSource]="dataSource">
     <ng-container matColumnDef="sNo">
       <mat-header-cell id="head" *matHeaderCellDef>S.No</mat-header-cell>
@@ -48,6 +79,7 @@
     <mat-row *matRowDef="let row; columns: ['sNo', 'name', 'code', 'startTime', 'endTime', 'paperId', 'delete']"></mat-row>
   </mat-table>
   <mat-paginator class="paginator" #paginator  [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 40]" showFirstLastButtons></mat-paginator>
+
 
   </div>
   <div *ngIf="!addexam" >

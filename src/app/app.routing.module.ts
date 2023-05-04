@@ -80,9 +80,9 @@ import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/
       {path:'userpage/:id',component:UserHomepageComponent,
       canActivate: [AuthGuard],
       children: [
+        {path:'code',component:CodeComponent},
         { path: 'profile', component: ProfileComponent },
-        {path:'code',component:CodeComponent,
-      },
+        { path: '**', redirectTo: 'code' },
       ],
     },
       {path:'usersidenav',component:UserSidenavComponent},

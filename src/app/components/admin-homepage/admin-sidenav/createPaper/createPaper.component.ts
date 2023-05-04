@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { CreatePaper } from 'src/app/model/model/CreatePaper';
 import swal from 'sweetalert';
+import { MatPaginator } from '@angular/material/paginator';
 @Component({
   selector: 'app-createPaper',
   templateUrl: './createPaper.component.html',
@@ -14,6 +16,8 @@ export class CreatePaperComponent implements OnInit {
   addpaper:boolean=true;
   viewpaper:boolean=true;
   paperid?:number;
+  dataSource = new MatTableDataSource<CreatePaper>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
@@ -29,6 +33,8 @@ export class CreatePaperComponent implements OnInit {
 
     console.log(data)
     this.papers=data;
+    this.dataSource.data=this.papers;
+    this.dataSource.paginator = this.paginator;
   });
   }
   viewPaper(flag:boolean,id:any){

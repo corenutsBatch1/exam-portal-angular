@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { ScheduleExam } from './../../../../model/model/ScheduleExam';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import swal from 'sweetalert';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 @Component({
   selector: 'app-schedule-exam',
   templateUrl: './schedule-exam.component.html',
@@ -12,6 +14,8 @@ export class ScheduleExamComponent implements OnInit {
   scheduleExam:ScheduleExam=new ScheduleExam();
   exams:ScheduleExam[]=[];
   addexam:boolean=true;
+  dataSource = new MatTableDataSource<ScheduleExam>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
@@ -26,6 +30,8 @@ export class ScheduleExamComponent implements OnInit {
   fetchExam(){
     this.http.get<ScheduleExam[]>(`http://localhost:8089/api/getallexams`).subscribe(data=>{
     this.exams=data;
+    this.dataSource.data=this.exams
+    this.dataSource.paginator = this.paginator;
   });
   }
   deleteexam(id:any,id2:any){

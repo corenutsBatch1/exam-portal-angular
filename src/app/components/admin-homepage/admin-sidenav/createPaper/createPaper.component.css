@@ -1,10 +1,11 @@
-th{
-  color: rgb(243, 248, 248);
-  background-color:#1f2937;
+#head {
+  background-color: black;
+  color: white;
 }
-thead
-{
-  background-color: #1f2937;
+
+mat-table{
+  width: 100%;
+  margin-bottom: 0;
 }
 
 .view{
@@ -36,5 +37,5 @@ thead
 
 button{
   border: none;
-  
+
 }

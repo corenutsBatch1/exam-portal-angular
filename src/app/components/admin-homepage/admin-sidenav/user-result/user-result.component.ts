@@ -12,6 +12,8 @@ import 'chartjs-plugin-datalabels';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { MatPaginator } from '@angular/material/paginator';
+
 
 
 export interface PeriodicElement {
@@ -30,6 +32,7 @@ export interface PeriodicElement {
   templateUrl: './user-result.component.html',
   styleUrls: ['./user-result.component.css']
 })
+
 export class UserResultComponent {
   showPieChart: boolean = false;
   marks:Marks[]=[];
@@ -49,28 +52,27 @@ export class UserResultComponent {
   totalmarks?:number;
   gotmarks?:number;
   chart1: any;
-chart2: any;
-examchart1:any
-examchart2:any;
-nameFilterValue = '';
+  chart2: any;
+  examchart1:any
+  examchart2:any;
+  nameFilterValue = '';
   codeFilterValue = '';
   ueseexammarks?:number[]=[];
   examcode:string[]=[]
-   constructor(private http:HttpClient){}
-
-
+  dataSource = new MatTableDataSource<Marks>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  constructor(private http:HttpClient){}
   ngOnInit(): void {
-
-
     this.getMarks().subscribe((data)=>{this.marks=data
                                     this.dataSource.data=this.marks
+                                    this.dataSource.paginator = this.paginator;
                                 })
-
   }
 
   displayedColumns: string[] = ['serialNumber', 'examCode', 'name', 'totalMarks', 'obtainedMarks'];
-  dataSource = new MatTableDataSource<Marks>([]);
 
+
+//For Searching
   applyFilter(): void {
     const nameFilterValue = this.nameFilterValue.trim().toLowerCase();
     console.log(this.nameFilterValue)
@@ -88,10 +90,10 @@ nameFilterValue = '';
     this.dataSource.filter = filterValue;
     console.log(this.dataSource.filter)
   }
+
   getMarks():Observable<Marks[]>{
     return this.http.get<Marks[]>(`http://localhost:8089/api/getmarks`)
   }
-
 
  exampiechart(code?:string){
   this.userchart=false;

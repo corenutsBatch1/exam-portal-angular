@@ -1,7 +1,17 @@
 
-thead
+/* thead
 {
 
   background-color: rgb(4, 0, 0);
   color: rgba(255, 255, 255, 0.882);
+} */
+
+#head {
+  background-color: black;
+  color: white;
+}
+
+mat-table{
+  width: 100%;
+  margin-bottom: 0;
 }

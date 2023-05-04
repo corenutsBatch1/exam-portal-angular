@@ -124,29 +124,32 @@ export class ManageQuestionComponent implements OnInit {
       buttons: ['Cancel', 'Yes, Delete'],
       dangerMode: true,
     })
+
     .then((deleteConfirmed: any) => {
       if (deleteConfirmed) {
-        this.deleteQuestion(id)
-          .pipe(
-            catchError((error: any) => {
-              console.error('Error deleting question:', error);
-            swal({
-              title: "Unable to delete",
-              text: "This question present in one paper set, first delete the paper set",
-              icon: "error",
-            });
-            return throwError(error);
-            })
-          )
-          .subscribe(response => {
-            console.log('Question deleted:', response);
-            location.reload();
-          });
+
+        this.deleteQuestion(id).subscribe((data)=>console.log(data))
+          // .pipe(
+          //   catchError((error: any) => {
+          //     console.error('Error deleting question:', error);
+          //   swal({
+          //     title: "Unable to delete",
+          //     text: "This question present in one paper set, first delete the paper set",
+          //     icon: "error",
+          //   });
+          //   return throwError(error);
+          //   })
+          // )
+          // .subscribe(response => {
+          //   console.log('Question deleted:', response);
+          //   location.reload();
+          // });
+
       } else {
         console.log('Delete cancelled by user');
       }
     });
-  }
+   }
   deleteQuestion(id?:number){
     console.log(id);
    return this.http.delete(`http://localhost:8089/api/deleteQuestion/${id}`)

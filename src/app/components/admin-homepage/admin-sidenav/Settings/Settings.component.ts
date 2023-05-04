@@ -47,6 +47,7 @@ export class SettingsComponent implements OnInit {
       if (deleteConfirmed) {
         this.deleteSubject(id).subscribe(
       reponse=>{
+        swal("Deleted successfully", '', "success");
         console.log(reponse);
         console.log(id);
         this.ngOnInit();

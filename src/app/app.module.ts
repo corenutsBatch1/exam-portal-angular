@@ -47,6 +47,8 @@ import { CodingComponent } from './components/user-homepage/user-sidenav/code/us
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/users.component';
+
 
 @NgModule({
   declarations: [
@@ -78,7 +80,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     UserAnswersComponent,
     AddCodingQuestionComponent,
     CodingComponent,
-
+    UsersComponent,
 
   ],
   imports: [

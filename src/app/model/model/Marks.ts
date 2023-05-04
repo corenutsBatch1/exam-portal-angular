@@ -7,4 +7,8 @@ export class Marks{
   marks?:number;
   user?:User;
   exam?:ScheduleExam;
+  serialNumber?:number;
+  examCode?:string;
+  name?:string;
+  obtainedMarks?:number;
 }

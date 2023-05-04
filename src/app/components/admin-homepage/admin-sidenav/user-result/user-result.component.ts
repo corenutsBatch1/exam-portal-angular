@@ -2,17 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { Observable } from 'rxjs';
-// import { Marks } from 'src/app/model/model/Marks';
 import { Marks } from 'src/app/model/model/Marks';
-import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import{Chart,registerables}from 'node_modules/chart.js';
 Chart.register(...registerables);
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import 'chartjs-plugin-datalabels';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { MatPaginator } from '@angular/material/paginator';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import { TDocumentDefinitions } from 'pdfmake/interfaces';
+import { Title } from '@angular/platform-browser';
+
 
 
 
@@ -59,9 +59,14 @@ export class UserResultComponent {
   codeFilterValue = '';
   ueseexammarks?:number[]=[];
   examcode:string[]=[]
+
   dataSource = new MatTableDataSource<Marks>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  constructor(private http:HttpClient){}
+
+  constructor(private titleService: Title,private http:HttpClient) {
+  }
+
+
   ngOnInit(): void {
     this.getMarks().subscribe((data)=>{this.marks=data
                                     this.dataSource.data=this.marks
@@ -89,6 +94,73 @@ export class UserResultComponent {
     const filterValue = `${nameFilterValue}`;
     this.dataSource.filter = filterValue;
     console.log(this.dataSource.filter)
+  }
+
+
+
+  generatePDF(): void {
+    var i=1;
+    const filteredData = this.dataSource.filteredData;
+    const docDefinition: TDocumentDefinitions = {
+      content: [
+        {
+          text: 'User Exam Result Data',
+          style: 'header'
+        },
+        {
+          table: {
+            headerRows: 1,
+            widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
+            body: [
+              [
+                'Serial Number',
+                'Exam Code',
+                'User Name',
+                'Total Marks',
+                'Obtained Marks'
+              ],
+              ...filteredData.map(d => [
+                i++ || "",
+                d.exam?.code || "",
+                d.user?.name || "",
+                d.totalMarks || 0,
+                d.marks || 0
+
+              ])
+            ]
+          }
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 0, 0, 10]
+        }
+      }
+    };
+    pdfMake.createPdf(docDefinition).open();
+  }
+
+  generatePDF2(): void {
+    const docDefinition: TDocumentDefinitions = {
+      content: [
+        { text: 'User Exam Result Data', style: 'header' },
+        `Name: ${this.username3 || ""}\n`,
+        `Exam Name: ${this.examname || ""}\n`,
+        `Total Marks: ${this.totalmarks || 0}\n`,
+        `Obtained Marks: ${this.gotmarks || 0}`
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 0, 0, 10]
+        }
+      }
+    };
+
+    pdfMake.createPdf(docDefinition).open();
   }
 
   getMarks():Observable<Marks[]>{
@@ -312,33 +384,35 @@ export class UserResultComponent {
     }
 
   }
-  public openPDF(): void {
-    const TABLE: any = document.querySelector('#my-table');
 
-    html2canvas(TABLE).then((canvas) => {
-      const fileWidth = 208;
-      const fileHeight = (canvas.height * fileWidth) / canvas.width;
-      const FILEURI = canvas.toDataURL('image/png');
-      const PDF = new jsPDF('p', 'mm', 'a4');
-      let position = 0;
-      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-      const currentDate=new Date();
-      PDF.save('Exam-result '+currentDate+'.pdf');
-    });
-  }
-  public openPDF2(): void {
-    const userexamresult: any = document.querySelector('#result');
 
-    html2canvas(userexamresult).then((canvas) => {
-      const fileWidth = 208;
-      const fileHeight = (canvas.height * fileWidth) / canvas.width;
-      const FILEURI = canvas.toDataURL('image/png');
-      const PDF = new jsPDF('p', 'mm', 'a4');
-      let position = 0;
-      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-      PDF.save('userexamresult-demo.pdf');
-    });
-  }
+  // public openPDF(): void {
+  //   const TABLE: any = document.querySelector('#my-table');
+
+  //   html2canvas(TABLE).then((canvas) => {
+  //     const fileWidth = 208;
+  //     const fileHeight = (canvas.height * fileWidth) / canvas.width;
+  //     const FILEURI = canvas.toDataURL('image/png');
+  //     const PDF = new jsPDF('p', 'mm', 'a4');
+  //     let position = 0;
+  //     PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+  //     const currentDate=new Date();
+  //     PDF.save('Exam-result '+currentDate+'.pdf');
+  //   });
+  // }
+  // public openPDF2(): void {
+  //   const userexamresult: any = document.querySelector('#result');
+
+  //   html2canvas(userexamresult).then((canvas) => {
+  //     const fileWidth = 208;
+  //     const fileHeight = (canvas.height * fileWidth) / canvas.width;
+  //     const FILEURI = canvas.toDataURL('image/png');
+  //     const PDF = new jsPDF('p', 'mm', 'a4');
+  //     let position = 0;
+  //     PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+  //     PDF.save('userexamresult-demo.pdf');
+  //   });
+  // }
 
 
 }

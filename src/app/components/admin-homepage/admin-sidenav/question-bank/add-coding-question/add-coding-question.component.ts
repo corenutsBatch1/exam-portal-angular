@@ -111,10 +111,6 @@ export class AddCodingQuestionComponent {
       isCorrect: false
     });
   }
-
-
-
-
   onSubmit(id?:number): void {
 
     this.codingQuestion.content=this.questionContent;

@@ -151,7 +151,7 @@ export class UserAnswersComponent implements OnInit {
       }
     };
 
-    pdfMake.createPdf(docDefinition).download('exam-result.pdf');
+    pdfMake.createPdf(docDefinition).open();
   }
 
 

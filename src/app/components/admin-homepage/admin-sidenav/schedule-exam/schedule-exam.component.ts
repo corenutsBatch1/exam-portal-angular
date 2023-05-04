@@ -35,31 +35,31 @@ export class ScheduleExamComponent implements OnInit {
 
         //   console.log(data);
         //   this.ngOnInit();
-        // })
+         })
   }
-  delete(id:any,id2:any){
+  // delete(id:any,id2:any){
 
-    swal({
-      title: "Are you sure you want to Delete? ",
-      icon: "warning",
-      buttons: ['Cancel', 'Yes, Delete'],
-      dangerMode: true,
-    })
-    .then((deleteConfirmed: any) => {
-      if (deleteConfirmed) {
-        this.deleteexam(id,id2).subscribe(
-      reponse=>{
-        console.log(reponse);
-        swal("Deleted successfully", '', "success");
-        console.log(id);
-        console.log(id2);
-        this.ngOnInit();
-      }
-      );
-      } else {
-      }
-       });
+  //   swal({
+  //     title: "Are you sure you want to Delete? ",
+  //     icon: "warning",
+  //     buttons: ['Cancel', 'Yes, Delete'],
+  //     dangerMode: true,
+  //   })
+  //   .then((deleteConfirmed: any) => {
+  //     if (deleteConfirmed) {
+  //       this.deleteexam(id,id2).subscribe(
+  //     reponse=>{
+  //       console.log(reponse);
+  //       swal("Deleted successfully", '', "success");
+  //       console.log(id);
+  //       console.log(id2);
+  //       this.ngOnInit();
+  //     }
+  //     );
+  //     } else {
+  //     }
+  //      });
 
-    }
+  //   }
 
 }

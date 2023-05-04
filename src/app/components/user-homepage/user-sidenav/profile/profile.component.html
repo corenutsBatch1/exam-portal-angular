@@ -20,8 +20,40 @@
                 <li class="list-group-item"><strong>PHONENUMBER:</strong> {{user2.phoneNumber}}</li>
               </ul>
             </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+              edit profile
+            </button>
+
           </div>
       </mat-card>
     </div>
   </div>
 </div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><b>Update Profile</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="totalMarks">Enter name</label>
+          <input type="text" class="form-control" id=" " placeholder="Enter name"  [(ngModel)]="user3.name"  name="" value="{{user3.name}}">
+          <label for="totalMarks">Enter email</label>
+          <input type="text" class="form-control" id=" " placeholder="Enter email"  [(ngModel)]="user3.email " name="" value="{{user3.email}}" >
+           <label for="totalMarks">Enter phoneNumber</label>
+          <input type="text" class="form-control" id=" " placeholder="Enter phoneNumber"  [(ngModel)]="user3.phoneNumber" name="" value="{{user3.phoneNumber}}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateprofile()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+

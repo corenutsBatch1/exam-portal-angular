@@ -51,7 +51,7 @@ export class AddquestionComponent implements OnInit{
     console.log(subjects)
     const uniqueSubjectNames = subjects
       .map((subject) => subject?.name)
-      .filter((name) => name !== undefined) as string[];
+      .filter((name) => name !== undefined && name.toLowerCase()!=='coding') as string[];
     return [...new Set(uniqueSubjectNames)];
   }
 
@@ -66,7 +66,7 @@ export class AddquestionComponent implements OnInit{
       // Filter topics based on selected subject
       console.log(this.selectedsubject)
       console.log(this.subjects)
-      this.filteredTopics = this.subjects!.filter((t) => t.name === this.selectedsubject);
+      this.filteredTopics = this.subjects!.filter((t) => t.name=== this.selectedsubject);
 
     } else {
      // this.filteredTopics = undefined;

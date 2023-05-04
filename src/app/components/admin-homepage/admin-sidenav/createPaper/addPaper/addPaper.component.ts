@@ -37,7 +37,7 @@ export class AddPaperComponent implements OnInit {
   questionCount = 0;
   noOfQuestions?:number;
   name:string='';
-
+  questionsLeft?:number;
   ngOnInit(): void {
 
     this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe(data=>{
@@ -77,7 +77,7 @@ export class AddPaperComponent implements OnInit {
       });
   }
   allFieldsFilled = false;
-
+  
   checkAllFieldsFilled() {
     if (
       this.createPaper.name &&
@@ -141,17 +141,23 @@ addpaper(createPaper:CreatePaper)
 {
   createPaper.questionsListArray=this.questionsIdArray;
   createPaper.codingQuestionsListArray=this.codingQuestionsIdArray
+  if (this.noOfQuestions && this.questionCount < this.noOfQuestions){
+    this.questionsLeft=this.noOfQuestions-this.questionCount;
+    swal("You have to add "+this.questionsLeft+" more .", "", "error");
+  }else{
+    this.http.post<CreatePaper>(`http://localhost:8089/api/addpaper`,createPaper).subscribe(
+      data=>{
 
-  this.http.post<CreatePaper>(`http://localhost:8089/api/addpaper`,createPaper).subscribe(
-    data=>{
-    swal("Paper created successfully","", "success");
-  this.goBack();
-},
-  error=>{
-    swal("All field must be required","", "error");
+      swal("Paper created successfully","", "success");
+    this.goBack();
+  },
+    error=>{
+      swal("All field must be required","", "error");
+    }
+
+    );
   }
 
-  );
 }
 // addquestions(questionId?:number)
 //   {

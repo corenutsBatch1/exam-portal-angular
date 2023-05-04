@@ -48,6 +48,8 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/users.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
@@ -105,7 +107,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatCheckboxModule,
     MatSlideToggleModule,
     CodemirrorModule,
-    CKEditorModule
+    CKEditorModule,
+    MatPaginatorModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

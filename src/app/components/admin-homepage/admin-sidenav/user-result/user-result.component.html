@@ -7,12 +7,16 @@
   <!-- Show table here -->
   <div class="row">
     <div class="col-md-10 mt-6">
-    <div class="row table">
+   <!-- <div class="row table">-->
       <img id="pdf-icon"  (click)="openPDF()" src="assets/Button.svg" alt="">
       <mat-form-field class="ml-2">
         <mat-label>Search</mat-label>
         <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
       </mat-form-field>
+
+    <!-- <div class="row table"> -->
+      <img id="pdf-icon"  (click)="generatePDF()" src="assets/Button.svg" alt="">
+
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="my-table">
 
         <!-- Serial Number Column -->
@@ -55,7 +59,8 @@
           </tr>
         </ng-container>
       </table>
-    </div>
+      <mat-paginator class="paginator" #paginator  [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 40]" showFirstLastButtons></mat-paginator>
+    <!-- </div> -->
 
 
     </div>
@@ -97,7 +102,7 @@
     <div class="col-lg-4 canvasheading">
      <h1 class="text-center ml-6" >Exam Report for a user</h1>
    </div>
-   <img id="pdf-icon"  (click)="openPDF2()" src="assets/5467016.svg" alt="deleted">
+   <img id="pdf-icon"  (click)="generatePDF2()" src="assets/5467016.svg" alt="deleted">
    <label for="" class="canvassearch">Enter the exam code &nbsp;</label>
    <input type="text" [(ngModel)]="examcode1"/> &nbsp;
 

@@ -55,7 +55,8 @@
           </tr>
         </ng-container>
       </table>
-    </div>
+      <mat-paginator class="paginator" #paginator  [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 40]" showFirstLastButtons></mat-paginator>
+    <!-- </div> -->
 
 
     </div>
@@ -97,7 +98,7 @@
     <div class="col-lg-4 canvasheading">
      <h1 class="text-center ml-6" >Exam Report for a user</h1>
    </div>
-   <img id="pdf-icon"  (click)="openPDF2()" src="assets/5467016.svg" alt="deleted">
+   <img id="pdf-icon"  (click)="generatePDF2()" src="assets/5467016.svg" alt="deleted">
    <label for="" class="canvassearch">Enter the exam code &nbsp;</label>
    <input type="text" [(ngModel)]="examcode1"/> &nbsp;
 

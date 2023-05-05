@@ -27,7 +27,7 @@
       <p>No questions found.</p>
     </div> -->
 
-    <table class="table table-striped" *ngIf="allFieldsFilled && Questions.length > 0 && selectedsubject != 'Coding'">
+    <table class="table table-striped" *ngIf="allFieldsFilled && Questions.length > 0 && selectedsubject != 'CODING'">
     <thead >
       <tr>
         <th>S.No</th>
@@ -67,7 +67,7 @@
    </table>
 
 
-  <table class="table table-striped" *ngIf="allFieldsFilled && selectedsubject!.toLowerCase() === 'coding'">
+  <table class="table table-striped" *ngIf="allFieldsFilled && selectedsubject === 'CODING'">
     <thead >
       <tr>
         <th>S.No</th>
@@ -80,7 +80,7 @@
     <tbody>
       <tr *ngFor="let question of codingQuestion let i=index">
         <td>{{question.id}}</td>
-        <td>{{question.content}}</td>
+        <td [innerHTML]="question.content"></td>
 
         <td>
        <mat-icon type="button" data-toggle="modal" data-target="#staticBackdrop" (click)="getQuestionsById(question.id)" class="material-symbols-outlined">edit

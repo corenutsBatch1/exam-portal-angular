@@ -76,7 +76,7 @@ export class ManageQuestionComponent implements OnInit {
     console.log('=====================================');
     console.log(id);
     this.Topic_id = id;
-    if(this.selectedsubject?.toLowerCase()!= 'coding'){
+    if(this.selectedsubject!= 'CODING'){
       this.http
       .get<Question[]>(`http://localhost:8089/api/getallquestions/${id}`)
       .subscribe((data) => {
@@ -93,9 +93,6 @@ export class ManageQuestionComponent implements OnInit {
       });
     }
   }
-
-
-
 
   getQuestionsById(id: any) {
     this.http

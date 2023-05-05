@@ -39,6 +39,7 @@ paper:CreatePaper=new CreatePaper();
   this.http.post(`http://localhost:8089/api/questionsbypaper`,paper2).subscribe(data=>{
   console.log(data)
   this.questionsArray=this.questionsArray.concat(data);
+  console.log(this.questionsArray)
 })
   }
 

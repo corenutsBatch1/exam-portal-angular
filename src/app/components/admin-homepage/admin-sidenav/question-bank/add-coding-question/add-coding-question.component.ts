@@ -7,7 +7,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CodingQuestion } from 'src/app/model/model/CodingQuestion';
 import { Subject } from 'src/app/model/model/Subject';
 import { TestCases } from 'src/app/model/model/TestCases';
-
+import swal from 'sweetalert';
 interface InputField {
   // value: string;
   input: string;
@@ -117,9 +117,19 @@ export class AddCodingQuestionComponent {
 
     this.codingQuestion.content=this.questionContent;
 
-    this.http.post(`http://localhost:8089/api/addcodingquestion/${id}`, this.codingQuestion).subscribe((data)=>{
-                  this.getallcodingquestions(id);})
+    this.http.post(`http://localhost:8089/api/addcodingquestion/${id}`, this.codingQuestion).subscribe(
 
+                  response=>{
+                    this.getallcodingquestions(id);
+                    swal("Question added successfully","", "success");
+                    // this.goBack();
+                  },
+
+                  error=>{
+                    swal("All field must be required","", "error");
+                  }
+    );
+                
   }
   getallcodingquestions(id?:number){
     this.http.get(`http://localhost:8089/api/getallcodingquestions/${id}`).subscribe((data)=>{

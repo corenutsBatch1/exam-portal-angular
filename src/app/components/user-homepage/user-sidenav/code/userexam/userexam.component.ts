@@ -8,6 +8,7 @@ import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import swal from 'sweetalert';
+import { LocationStrategy } from '@angular/common';
 
 
 @Component({
@@ -53,11 +54,14 @@ export class UserexamComponent {
     private http: HttpClient,
     private route: ActivatedRoute,
     private service: MyserviceService,
-    private router: Router
+    private router: Router,
+    private locationStrategy: LocationStrategy
   ) {}
 
   ngOnInit(): void {
-
+    this.locationStrategy.onPopState(() => {
+      history.forward();
+    });
     this.uid = this.service.sendid();
     this.eid = this.service.sendeid();
     this.startTimer()
@@ -72,6 +76,7 @@ export class UserexamComponent {
       this.code = params['code'];
       this.http.get<any>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>{this.questions=data,
         this.totalQuestions=data.length;
+        this.nextquestions(0,this.questions[0].optionA,this.questions[0].id);
     });
       this.loadSubjects().subscribe((subjects: Subject[]) => {
         this.subjects = subjects;
@@ -79,6 +84,7 @@ export class UserexamComponent {
         console.log(subjects);
       });
     });
+
   }
 
 
@@ -132,7 +138,8 @@ startTimer() {
     this.subjects.forEach((subject)=>{
                   if(subject.name==subjectName){
                     this.loadQuestions(subject.id).subscribe((data)=>{this.questions=this.questions.concat(data)
-                    this.questionnumber=0
+                    this.questionnumber=0;
+                    this.nextquestions(0,this.questions[0].optionA,this.questions[0].id);
                   })
                   }})
   }

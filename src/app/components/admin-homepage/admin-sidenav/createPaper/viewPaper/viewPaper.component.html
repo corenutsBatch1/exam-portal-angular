@@ -22,9 +22,9 @@
     </thead>
     <tbody *ngFor="let question of questionsArray let i=index">
       <!-- <tr *ngIf="question.subject?.name?.toLowerCase()!='coding'"> -->
-        <tr  *ngIf="question.subject?.name?.toLowerCase()!='coding'" >
+        <tr  *ngIf="question.subject?.name!='CODING'" >
        <td>{{i+1}}</td>
-        <td>{{question.content}}</td>
+        <td [innerHTML]="question.content"></td>
         <td>{{question.optionA}}</td>
         <td>{{question.optionB}}</td>
         <td>{{question.optionC}}</td>
@@ -43,9 +43,9 @@
    </thead>
    <tbody *ngFor="let question of questionsArray let i=index">
 
-      <tr *ngIf="question.subject?.name?.toLowerCase()=='coding'">
+      <tr *ngIf="question.subject?.name=='CODING'">
       <td>{{i+1}}</td>
-      <td>{{question.content}}</td>
+      <td [innerHTML]="question.content"></td>
     </tr>
    </tbody>
   </table>

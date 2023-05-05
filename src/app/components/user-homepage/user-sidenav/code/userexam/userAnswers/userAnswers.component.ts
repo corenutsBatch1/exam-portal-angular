@@ -55,6 +55,7 @@ export class UserAnswersComponent implements OnInit {
 
   this.loadScore().subscribe((data)=>{this.score=data;
                                       this.score=this.score+this.service.getcodingmarks();
+                                      console.log("in answers"+this.score);
                                         this.insertMarks()})
   this.loadUserAnswers().subscribe((data)=>this.userAnswers=data)
 

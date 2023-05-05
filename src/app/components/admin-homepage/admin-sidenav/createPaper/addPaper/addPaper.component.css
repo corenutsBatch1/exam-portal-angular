@@ -2,15 +2,22 @@
     /* width:150%;  */
     position:relative;
 }
+
 th{
   color: rgb(243, 248, 248);
   background-color:#1f2937;
 }
-thead
-{
+
+thead{
   background-color: #1f2937;
 }
 
 #createpaper-form{
   width: 43%;
+}
+
+.arrowbutton{
+  border: none;
+  margin-right: 1rem;
+  background-color: rgb(203, 220, 236);
 }

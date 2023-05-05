@@ -1,6 +1,6 @@
-<div id="createpaper-form">
-  <button class="btn btn-secondary ml-3 float-left" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
-  <br><br>  <br>  <br>
+<button class="arrowbutton" (click)="goBack()"> <mat-icon>arrow_back</mat-icon>
+</button>
+<div id="createpaper-form" class="ml-2">
 <div class="form-group maindiv">
   <label for="formGroupExampleInput" required>Enter the paper name</label>
   <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the paper name" [(ngModel)]="createPaper.name" name="name" (ngModelChange)="checkAllFieldsFilled()" ng-required="true">
@@ -21,7 +21,7 @@
   </div>
 </div>
 </div>
-<mat-form-field appearance="fill">
+<mat-form-field appearance="fill" class="ml-2">
   <mat-label>Select a subject</mat-label>
   <mat-select [(ngModel)]="selectedsubject" name="selectedSubject" (selectionChange)="onSubjectSelection()" (ngModelChange)="checkAllFieldsFilled()">
     <mat-option *ngFor="let subject of uniqueSubjectNames" [value]="subject">{{ subject }}</mat-option>
@@ -93,5 +93,5 @@
 
 <div>
   <button *ngIf="allFieldsFilled"  type="button" class="btn btn-primary" data-dismiss="modal" (click)="addpaper(this.createPaper)"  >Create Paper</button>
-<button class="btn btn-dark ml-3" (click)="goBack()">Back</button>
+<button class="btn btn-dark ml-3" (click)="goBack()">Go back</button>
 </div>

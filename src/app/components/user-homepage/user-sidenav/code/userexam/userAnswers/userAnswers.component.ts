@@ -108,7 +108,7 @@ export class UserAnswersComponent implements OnInit {
       content: [
         {
 
-          text: `Your Score is : ${this.score} / ${this.totalmarks}`,
+          text: `Your Score is : ${this.score} / ${this.exam?.createPaper?.totalMarks}`,
           style: 'header'
         },
         {
@@ -118,18 +118,18 @@ export class UserAnswersComponent implements OnInit {
             ];
 
             if (question.subject?.name !== 'Coding') {
-              listItems.push(`A : ${question.optionA}`);
-              listItems.push(`B : ${question.optionB}`);
-              listItems.push(`C : ${question.optionC}`);
-              listItems.push(`D : ${question.optionD}`);
+              listItems.push(`A) ${question.optionA}`);
+              listItems.push(`B) ${question.optionB}`);
+              listItems.push(`C) ${question.optionC}`);
+              listItems.push(`D) ${question.optionD}`);
 
               const answer = this.userAnswers.find(answer => answer.question?.id === question.id);
 
               if (answer) {
-                  listItems.push(JSON.stringify(`YourAnswer : ${answer.userAnswer}`));
+                  listItems.push(`YourAnswer : ${answer.userAnswer}`);
               }
 
-              listItems.push(JSON.stringify(`CorrectAnswer : ${question.answer}`));
+              listItems.push(`CorrectAnswer : ${question.answer}`);
               listItems.push('\n');
 
             }else{

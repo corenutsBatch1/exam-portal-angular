@@ -1,0 +1,47 @@
+<button class="arrowbutton" (click)="goBack()"> <mat-icon>arrow_back</mat-icon>
+</button>
+
+<!-- -------------------------------pie chart-------------- -->
+
+<ng-container>
+
+  <div class="userexampage">
+    <div class="col-lg-4 canvasheading">
+     <h1 class="text-center ml-6" >Exam Report for individual user</h1>
+   </div>
+   <img *ngIf="username3 && examname && totalmarks && gotmarks" id="pdf-icon"  (click)="generatePDF()" src="assets/5467016.svg" alt="pdf">
+   <label for="" class="canvassearch">Enter the exam code &nbsp;</label>
+   <input type="text" [(ngModel)]="examcode1"/> &nbsp;
+
+   <label for="" class="canvassearch">Enter the user name &nbsp;</label>
+   <input type="text" [(ngModel)]="username2"/> &nbsp;
+   <button class="btn-sm btn-primary" type="submit" (click)="examresult(username2,examcode1)">
+     Submit
+   </button>
+   <div class="bootstrap-wrapper" id="result" *ngIf="username3 && examname && totalmarks && gotmarks">
+    <div class="container">
+      <div class="row">
+        <mat-card class="card col-md-8">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-center">
+              <div class="left">
+                <mat-icon class="mat-24" style="margin-right: 10px;">person</mat-icon>
+              </div>
+              <div class="right float-right">
+                <h1><b>User Exam Result</b></h1>
+              </div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>NAME:</strong> {{this.username3}}</li>
+              <li class="list-group-item"><strong>EXAM NAME:</strong> {{this.examname}}</li>
+              <li class="list-group-item"><strong>TOTAL MARKS:</strong> {{ this.totalmarks}}</li>
+              <li class="list-group-item"><strong>MARKS:</strong> {{ this.gotmarks}}</li>
+            </ul>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+   </div>
+</ng-container>
+

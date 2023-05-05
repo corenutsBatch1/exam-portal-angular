@@ -16,3 +16,9 @@ button .submit{
   margin-top: 0.6rem;
 }
 
+.arrowbutton{
+  border: none;
+  margin-right: 1rem;
+  background-color: rgb(203, 220, 236);
+}
+

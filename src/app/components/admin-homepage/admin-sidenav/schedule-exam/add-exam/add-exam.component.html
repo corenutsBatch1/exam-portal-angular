@@ -1,4 +1,6 @@
-<div class="ExamForm">
+<button class="arrowbutton" (click)="goBack()"> <mat-icon>arrow_back</mat-icon>
+</button>
+<div class="ExamForm ml-2">
 <div class="form-group">
   <label for="formGroupExampleInput">Enter the exam name</label>
   <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the exam name" [(ngModel)]="scheduleExam.name" name="name">
@@ -21,7 +23,7 @@
 </div>
 </div>
 
-<button class="btn btn-secondary btn-sm float-left" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+<!-- <button class="btn btn-secondary btn-sm float-left" (click)="goBack()"><mat-icon>arrow_back</mat-icon></button> -->
 <table class="table table-striped">
 
   <thead>

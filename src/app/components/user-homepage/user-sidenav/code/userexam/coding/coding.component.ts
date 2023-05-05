@@ -72,7 +72,7 @@ export class CodingComponent {
       this.http.get(`http://localhost:8089/api/getalltestcases/${this.id}`).subscribe((data)=>{
         this.Testcase?.splice(0,this.Testcase.length);
        this.Testcase=this.Testcase?.concat(data);
-
+            this.count=0;
            this.Testcase?.forEach(a=>{
          console.log(a.input+"above")
          this.apiService.runCode(code,this.selectedLanguage,a.input).subscribe(response => {
@@ -81,16 +81,22 @@ export class CodingComponent {
             console.log(a.expectedOutput)
             if(response.output.trim() === a.expectedOutput) {
                 this.count++;
+                console.log(this.count);
               console.log("Your program is correct.");
+              if(this.count==this.Testcase?.length)
+              {
+                  this.codingMarks=5;
+                  console.log("in coding"+this.codingMarks)
+                  this.service.codingmarks(this.codingMarks);
+                  console.log(this.codingMarks+"in coding component")
+              }
+              else{
+               console.log("no marks")
+              }
             } else {
               console.log("Your program is incorrect.");
             }
-             if(this.count==this.Testcase?.length)
-             {
-                 this.codingMarks=5;
-                 this.service.codingmarks(this.codingMarks);
-                 console.log(this.codingMarks+"in coding component")
-             }
+
 
            //  this.response=this.response?.concat(response);
           // console.log(this.response)

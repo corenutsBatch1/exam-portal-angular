@@ -29,6 +29,7 @@ sendeid()
 }
 codingmarks(marks:any){
   this.codingmark=this.codingmark+marks;
+  console.log("in service"+this.codingmark);
   console.log(this.codingmark +"in service")
 }
 getcodingmarks(){

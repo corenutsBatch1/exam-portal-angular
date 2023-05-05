@@ -70,5 +70,14 @@ th{
   /* background-color: aqua; */
 }
 
+.arrow{
+  border: none;
+ background-color: rgb(251, 253, 254);
+}
 
-
+.arrow:hover{
+  transform: scale(1.2);
+}
+.level{
+  width: 50%;
+}

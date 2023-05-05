@@ -76,7 +76,7 @@
           <label class="option">{{currentQuestion.optionD}}</label>
         </div>
       </mat-list-item>
-       <button class="btn-success" (click)="submitoption(currentQuestion.id,this.checkboxoption)" isRadioButtonSelected = true;>Save</button>
+       <button class="bt btn-success btn-sm" (click)="submitoption(currentQuestion.id,this.checkboxoption)" isRadioButtonSelected = true;>Save</button>&nbsp;&nbsp;
     </ng-container>
     <ng-template #radioButtons>
               <mat-list-item>
@@ -108,18 +108,22 @@
                </div>
               </mat-list-item>
             </ng-template>
+
+      <!-- <div > -->
+        <button  *ngIf="this.questionnumber>0" type="none" class="btn btn-primary btn-sm" (click)="previousquestion(this.questionnumber);">Previous</button>
+      <!-- </div> -->
+      &nbsp;&nbsp;
+      <button type="none" *ngIf="this.questionnumber<(questions.length-1)"class="btn btn-primary btn-sm" (click)="nextquestion()">Next</button>
+
+
             </div>
 
-            <div *ngIf="clickedSubject === 'Coding' && this.currentQuestion != null">
+            <div *ngIf="clickedSubject === 'CODING' && this.currentQuestion != null">
               <h3><b> Question No {{this.questionnumber+1}}</b></h3>
-            <mat-list-item> <h1> {{ currentQuestion.content }}</h1></mat-list-item>
+             <h1 [innerHTML]="currentQuestion.content"></h1>
               <app-coding></app-coding>
             </div>
 
-            <!-- <div > -->
-              <button  *ngIf="this.questionnumber>0" type="none" class="arrow ml-4 mt-3" (click)="previousquestion(this.questionnumber);"><mat-icon>arrow_back_ios</mat-icon></button>
-            <!-- </div> -->
-            <button type="none" *ngIf="this.questionnumber<(questions.length-1)" class="arrow ml-4 mt-3" (click)="nextquestion()"><mat-icon>arrow_forward_ios</mat-icon></button>
 
           </mat-list>
           <mat-list dense>
@@ -128,11 +132,11 @@
 
           </mat-list>
         </div>
-        <div class="row-md-9 leftbottom ml-2" *ngIf="currentQuestion?.subject?.name?.toLowerCase()=='coding'" class="question">
+        <div class="row-md-9 leftbottom ml-2" *ngIf="currentQuestion?.subject?.name=='CODING'" class="question">
           <mat-list >
             <!-- <mat-list-item> <h1 ><span>{{this.questionnumber+1}} </span> {{ currentQuestion?.content }}</h1></mat-list-item> -->
             <h3><b> Question No {{this.questionnumber+1}}</b></h3>
-            <mat-list-item> <h1> {{ currentQuestion?.content }}</h1></mat-list-item>
+             <h1  [innerHTML]="currentQuestion?.content"> </h1>
             <app-coding [id]="this.codingquestionid"></app-coding>
           </mat-list>
         </div>

@@ -77,7 +77,7 @@ export class AddPaperComponent implements OnInit {
       });
   }
   allFieldsFilled = false;
-  
+
   checkAllFieldsFilled() {
     if (
       this.createPaper.name &&
@@ -120,7 +120,7 @@ export class AddPaperComponent implements OnInit {
   }
   getquestions(id:any)
   {
-    if(this.selectedsubject != 'Coding'){
+    if(this.selectedsubject != 'CODING'){
       this.http.get<Question[]>(`http://localhost:8089/api/getallquestions/${id}`).subscribe(data=>{
       console.log(data);
         this.question123=data;

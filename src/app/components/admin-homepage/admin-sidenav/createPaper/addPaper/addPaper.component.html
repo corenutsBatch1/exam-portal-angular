@@ -35,7 +35,7 @@
   </mat-select>
 </mat-form-field>
 
-<table class="table table-striped"*ngIf="allFieldsFilled && selectedsubject != 'Coding'" >
+<table class="table table-striped"*ngIf="allFieldsFilled && selectedsubject != 'CODING'" >
 
   <thead>
     <!-- [formControl]="subjectControl" -->
@@ -54,7 +54,7 @@
   <tbody>
     <tr *ngFor="let question of question123 let i=index">
      <td>{{question.id}}</td>
-      <td>{{question.content}}</td>
+      <td [innerHTML]="question.content"></td>
       <td>{{question.optionA}}</td>
       <td>{{question.optionB}}</td>
       <td>{{question.optionC}}</td>
@@ -72,7 +72,7 @@
 </tbody>
  </table>
 
-<table class="table table-striped" *ngIf="allFieldsFilled && selectedsubject === 'Coding'">
+<table class="table table-striped" *ngIf="allFieldsFilled && selectedsubject === 'CODING'">
   <thead >
     <tr>
       <th>S.No</th>
@@ -83,7 +83,7 @@
   <tbody>
     <tr *ngFor="let question of codingQuestion let i=index">
       <td>{{question.id}}</td>
-      <td>{{question.content}}</td>
+      <td [innerHTML]="question.content"></td>
       <td>
         <mat-checkbox [disabled]="isDisabled" class="example-margin" color="primary" (change)="checkboxChanged($event,question.id,question.subject?.name)"></mat-checkbox>
 </td>

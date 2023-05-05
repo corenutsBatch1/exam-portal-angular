@@ -29,7 +29,7 @@
       mode: 'markdown'
       }">
     </ngx-codemirror> -->
-    <ckeditor [editor]="Editor" [(ngModel)]="questionContent" data="<p>Add question</p>"></ckeditor>
+    <ckeditor [editor]="Editor" formControlName="question" [(ngModel)]="questionContent" name="content" ></ckeditor>
     </div>
   </div>
   <div *ngFor="let input of inputs; let i = index">

@@ -3,7 +3,7 @@
     <div class="row">
       <form>
         <mat-card class="card">
-          <div>
+          <div> <button class="float-left mr-4 arrow"  (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
             <h2 class="text-center title">Add Question
               <button
                 class="btn btn-secondary btn-sm back float-left" (click)="goBack()"> <mat-icon>arrow_back</mat-icon>
@@ -36,8 +36,8 @@
 
           <div class="form-group">
             <h3><b>Enter the question</b></h3>
-        
-  <ckeditor [editor]="Editor" [(ngModel)]="Questions.content" name="content" data="<p>Add question</p>"></ckeditor>
+
+  <ckeditor [editor]="Editor" [(ngModel)]="Questions.content" name="content"></ckeditor>
           </div>
 
           <table class="table">
@@ -139,8 +139,8 @@
             </tr>
           </table>
 
-          <mat-form-field appearance="fill">
-            <mat-label>Choose   Level</mat-label>
+          <mat-form-field appearance="fill" class="level">
+            <mat-label>Choose  Level</mat-label>
             <mat-select [(ngModel)]="Questions.qtype" name="q_type">
               <mat-option value="simple">simple</mat-option>
               <mat-option value="medium">medium</mat-option>
@@ -150,19 +150,11 @@
           <div class="text-center">
             <button
               (click)="addQuestion(this.Questions, subject_id)"
-              class="btn btn-primary btn-sm addButton"
-            >
+              class="btn btn-primary btn-sm addButton">
               Add question
             </button>
             <button type="reset" class="btn btn-danger ml-3 btn-sm clear">
               Clear
-            </button>
-            <button
-              (click)="goBack()"
-              class="btn btn-secondary btn-sm Back ml-3"
-              style="background-color: #1f2937"
-            >
-              <mat-icon>arrow_back</mat-icon>
             </button>
           </div>
         </mat-card>

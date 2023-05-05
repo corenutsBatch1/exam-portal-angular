@@ -30,6 +30,7 @@ Subjects:Subject = new Subject();
   ngOnInit() {
     console.log(this.id);
    this.isAddOperation = this.route.snapshot.queryParams['action'] === 'add';
+   this.subject.name='';
    console.log(this.isAddOperation)
    console.log("---")
 
@@ -62,7 +63,7 @@ Subjects:Subject = new Subject();
 
     }
     else{
-this.submitted=true;
+    this.submitted=true;
     if (this.myForm.invalid) {
       console.log(this.myForm);
       console.log("false");

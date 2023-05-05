@@ -1,0 +1,61 @@
+<button class="arrowbutton" (click)="goBack()"> <mat-icon>arrow_back</mat-icon>
+</button>
+<ng-container>
+  <!-- Show table here -->
+  <div class="row">
+    <div class="col-md-10">
+
+      <mat-form-field class="search">
+        <mat-label class="mt-2">Search here</mat-label>
+        <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter($event )" #input>
+      </mat-form-field>
+      <img id="pdf-icon" class="pdfImg" (click)="generatePDF()" src="assets/5467016.svg" alt="">
+    <div class="row table">
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 ml-4 table" id="my-table">
+
+        <!-- Serial Number Column -->
+        <ng-container matColumnDef="serialNumber">
+          <th class="text-center" mat-header-cell *matHeaderCellDef>Serial No </th>
+          <td class="text-center" mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Exam code Column -->
+        <ng-container matColumnDef="examCode">
+          <th class="text-center" mat-header-cell *matHeaderCellDef>Exam Code </th>
+          <td class="text-center" mat-cell *matCellDef="let element"> {{element.exam.code}} </td>
+        </ng-container>
+
+        <!-- Name of Student Column -->
+        <ng-container matColumnDef="name">
+          <th class="text-center" mat-header-cell *matHeaderCellDef>Name Of Student </th>
+          <td class="text-center" mat-cell *matCellDef="let element"> {{element.user.name}} </td>
+        </ng-container>
+
+        <!-- Total Marks Column -->
+        <ng-container matColumnDef="totalMarks">
+          <th class="text-center" mat-header-cell *matHeaderCellDef>Total Marks </th>
+          <td class="text-center" mat-cell *matCellDef="let element"> {{element.totalMarks}} </td>
+        </ng-container>
+
+        <!-- Obtained Marks Column -->
+        <ng-container matColumnDef="obtainedMarks">
+          <th class="text-center" mat-header-cell *matHeaderCellDef>Obtained Marks </th>
+          <td class="text-center" mat-cell *matCellDef="let element"> {{element.marks}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <ng-container matNoDataRow>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell text-center" colspan="4">No data matching  this withsearch "{{input.value}}"</td>
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+    </div>
+  </div>
+</ng-container>
+

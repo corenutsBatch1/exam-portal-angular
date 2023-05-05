@@ -1,7 +1,7 @@
 
 <form [formGroup]="questionForm" >
 
-  <div>
+  <div class="mt-2">
     <mat-form-field appearance="fill" classs="left">
       <mat-label>Select a subject</mat-label>
       <mat-select [(ngModel)]="selectedsubject" name="selectedSubject" [ngModelOptions]="{standalone: true}"
@@ -10,7 +10,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="right">
+    <mat-form-field appearance="fill" class="right ml-3">
       <mat-label>Select a topic</mat-label>
       <mat-select [(ngModel)]="subject_id" name="subject_id" [formControl]="subjectControl">
         <mat-option *ngFor="let subject of  filteredTopics" [value]="subject.id">{{ subject.description }}</mat-option>

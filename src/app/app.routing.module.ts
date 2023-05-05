@@ -1,3 +1,4 @@
+import { AllUserExamResultComponent } from './components/admin-homepage/admin-sidenav/user-result/all-user-exam-result/all-user-exam-result.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { NgModule, Component } from '@angular/core';
@@ -45,7 +46,11 @@ import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/
         canActivate: [AuthGuard],
         children: [
           // {path:'home',component:HomeComponent},
-          { path: 'result', component: UserResultComponent },
+          { path: 'result', component: UserResultComponent,
+          children:[
+            {path:'alluser', component:AllUserExamResultComponent}
+          ]
+        },
           {
             path: 'allusers' ,component: UsersComponent
           },

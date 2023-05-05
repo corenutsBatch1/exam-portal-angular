@@ -13,7 +13,7 @@
       <mat-icon (click)="generatePDF()" class="maticon mt-4">picture_as_pdfdownload</mat-icon>
       <mat-icon (click)="generatePDF()"  class="maticon mt-4">download</mat-icon>
      </button>
-    <h1 style="text-align: center;" class="score">Your Score is : {{score}} /{{totalmarks}} </h1></div>
+    <h1 style="text-align: center;" class="score">Your Score is : {{score}} / {{this.exam?.createPaper?.totalMarks}} </h1></div>
 <mat-list *ngFor="let question of questions let i=index">
             <h1 [innerHTML]="question.content">{{i+1}}</h1>
 
@@ -48,12 +48,12 @@
               <mat-list-item>
                 <div class="white-space:nowrap" *ngFor="let answer of userAnswers">
                   <label class="option" style="color: red;font-size: large;" *ngIf="question.id==answer.question?.id && answer.userAnswer!=question.answer">YourAnswer : {{ answer.userAnswer}}</label>
-                  <label class="option" style="color:blue;font-size: large;" *ngIf="question.id==answer.question?.id && answer.userAnswer==question.answer ">YourAnswer : {{ answer.userAnswer}}</label>
+                  <label class="option" style="color:rgb(0, 255, 51);font-size: large;" *ngIf="question.id==answer.question?.id && answer.userAnswer==question.answer ">YourAnswer : {{ answer.userAnswer}}</label>
                 </div>
                </mat-list-item>
               <mat-list-item>
                 <div class="white-space:nowrap">
-                  <label class="option" style="color: rgb(7, 245, 7);font-size: large;">CorrectAnswer : {{ question.answer}}</label>
+                  <label class="option" style="color: rgb(7, 7, 245);font-size: large;">CorrectAnswer : {{ question.answer}}</label>
                 </div>
                </mat-list-item>
 

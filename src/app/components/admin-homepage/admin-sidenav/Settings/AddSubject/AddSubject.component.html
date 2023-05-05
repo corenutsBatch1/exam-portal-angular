@@ -1,3 +1,5 @@
+<button class="arrowbutton" (click)="goBack()"> <mat-icon>arrow_back</mat-icon>
+</button>
 
     <mat-card color="primary" class="card mat-elevation-z8" style="height:300px;width:300%;display:flex;justify-content:center;align-items:center;"  >
 
@@ -20,7 +22,7 @@
             <input class="form-control" type="text" formControlName="name" placeholder="Enter name"
               (ngModelChange)="subject.name = $event.toUpperCase(); inputvalue = subject.name"
               [ngModel]="subject.name" [ngClass]="{ 'is-invalid':(submitted && f.name.errors)|| (f.name.touched && f.name.errors) }">
-            
+
             <div *ngIf="(submitted && f.name.errors) || (f.name.touched && f.name.errors)" class="invalid-feedback">
               <div *ngIf="f.name.errors?.required">Subject name required</div>
             </div>
@@ -47,7 +49,7 @@
       <br>
       <div class="text-center"><input class="btn btn-success btn-sm submit"  type="submit" value="{{ subject.id ? 'Update' : 'Add' }}">
         <button class="btn btn-warning btn-sm ml-4" type="reset">Clear</button>
-        <button class="btn btn-secondary btn-sm ml-4" (click)="goBack()">Back</button>
+        <button class="btn btn-secondary btn-sm ml-4" (click)="goBack()">Go back</button>
       </div>
 
 

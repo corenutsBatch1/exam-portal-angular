@@ -49,6 +49,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/users.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AllUserExamResultComponent } from './components/admin-homepage/admin-sidenav/user-result/all-user-exam-result/all-user-exam-result.component';
+import { IndividualUserExamResultComponent } from './components/admin-homepage/admin-sidenav/user-result/individual-user-exam-result/individual-user-exam-result.component';
+import { AllUserExamResultTableComponent } from './components/admin-homepage/admin-sidenav/user-result/all-user-exam-result-table/all-user-exam-result-table.component';
 
 
 @NgModule({
@@ -81,7 +84,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     UserAnswersComponent,
     AddCodingQuestionComponent,
     CodingComponent,
-    UsersComponent
+    UsersComponent,
+    AllUserExamResultComponent,
+    IndividualUserExamResultComponent,
+    AllUserExamResultTableComponent
 
   ],
   imports: [

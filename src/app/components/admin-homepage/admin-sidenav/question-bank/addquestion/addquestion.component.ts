@@ -1,14 +1,11 @@
 
-import { Component, OnInit, Directive, EventEmitter, Output } from '@angular/core';
-
+import { Component, OnInit,EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { FormControl } from '@angular/forms';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
 import { Router } from '@angular/router';
-import { MatSelectChange } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
+
 import swal from 'sweetalert';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -80,12 +77,13 @@ export class AddquestionComponent implements OnInit{
     console.log(id)
     this.answers.sort();
     this.Questions.answer = this.answers.join('');
-    
+
     console.log(this.Questions.answer)
     this.http.post(`http://localhost:8089/api/addquestion/${id}`, Questions).subscribe(
 
       response=>{
         swal("Question added successfully","", "success");
+        // location.reload();
         // this.goBack();
       },
 

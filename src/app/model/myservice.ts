@@ -7,7 +7,11 @@ export class MyserviceService {
   uid?:any;
   eid?:any;
   codingmark=0;
+<<<<<<< Updated upstream
 
+=======
+  bool?: boolean;
+>>>>>>> Stashed changes
 constructor() { }
 
 userid(id:any)
@@ -37,6 +41,7 @@ getcodingmarks(){
   return this.codingmark;
 }
 
+<<<<<<< Updated upstream
 cid?:number;
 
 setCId(id: number) {
@@ -47,4 +52,12 @@ getCId() {
   return this.cid;
 }
 
+=======
+codingBoolean(flag:boolean){
+  this.bool=flag;
+  }
+  sendCodingBoolean(){
+    return this.bool;
+  }
+>>>>>>> Stashed changes
 }

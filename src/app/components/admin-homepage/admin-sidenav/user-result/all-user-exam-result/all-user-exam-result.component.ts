@@ -145,6 +145,8 @@ export class AllUserExamResultComponent {
 
   }
  }
+
+
   userpiechart(name:any){
     this.examcode?.splice(0, this.examcode.length);
     this.ueseexammarks?.splice(0, this.ueseexammarks.length);
@@ -205,7 +207,13 @@ export class AllUserExamResultComponent {
           labels: ['above80', 'above60', 'above35', 'fail'],
           datasets: [{
             label: 'Exam Report',
-            data: [this.above80, this.above60, this.above35, this.fail], // converted string values to numbers
+            data: [this.above80, this.above60, this.above35, this.fail],
+            backgroundColor: [
+              'green',
+              'blue',
+              'aqua',
+              'red'
+            ],
             borderWidth: 1
           }]
         },
@@ -241,6 +249,12 @@ export class AllUserExamResultComponent {
           datasets: [{
             label: 'Exam Report',
             data: data, // use dynamically generated data
+            backgroundColor: [
+              'green',
+              'blue',
+              'aqua',
+              'red'
+            ],
             borderWidth: 1
           }]
         },
@@ -274,6 +288,12 @@ export class AllUserExamResultComponent {
           datasets: [{
             label: 'Exam Report',
             data: [this.above80, this.above60, this.above35, this.fail], // converted string values to numbers
+            backgroundColor: [
+              this.above80 > 0 ? 'green' : 'red',
+              this.above60 > 0 ? 'blue' : 'red',
+              this.above35 > 0 ? 'aqua' : 'red',
+              this.fail > 0 ? 'red' : 'green'
+            ],
             borderWidth: 1
           }]
         },
@@ -309,6 +329,12 @@ export class AllUserExamResultComponent {
           datasets: [{
             label: 'Exam Report',
             data: data, // use dynamically generated data
+            backgroundColor: [
+              'green',
+              'blue',
+              'aqua',
+              'red'
+            ],
             borderWidth: 1
           }]
         },

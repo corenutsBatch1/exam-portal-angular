@@ -160,5 +160,16 @@ img{
 
 .question{
   margin-left: 50px;
-  
+
+}
+
+h4{
+  background-color: rgb(86, 229, 229);
+  border: 0.1rem solid black ;
+  width: 60%;
+  padding-left:0.2rem;
+}
+
+.totalquestion{
+  margin-top: 0.2rem;
 }

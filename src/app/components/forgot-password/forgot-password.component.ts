@@ -44,6 +44,7 @@ import { FormGroup,Validators,FormBuilder } from '@angular/forms';
 
 export class ForgotPasswordComponent {
 hide = true;
+hidec=true;
 //Form variables
 resetForm:any = FormGroup;
 submitted = false;
@@ -63,9 +64,30 @@ ngOnInit() {
   //Add User form validations
   this.resetForm = this.formBuilder.group({
     remail: ['', [Validators.required, Validators.email]],
-    rpassword: ['', [Validators.required,Validators.minLength(6),Validators.pattern( /^\S*$/)]]
-  });
+    rpassword: ['', [Validators.required,Validators.minLength(6),Validators.pattern( /^\S*$/)]],
+    rcpassword: [
+      '',
+      [
+        Validators.required,
+      ]
+    ],
+  },{
+    validator: this.passwordMatchValidator('rpassword', 'rcpassword') // Add custom validator
+  }
+  );
 }
+
+  // Custom validator function to check if password and confirm password match
+  passwordMatchValidator(passwordField: string, confirmPasswordField: string) {
+    return (group: FormGroup) => {
+      let password = group.controls[passwordField];
+      let confirmPassword = group.controls[confirmPasswordField];
+
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.setErrors({ passwordMismatch: true });
+      }
+    };
+  }
 
 resetpassword(user: User) {
   this.submitted = true;
@@ -83,7 +105,7 @@ resetpassword(user: User) {
       .subscribe((data) => {
 
         if (data == true  ) {
-          sweetAlert("Password changed sucessfully!!", "Now,login with new password", "sucess");
+          sweetAlert("Password changed sucessfully!!", "Now,login with new password", "success");
 
         } else {
           sweetAlert("Invalid Credentials", "Register and try again", "error");

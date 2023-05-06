@@ -45,6 +45,7 @@ export class UserexamComponent {
   totalQuestions:number=0;
   remainingQuestion:number=0;
   timeexpire?:boolean=false;
+  cId?:number;
 
   checkboxoption?:string[]=[];
   checkboxState: { [key: number]: string[] } = {};
@@ -59,6 +60,8 @@ export class UserexamComponent {
   ) {}
 
   ngOnInit(): void {
+    this.cId = this.service.getCId();
+    console.log(this.cId);
     this.locationStrategy.onPopState(() => {
       history.forward();
     });

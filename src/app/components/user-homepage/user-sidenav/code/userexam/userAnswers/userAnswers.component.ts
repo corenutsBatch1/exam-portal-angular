@@ -10,7 +10,6 @@ import { Question } from 'src/app/model/model/Question';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
-import * as jsPDF from 'jspdf';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;

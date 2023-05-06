@@ -39,7 +39,10 @@
           <div class="form-group">
             <h3><b>Enter the question</b></h3>
 
-  <ckeditor [editor]="Editor" [(ngModel)]="Questions.content" name="content" data="<p>Add question</p>"></ckeditor>
+            <ckeditor [editor]="Editor" [(ngModel)]="Questions.content" name="content"
+            [config]="{placeholder: 'Enter your question here..............'}">
+          </ckeditor>
+
           </div>
 
           <table class="table">

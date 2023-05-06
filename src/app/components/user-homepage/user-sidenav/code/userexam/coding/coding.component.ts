@@ -30,11 +30,8 @@ export class CodingComponent {
   index=0;
   codingMarks=0;
   count:number=0;
-<<<<<<< Updated upstream
   setId:number=0;
-=======
   flag:boolean = false;
->>>>>>> Stashed changes
    response?:any[];
   constructor(private apiService:CodingApiService,private service:MyserviceService,private http:HttpClient){}
   ngOnInit(): void {
@@ -91,22 +88,20 @@ export class CodingComponent {
                 this.count++;
                 console.log(this.count);
               console.log("Your program is correct.");
-              if(this.count==this.Testcase?.length)
-<<<<<<< Updated upstream
-              {
-                  this.codingMarks=5;
-                  console.log("in coding"+this.codingMarks)
-                  this.service.codingmarks(this.codingMarks);
-                  console.log(this.codingMarks+"in coding component")
-              }
-              else{
-               console.log("no marks")
-              }
-            } else {
-              console.log("Your program is incorrect.");
-            }
+               if(this.count==this.Testcase?.length)
+            //   {
+            //       this.codingMarks=5;
+            //       console.log("in coding"+this.codingMarks)
+            //       this.service.codingmarks(this.codingMarks);
+            //       console.log(this.codingMarks+"in coding component")
+            //   }
+            //   else{
+            //    console.log("no marks")
+            //   }
+            // } else {
+            //   console.log("Your program is incorrect.");
+            // }
 
-=======
              {
                 this.flag = true;
                  this.codingMarks=5;
@@ -120,7 +115,6 @@ export class CodingComponent {
               console.log("your program is incorrect")
             }
             this.sendingBoolean();
->>>>>>> Stashed changes
 
            //  this.response=this.response?.concat(response);
           // console.log(this.response)

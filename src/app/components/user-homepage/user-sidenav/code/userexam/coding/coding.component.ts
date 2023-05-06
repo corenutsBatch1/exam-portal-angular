@@ -41,11 +41,9 @@ export class CodingComponent {
     console.log(this.userid)
   }
 
-  sendCId() {
-    const id = 123;
-    this.service.setCId(id);
-  }
+
   runCode(code:string) {
+
     console.log("code")
     console.log(code)
     if(!this.selectedLanguage){
@@ -74,6 +72,7 @@ export class CodingComponent {
       }
 
     }
+    this.service.setCId(this.id);
       this.http.get(`http://localhost:8089/api/getalltestcases/${this.id}`).subscribe((data)=>{
         this.Testcase?.splice(0,this.Testcase.length);
        this.Testcase=this.Testcase?.concat(data);

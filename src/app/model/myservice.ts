@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -38,9 +38,11 @@ getcodingmarks(){
 }
 
 cid?:number;
+runCodeClicked=new EventEmitter();
 
 setCId(id: number) {
   this.cid = id;
+  this.runCodeClicked.emit(this.cid);
 }
 
 getCId() {

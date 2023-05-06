@@ -60,8 +60,16 @@ export class UserexamComponent {
   ) {}
 
   ngOnInit(): void {
-    this.cId = this.service.getCId();
-    console.log(this.cId);
+    // this.cId = this.service.getCId();
+    // console.log(this.cId);
+    this.service.runCodeClicked.subscribe((data)=>{this.cId=data
+
+      if(this.cId!=undefined){
+        if(!this.stateChange.includes(this.cId)){
+          this.stateChange.push(this.cId);
+        }}
+      })
+
     this.locationStrategy.onPopState(() => {
       history.forward();
     });

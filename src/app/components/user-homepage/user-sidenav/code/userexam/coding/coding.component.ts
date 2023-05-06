@@ -30,6 +30,7 @@ export class CodingComponent {
   index=0;
   codingMarks=0;
   count:number=0;
+  setId:number=0;
    response?:any[];
   constructor(private apiService:CodingApiService,private service:MyserviceService,private http:HttpClient){}
   ngOnInit(): void {
@@ -38,7 +39,11 @@ export class CodingComponent {
     console.log(this.id)
     console.log(this.examid)
     console.log(this.userid)
+  }
 
+  sendCId() {
+    const id = 123;
+    this.service.setCId(id);
   }
   runCode(code:string) {
     console.log("code")

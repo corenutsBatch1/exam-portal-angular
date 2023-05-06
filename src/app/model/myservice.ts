@@ -7,6 +7,7 @@ export class MyserviceService {
   uid?:any;
   eid?:any;
   codingmark=0;
+
 constructor() { }
 
 userid(id:any)
@@ -35,4 +36,15 @@ codingmarks(marks:any){
 getcodingmarks(){
   return this.codingmark;
 }
+
+cid?:number;
+
+setCId(id: number) {
+  this.cid = id;
+}
+
+getCId() {
+  return this.cid;
+}
+
 }

@@ -23,14 +23,14 @@ export class AddExamComponent implements OnInit{
   subjectControl = new FormControl();
 
   exams:ScheduleExam[]=[];
+  start?:any;
+  end?:any;
   ngOnInit(): void {
 
     this.http.get<CreatePaper[]>(`http://localhost:8089/api/getpaper`).subscribe(data=>{
       console.log(data);
        this.papers=data;
        console.log(this.papers);
-       console.log("---------------")
-
     })
    }
 
@@ -41,7 +41,28 @@ export class AddExamComponent implements OnInit{
 
   addexam(scheduleExam:ScheduleExam)
   {
-    this.http.post<ScheduleExam>(`http://localhost:8089/api/addexam/${this.paperId}`,scheduleExam).subscribe(
+    if (typeof scheduleExam.startTime === 'string' && typeof scheduleExam.endTime === 'string') {
+     this.start = new Date(scheduleExam.startTime);
+     this.end = new Date(scheduleExam.endTime);
+      console.log(this.start);
+      console.log(this.end);
+      // Rest of your code here
+    } else {
+      // Handle the error or do nothing
+    }
+     if(scheduleExam.name==undefined || scheduleExam.code==undefined || scheduleExam.startTime==undefined || scheduleExam.endTime==undefined || scheduleExam.examDuration==undefined || this.paperId==undefined )
+     {
+
+      swal("All field must be required","", "error");
+     }
+     else{
+
+      if(this.start>this.end) {
+        swal("strat time  must be less than end time","", "error");
+
+      }
+       else{
+        this.http.post<ScheduleExam>(`http://localhost:8089/api/addexam/${this.paperId}`,scheduleExam).subscribe(
 
     response=>{
       swal("Exam scheduled successfully","", "success");
@@ -50,17 +71,16 @@ export class AddExamComponent implements OnInit{
     error=>{
       //console.error('Error:', error.message);
       //console.log('Error details:', JSON.stringify(error));
-      swal("All field must be required","", "error");
+     // swal("All field must be required","", "error");
     }
-
-
-
   );
+       }
+    }
   }
   goBack() {
     console.log("go back")
       this.loadAddExampage.emit(true);
-      location.reload();
+     //location.reload();
      }
 
 }

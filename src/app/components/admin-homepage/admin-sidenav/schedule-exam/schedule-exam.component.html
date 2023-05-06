@@ -48,8 +48,6 @@
     <mat-row *matRowDef="let row; columns: ['sNo', 'name', 'code', 'startTime', 'endTime', 'paperId', 'delete']"></mat-row>
   </mat-table>
   <mat-paginator class="paginator" #paginator  [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 40]" showFirstLastButtons></mat-paginator>
-
-
   </div>
   <div *ngIf="!addexam" >
   <app-add-exam (loadAddExampage)="loadAddExampage(true)"></app-add-exam>

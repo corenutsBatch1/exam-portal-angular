@@ -201,23 +201,7 @@ startTimer() {
     }
   }
   submitoption(qid:any,optionarray?:any){
-    // optionarray.sort();
-    // //this.Questions.answer = this.answers.join('');
-    // this.answer = {
-    //   user: {
-    //     id: this.uid,
-    //   },
-    //   exam: {
-    //     id: this.eid,
-    //   },
-    //   question: {
-    //     id: qid,
-    //   },
-    //   userAnswer:optionarray.join(''),
-    // };
-    //    this.http.post(`http://localhost:8089/api/saveanswer`,this.answer).subscribe(data=>{
-    //    this.selectedOption=optionarray;
-    //   });
+   
      if(!this.stateChange.includes(qid)){
       this.stateChange.push(qid);
     }

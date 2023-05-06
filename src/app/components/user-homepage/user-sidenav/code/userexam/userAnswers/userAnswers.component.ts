@@ -34,7 +34,7 @@ export class UserAnswersComponent implements OnInit {
   totalmarks?:number;
   obtainedMarks?:Marks;
   exam?:ScheduleExam;
-
+  codeFlag?:boolean;
   constructor(private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService, private locationStrategy: LocationStrategy
     ) { }
 
@@ -60,12 +60,15 @@ export class UserAnswersComponent implements OnInit {
   this.loadUserAnswers().subscribe((data)=>this.userAnswers=data)
 
   this.loadExam().subscribe(data=>{this.exam=data})
+  this.codeFlag = this.service.sendCodingBoolean();
 
 }
 
   loadQuestions(): Observable<Question[]> {
     return this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`);
   }
+
+
 
   loadScore(): Observable<number>{
     return this.http.get<number>(`http://localhost:8090/api/getScore/${this.uid}/${this.eid}`);

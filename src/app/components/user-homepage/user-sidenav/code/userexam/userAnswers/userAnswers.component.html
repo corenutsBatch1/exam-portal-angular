@@ -16,8 +16,21 @@
     <h1 style="text-align: center;" class="score">Your Score is : {{score}} / {{this.exam?.createPaper?.totalMarks}} </h1></div>
 <mat-list *ngFor="let question of questions let i=index">
             <h1 [innerHTML]="question.content">{{i+1}}</h1>
+            <div *ngIf="question.subject?.name == 'CODING'">
+              <mat-list-item>
+                <div style="white-space:nowrap">
+                    <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="A" /> -->
+                    <!-- <label class="option">A : {{ question.optionA }}</label> -->
+                    <div style="color:rgb(0, 255, 51);font-size: large;" *ngIf="codeFlag">Your Code is Correct
 
-            <div *ngIf="question.subject?.name != 'Coding'">
+                    </div>
+                    <div style="color: red;font-size: large;" *ngIf="!codeFlag">Your Code is Wrong
+
+                    </div>
+                </div>
+              </mat-list-item>
+            </div>
+            <div *ngIf="question.subject?.name != 'CODING'">
               <mat-list-item>
                 <div style="white-space:nowrap">
                     <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="A" /> -->

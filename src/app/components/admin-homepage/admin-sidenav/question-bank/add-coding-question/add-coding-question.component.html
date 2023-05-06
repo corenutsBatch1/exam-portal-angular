@@ -39,7 +39,7 @@
     <label for="output-{{i}}">Expected output {{i + 1}}:</label>
     <input type="text" id="output-{{i}}" name="output{{i}}" [(ngModel)]="input.output" [ngModelOptions]="{standalone: true}">
   </div>
-  <button class="btn btn-primary btn-sm" (click)="addInput()">Add Input</button>&nbsp;
-  <button class="btn btn-warning btn-sm" (click)="removeInput()">Remove Input</button>&nbsp;
-  <button class="btn btn-success btn-sm submit" type="submit" (click)="onSubmit(subject_id)">Save Question</button>
+  <button class="btn btn-primary btn-sm mt-2" (click)="addInput()">Add Input</button>&nbsp;
+  <button class="btn btn-warning btn-sm mt-2" (click)="removeInput()">Remove Input</button>&nbsp;
+  <button class="btn btn-success btn-sm mt-2 submit" type="submit" (click)="onSubmit(subject_id)">Save Question</button>
 </form>

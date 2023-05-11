@@ -1,33 +1,40 @@
-<button class="arrowbutton" (click)="goBack()"> <mat-icon>arrow_back</mat-icon>
+<button class="arrowbutton" (click)="goBack()">
+  <mat-icon>arrow_back</mat-icon>
 </button>
 
+<!-- Pie Chart Section -->
+<div>
+  <div class="col-lg-4 canvasheading">
+    <h1>Users Exam Result (Pie Chart)</h1>
+  </div>
 
+  <div class="canvassearch">
 
-
-<!-- -------------------------------pie chart-------------- -->
-<ng-container>
-    <!-- Show pie chart here -->
-    <div>
-       <div class="col-lg-4 canvasheading">
-        <h1 class="text-center ml-6" >All User Exam Result Report</h1>
+    <ng-container *ngIf="showExamCodeInput">
+      <button class="btn-sm btn-secondary toggle" type="button" (click)="toggleInput()">Switch to User Name</button>
+      <div>
+        <label for="exam-code">Enter the exam code:</label>
+        <input type="text" id="exam-code" [(ngModel)]="examcode1" />
+        <button class="btn-sm btn-primary ml-1" type="submit" (click)="exampiechart(examcode1)">Submit</button>
       </div>
 
-      <label for="" class="canvassearch">Enter the exam code &nbsp;</label>
-      <input type="text" [(ngModel)]="examcode1"/> &nbsp;
-      <button class="btn-sm btn-primary" type="submit" (click)="exampiechart(examcode1)">
-        Submit
-      </button>
-      <label for="" class="canvassearch">Enter the user name &nbsp;</label>
-      <input type="text" [(ngModel)]="username2"/> &nbsp;
-      <button class="btn-sm btn-primary" type="submit" (click)="userpiechart(username2)">
-        Submit
-      </button>
-              <div class="leftcanvas" style="height: 15rem;">
-                <canvas id="abc"></canvas>
-              </div>
-              <div class="rightcanvas float-right" style="height: 15rem;">
-                <canvas id="def"></canvas>
-              </div>
+    </ng-container>
+
+    <ng-container *ngIf="!showExamCodeInput">
+      <button class="btn-sm btn-secondary toggle" type="button" (click)="toggleInput()">Switch to Exam Code</button>
+      <div>
+        <label for="username">Enter the user name:</label>
+        <input type="text" id="username" [(ngModel)]="username2" />
+        <button class="btn-sm btn-primary ml-1" type="submit" (click)="userpiechart(username2)">Submit</button>
       </div>
 
-</ng-container>
+    </ng-container>
+  </div>
+
+  <div class="leftcanvas" style="height: 15rem;">
+    <canvas id="abc"></canvas>
+  </div>
+  <div class="rightcanvas float-right" style="height: 15rem;">
+    <canvas id="def"></canvas>
+</div>
+</div>

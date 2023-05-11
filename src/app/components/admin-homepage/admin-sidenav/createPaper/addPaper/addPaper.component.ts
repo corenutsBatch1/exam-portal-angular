@@ -177,7 +177,7 @@ goBack() {
   console.log(this.loadAddPaperpage)
      this.loadAddPaperpage.emit(true);
      console.log(this.loadAddPaperpage)
-     location.reload();
+    //  location.reload();
 
      }
 checkboxChanged(event: any, optionValue?: number, subjectName?:string) {

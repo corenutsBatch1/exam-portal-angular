@@ -17,7 +17,7 @@
         <!-- Serial Number Column -->
         <ng-container matColumnDef="serialNumber">
           <th class="text-center" mat-header-cell *matHeaderCellDef>Serial No </th>
-          <td class="text-center" mat-cell *matCellDef="let element"> {{element.id}} </td>
+          <td class="text-center" mat-cell *matCellDef="let i=index"> {{i+1}} </td>
         </ng-container>
 
         <!-- Exam code Column -->
@@ -28,7 +28,7 @@
 
         <!-- Name of Student Column -->
         <ng-container matColumnDef="name">
-          <th class="text-center" mat-header-cell *matHeaderCellDef>Name Of Student </th>
+          <th class="text-center" mat-header-cell *matHeaderCellDef>Name Of User </th>
           <td class="text-center" mat-cell *matCellDef="let element"> {{element.user.name}} </td>
         </ng-container>
 

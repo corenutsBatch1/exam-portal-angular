@@ -93,6 +93,6 @@ export class UsersComponent {
     };
 
     pdfMake.createPdf(documentDefinition).open();
-  }
+  }
 
 }

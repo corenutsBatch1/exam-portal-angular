@@ -110,32 +110,37 @@ export class UserAnswersComponent implements OnInit {
     const docDefinition: TDocumentDefinitions = {
       content: [
         {
-
           text: `Your Score is : ${this.score} / ${this.exam?.createPaper?.totalMarks}`,
           style: 'header'
         },
         {
           ol: this.questions.map((question, i) => {
-            const listItems = [
-              `${question.content}`
-            ];
+            const listItems = [];
 
-            if (question.subject?.name !== 'Coding') {
-              listItems.push(`A) ${question.optionA}`);
-              listItems.push(`B) ${question.optionB}`);
-              listItems.push(`C) ${question.optionC}`);
-              listItems.push(`D) ${question.optionD}`);
+            // Use a regular expression to remove HTML tags from the question content
+            const questionContent = question?.content?.replace(/<[^>]*>/g, '');
 
-              const answer = this.userAnswers.find(answer => answer.question?.id === question.id);
+            if (questionContent) {
+              listItems.push(questionContent);
+            }
+
+            // Add the answer options and user answer (if available) to the listItems array
+            if (question?.subject?.name !== 'CODING') {
+              listItems.push(`A) ${question?.optionA}`);
+              listItems.push(`B) ${question?.optionB}`);
+              listItems.push(`C) ${question?.optionC}`);
+              listItems.push(`D) ${question?.optionD}`);
+
+              const answer = this.userAnswers.find(answer => answer?.question?.id === question?.id);
 
               if (answer) {
                   listItems.push(`YourAnswer : ${answer.userAnswer}`);
               }
 
-              listItems.push(`CorrectAnswer : ${question.answer}`);
+              listItems.push(`CorrectAnswer : ${question?.answer}`);
               listItems.push('\n');
 
-            }else{
+            } else {
               listItems.push('\n');
             }
 
@@ -155,7 +160,7 @@ export class UserAnswersComponent implements OnInit {
     };
 
     pdfMake.createPdf(docDefinition).open();
-  }
+}
 
 
 

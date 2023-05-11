@@ -71,7 +71,7 @@ export class AddExamComponent implements OnInit{
     error=>{
       //console.error('Error:', error.message);
       //console.log('Error details:', JSON.stringify(error));
-     // swal("All field must be required","", "error");
+     swal("All field must be required","", "error");
     }
   );
        }
@@ -80,7 +80,6 @@ export class AddExamComponent implements OnInit{
   goBack() {
     console.log("go back")
       this.loadAddExampage.emit(true);
-     //location.reload();
      }
 
 }

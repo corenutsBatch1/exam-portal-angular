@@ -7,7 +7,7 @@ import { MyserviceService } from 'src/app/model/myservice';
 import { UserCode } from 'src/app/model/model/UserCode';
 import { HttpClient } from '@angular/common/http';
 import { TestCases } from 'src/app/model/model/TestCases';
-
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-coding',
@@ -88,20 +88,7 @@ export class CodingComponent {
                 this.count++;
                 console.log(this.count);
               console.log("Your program is correct.");
-               if(this.count==this.Testcase?.length)
-            //   {
-            //       this.codingMarks=5;
-            //       console.log("in coding"+this.codingMarks)
-            //       this.service.codingmarks(this.codingMarks);
-            //       console.log(this.codingMarks+"in coding component")
-            //   }
-            //   else{
-            //    console.log("no marks")
-            //   }
-            // } else {
-            //   console.log("Your program is incorrect.");
-            // }
-
+              if(this.count==this.Testcase?.length)
              {
                 this.flag = true;
                  this.codingMarks=5;
@@ -119,8 +106,6 @@ export class CodingComponent {
            //  this.response=this.response?.concat(response);
           // console.log(this.response)
            //this.codeOutput = this.codeOutput?.concat(response);
-
-
     }, error => {
       console.log(error)
       this.codeOutput = error
@@ -128,8 +113,10 @@ export class CodingComponent {
           })
           this.http.post(javaUrl,this.userCode).subscribe(response => {
             console.log('Upload successful!');
+            swal("code submitted successfully","", "success");
           }, error => {
             console.error('Upload failed:', error);
+
           });
 
 

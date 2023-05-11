@@ -60,7 +60,7 @@ export class AllUserExamResultComponent {
   codeFilterValue = '';
   ueseexammarks?:number[]=[];
   examcode:string[]=[]
-
+  showExamCodeInput:boolean = true;
   dataSource = new MatTableDataSource<Marks>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -68,6 +68,9 @@ export class AllUserExamResultComponent {
   }
 
 
+  toggleInput(){
+    this.showExamCodeInput = !this.showExamCodeInput;
+  }
   ngOnInit(): void {
     this.getMarks().subscribe((data)=>{this.marks=data
                                     this.dataSource.data=this.marks

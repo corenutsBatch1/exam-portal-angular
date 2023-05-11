@@ -7,40 +7,40 @@
         <div class="col-sm-6">
           <mat-card class="card leftcard" >
             <mat-card-header>
-              <div mat-card-avatar><img class="ml-1" src="assets/Analytics.svg" alt="icon"></div>
+              <div mat-card-avatar><img class="svg" src="assets/Analytics.svg" alt="icon"></div>
 
-              <mat-card-title class="text-center ml-2">All Users piechart</mat-card-title>
+              <mat-card-title class="text-center title">Users Pie-Chart</mat-card-title>
 
               <mat-card-subtitle class="text-center"></mat-card-subtitle>
             </mat-card-header>
 
             <mat-card-content>
               <p>
-                 All user exam result in the form of pie chart
+                 Users exam result in the form of pie chart
               </p>
             </mat-card-content>
             <mat-card-actions>
-              <button id="add-button" style="margin-left:6rem;" mat-raised-button color="primary" (click)="loadAllUserExamResult(false)">Go for pie charts</button>
+              <button class="button1" id="add-button" style="margin-left:6rem;" mat-raised-button color="primary" (click)="loadAllUserExamResult(false)">Go for pie charts</button>
             </mat-card-actions>
           </mat-card>
         </div>
         <div class="col-sm-6">
           <mat-card class="card rightcard" >
             <mat-card-header>
-              <div mat-card-avatar><img class="ml-1" src="assets/Results.svg" alt="icon"></div>
+              <div mat-card-avatar><img class="svg" src="assets/Results.svg" alt="icon"></div>
 
-              <mat-card-title class="text-center ml-2">Download Exam Result</mat-card-title>
+              <mat-card-title class="title2">Download User's Exam Result</mat-card-title>
 
               <mat-card-subtitle class="text-center"></mat-card-subtitle>
             </mat-card-header>
 
             <mat-card-content>
               <p>
-                Download exam result based individual user
+                Download exam result based on user's
               </p>
             </mat-card-content>
-            <mat-card-actions>
-              <button id="add-button" style="margin-left:6rem;" mat-raised-button color="primary" (click)="loadIndividualUserExamResult(false)" >Go for download</button>
+            <mat-card-actions class="button2">
+              <button  id="add-button" style="margin-left:6rem;" mat-raised-button color="primary" (click)="loadIndividualUserExamResult(false)" >Go for download</button>
             </mat-card-actions>
           </mat-card>
         </div>
@@ -50,20 +50,20 @@
 
           <mat-card class="card leftcard mt-4" >
             <mat-card-header>
-              <div mat-card-avatar><img class="ml-1" src="assets/Stats.svg" alt="icon"></div>
+              <div mat-card-avatar><img class="svg" src="assets/Stats.svg" alt="icon"></div>
 
-              <mat-card-title class="text-center ml-2">All User Exam Result</mat-card-title>
+              <mat-card-title class="text-center title">Users Exam Result</mat-card-title>
 
               <mat-card-subtitle class="text-center"></mat-card-subtitle>
             </mat-card-header>
 
             <mat-card-content>
               <p>
-                All user exam result in the form of tabular format
+                Users exam result in the form of tabular format
               </p>
             </mat-card-content>
-            <mat-card-actions>
-              <button id="add-button" style="margin-left:6rem;" mat-raised-button color="primary" (click)="loadAllUserExamResultTable(false)" >Go for table</button>
+            <mat-card-actions class="button3">
+              <button  id="add-button" style="margin-left:6rem;" mat-raised-button color="primary" (click)="loadAllUserExamResultTable(false)" >Go for table</button>
             </mat-card-actions>
           </mat-card>
 

@@ -1,12 +1,27 @@
-table{
-  width: 100%;
+.table{
+  width: 90%;
   margin-left: 10px;
 }
 
 th{
   color: rgb(243, 248, 248);
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.355);
 }
+
 .mat-mdc-header-row{
-  background-color: rgb(0, 11, 11);
+  background-color: rgba(0, 11, 11, 0.676);
+}
+
+.pdfImg{
+  height: 3rem;
+  width: 3rem;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+
+}
+
+.search{
+  margin-top: 1rem;
+  margin-right: 45rem;
+
 }

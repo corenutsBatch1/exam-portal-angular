@@ -16,7 +16,7 @@
 } */
 
 .card:hover {
-  transform: translateY(-2px) scale(1.005);
+  transform: translateY(-2px) scale(1.010);
 }
 
 button:hover{
@@ -34,4 +34,30 @@ button:hover{
 
 button{
   margin-left: 1rem;
+}
+
+.svg{
+  height: 2.5rem;
+  width: 2rem;
+  margin-left:2.5rem;
+  /* background-color: aqua; */
+}
+
+.title{
+  margin-top: 0.5rem;
+  margin-left: 2.5rem;
+  /* background-color: blue; */
+}
+
+.button3{
+  margin-left: 2rem;
+}
+
+.button2{
+  margin-left: 1rem;
+}
+
+.title2{
+  margin-top: 0.2rem;
+  margin-left: 0.6rem;
 }

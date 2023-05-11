@@ -212,7 +212,7 @@ startTimer() {
     }
   }
   submitoption(qid:any,optionarray?:any){
-   
+
      if(!this.stateChange.includes(qid)){
       this.stateChange.push(qid);
     }
@@ -323,6 +323,7 @@ clickEvent2(){
         this.questionnumber--;
         if(this.stateChange.includes(this.currentQuestion?.id)){
           this.isRadioButtonSelected = true;
+          
         }else{
           this.isRadioButtonSelected =false;
         }

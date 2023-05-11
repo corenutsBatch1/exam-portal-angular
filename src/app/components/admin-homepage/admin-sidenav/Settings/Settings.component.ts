@@ -20,24 +20,31 @@ export class SettingsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private route: Router,private http:HttpClient) {}
 
-  ngOnInit() {
-
+  fetchSubjects(){
     this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe(data=>{
-      console.log(data);
-      this.dataSource=data;
-      this.datasource.data=this.dataSource
-      this.datasource.paginator = this.paginator;
-      console.log(this.dataSource);
-  });
+    console.log(data);
+    this.dataSource=data;
+    this.datasource.data=this.dataSource
+    this.datasource.paginator = this.paginator;
+    console.log(this.dataSource);
+});
   // location.reload();
 }
+
+  ngOnInit(): void {
+    this.fetchSubjects()
+  }
+
+
   loadAddSubjectPage(flag:boolean) {
     this.show = flag;
+    this.fetchSubjects()
     this.route.navigate(['adminpage/settings/addsubject'], { queryParams: { action: 'add' } });
   }
   loadEditSubjectPage(flag:boolean,id?:any) {
    this.subjectId=id;
     this.show = flag;
+    this.fetchSubjects()
     this.route.navigate(['adminpage/settings/addsubject'], { queryParams: { action: 'edit' } });
 
   }
@@ -70,3 +77,7 @@ export class SettingsComponent implements OnInit {
 
 }
 }
+function ngOnInit() {
+  throw new Error('Function not implemented.');
+}
+

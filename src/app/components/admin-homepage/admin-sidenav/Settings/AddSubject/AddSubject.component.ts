@@ -89,8 +89,10 @@ addSubjectInfo()
     response=>{
       swal("Subject added successfully","", "success");
       this.goBack();
+    },(error:any)=>{
+      swal("Topic with same name already present","", "error");
     }
-  );
+  )
 }
 //edit Category info
 editSubjectInfo()
@@ -106,7 +108,7 @@ editSubjectInfo()
 
 goBack(){
 this.loadAddSubjectPage.emit(true);
-location.reload();
+// location.reload();
 }
 
 }

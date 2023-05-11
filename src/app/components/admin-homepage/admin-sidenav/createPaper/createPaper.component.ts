@@ -20,14 +20,6 @@ export class CreatePaperComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private http:HttpClient) { }
 
-  ngOnInit() {
-  this.fetchPaper();
-  }
-  loadAddPaperpage(flag:boolean){
-
-    this.addpaper=flag;
-  }
-
   fetchPaper(){
     this.http.get<CreatePaper[]>(`http://localhost:8089/api/getpaper`).subscribe(data=>{
 
@@ -37,6 +29,18 @@ export class CreatePaperComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   });
   }
+
+  ngOnInit() {
+  this.fetchPaper();
+  }
+
+  loadAddPaperpage(flag:boolean){
+    this.addpaper=flag;
+    this.fetchPaper();
+  }
+
+
+
   viewPaper(flag:boolean,id:any){
   this.viewpaper=flag;
   this.paperid=id;

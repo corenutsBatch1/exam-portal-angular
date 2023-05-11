@@ -7,7 +7,7 @@ import { MyserviceService } from 'src/app/model/myservice';
 import { UserCode } from 'src/app/model/model/UserCode';
 import { HttpClient } from '@angular/common/http';
 import { TestCases } from 'src/app/model/model/TestCases';
-
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-coding',
@@ -30,11 +30,8 @@ export class CodingComponent {
   index=0;
   codingMarks=0;
   count:number=0;
-<<<<<<< Updated upstream
   setId:number=0;
-=======
   flag:boolean = false;
->>>>>>> Stashed changes
    response?:any[];
   constructor(private apiService:CodingApiService,private service:MyserviceService,private http:HttpClient){}
   ngOnInit(): void {
@@ -92,21 +89,6 @@ export class CodingComponent {
                 console.log(this.count);
               console.log("Your program is correct.");
               if(this.count==this.Testcase?.length)
-<<<<<<< Updated upstream
-              {
-                  this.codingMarks=5;
-                  console.log("in coding"+this.codingMarks)
-                  this.service.codingmarks(this.codingMarks);
-                  console.log(this.codingMarks+"in coding component")
-              }
-              else{
-               console.log("no marks")
-              }
-            } else {
-              console.log("Your program is incorrect.");
-            }
-
-=======
              {
                 this.flag = true;
                  this.codingMarks=5;
@@ -120,13 +102,10 @@ export class CodingComponent {
               console.log("your program is incorrect")
             }
             this.sendingBoolean();
->>>>>>> Stashed changes
 
            //  this.response=this.response?.concat(response);
           // console.log(this.response)
            //this.codeOutput = this.codeOutput?.concat(response);
-
-
     }, error => {
       console.log(error)
       this.codeOutput = error
@@ -134,8 +113,10 @@ export class CodingComponent {
           })
           this.http.post(javaUrl,this.userCode).subscribe(response => {
             console.log('Upload successful!');
+            swal("code submitted successfully","", "success");
           }, error => {
             console.error('Upload failed:', error);
+
           });
 
 

@@ -92,7 +92,7 @@
                   <label class="option">{{ currentQuestion.optionB }}</label>
                 </div>
               </mat-list-item>
-
+  
               <mat-list-item>
                 <div class="white-space:nowrap">
                   <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="C" (click)="sendoption(currentQuestion.id, 'C');isRadioButtonSelected = true;" [checked]="isOptionSelected(currentQuestion.id, 'C')" ng-class="{checked: isChecked == C}">

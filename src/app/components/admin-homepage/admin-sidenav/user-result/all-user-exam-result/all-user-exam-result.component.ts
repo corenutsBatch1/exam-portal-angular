@@ -217,7 +217,7 @@ export class AllUserExamResultComponent {
               'aqua',
               'red'
             ],
-            borderWidth: 1
+            borderWidth:0
           }]
         },
         options: {
@@ -258,7 +258,7 @@ export class AllUserExamResultComponent {
               'aqua',
               'red'
             ],
-            borderWidth: 1
+            borderWidth: 0
           }]
         },
         options: {
@@ -297,7 +297,7 @@ export class AllUserExamResultComponent {
               this.above35 > 0 ? 'aqua' : 'red',
               this.fail > 0 ? 'red' : 'green'
             ],
-            borderWidth: 1
+            borderWidth: 0
           }]
         },
         options: {
@@ -338,7 +338,7 @@ export class AllUserExamResultComponent {
               'aqua',
               'red'
             ],
-            borderWidth: 1
+            borderWidth: 0
           }]
         },
         options: {

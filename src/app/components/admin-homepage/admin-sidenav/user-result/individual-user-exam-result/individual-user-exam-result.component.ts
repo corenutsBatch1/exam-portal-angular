@@ -108,7 +108,7 @@ export class IndividualUserExamResultComponent {
     const docDefinition: TDocumentDefinitions = {
       content: [
         { text: 'Exam Result Data', style: 'header' },
-        `Name: ${this.username3 || ""}\n`,
+        `User Name: ${this.username3 || ""}\n`,
         `Exam Name: ${this.examname || ""}\n`,
         `Total Marks: ${this.totalmarks || 0}\n`,
         `Obtained Marks: ${this.gotmarks || 0}`

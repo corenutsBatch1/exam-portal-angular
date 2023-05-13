@@ -1,3 +1,4 @@
+
 <div class="allign mt-3" *ngIf="show">
   <div class="container">
     <div class="card-container">
@@ -51,12 +52,14 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator class="paginator" #paginator  [pageSize]="5" [pageSizeOptions]="[2, 5, 10, 25]" showFirstLastButtons></mat-paginator>
+      <mat-paginator class="paginator" #paginator  [pageSize]="25" [pageSizeOptions]="[2, 5, 10, 25]" showFirstLastButtons></mat-paginator>
     </div>
   </div>
 </div>
+
 <div class="allign" *ngIf="!show">
   <app-AddSubject [id]="subjectId"
     (loadAddSubjectPage)="loadAddSubjectPage(true)"
   ></app-AddSubject>
 </div>
+

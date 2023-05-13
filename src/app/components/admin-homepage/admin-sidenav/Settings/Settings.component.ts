@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class SettingsComponent implements OnInit {
   show: boolean = true;
+  editShow: boolean=true;
   displayedColumns: string[] = ['id', 'name', 'description', 'edit','delete'];
   dataSource:Subject[]=[];
   subject:Subject=new Subject();
@@ -37,6 +38,7 @@ export class SettingsComponent implements OnInit {
 
 
   loadAddSubjectPage(flag:boolean) {
+    this.subjectId=undefined
     this.show = flag;
     this.fetchSubjects()
     this.route.navigate(['adminpage/settings/addsubject'], { queryParams: { action: 'add' } });

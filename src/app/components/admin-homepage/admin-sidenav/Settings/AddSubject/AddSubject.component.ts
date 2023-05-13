@@ -16,6 +16,7 @@ export class AddSubjectComponent implements OnInit {
   objectId!: string;
   objectData: any = {};
   isAddOperation?: boolean;
+  isEditOperation?: boolean;
   subject:Subject=new Subject();
   inputvalue?:string;
 @Input() id:any;
@@ -30,11 +31,13 @@ Subjects:Subject = new Subject();
   ngOnInit() {
     console.log(this.id);
    this.isAddOperation = this.route.snapshot.queryParams['action'] === 'add';
+   this.isEditOperation= this.route.snapshot.queryParams['action'] === 'edit';
    this.subject.name='';
    console.log(this.isAddOperation)
+   console.log(this.isEditOperation)
    console.log("---")
 
-   if (!this.isAddOperation && this.id) {
+   if (this.isEditOperation && this.id) {
    this.http
    .get<Subject>(`http://localhost:8089/api/getSubjectById/${this.id}`)
    .subscribe((data) => {

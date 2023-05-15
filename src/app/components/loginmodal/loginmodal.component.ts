@@ -4,7 +4,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { User } from '../../model/model/User';
 import { LoginserviceService } from './loginservice.service';
 import { FormGroup,Validators,FormBuilder } from '@angular/forms';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-loginmodal',
   templateUrl: './loginmodal.component.html',
@@ -63,7 +63,14 @@ login(user: User) {
             console.log(this.id);
           }
         } else {
-          sweetAlert("Invalid Credentials", "Register and try again", "error");
+          
+          Swal.fire({
+            title: "Invalid Credentials",
+            text: "Register and try again",
+            icon: "error",
+            // Additional configuration options...
+          });
+
         }
      });
     }

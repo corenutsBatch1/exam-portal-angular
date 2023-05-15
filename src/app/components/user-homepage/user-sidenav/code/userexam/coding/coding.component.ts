@@ -7,7 +7,7 @@ import { MyserviceService } from 'src/app/model/myservice';
 import { UserCode } from 'src/app/model/model/UserCode';
 import { HttpClient } from '@angular/common/http';
 import { TestCases } from 'src/app/model/model/TestCases';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-coding',
@@ -48,13 +48,13 @@ export class CodingComponent {
     console.log("code")
     console.log(code)
     if(!this.selectedLanguage){
-      sweetAlert("Fill All Fields", "Must be select the any programming language", "error");
+      Swal.fire("Fill All Fields", "Must be select the any programming language", "error");
       return;
     }
 
 
     if (this.code=='') {
-      sweetAlert("Fill All Fields", "Must be write programming code", "error");
+      Swal.fire("Fill All Fields", "Must be write programming code", "error");
       return;
     }
     const javaUrl='http://localhost:8089/api/savecode'
@@ -113,7 +113,7 @@ export class CodingComponent {
           })
           this.http.post(javaUrl,this.userCode).subscribe(response => {
             console.log('Upload successful!');
-            swal("code submitted successfully","", "success");
+            Swal.fire("code submitted successfully","", "success");
           }, error => {
             console.error('Upload failed:', error);
 

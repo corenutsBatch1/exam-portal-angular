@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { MyserviceService } from 'src/app/model/myservice';
 import { DateTime } from 'luxon';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-code',
   templateUrl: './code.component.html',
@@ -35,7 +35,7 @@ export class CodeComponent implements OnInit {
         const examObject = uniqueExamNames.find(item => item.code === this.exam.code);
         console.log(examObject+"6666");
         if(examObject==null){
-          swal("Enter Correct Code", "", "error");
+          Swal.fire("Enter Correct Code", "", "error");
         }
 
     this.http.get(`http://localhost:8089/api/getquestions/${examObject.id}`).subscribe
@@ -71,7 +71,7 @@ const isOver = !isBeforeEnd || (isOnSameDate && !isAfterStart);
 this.isOver = isOver;
 if (isSameDate && now < startTime) {
   console.log('The exam has not started yet.');
-   swal("The exam has not started yet.", "", "error");
+  Swal.fire("The exam has not started yet.", "", "error");
 }
 else if (this.isBetween) {
   console.log('The exam is currently ongoing.');
@@ -79,14 +79,14 @@ else if (this.isBetween) {
 }
  else if (this.isOver) {
   console.log('The exam is over.');
-  swal("The exam is over", "", "error");
+  Swal.fire("The exam is over", "", "error");
 }
 }
     if (examObject !== undefined && this.isBetween) {
       console.log(examObject.id+"senddddddddddddddd")
       this.service.examid(examObject.id)
      // console.log(`Exam code and id present: ${examObject.code} - ${examObject.id}`);
-     swal("Exam Started", "", "success");
+     Swal.fire("Exam Started", "", "success");
       this.route.navigate(['userexam', examObject.code]);
     }
 

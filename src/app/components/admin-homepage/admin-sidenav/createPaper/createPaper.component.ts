@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { CreatePaper } from 'src/app/model/model/CreatePaper';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { MatPaginator } from '@angular/material/paginator';
 @Component({
   selector: 'app-createPaper',
@@ -60,17 +60,20 @@ export class CreatePaperComponent implements OnInit {
     this.paperid=id;
     console.log(id)
     console.log(this.paperid)
-    swal({
+    Swal.fire({
       title: "Are you sure you want to Delete? ",
       icon: "warning",
-      buttons: ['Cancel', 'Yes, Delete'],
-      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete",
+      cancelButtonText: "Cancel"
     })
     .then((deleteConfirmed: any) => {
       if (deleteConfirmed) {
         this.delete(this.paperid).subscribe(
       reponse=>{
-        swal("Deleted successfully", '', "success");
+        Swal.fire("Deleted successfully", '', "success");
         console.log(reponse);
         console.log(id);
         this.ngOnInit();

@@ -4,7 +4,7 @@ import { catchError, throwError } from 'rxjs';
 import { CodingQuestion } from 'src/app/model/model/CodingQuestion';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-manageQuestion',
   templateUrl: './manageQuestion.component.html',
@@ -115,17 +115,25 @@ export class ManageQuestionComponent implements OnInit {
       });
   }
   deleteQuestionInfo(id?:number){
-    swal({
+    Swal.fire({
       title: "Are you sure you want to Delete? ",
       icon: "warning",
-      buttons: ['Cancel', 'Yes, Delete'],
-      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete",
+      cancelButtonText: "Cancel"
     })
 
-    .then((deleteConfirmed: any) => {
-      if (deleteConfirmed) {
+    .then((result) => {
+      if (result.isConfirmed) {
 
-        this.deleteQuestion(id).subscribe((data)=>console.log(data))
+        this.deleteQuestion(id).subscribe((data)=>console.log(data)
+        ,
+          error => {
+            Swal.fire("Error", "An error occurred while deleting.", "error");
+            console.log(error);
+          })
           // .pipe(
           //   catchError((error: any) => {
           //     console.error('Error deleting question:', error);

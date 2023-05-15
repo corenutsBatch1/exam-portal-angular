@@ -3,7 +3,7 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {  FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'src/app/model/model/Subject';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-AddSubject',
@@ -90,10 +90,16 @@ addSubjectInfo()
 
   this.http.post<any>('http://localhost:8089/api/addsubject',this.myForm.value).subscribe(
     response=>{
-      swal("Subject added successfully","", "success");
+
+      Swal.fire({
+        title: "Subject added successfully",
+        text: "",
+        icon: "success",
+        // Additional configuration options...
+      });
       this.goBack();
     },(error:any)=>{
-      swal("Topic with same name already present","", "error");
+      Swal.fire("Topic with same name already present","", "error");
     }
   )
 }
@@ -103,7 +109,12 @@ editSubjectInfo()
   console.log(this.myForm);
   this.http.put<any>(`http://localhost:8089/api/updatesubject/${this.id}`,this.myForm.value).subscribe(
     response=>{
-      swal("Subject updated successfully","", "success");
+      Swal.fire({
+        title: "Subject updated successfully",
+        text: "",
+        icon: "success",
+        // Additional configuration options...
+      });
       this.goBack();
     }
   );

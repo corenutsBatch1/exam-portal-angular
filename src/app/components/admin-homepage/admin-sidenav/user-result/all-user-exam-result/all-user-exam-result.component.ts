@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, map, startWith } from 'rxjs';
 import { Marks } from 'src/app/model/model/Marks';
 import{Chart,registerables}from 'node_modules/chart.js';
 Chart.register(...registerables);
 import 'chartjs-plugin-datalabels';
 import { MatPaginator } from '@angular/material/paginator';
-
+import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
 export interface PeriodicElement {
@@ -28,6 +28,7 @@ export interface PeriodicElement {
 export class AllUserExamResultComponent {
 
   @Output("loadAllUserExamResult") loadAllUserExamResult = new EventEmitter();
+
 
   goBack() {
     this.loadAllUserExamResult.emit(true);
@@ -63,10 +64,42 @@ export class AllUserExamResultComponent {
   totalmarksarray:any[]=[]
   showExamCodeInput:boolean = true;
   dataSource = new MatTableDataSource<Marks>([]);
+  uniqueexamcodes:any[]=[];
+  filteredCodes: string[]=[];
+  codeControl =new FormControl();
+  nameControl =new FormControl();
+  uniqueusernames:any[]=[];
+  filterednames:string[]=[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private titleService: Title,private http:HttpClient) {
+    this.filteredCodes = this.uniqueexamcodes;
+    this.codeControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filterCodes(value))
+    ).subscribe(filteredCodes => {
+      this.filteredCodes = filteredCodes;
+    });
+    console.log(this.filterednames)
+    console.log(this.uniqueusernames)
+    this.filterednames = this.uniqueusernames;
+    this.nameControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filternames(value))
+    ).subscribe(filteredCodes => {
+      this.filterednames = filteredCodes;
+    });
   }
+  filterCodes(value: any): any {
+    const filterValue = value.toLowerCase();
+    return this.uniqueexamcodes.filter(code => code.toLowerCase().includes(filterValue));
+  }
+  filternames(value: any): any {
+    const filterValue = value.toLowerCase();
+
+    return this.uniqueusernames.filter(code => code.toLowerCase().includes(filterValue));
+  }
+
 
 
   toggleInput(){
@@ -76,6 +109,12 @@ export class AllUserExamResultComponent {
     this.getMarks().subscribe((data)=>{this.marks=data
                                     this.dataSource.data=this.marks
                                     this.dataSource.paginator = this.paginator;
+                                    this.marks.forEach(a=>this.uniqueexamcodes.push(a.exam?.code))
+                                    this.uniqueexamcodes=[...new Set(this.uniqueexamcodes)]
+                                    this.filteredCodes = this.uniqueexamcodes;
+                                    this.marks.forEach(a=>this.uniqueusernames.push(a.user?.name))
+                                    this.uniqueusernames=[...new Set(this.uniqueusernames)]
+                                    this.filterednames = this.uniqueusernames;
                                 })
   }
 
@@ -120,7 +159,7 @@ export class AllUserExamResultComponent {
   this.fail = 0;
 
   this.marks.forEach(a=>{
-      if(a.exam && a.exam.code==code) {
+      if(a.exam && a.exam.code==this.codeControl.value) {
         this.userMarks?.push(a);
         console.log("exampiexhart")
         console.log(this.userMarks)
@@ -159,7 +198,7 @@ export class AllUserExamResultComponent {
     this.examchart=false;
     console.log(name)
     this.marks.forEach(a=>{
-        if(a.marks && a.user?.name==name && a?.exam?.code ) {
+        if(a.marks && a.user?.name==this.nameControl.value && a?.exam?.code ) {
           console.log(a)
           this.examcode.push(a.exam.code);
           this.totalmarksarray.push(a.totalMarks)
@@ -184,7 +223,7 @@ export class AllUserExamResultComponent {
 {
 
   this.marks.forEach(a=>{
-    if(a.exam && a.exam.code==code &&  a.user?.name==name) {
+    if(a.exam && a.exam.code==code &&  a.user?.name==this.nameControl.value) {
           this.username3=a.user?.name;
           this.examname=a.exam.name;
           this.totalmarks=a.totalMarks;
@@ -330,7 +369,7 @@ export class AllUserExamResultComponent {
           datasets: [{
             label: 'Exam Report',
             data: data, // use dynamically generated data
-            
+
             borderWidth: 0
           }]
         },

@@ -26,12 +26,16 @@ import { UserHomepageComponent } from './components/user-homepage/user-homepage.
 import { UserSidenavComponent } from './components/user-homepage/user-sidenav/user-sidenav.component';
 import { ProfileComponent } from './components/user-homepage/user-sidenav/profile/profile.component';
 import { CodeComponent } from './components/user-homepage/user-sidenav/code/code.component';
-// import { ExamComponent } from './components/Exam/Exam.component';
-// import { ExamSidnavComponent } from './components/Exam/Exam-sidnav/Exam-sidnav.component';
+
 import { UserexamComponent } from './components/user-homepage/user-sidenav/code/userexam/userexam.component';
 import { UserAnswersComponent } from './components/user-homepage/user-sidenav/code/userexam/userAnswers/userAnswers.component';
 import { AddCodingQuestionComponent } from './components/admin-homepage/admin-sidenav/question-bank/add-coding-question/add-coding-question.component';
 import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/users.component';
+import { CodingComponent } from './components/user-homepage/user-sidenav/code/userexam/coding/coding.component';
+import { IndividualUserExamResultComponent } from './components/admin-homepage/admin-sidenav/user-result/individual-user-exam-result/individual-user-exam-result.component';
+import { AllUserExamResultTableComponent } from './components/admin-homepage/admin-sidenav/user-result/all-user-exam-result-table/all-user-exam-result-table.component';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -45,7 +49,6 @@ import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/
         component: AdminHomepageComponent,
         canActivate: [AuthGuard],
         children: [
-          // {path:'home',component:HomeComponent},
           { path: 'result', component: UserResultComponent,
           children:[
             {path:'alluser', component:AllUserExamResultComponent}
@@ -103,3 +106,37 @@ import { UsersComponent } from './components/admin-homepage/admin-sidenav/users/
   providers: [],
 })
 export class AppRoutingModule {}
+export const routingComponents=[
+  AppComponent,
+  HomeComponent,
+  HeaderComponent,
+  LoginmodalComponent,
+  SignupComponent,
+  AdminHomepageComponent,
+  AdminSidenavComponent,
+  AdminSidenavComponent,
+  UserResultComponent,
+  QuestionBankComponent,
+  AddquestionComponent,
+  SettingsComponent,
+  AddSubjectComponent,
+  ManageQuestionComponent,
+  CreatePaperComponent,
+  AddPaperComponent,
+  ScheduleExamComponent,
+  AddExamComponent,
+  ForgotPasswordComponent,
+  ViewPaperComponent,
+  UserHomepageComponent,
+  UserSidenavComponent,
+  ProfileComponent,
+  CodeComponent,
+  UserexamComponent,
+  UserAnswersComponent,
+  AddCodingQuestionComponent,
+  CodingComponent,
+  UsersComponent,
+  AllUserExamResultComponent,
+  IndividualUserExamResultComponent,
+  AllUserExamResultTableComponent
+]

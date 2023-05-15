@@ -92,7 +92,7 @@
                   <label class="option">{{ currentQuestion.optionB }}</label>
                 </div>
               </mat-list-item>
-  
+
               <mat-list-item>
                 <div class="white-space:nowrap">
                   <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="C" (click)="sendoption(currentQuestion.id, 'C');isRadioButtonSelected = true;" [checked]="isOptionSelected(currentQuestion.id, 'C')" ng-class="{checked: isChecked == C}">
@@ -165,9 +165,7 @@
             <div class="question-list__items">
               <ul>
                 <li *ngFor="let question of questions let i=index">
-
                   <a class="numberOfQuestion ml-1.2" (click)="nextquestions(i,question.optionA,question.id)" [ngStyle]="{'background-color' : stateChangeCheck(question.id) ? 'green' : 'Gray'}" >{{i+1 }} </a>
-
                 </li>
               </ul>
             </div>

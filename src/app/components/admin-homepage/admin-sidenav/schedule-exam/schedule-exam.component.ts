@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ScheduleExam } from './../../../../model/model/ScheduleExam';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 @Component({
@@ -45,18 +45,21 @@ export class ScheduleExamComponent implements OnInit {
   }
   delete(id:any){
 
-    swal({
+    Swal.fire({
       title: "Are you sure you want to Delete? ",
       icon: "warning",
-      buttons: ['Cancel', 'Yes, Delete'],
-      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete",
+      cancelButtonText: "Cancel"
     })
     .then((deleteConfirmed: any) => {
       if (deleteConfirmed) {
         this.deleteexam(id).subscribe(
       reponse=>{
         console.log(reponse);
-        swal("Deleted successfully", '', "success");
+        Swal.fire("Deleted successfully", '', "success");
         console.log(id);
 
         this.ngOnInit();

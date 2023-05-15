@@ -6,7 +6,7 @@ import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
 import { Router } from '@angular/router';
 
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
@@ -82,13 +82,13 @@ export class AddquestionComponent implements OnInit{
     this.http.post(`http://localhost:8089/api/addquestion/${id}`, Questions).subscribe(
 
       response=>{
-        swal("Question added successfully","", "success");
+        Swal.fire("Question added successfully","", "success");
         // location.reload();
         // this.goBack();
       },
 
       error=>{
-        swal("All field must be required","", "error");
+        Swal.fire("All field must be required","", "error");
       }
     );
   }

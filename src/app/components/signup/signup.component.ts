@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Component} from '@angular/core';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { User } from '../../model/model/User';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -102,10 +102,21 @@ export class SignupComponent {
     if (this.submitted) {
       this.http.post(`http://localhost:8088/api/registerUser`, newUser).subscribe(data => {
         if (data != null) {
-          swal("Registered successfully", 'User Name is ' + this.userLogin.email, "success");
+          Swal.fire({
+            title: "Registered successfully",
+            text: 'User Name is ' + this.userLogin.email,
+            icon: "success",
+            // Additional configuration options...
+          });
           this.router.navigateByUrl('/login');
         } else {
-          swal("Already have an Account", "", "error");
+
+          Swal.fire({
+            title: "Already have an Account",
+            text: "",
+            icon: "error",
+            // Additional configuration options...
+          });
         }
       });
     }

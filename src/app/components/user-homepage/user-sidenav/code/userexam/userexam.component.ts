@@ -7,7 +7,7 @@ import { Subject } from 'src/app/model/model/Subject';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { LocationStrategy } from '@angular/common';
 
 
@@ -255,27 +255,33 @@ clickEvent(exam: any) {
   var remainingQuestion=(this.totalQuestions-this.stateChange.length);
   console.log("remainingQuestion"+remainingQuestion);
   if(remainingQuestion>0){
-    swal({
+    Swal.fire({
       title: "Remaining questions are "+ remainingQuestion + " , Are you sure you want to Submit?",
       icon: "warning",
-      buttons: ['Cancel', 'Yes, Submit'],
-      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Submit",
+      cancelButtonText: "Cancel"
     })
-    .then((submitConfirmed: any) => {
-      if (submitConfirmed) {
+    .then((result) => {
+      if (result.isConfirmed) {
         this.router.navigate(['answers', this.code]);
       } else {
       }
        });
   }else{
-    swal({
+    Swal.fire({
       title: "Are you sure you want to Submit? ",
       icon: "warning",
-      buttons: ['Cancel', 'Yes, Submit'],
-      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Submit",
+      cancelButtonText: "Cancel"
     })
-    .then((submitConfirmed: any) => {
-      if (submitConfirmed) {
+    .then((result) => {
+      if (result.isConfirmed) {
         this.router.navigate(['answers', this.code]);
       } else {
       }
@@ -323,7 +329,7 @@ clickEvent2(){
         this.questionnumber--;
         if(this.stateChange.includes(this.currentQuestion?.id)){
           this.isRadioButtonSelected = true;
-          
+
         }else{
           this.isRadioButtonSelected =false;
         }

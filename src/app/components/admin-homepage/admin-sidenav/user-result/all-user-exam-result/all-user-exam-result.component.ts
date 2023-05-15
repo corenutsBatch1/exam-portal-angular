@@ -60,8 +60,8 @@ export class AllUserExamResultComponent {
   codeFilterValue = '';
   ueseexammarks?:number[]=[];
   examcode:string[]=[]
-  showExamCodeInput:boolean = true;
   totalmarksarray:any[]=[]
+  showExamCodeInput:boolean = true;
   dataSource = new MatTableDataSource<Marks>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -122,7 +122,6 @@ export class AllUserExamResultComponent {
   this.marks.forEach(a=>{
       if(a.exam && a.exam.code==code) {
         this.userMarks?.push(a);
-        this.totalmarksarray.push(a.totalMarks)
         console.log("exampiexhart")
         console.log(this.userMarks)
           }
@@ -163,7 +162,7 @@ export class AllUserExamResultComponent {
         if(a.marks && a.user?.name==name && a?.exam?.code ) {
           console.log(a)
           this.examcode.push(a.exam.code);
-          this.totalmarksarray.push(a.totalMarks);
+          this.totalmarksarray.push(a.totalMarks)
            this.ueseexammarks?.push(a.marks)
            console.log(this.examcode)
            console.log(this.ueseexammarks)
@@ -312,14 +311,14 @@ export class AllUserExamResultComponent {
       // Initialize empty arrays for labels and data
       let labels = [];
       let data = [0, 0, 0, 0];
-
+      let totalmarks =this.totalmarksarray; // example total marks array
       // Iterate over exam codes and marks to populate labels and data
       for (let i = 0; i < this.examcode.length; i++) {
         if (this.ueseexammarks) {
           let code = this.examcode[i];
           let marks = this.ueseexammarks[i];
           data[i]=marks;
-          labels.push(code);
+          labels.push(`${code}: ${marks} out of ${totalmarks[i]}`);
         }
       }
 
@@ -331,12 +330,7 @@ export class AllUserExamResultComponent {
           datasets: [{
             label: 'Exam Report',
             data: data, // use dynamically generated data
-            backgroundColor: [
-              'green',
-              'blue',
-              'aqua',
-              'red'
-            ],
+            
             borderWidth: 0
           }]
         },

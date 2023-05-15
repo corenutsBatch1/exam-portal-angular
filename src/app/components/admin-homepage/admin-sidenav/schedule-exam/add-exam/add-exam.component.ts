@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { response } from 'express';
 import { CreatePaper } from 'src/app/model/model/CreatePaper';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-exam',
@@ -53,25 +53,25 @@ export class AddExamComponent implements OnInit{
      if(scheduleExam.name==undefined || scheduleExam.code==undefined || scheduleExam.startTime==undefined || scheduleExam.endTime==undefined || scheduleExam.examDuration==undefined || this.paperId==undefined )
      {
 
-      swal("All field must be required","", "error");
+      Swal.fire("All field must be required","", "error");
      }
      else{
 
       if(this.start>this.end) {
-        swal("strat time  must be less than end time","", "error");
+        Swal.fire("strat time  must be less than end time","", "error");
 
       }
        else{
         this.http.post<ScheduleExam>(`http://localhost:8089/api/addexam/${this.paperId}`,scheduleExam).subscribe(
 
     response=>{
-      swal("Exam scheduled successfully","", "success");
+      Swal.fire("Exam scheduled successfully","", "success");
       this.goBack();
     },
     error=>{
       //console.error('Error:', error.message);
       //console.log('Error details:', JSON.stringify(error));
-     swal("All field must be required","", "error");
+      Swal.fire("All field must be required","", "error");
     }
   );
        }

@@ -7,7 +7,7 @@ import { CreatePaper } from 'src/app/model/model/CreatePaper';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-addPaper',
@@ -143,16 +143,16 @@ addpaper(createPaper:CreatePaper)
   createPaper.codingQuestionsListArray=this.codingQuestionsIdArray
   if (this.noOfQuestions && this.questionCount < this.noOfQuestions){
     this.questionsLeft=this.noOfQuestions-this.questionCount;
-    swal("You have to add "+this.questionsLeft+" more .", "", "error");
+    Swal.fire("You have to add "+this.questionsLeft+" more .", "", "error");
   }else{
     this.http.post<CreatePaper>(`http://localhost:8089/api/addpaper`,createPaper).subscribe(
       data=>{
 
-      swal("Paper created successfully","", "success");
+        Swal.fire("Paper created successfully","", "success");
     this.goBack();
   },
     error=>{
-      swal("All field must be required","", "error");
+      Swal.fire("All field must be required","", "error");
     }
 
     );
@@ -199,7 +199,7 @@ checkboxChanged(event: any, optionValue?: number, subjectName?:string) {
         }
         } else {
           setTimeout(() => {
-            swal("You have reached the maximum number of questions.", "", "error");
+            Swal.fire("You have reached the maximum number of questions.", "", "error");
             // alert('You have reached the maximum number of questions.');
             event.source.checked = false;
           }, 0);

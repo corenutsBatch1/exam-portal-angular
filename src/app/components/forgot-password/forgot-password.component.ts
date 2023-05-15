@@ -33,7 +33,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { User } from '../../model/model/User';
 // import { LoginserviceService } from './loginservice.service';
 import { FormGroup,Validators,FormBuilder } from '@angular/forms';
-
+import Swal from 'sweetalert2';
 
 @Component({
      selector: 'app-forgot-password',
@@ -105,10 +105,10 @@ resetpassword(user: User) {
       .subscribe((data) => {
 
         if (data == true  ) {
-          sweetAlert("Password changed sucessfully!!", "Now,login with new password", "success");
+          Swal.fire("Password changed sucessfully!!", "Now,login with new password", "success");
 
         } else {
-          sweetAlert("Invalid Credentials", "Register and try again", "error");
+          Swal.fire("Invalid Credentials", "Register and try again", "error");
         }
      });
     }

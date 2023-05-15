@@ -31,7 +31,7 @@ export class UserexamComponent {
   answer:useranswer=new useranswer() ;
   uniqueSubjectNames: String[] =[];
   selected:boolean=false;
-  stateChange:number[]=[];
+  stateChange:any[]=[];
   questionnumber:number=0;
   clickedSubject:String="";
   selectedOption: string = '';
@@ -46,10 +46,9 @@ export class UserexamComponent {
   remainingQuestion:number=0;
   timeexpire?:boolean=false;
   cId?:number;
-
+  codeId?:String;
   checkboxoption?:string[]=[];
   checkboxState: { [key: number]: string[] } = {};
-
 
   constructor(
     private http: HttpClient,
@@ -65,8 +64,11 @@ export class UserexamComponent {
     this.service.runCodeClicked.subscribe((data)=>{this.cId=data
 
       if(this.cId!=undefined){
-        if(!this.stateChange.includes(this.cId)){
-          this.stateChange.push(this.cId);
+        this.codeId = 'C' + this.cId
+        if(!this.stateChange.includes(this.codeId)){
+          this.stateChange.push(this.codeId);
+          console.log(this.codeId);
+          console.log(this.stateChange)
         }}
       })
 
@@ -160,7 +162,6 @@ startTimer() {
     return this.http.get(
       `http://localhost:8089/api/getquestionsBySubjectId/${subjectid}/${this.code}`
     );
-
   }
 
   showQuestion(questionId: number): void {
@@ -176,8 +177,9 @@ startTimer() {
 
   sendoption(qid:number,option1:string)
   {
-    if(!this.stateChange.includes(qid)){
-      this.stateChange.push(qid);
+    const normalQuestionOptionId = "N" + qid;
+    if(!this.stateChange.includes(normalQuestionOptionId)){
+      this.stateChange.push(normalQuestionOptionId);
     }
     this.selectedOptions[qid] = option1;
     console.log("option"+option1);
@@ -213,8 +215,9 @@ startTimer() {
   }
   submitoption(qid:any,optionarray?:any){
 
-     if(!this.stateChange.includes(qid)){
-      this.stateChange.push(qid);
+    const normalQuestionOptionId = "N" + qid;
+    if(!this.stateChange.includes(normalQuestionOptionId)){
+      this.stateChange.push(normalQuestionOptionId);
     }
     const selectedOptions = this.checkboxState[qid] || [];
     selectedOptions.sort();
@@ -241,14 +244,12 @@ isOptionSelected(questionId: number, option: string): boolean {
     return this.selectedOptions[questionId] ===option;
   }
 
+
   isOptionSelected2(qid: number, option: string) {
     const selectedOptions = this.checkboxState[qid] || [];
+
     return selectedOptions.includes(option);
   }
-
-
-
-
 
 clickEvent(exam: any) {
   this.timeexpire=true;
@@ -335,10 +336,18 @@ clickEvent2(){
         }
       }
 
-stateChangeCheck(qid:number)
+
+stateChangeCheck(qid:number, subject : Subject)
 {
-  return this.stateChange.includes(qid);
+  if(subject.name == 'CODING'){
+    const codingQuestionId = 'C' + qid
+    return this.stateChange.includes(codingQuestionId);
+  }else{
+    const normalQuestionId = 'N'+qid
+    return this.stateChange.includes(normalQuestionId);
+  }
 }
+
 
 setActive(index: number, subjectName:String) {
   console.log(subjectName)

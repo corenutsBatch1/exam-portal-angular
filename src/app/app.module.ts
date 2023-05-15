@@ -22,7 +22,7 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     routingComponents
@@ -52,7 +52,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     CodemirrorModule,
     CKEditorModule,
     MatPaginatorModule,
-
+    MatAutocompleteModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

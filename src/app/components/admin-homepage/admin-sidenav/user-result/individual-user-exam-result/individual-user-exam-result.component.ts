@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component,ViewChild, EventEmitter, Output } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, startWith,map } from 'rxjs';
 import { Marks } from 'src/app/model/model/Marks';
 import{Chart,registerables}from 'node_modules/chart.js';
 Chart.register(...registerables);
@@ -10,6 +10,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { Title } from '@angular/platform-browser';
+import { FormControl } from '@angular/forms';
+import { Question } from 'src/app/model/model/Question';
+import { useranswer } from 'src/app/model/model/useranswer';
 
 
 export interface PeriodicElement {
@@ -60,11 +63,25 @@ export class IndividualUserExamResultComponent {
   codeFilterValue = '';
   ueseexammarks?:number[]=[];
   examcode:string[]=[]
-
+  uniqueexamcodes:any[]=[];
+  usernames:any[]=[]
+  codeControl =new FormControl();
+  filteredCodes:String[]=[]
+  questions:Question[]=[]
+  userAnswers:useranswer[]=[]
+  uid:any;
+  eid:any;
   dataSource = new MatTableDataSource<Marks>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private titleService: Title,private http:HttpClient) {
+    this.filteredCodes = this.uniqueexamcodes;
+    this.codeControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filterCodes(value))
+    ).subscribe(filteredCodes => {
+      this.filteredCodes = filteredCodes;
+    });
   }
 
 
@@ -72,7 +89,25 @@ export class IndividualUserExamResultComponent {
     this.getMarks().subscribe((data)=>{this.marks=data
                                     this.dataSource.data=this.marks
                                     this.dataSource.paginator = this.paginator;
+                                    this.marks.forEach(a=>this.uniqueexamcodes.push(a.exam?.code))
+                                    this.uniqueexamcodes=[...new Set(this.uniqueexamcodes)]
+                                    this.filteredCodes = this.uniqueexamcodes;
+
                                 })
+  }
+  filterCodes(value: any): any {
+    const filterValue = value.toLowerCase();
+    return this.uniqueexamcodes.filter(code => code.toLowerCase().includes(filterValue));
+  }
+  oncodeSelection() {
+    this.usernames.splice(0,this.usernames.length)
+    this.marks.forEach(a=>{
+      if(a.exam && a.exam.code==this.codeControl.value) {
+        this.usernames.push(a.user?.name);
+        console.log("exampiexhart")
+        console.log(this.userMarks)
+          }
+  })
   }
 
   displayedColumns: string[] = ['serialNumber', 'examCode', 'name', 'totalMarks', 'obtainedMarks'];
@@ -105,13 +140,55 @@ export class IndividualUserExamResultComponent {
 
 
   generatePDF(): void {
+    if(this.questions){
     const docDefinition: TDocumentDefinitions = {
       content: [
         { text: 'Exam Result Data', style: 'header' },
         `User Name: ${this.username3 || ""}\n`,
         `Exam Name: ${this.examname || ""}\n`,
         `Total Marks: ${this.totalmarks || 0}\n`,
-        `Obtained Marks: ${this.gotmarks || 0}`
+        `Obtained Marks: ${this.gotmarks || 0}`,
+        `-----------------------------------`,
+        {
+          text: `Exam Paper`,
+          style: 'header'
+        },
+        {
+          ol: this.questions.map((question, i) => {
+            const listItems = [];
+
+            // Use a regular expression to remove HTML tags from the question content
+            const questionContent = question?.content?.replace(/<[^>]*>/g, '');
+
+            if (questionContent) {
+              listItems.push(questionContent);
+            }
+
+            // Add the answer options and user answer (if available) to the listItems array
+            if (question?.subject?.name !== 'CODING') {
+              listItems.push(`A) ${question?.optionA}`);
+              listItems.push(`B) ${question?.optionB}`);
+              listItems.push(`C) ${question?.optionC}`);
+              listItems.push(`D) ${question?.optionD}`);
+              listItems.push(`             `);
+
+              const answer = this.userAnswers.find(answer => answer?.question?.id === question?.id);
+
+              if (answer) {
+                  listItems.push(`YourAnswer : ${answer.userAnswer}`);
+              }
+
+              listItems.push(`CorrectAnswer : ${question?.answer}`);
+              listItems.push('\n');
+
+            } else {
+              listItems.push('\n');
+            }
+
+            // Map each list item string to an ordered list item object with a `text` property
+            return listItems.map(item => ({ text: item }));
+          })
+        }
       ],
       styles: {
         header: {
@@ -123,6 +200,7 @@ export class IndividualUserExamResultComponent {
     };
 
     pdfMake.createPdf(docDefinition).open();
+  }
   }
 
 
@@ -147,6 +225,7 @@ export class IndividualUserExamResultComponent {
         console.log(this.userMarks)
           }
   })
+
 
   if(this.userMarks){
     this.userMarks.forEach(a=>{
@@ -202,15 +281,21 @@ export class IndividualUserExamResultComponent {
 {
 
   this.marks.forEach(a=>{
-    if(a.exam && a.exam.code==code &&  a.user?.name==name) {
+    if(a.exam && a.exam.code==this.codeControl.value &&  a.user?.name==name) {
           this.username3=a.user?.name;
           this.examname=a.exam.name;
           this.totalmarks=a.totalMarks;
           this.gotmarks=a.marks;
+          this.uid=a.user?.id;
+          this.eid=a.exam.id;
         }
 })
 
+this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data=>
+     this.questions=data);
 
+     this.http.get<useranswer[]>(`http://localhost:8089/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data=>
+       this.userAnswers=data);
 }
 
   RenderDailyChart() {

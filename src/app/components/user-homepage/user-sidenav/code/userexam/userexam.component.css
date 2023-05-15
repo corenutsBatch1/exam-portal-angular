@@ -9,8 +9,23 @@
   margin-top: 1rem;
   margin-right: 2rem;
   height: 25rem;
+  overflow-y: scroll;
   border: .1rem solid black;
   background-color: rgb(241, 231, 236);
+}
+main::-webkit-scrollbar,
+.rigthbottom::-webkit-scrollbar {
+  width: .5rem;
+}
+
+main::-webkit-scrollbar-track,
+.rigthbottom::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+main::-webkit-scrollbar-thumb,
+.rigthbottom::-webkit-scrollbar-thumb {
+  background-color: #ccc;
 }
 
 .lefttop{
@@ -173,3 +188,4 @@ h4{
 .totalquestion{
   margin-top: 0.2rem;
 }
+

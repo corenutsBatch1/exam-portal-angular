@@ -29,7 +29,10 @@
       <mat-header-cell id="head" *matHeaderCellDef>EndTime</mat-header-cell>
       <mat-cell *matCellDef="let exam">{{exam.endTime}}</mat-cell>
     </ng-container>
-
+    <ng-container matColumnDef="examDuration">
+      <mat-header-cell id="head" *matHeaderCellDef>examDuration</mat-header-cell>
+      <mat-cell *matCellDef="let exam">{{exam.examDuration}}</mat-cell>
+    </ng-container>
     <ng-container matColumnDef="paperId">
       <mat-header-cell id="head" *matHeaderCellDef>PaperId</mat-header-cell>
       <mat-cell *matCellDef="let exam">{{exam.createPaper?.id}}</mat-cell>
@@ -44,8 +47,8 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="['sNo', 'name', 'code', 'startTime', 'endTime', 'paperId', 'delete']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['sNo', 'name', 'code', 'startTime', 'endTime', 'paperId', 'delete']"></mat-row>
+    <mat-header-row *matHeaderRowDef="['sNo', 'name', 'code', 'startTime', 'endTime','examDuration', 'paperId', 'delete']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['sNo', 'name', 'code', 'startTime', 'endTime','examDuration', 'paperId', 'delete']"></mat-row>
   </mat-table>
   <mat-paginator class="paginator" #paginator  [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 40]" showFirstLastButtons></mat-paginator>
   </div>

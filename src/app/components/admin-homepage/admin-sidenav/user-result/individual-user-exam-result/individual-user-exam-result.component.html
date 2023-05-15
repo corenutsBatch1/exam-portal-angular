@@ -21,22 +21,14 @@
        [value]="subject">{{ subject }}</mat-option>
    </mat-select>
  </mat-form-field> -->
- <mat-form-field appearance="fill" class="left">
-  <mat-label>Select an exam code</mat-label>
-  <input type="text" matInput [formControl]="codeControl" [matAutocomplete]="auto" />
-  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="oncodeSelection()">
-    <mat-option *ngFor="let code of filteredCodes" [value]="code">
-      {{ code }}
-    </mat-option>
-  </mat-autocomplete>
-</mat-form-field>
+
 
 
 
 
    <!-- <label for="" class="canvassearch">Enter the user name &nbsp;</label>
    <input type="text" [(ngModel)]="username2"/> &nbsp; -->
-   <mat-form-field appearance="fill" classs="left">
+   <!-- <mat-form-field appearance="fill" classs="left">
     <mat-label>Select a user</mat-label>
      <mat-select
      [(ngModel)]="username2" name="selectedSubject" (selectionChange)="examresult(username2,codeControl.value)">
@@ -44,10 +36,42 @@
         *ngFor="let subject of usernames"
         [value]="subject">{{ subject }}</mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field> -->
    <!-- <button class="btn-sm btn-primary" type="submit" (click)="examresult(username2,examcode1)">
      Submit
    </button> -->
+   <!-- Add [(ngModel)]="username2" and (ngModelChange)="onUsernameChange()" to the input -->
+   <mat-form-field appearance="fill" class="left">
+    <mat-label>Select an exam code</mat-label>
+    <input type="text" matInput [formControl]="codeControl" [matAutocomplete]="auto" />
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="oncodeSelection()">
+      <mat-option *ngFor="let code of filteredCodes" [value]="code">
+        {{ code }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <!-- <mat-form-field appearance="fill" class="left">
+    <mat-label>Select a username</mat-label>
+    <input type="text" matInput [formControl]="usernamecontrol" [matAutocomplete]="auto2" (input)="onUsernameChange()" />
+    <mat-autocomplete #auto2="matAutocomplete">
+      <mat-option *ngFor="let name of filteredUsernames">
+        {{ name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field> -->
+  <mat-form-field appearance="fill" class="left">
+    <mat-label>Select an exam code</mat-label>
+    <input type="text" matInput [formControl]="usernamecontrol" [matAutocomplete]="auto2" />
+    <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="examresult(username2,codeControl.value)">
+      <mat-option *ngFor="let code of filteredUsernames" [value]="code">
+        {{ code }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+
+
+
    <div></div>
    <div class="bootstrap-wrapper" id="result" *ngIf="username3 && examname">
     <div class="container">

@@ -69,8 +69,8 @@ export class CreatePaperComponent implements OnInit {
       confirmButtonText: "Yes, Delete",
       cancelButtonText: "Cancel"
     })
-    .then((deleteConfirmed: any) => {
-      if (deleteConfirmed) {
+    .then((result) => {
+      if (result.isConfirmed) {
         this.delete(this.paperid).subscribe(
       reponse=>{
         Swal.fire("Deleted successfully", '', "success");

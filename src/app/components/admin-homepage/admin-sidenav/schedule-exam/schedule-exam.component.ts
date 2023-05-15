@@ -54,8 +54,8 @@ export class ScheduleExamComponent implements OnInit {
       confirmButtonText: "Yes, Delete",
       cancelButtonText: "Cancel"
     })
-    .then((deleteConfirmed: any) => {
-      if (deleteConfirmed) {
+    .then((result) => {
+      if (result.isConfirmed) {
         this.deleteexam(id).subscribe(
       reponse=>{
         console.log(reponse);

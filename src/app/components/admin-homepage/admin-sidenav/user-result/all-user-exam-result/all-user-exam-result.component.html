@@ -12,21 +12,28 @@
 
     <ng-container *ngIf="showExamCodeInput">
       <button class="btn-sm btn-secondary toggle" type="button" (click)="toggleInput()">Switch to User Name</button>
-      <div>
-        <label for="exam-code">Enter the exam code:</label>
-        <input type="text" id="exam-code" [(ngModel)]="examcode1" />
-        <button class="btn-sm btn-primary ml-1" type="submit" (click)="exampiechart(examcode1)">Submit</button>
-      </div>
-
+      <mat-form-field appearance="fill" class="left">
+        <mat-label>Select an exam code</mat-label>
+        <input type="text" matInput [formControl]="codeControl" [matAutocomplete]="auto" />
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="exampiechart(examcode1)">
+          <mat-option *ngFor="let code of filteredCodes" [value]="code">
+            {{ code }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
     </ng-container>
 
     <ng-container *ngIf="!showExamCodeInput">
       <button class="btn-sm btn-secondary toggle" type="button" (click)="toggleInput()">Switch to Exam Code</button>
-      <div>
-        <label for="username">Enter the user name:</label>
-        <input type="text" id="username" [(ngModel)]="username2" />
-        <button class="btn-sm btn-primary ml-1" type="submit" (click)="userpiechart(username2)">Submit</button>
-      </div>
+      <mat-form-field appearance="fill" class="left">
+        <mat-label>Select an user name</mat-label>
+        <input type="text" matInput [formControl]="nameControl" [matAutocomplete]="auto2" />
+        <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="userpiechart(examcode1)">
+          <mat-option *ngFor="let code of filterednames" [value]="code">
+            {{ code }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
     </ng-container>
   </div>

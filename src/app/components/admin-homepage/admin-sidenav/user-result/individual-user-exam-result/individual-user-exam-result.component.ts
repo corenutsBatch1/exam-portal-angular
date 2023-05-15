@@ -66,11 +66,14 @@ export class IndividualUserExamResultComponent {
   uniqueexamcodes:any[]=[];
   usernames:any[]=[]
   codeControl =new FormControl();
+  usernamecontrol=new FormControl();
   filteredCodes:String[]=[]
   questions:Question[]=[]
   userAnswers:useranswer[]=[]
   uid:any;
   eid:any;
+  filteredUsernames:any[]=[]
+  searchusername:any;
   dataSource = new MatTableDataSource<Marks>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -81,6 +84,13 @@ export class IndividualUserExamResultComponent {
       map(value => this.filterCodes(value))
     ).subscribe(filteredCodes => {
       this.filteredCodes = filteredCodes;
+    });
+    this.filteredUsernames = this.usernames;
+    this.usernamecontrol.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filterNames(value))
+    ).subscribe(filteredCodes => {
+      this.filteredUsernames = filteredCodes;
     });
   }
 
@@ -94,18 +104,40 @@ export class IndividualUserExamResultComponent {
                                     this.filteredCodes = this.uniqueexamcodes;
 
                                 })
+                                console.log("in on it")
+                                console.log(this.filteredUsernames);
   }
   filterCodes(value: any): any {
     const filterValue = value.toLowerCase();
     return this.uniqueexamcodes.filter(code => code.toLowerCase().includes(filterValue));
   }
+  filterNames(value: any): any {
+    const filterValue = value.toLowerCase();
+    return this.usernames.filter(code => code.toLowerCase().includes(filterValue));
+  }
+  // onUsernameChange() {
+  //   console.log("in onusernamechange");
+  //   console.log(this.filteredUsernames);
+
+  //   const filterValue = this.usernamecontrol.value.toLowerCase().trim();
+  //   console.log(filterValue+"i-----------------")
+  //   console.log(this.usernamecontrol.value)
+  //   this.filteredUsernames = this.usernames.filter(username =>
+  //     username.toLowerCase().includes(filterValue)
+  //   );
+
+  //   console.log(this.filteredUsernames);
+  // }
+
   oncodeSelection() {
     this.usernames.splice(0,this.usernames.length)
     this.marks.forEach(a=>{
       if(a.exam && a.exam.code==this.codeControl.value) {
         this.usernames.push(a.user?.name);
-        console.log("exampiexhart")
-        console.log(this.userMarks)
+
+        console.log("in oncodeselection")
+           this.filteredUsernames=this.usernames;
+           console.log(this.filteredUsernames)
           }
   })
   }
@@ -279,23 +311,29 @@ export class IndividualUserExamResultComponent {
   }
   examresult(name?:string,code?:string)
 {
-
+  console.log("in exam result")
   this.marks.forEach(a=>{
-    if(a.exam && a.exam.code==this.codeControl.value &&  a.user?.name==name) {
+    if(a.exam && a.exam.code==this.codeControl.value &&  a.user?.name==this.usernamecontrol.value) {
           this.username3=a.user?.name;
           this.examname=a.exam.name;
           this.totalmarks=a.totalMarks;
           this.gotmarks=a.marks;
           this.uid=a.user?.id;
           this.eid=a.exam.id;
+          console.log(this.uid)
+          console.log(this.eid+"========================================")
         }
+
 })
+if(this.uid){
+  this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data=>
+  this.questions=data);
 
-this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data=>
-     this.questions=data);
+  this.http.get<useranswer[]>(`http://localhost:8089/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data=>
+    this.userAnswers=data);
+}
 
-     this.http.get<useranswer[]>(`http://localhost:8089/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data=>
-       this.userAnswers=data);
+
 }
 
   RenderDailyChart() {

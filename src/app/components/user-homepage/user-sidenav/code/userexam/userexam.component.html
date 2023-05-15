@@ -1,3 +1,4 @@
+
 <mat-toolbar>
   <img src="assets/test.png">
   &nbsp;&nbsp;
@@ -165,7 +166,9 @@
             <div class="question-list__items">
               <ul>
                 <li *ngFor="let question of questions let i=index">
-                  <a class="numberOfQuestion ml-1.2" (click)="nextquestions(i,question.optionA,question.id)" [ngStyle]="{'background-color' : stateChangeCheck(question.id) ? 'green' : 'Gray'}" >{{i+1 }} </a>
+
+                  <a class="numberOfQuestion ml-1.2" (click)="nextquestions(i,question.optionA,question.id)" [ngStyle]="{'background-color' : stateChangeCheck(question.id, question.subject) ? 'green' : 'Gray'}" >{{i+1 }} </a>
+
                 </li>
               </ul>
             </div>
@@ -182,5 +185,4 @@
     </div>
   </div>
 </div>
-
 

@@ -44,8 +44,8 @@ export class CodeComponent implements OnInit {
 
       if (this.examtime.startTime && this.examtime.endTime) {
         const startTime = DateTime.fromISO(this.examtime.startTime);
-const endTime = DateTime.fromISO(this.examtime.endTime);
-const now = DateTime.local();
+        const endTime = DateTime.fromISO(this.examtime.endTime);
+        const now = DateTime.local();
 
 // const startHour = startTime.hour;
 // const startMinute = startTime.minute;

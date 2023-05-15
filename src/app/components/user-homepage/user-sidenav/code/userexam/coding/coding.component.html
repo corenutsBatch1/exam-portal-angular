@@ -6,33 +6,35 @@
       <mat-form-field appearance="fill">
         <mat-label>Select Programming language</mat-label>
         <mat-select [(ngModel)]="selectedLanguage" name="language">
-            <mat-option value="java">Java</mat-option>
-            <mat-option value="py">Python</mat-option>
-            <mat-option value="c">C</mat-option>
-            <mat-option value="cpp">C++</mat-option>
-            <mat-option value="go">GoLang</mat-option>
-            <mat-option value="cs">C#</mat-option>
-            <mat-option value="js">JavaScript</mat-option>
+          <mat-option value="java">Java</mat-option>
+          <mat-option value="py">Python</mat-option>
+          <mat-option value="c">C</mat-option>
+          <mat-option value="cpp">C++</mat-option>
+          <mat-option value="go">GoLang</mat-option>
+          <mat-option value="cs">C#</mat-option>
+          <mat-option value="js">JavaScript</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <div class="row">
       <div class="code-editor">
-        <ngx-codemirror [(ngModel)]="code"
-      [options]="codeMirrorOptions"
-    ></ngx-codemirror>
+        <ngx-codemirror [(ngModel)]="code" [options]="codeMirrorOptions"></ngx-codemirror>
 
-      <button class="mt-2" mat-raised-button color="primary" (click)="runCode(code)">Submit Code</button>
-      <br>
+        <button class="mt-2" mat-raised-button color="primary" (click)="runCode(code)">Run Code</button>
+        <button class="mt-2" mat-raised-button color="primary" (click)="submitCode(code)"
+          [disabled]="!runCodeSuccessfull">Submit Code</button>
+        <br>
 
-    </div>
+        <h2>Number of testcases passed {{passedTestCases}} / {{Testcase?.length}}</h2>
+      </div>
 
     </div>
 
     <div class="row mt-4 ml-2">
-      <textarea  *ngFor="let item of codeOutput" placeholder="your coding output">{{item?.output}}</textarea>
+      <textarea *ngFor="let item of codeOutput" placeholder="your coding output">{{item?.output}}</textarea>
     </div>
   </div>
 </div>
+
 
 

@@ -11,8 +11,10 @@ export class AdminSidenavComponent {
 
   name:string='';
   value:string='';
+  activeButton: string = '';
 
-  clickEvent(name:any){
+  clickEvent(name:any,button:string){
+    this.activeButton = button;
     console.log(name);
     if(name=='result'){
       this.router.navigateByUrl("adminpage/result");

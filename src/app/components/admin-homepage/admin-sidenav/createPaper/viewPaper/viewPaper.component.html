@@ -10,27 +10,27 @@
     <thead>
       <!-- [formControl]="subjectControl" -->
       <tr>
-        <th>S.No</th>
-        <th>Content</th>
-        <th>Option A</th>
-        <th>Option B</th>
-        <th>Option C</th>
-        <th>Option D</th>
-        <th>Answer</th>
-        <th>Level</th>
+        <th style="width:0.5rem;" class="text-center">S.No</th>
+        <th style="width:2rem;" class="text-center">Content</th>
+        <th style="width:2rem;" class="text-center">Option A</th>
+        <th style="width:2rem;" class="text-center">Option B</th>
+        <th style="width:2rem;" class="text-center">Option C</th>
+        <th style="width:2rem;" class="text-center">Option D</th>
+        <th style="width:1rem;" class="text-center">Answer</th>
+        <th style="width:1rem;" class="text-center">Level</th>
       </tr>
     </thead>
     <tbody *ngFor="let question of questionsArray let i=index">
       <!-- <tr *ngIf="question.subject?.name?.toLowerCase()!='coding'"> -->
         <tr  *ngIf="question.subject?.name!='CODING'" >
-       <td>{{i+1}}</td>
-        <td [innerHTML]="question.content"></td>
-        <td>{{question.optionA}}</td>
-        <td>{{question.optionB}}</td>
-        <td>{{question.optionC}}</td>
-        <td>{{question.optionD}}</td>
-        <td>{{question.answer}}</td>
-        <td>{{question.qtype}}</td>
+       <td class="text-center">{{i+1}}</td>
+        <td [innerHTML]="question.content" class="text-center"></td>
+        <td class="text-center">{{question.optionA}}</td>
+        <td class="text-center">{{question.optionB}}</td>
+        <td class="text-center">{{question.optionC}}</td>
+        <td class="text-center">{{question.optionD}}</td>
+        <td class="text-center">{{question.answer}}</td>
+        <td class="text-center">{{question.qtype}}</td>
   </tr>
   </tbody>
    </table>

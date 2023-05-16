@@ -36,6 +36,8 @@ import { IndividualUserExamResultComponent } from './components/admin-homepage/a
 import { AllUserExamResultTableComponent } from './components/admin-homepage/admin-sidenav/user-result/all-user-exam-result-table/all-user-exam-result-table.component';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
+import { IndividualUserResultComponent } from './components/user-homepage/user-sidenav/individual-user-result/individual-user-result.component';
+
 
 
 @NgModule({
@@ -90,6 +92,7 @@ import { HeaderComponent } from './components/header/header.component';
       children: [
         {path:'code',component:CodeComponent},
         { path: 'profile', component: ProfileComponent },
+        {path:'userresult',component:IndividualUserResultComponent},
         { path: '**', redirectTo: 'code' },
       ],
     },

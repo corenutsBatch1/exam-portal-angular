@@ -62,42 +62,42 @@
   <div class="container-fulid">
     <mat-list class="matlist">
       <mat-list-item class="matlistitem">
-        <button mat-button class="side-nav-button hove" (click)="clickEvent('settings')">
+        <button mat-button class="side-nav-button hove" (click)="clickEvent('settings','sub')"  [ngClass]="{ 'active': activeButton === 'sub' }">
           <mat-icon class="icon-spacing hove" color="primary">library_books</mat-icon>
           <span class="button-text hove">Subjects</span>
         </button>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item class="matlistitem">
-        <button mat-button type="button" class="side-nav-button hove" (click)="clickEvent('questionbank')">
+        <button mat-button type="button" class="side-nav-button hove" (click)="clickEvent('questionbank','q')" [ngClass]="{ 'active': activeButton === 'q' }">
           <mat-icon class="icon-spacing hove" color="primary">folder</mat-icon>
           <span class="button-text hove">Question Bank</span>
         </button>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item class="matlistitem">
-        <button mat-button class="side-nav-button hove" (click)="clickEvent('createpaper')">
+        <button mat-button class="side-nav-button hove" (click)="clickEvent('createpaper','c')" [ngClass]="{ 'active': activeButton === 'c' }">
           <mat-icon class="icon-spacing hove" color="primary">assignment</mat-icon>
           <span class="button-text hove">Create Paper</span>
         </button>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item class="matlistitem">
-        <button mat-button class="side-nav-button hove" (click)="clickEvent('scheduleexam')">
+        <button mat-button class="side-nav-button hove" (click)="clickEvent('scheduleexam','s')" [ngClass]="{ 'active': activeButton === 's' }">
           <mat-icon class="icon-spacing hove" color="primary">event</mat-icon>
           <span  class="button-text hove">Schedule Exam</span>
         </button>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item class="matlistitem">
-        <button mat-button class="side-nav-button hove" (click)="clickEvent('result')">
+        <button mat-button class="side-nav-button hove" (click)="clickEvent('result','e')" [ngClass]="{ 'active': activeButton === 'e' }">
           <mat-icon class="icon-spacing hove" color="primary">poll</mat-icon>
           <span class="button-text hove">Exam Result</span>
         </button>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item class="matlistitem">
-        <button mat-button class="side-nav-button hove" (click)="clickEvent('users')">
+        <button mat-button class="side-nav-button hove" (click)="clickEvent('users','u')" [ngClass]="{ 'active': activeButton === 'u' }">
           <mat-icon class="icon-spacing hove" color="primary">supervisor_account</mat-icon>
           <span class="button-text hove">Users</span>
         </button>

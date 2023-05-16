@@ -1,0 +1,100 @@
+table{
+  width: 100%;
+  margin-left: 10px;
+}
+
+th{
+  color: rgb(243, 248, 248);
+  background-color: black;
+}
+.mat-mdc-header-row{
+  background-color: rgb(0, 11, 11);
+}
+
+.rightcanvas{
+  margin-left: 40rem;
+  margin-top: -15rem;
+  width: 40rem;
+}
+.leftcanvas{
+  margin-top: 2rem;
+  margin-left:5rem;
+}
+
+.chartspan{
+  margin-top: 1rem;;
+}
+
+.canvassearch{
+  /* background-color: aqua; */
+  margin-left: 5rem;
+}
+
+.canvasheading{
+  display: flex;
+  margin-left: 17rem;
+  color: rgb(0, 11, 11);
+}
+
+.search{
+  height: 5rem;
+}
+
+.pdf{
+  margin-left: 15rem;
+  margin-top: -5rem;
+}
+
+.table{
+  margin-top: -0.3rem;
+  margin-bottom: 0;
+}
+
+.pdf{
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+}
+
+#pdf-icon{
+  height: 40px;
+  width: 40px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.pdfImg
+{
+  margin-top: -1rem;
+}
+
+
+.search{
+  margin-top: 1rem;
+  margin-left: 1.2rem;
+}
+
+.arrow{
+  margin-top: 1rem;
+}
+
+.arrowbutton{
+  border: none;
+  margin-right: 1rem;
+  background-color: rgb(203, 220, 236);
+}
+
+.pagination{
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.703);
+  padding: 0;
+  margin: 0;
+  margin-left: 0.55rem;
+  width:100.05%;
+}
+
+
+.paginator{
+  width: 100%;
+  /* background-color: brown; */
+  /* margin-left: 10px; */
+}

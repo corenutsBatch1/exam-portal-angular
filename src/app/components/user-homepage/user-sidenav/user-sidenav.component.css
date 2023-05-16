@@ -15,6 +15,7 @@
   text-align: left;
   padding: 1rem;
 }
+
 .side-nav-button .mat-icon {
   margin-right: 0rem;
   border-right: 0.4rem;
@@ -41,7 +42,27 @@
   box-shadow: none;
 }
 
+/* .active{
+  background-color: transparent;
+  color: inherit;
+  box-shadow: none;
+} */
+
 button,span,mat-icon{
 
   background-color: rgb(168, 205, 240);
 }
+
+button.active {
+  background-color: #1f2937;
+  transition-duration: 1s;
+  color: white;
+}
+
+button.active .hove{
+  background-color: #1f2937;
+  transition-duration: 1s;
+  color: white;
+}
+
+

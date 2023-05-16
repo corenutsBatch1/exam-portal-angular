@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component,ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component,ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Marks } from 'src/app/model/model/Marks';
@@ -9,94 +9,72 @@ import 'chartjs-plugin-datalabels';
 import { MatPaginator } from '@angular/material/paginator';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 
-export interface PeriodicElement {
-  serialNumber: number;
-  examCode: string;
-  name: string;
-  totalMarks: number;
-  obtainedMarks :number;
-}
+
 
 
 @Component({
-  selector: 'app-all-user-exam-result-table',
-  templateUrl: './all-user-exam-result-table.component.html',
-  styleUrls: ['./all-user-exam-result-table.component.css']
+  selector: 'app-individual-user-result',
+  templateUrl: './individual-user-result.component.html',
+  styleUrls: ['./individual-user-result.component.css']
 })
-export class AllUserExamResultTableComponent {
+export class IndividualUserResultComponent {
 
-  @Output("loadAllUserExamResultTable")  loadAllUserExamResultTable=new EventEmitter();
-
-  goBack(){
-    this.loadAllUserExamResultTable.emit(true);
-  }
-
-  allUserExamResult=true;
-  showPieChart: boolean = false;
   marks:Marks[]=[];
-  examcode1?:string;
-  above80:number=0;
-  above60:number=0;
-  above35:number=0;
-  fail:number=0;
-  userMarks?:Marks[]=[];
-  username?:string;
-  username2?:string;
-  examchart?:boolean;
-  userchart?:boolean;
-  userexamresult?:false;
-  username3?:string;
-  examname?:string;
-  totalmarks?:number;
-  gotmarks?:number;
-  chart1: any;
-  chart2: any;
-  examchart1:any
-  examchart2:any;
   nameFilterValue = '';
-  codeFilterValue = '';
-  ueseexammarks?:number[]=[];
-  examcode:string[]=[]
+  activeButton: string = '';
+  userName:string=''
+  // id2:any;
+
 
   dataSource = new MatTableDataSource<Marks>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private route:ActivatedRoute) {
   }
 
 
   ngOnInit(): void {
+
+    // this.route.parseUrl
+
     this.getMarks().subscribe((data)=>{this.marks=data
                                     this.dataSource.data=this.marks
                                     this.dataSource.paginator = this.paginator;
                                 })
+
   }
 
-  getMarks():Observable<Marks[]>{
-    return this.http.get<Marks[]>(`http://localhost:8089/api/getmarks`)
+  getMarks(): Observable<Marks[]> {
+    return this.route.paramMap.pipe(
+      switchMap(params => {
+        const id2 = params.get('id2');
+        console.log("id result" + id2); // Use the retrieved value as needed
+        return this.http.get<Marks[]>(`http://localhost:8089/api/getmarks/${id2}`);
+      })
+    );
   }
 
-  displayedColumns: string[] = ['serialNumber', 'examCode', 'name', 'totalMarks', 'obtainedMarks'];
 
- //rounting
- loadAllUserResult(flag:boolean){
-  this.allUserExamResult=flag;
- }
+  displayedColumns: string[] = ['serialNumber', 'examCode','totalMarks', 'obtainedMarks'];
+
+
 
 //For Searching
   applyFilter(event: Event): void {
+    console.log("apply")
+    console.log(this.marks)
     const nameFilterValue = this.nameFilterValue.trim().toLowerCase();
     console.log(this.nameFilterValue)
 
-    this.dataSource.filterPredicate = (data: Marks, filter: string) => {
-      const nameMatch = data.user?.name?.trim().toLowerCase().includes(nameFilterValue);
+    this.dataSource.filterPredicate = (data: Marks) => {
       const codeMatch = data.exam?.code?.trim().toLowerCase().includes(nameFilterValue );
       const marksMatch = data.marks === parseInt(nameFilterValue);
       const totalmarksMatch = data.totalMarks === parseInt(nameFilterValue);
-      const idMatch = data.id === parseInt(nameFilterValue);
-      return !!(nameMatch || codeMatch ||  marksMatch || totalmarksMatch || idMatch);
+      return !!(codeMatch ||  marksMatch || totalmarksMatch);
     };
 
     const filterValue = `${nameFilterValue}`;
@@ -118,19 +96,17 @@ export class AllUserExamResultTableComponent {
         {
           table: {
             headerRows: 1,
-            widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
+            widths: ['auto','auto', 'auto', 'auto'],
             body: [
               [
                 'Serial Number',
                 'Exam Code',
-                'User Name',
                 'Total Marks',
                 'Obtained Marks'
               ],
               ...filteredData.map(d => [
                 i++ || "",
                 d.exam?.code || "",
-                d.user?.name || "",
                 d.totalMarks || 0,
                 d.marks || 0
 
@@ -149,7 +125,5 @@ export class AllUserExamResultTableComponent {
     };
     pdfMake.createPdf(docDefinition).open();
   }
-
-
 
 }

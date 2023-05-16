@@ -33,6 +33,7 @@
   background-color: #1f2937;
   transition-duration: 0.3s;
   color: white;
+  transform: translateY(-2px) scale(1.010);
 }
 
 
@@ -41,9 +42,23 @@
   background-color: transparent;
   color: inherit;
   box-shadow: none;
+  transform: translateY(-2px) scale(1.010);
 }
 
 button,span,mat-icon{
 
   background-color: rgb(168, 205, 240);
+}
+
+
+button.active {
+  background-color: #1f2937;
+  transition-duration: 1s;
+  color: white;
+}
+
+button.active .hove{
+  background-color: #1f2937;
+  transition-duration: 1s;
+  color: white;
 }

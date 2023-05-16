@@ -23,9 +23,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { IndividualUserResultComponent } from './components/user-homepage/user-sidenav/individual-user-result/individual-user-result.component';
 @NgModule({
   declarations: [
-    routingComponents
+    routingComponents,
+    IndividualUserResultComponent
   ],
   imports: [
     BrowserModule,

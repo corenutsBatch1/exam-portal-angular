@@ -1,19 +1,19 @@
-import { UserCode } from './../../../../../model/model/UserCode';
 import { HttpClient } from '@angular/common/http';
-import { Component,ViewChild, EventEmitter, Output } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import { Observable, startWith,map } from 'rxjs';
-import { Marks } from 'src/app/model/model/Marks';
-import{Chart,registerables}from 'node_modules/chart.js';
-Chart.register(...registerables);
-import 'chartjs-plugin-datalabels';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Title } from '@angular/platform-browser';
+import 'chartjs-plugin-datalabels';
+import { Chart, registerables } from 'node_modules/chart.js';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
-import { Title } from '@angular/platform-browser';
-import { FormControl } from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
+import { Marks } from 'src/app/model/model/Marks';
 import { Question } from 'src/app/model/model/Question';
 import { useranswer } from 'src/app/model/model/useranswer';
+import { UserCode } from './../../../../../model/model/UserCode';
+Chart.register(...registerables);
 
 
 
@@ -22,7 +22,7 @@ export interface PeriodicElement {
   examCode: string;
   name: string;
   totalMarks: number;
-  obtainedMarks :number;
+  obtainedMarks: number;
 
 }
 
@@ -39,49 +39,49 @@ export class IndividualUserExamResultComponent {
   goBack() {
     this.loadIndividualUserExamResult.emit(true);
   }
-  usercodes?:UserCode[]=[];
-  allUserExamResult=true;
+  usercodes?: UserCode[] = [];
+  allUserExamResult = true;
   showPieChart: boolean = false;
-  marks:Marks[]=[];
-  examcode1?:string;
-  above80:number=0;
-  above60:number=0;
-  above35:number=0;
-  fail:number=0;
-  userMarks?:Marks[]=[];
-  username?:string;
-  username2?:string;
-  examchart?:boolean;
-  userchart?:boolean;
-  userexamresult?:false;
-  username3?:string;
-  examname?:string;
-  totalmarks?:number;
-  gotmarks?:number;
+  marks: Marks[] = [];
+  examcode1?: string;
+  above80: number = 0;
+  above60: number = 0;
+  above35: number = 0;
+  fail: number = 0;
+  userMarks?: Marks[] = [];
+  username?: string;
+  username2?: string;
+  examchart?: boolean;
+  userchart?: boolean;
+  userexamresult?: false;
+  username3?: string;
+  examname?: string;
+  totalmarks?: number;
+  gotmarks?: number;
   chart1: any;
   chart2: any;
-  examchart1:any
-  examchart2:any;
+  examchart1: any
+  examchart2: any;
   nameFilterValue = '';
   codeFilterValue = '';
-  ueseexammarks?:number[]=[];
-  examcode:string[]=[]
-  uniqueexamcodes:any[]=[];
-  usernames:any[]=[]
-  codeControl =new FormControl();
-  usernamecontrol=new FormControl();
-  filteredCodes:String[]=[]
-  questions:Question[]=[]
-  userAnswers:useranswer[]=[]
-  uid:any;
-  eid:any;
-  filteredUsernames:any[]=[]
-  searchusername:any;
-  correct?:string
+  ueseexammarks?: number[] = [];
+  examcode: string[] = []
+  uniqueexamcodes: any[] = [];
+  usernames: any[] = []
+  codeControl = new FormControl();
+  usernamecontrol = new FormControl();
+  filteredCodes: String[] = []
+  questions: Question[] = []
+  userAnswers: useranswer[] = []
+  uid: any;
+  eid: any;
+  filteredUsernames: any[] = []
+  searchusername: any;
+  correct?: string
   dataSource = new MatTableDataSource<Marks>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private titleService: Title,private http:HttpClient) {
+  constructor(private titleService: Title, private http: HttpClient) {
     this.filteredCodes = this.uniqueexamcodes;
     this.codeControl.valueChanges.pipe(
       startWith(''),
@@ -100,16 +100,17 @@ export class IndividualUserExamResultComponent {
 
 
   ngOnInit(): void {
-    this.getMarks().subscribe((data)=>{this.marks=data
-                                    this.dataSource.data=this.marks
-                                    this.dataSource.paginator = this.paginator;
-                                    this.marks.forEach(a=>this.uniqueexamcodes.push(a.exam?.code))
-                                    this.uniqueexamcodes=[...new Set(this.uniqueexamcodes)]
-                                    this.filteredCodes = this.uniqueexamcodes;
+    this.getMarks().subscribe((data) => {
+      this.marks = data
+      this.dataSource.data = this.marks
+      this.dataSource.paginator = this.paginator;
+      this.marks.forEach(a => this.uniqueexamcodes.push(a.exam?.code))
+      this.uniqueexamcodes = [...new Set(this.uniqueexamcodes)]
+      this.filteredCodes = this.uniqueexamcodes;
 
-                                })
-                                console.log("in on it")
-                                console.log(this.filteredUsernames);
+    })
+    console.log("in on it")
+    console.log(this.filteredUsernames);
   }
   filterCodes(value: any): any {
     const filterValue = value.toLowerCase();
@@ -134,36 +135,36 @@ export class IndividualUserExamResultComponent {
   // }
 
   oncodeSelection() {
-    this.usernames.splice(0,this.usernames.length)
-    this.marks.forEach(a=>{
-      if(a.exam && a.exam.code==this.codeControl.value) {
+    this.usernames.splice(0, this.usernames.length)
+    this.marks.forEach(a => {
+      if (a.exam && a.exam.code == this.codeControl.value) {
         this.usernames.push(a.user?.name);
 
         console.log("in oncodeselection")
-           this.filteredUsernames=this.usernames;
-           console.log(this.filteredUsernames)
-          }
-  })
+        this.filteredUsernames = this.usernames;
+        console.log(this.filteredUsernames)
+      }
+    })
   }
 
   displayedColumns: string[] = ['serialNumber', 'examCode', 'name', 'totalMarks', 'obtainedMarks'];
 
- //rounting
- loadAllUserResult(flag:boolean){
-  this.allUserExamResult=flag;
- }
-//For Searching
+  //rounting
+  loadAllUserResult(flag: boolean) {
+    this.allUserExamResult = flag;
+  }
+  //For Searching
   applyFilter(): void {
     const nameFilterValue = this.nameFilterValue.trim().toLowerCase();
     console.log(this.nameFilterValue)
 
     this.dataSource.filterPredicate = (data: Marks, filter: string) => {
       const nameMatch = data.user?.name?.trim().toLowerCase().includes(nameFilterValue);
-      const codeMatch = data.exam?.code?.trim().toLowerCase().includes(nameFilterValue );
+      const codeMatch = data.exam?.code?.trim().toLowerCase().includes(nameFilterValue);
       const marksMatch = data.marks === parseInt(nameFilterValue);
       const totalmarksMatch = data.totalMarks === parseInt(nameFilterValue);
       const idMatch = data.id === parseInt(nameFilterValue);
-      return !!(nameMatch || codeMatch ||  marksMatch || totalmarksMatch || idMatch);
+      return !!(nameMatch || codeMatch || marksMatch || totalmarksMatch || idMatch);
     };
 
     const filterValue = `${nameFilterValue}`;
@@ -176,182 +177,181 @@ export class IndividualUserExamResultComponent {
 
 
   generatePDF(): void {
-    if(this.questions){
-    const docDefinition: TDocumentDefinitions = {
-      content: [
-        { text: 'Exam Result Data', style: 'header' },
-        `User Name: ${this.username3 || ""}\n`,
-        `Exam Name: ${this.examname || ""}\n`,
-        `Total Marks: ${this.totalmarks || 0}\n`,
-        `Obtained Marks: ${this.gotmarks || 0}`,
-        `-----------------------------------`,
-        {
-          text: `Exam Paper`,
-          style: 'header'
-        },
-        {
-          ol: this.questions.map((question, i) => {
-            const listItems = [];
+    if (this.questions) {
+      const docDefinition: TDocumentDefinitions = {
+        content: [
+          { text: 'Exam Result Data', style: 'header' },
+          `User Name: ${this.username3 || ""}\n`,
+          `Exam Name: ${this.examname || ""}\n`,
+          `Total Marks: ${this.totalmarks || 0}\n`,
+          `Obtained Marks: ${this.gotmarks || 0}`,
+          `-----------------------------------`,
+          {
+            text: `Exam Paper`,
+            style: 'header'
+          },
+          {
+            ol: this.questions.map((question, i) => {
+              const listItems = [];
 
-            // Use a regular expression to remove HTML tags from the question content
-            const questionContent = question?.content?.replace(/<[^>]*>/g, '');
+              // Use a regular expression to remove HTML tags from the question content
+              const questionContent = question?.content?.replace(/<[^>]*>/g, '');
 
-            if (questionContent) {
-              listItems.push(questionContent);
-            }
-
-            // Add the answer options and user answer (if available) to the listItems array
-            if (question?.subject?.name !== 'CODING') {
-              listItems.push(`A) ${question?.optionA}`);
-              listItems.push(`B) ${question?.optionB}`);
-              listItems.push(`C) ${question?.optionC}`);
-              listItems.push(`D) ${question?.optionD}`);
-              listItems.push(`             `);
-
-              const answer = this.userAnswers.find(answer => answer?.question?.id === question?.id);
-
-              if (answer) {
-                  listItems.push(`YourAnswer : ${answer.userAnswer}`);
+              if (questionContent) {
+                listItems.push(questionContent);
               }
 
-              listItems.push(`CorrectAnswer : ${question?.answer}`);
-              listItems.push('\n');
+              // Add the answer options and user answer (if available) to the listItems array
+              if (question?.subject?.name !== 'CODING') {
+                listItems.push(`A) ${question?.optionA}`);
+                listItems.push(`B) ${question?.optionB}`);
+                listItems.push(`C) ${question?.optionC}`);
+                listItems.push(`D) ${question?.optionD}`);
+                listItems.push(`             `);
 
-            } else {
-              listItems.push('\n');
-            }
+                const answer = this.userAnswers.find(answer => answer?.question?.id === question?.id);
 
-            // Map each list item string to an ordered list item object with a `text` property
-            return listItems.map(item => ({ text: item }));
-          })
+                if (answer) {
+                  listItems.push(`YourAnswer : ${answer.userAnswer}`);
+                }
+
+                listItems.push(`CorrectAnswer : ${question?.answer}`);
+                listItems.push('\n');
+
+              } else {
+                listItems.push('\n');
+              }
+
+              // Map each list item string to an ordered list item object with a `text` property
+              return listItems.map(item => ({ text: item }));
+            })
+          }
+        ],
+        styles: {
+          header: {
+            fontSize: 18,
+            bold: true,
+            margin: [0, 0, 0, 10]
+          }
         }
-      ],
-      styles: {
-        header: {
-          fontSize: 18,
-          bold: true,
-          margin: [0, 0, 0, 10]
-        }
-      }
-    };
+      };
 
-    pdfMake.createPdf(docDefinition).open();
-  }
+      pdfMake.createPdf(docDefinition).open();
+    }
   }
 
 
 
-  getMarks():Observable<Marks[]>{
+  getMarks(): Observable<Marks[]> {
     return this.http.get<Marks[]>(`http://localhost:8089/api/getmarks`)
   }
 
- exampiechart(code?:string){
-  this.userchart=false;
-  this.examchart=true
-  this.userMarks?.splice(0, this.userMarks.length);
-  this.above80 = 0; // reset variables to zero
-  this.above60 = 0;
-  this.above35 = 0;
-  this.fail = 0;
+  exampiechart(code?: string) {
+    this.userchart = false;
+    this.examchart = true
+    this.userMarks?.splice(0, this.userMarks.length);
+    this.above80 = 0; // reset variables to zero
+    this.above60 = 0;
+    this.above35 = 0;
+    this.fail = 0;
 
-  this.marks.forEach(a=>{
-      if(a.exam && a.exam.code==code) {
+    this.marks.forEach(a => {
+      if (a.exam && a.exam.code == code) {
         this.userMarks?.push(a);
         console.log("exampiexhart")
         console.log(this.userMarks)
-          }
-  })
-
-
-  if(this.userMarks){
-    this.userMarks.forEach(a=>{
-      if(a.marks != null && a.totalMarks != null)
-      {
-         if((a.marks/a.totalMarks)>0.8) {
-          this.above80++;
-        } else if((a.marks/a.totalMarks)>0.6) {
-          this.above60++;
-        } else if((a.marks/a.totalMarks)>0.35) {
-          this.above35++;
-        } else {
-          this.fail++;
-        }
       }
-
     })
 
-    this.RenderDailyChart();
-    this.RenderDailyChart2();
 
+    if (this.userMarks) {
+      this.userMarks.forEach(a => {
+        if (a.marks != null && a.totalMarks != null) {
+          if ((a.marks / a.totalMarks) > 0.8) {
+            this.above80++;
+          } else if ((a.marks / a.totalMarks) > 0.6) {
+            this.above60++;
+          } else if ((a.marks / a.totalMarks) > 0.35) {
+            this.above35++;
+          } else {
+            this.fail++;
+          }
+        }
+
+      })
+
+      this.RenderDailyChart();
+      this.RenderDailyChart2();
+
+    }
   }
- }
-  userpiechart(name:any){
+  userpiechart(name: any) {
     this.examcode?.splice(0, this.examcode.length);
     this.ueseexammarks?.splice(0, this.ueseexammarks.length);
 
-    this.userchart=true;
-    this.examchart=false;
+    this.userchart = true;
+    this.examchart = false;
     console.log(name)
-    this.marks.forEach(a=>{
-        if(a.marks && a.user?.name==name && a?.exam?.code ) {
-          console.log(a)
-          this.examcode.push(a.exam.code);
-           this.ueseexammarks?.push(a.marks)
-           console.log(this.examcode)
-           console.log(this.ueseexammarks)
+    this.marks.forEach(a => {
+      if (a.marks && a.user?.name == name && a?.exam?.code) {
+        console.log(a)
+        this.examcode.push(a.exam.code);
+        this.ueseexammarks?.push(a.marks)
+        console.log(this.examcode)
+        console.log(this.ueseexammarks)
 
-            }
+      }
     })
     console.log(this.examcode)
     console.log(this.ueseexammarks)
-    if(this.examcode)
-    {
+    if (this.examcode) {
       console.log("calling render")
-    this.RenderDailyChart();
-    this.RenderDailyChart2();
+      this.RenderDailyChart();
+      this.RenderDailyChart2();
 
     }
 
   }
-  examresult(name?:string,code?:string)
-{
-  this.filteredCodes = this.uniqueexamcodes;
-  this.filteredUsernames=this.usernames;
-  console.log("in exam result")
-  this.marks.forEach(a=>{
-    if(a.exam && a.exam.code==this.codeControl.value &&  a.user?.name==this.usernamecontrol.value) {
-          this.username3=a.user?.name;
-          this.examname=a.exam.name;
-          this.totalmarks=a.totalMarks;
-          this.gotmarks=a.marks;
-          this.uid=a.user?.id;
-          this.eid=a.exam.id;
+  examresult(name?: string, code?: string) {
+    this.filteredCodes = this.uniqueexamcodes;
+    this.filteredUsernames = this.usernames;
+    console.log("in exam result")
+    this.marks.forEach(a => {
+      if (a.exam && a.exam.code == this.codeControl.value && a.user?.name == this.usernamecontrol.value) {
+        this.username3 = a.user?.name;
+        this.examname = a.exam.name;
+        this.totalmarks = a.totalMarks;
+        this.gotmarks = a.marks;
+        this.uid = a.user?.id;
+        this.eid = a.exam.id;
+
+      }
+
+    })
+
+    this.http.get<UserCode[]>(`http://localhost:8089/api/getusercodes/${this.uid}/${this.eid}`).subscribe((data: UserCode[]) => {
+      if (data.length > 0) {
+        this.usercodes = data;
+        this.correct = this.usercodes[0].iscorrect?.toString();
+        console.log(this.usercodes[0].iscorrect);
+        console.log(data);
+      } else {
+        if (this.uid) {
+          // console.log(this.usercodes[0].iscorrect)
+          this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data =>
+            this.questions = data);
+
+
+          this.http.get<useranswer[]>(`http://localhost:8089/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data =>
+            this.userAnswers = data);
 
         }
+      }
 
-})
-
-this.http.get<UserCode[]>(`http://localhost:8089/api/getusercodes/${this.uid}/${this.eid}`).subscribe((data: UserCode[]) => {
-  this.usercodes = data;
-  this.correct=this.usercodes[0].iscorrect?.toString();
-  console.log(this.usercodes[0].iscorrect);
-  console.log(data);
+    });
 
 
- if(this.uid){
-    // console.log(this.usercodes[0].iscorrect)
-  this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data=>
-  this.questions=data);
-
-
-  this.http.get<useranswer[]>(`http://localhost:8089/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data=>
-    this.userAnswers=data);
-
-}
-});
-
-
-}
+  }
 
   RenderDailyChart() {
     if (this.chart1) {
@@ -393,7 +393,7 @@ this.http.get<UserCode[]>(`http://localhost:8089/api/getusercodes/${this.uid}/${
         if (this.ueseexammarks) {
           let code = this.examcode[i];
           let marks = this.ueseexammarks[i];
-          data[i]=marks;
+          data[i] = marks;
           labels.push(code);
         }
       }
@@ -434,7 +434,7 @@ this.http.get<UserCode[]>(`http://localhost:8089/api/getusercodes/${this.uid}/${
       this.chart2 = new Chart("def", {
         type: 'bar',
         data: {
-          labels: ['>80% :'+this.above80, '>60% : '+this.above60,'>35% : '+this.above35,'fail : '+this.fail],
+          labels: ['>80% :' + this.above80, '>60% : ' + this.above60, '>35% : ' + this.above35, 'fail : ' + this.fail],
 
           datasets: [{
             label: 'Exam Report',
@@ -461,7 +461,7 @@ this.http.get<UserCode[]>(`http://localhost:8089/api/getusercodes/${this.uid}/${
         if (this.ueseexammarks) {
           let code = this.examcode[i];
           let marks = this.ueseexammarks[i];
-          data[i]=marks;
+          data[i] = marks;
           labels.push(code);
         }
       }

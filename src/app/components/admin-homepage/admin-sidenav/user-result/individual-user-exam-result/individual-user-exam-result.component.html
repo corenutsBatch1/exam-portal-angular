@@ -94,8 +94,10 @@
               <li class="list-group-item"><strong>MARKS:</strong> {{ this.gotmarks}}</li>
             </ul>
           </div>
-          <mat-list *ngFor="let question of questions let i=index">
-            <h1 [innerHTML]="question.content">{{i+1}}</h1>
+          <mat-list *ngFor="let question of questions; let i=index">
+
+            <span style="display: inline-block">{{ i + 1 }}. </span>
+             <span style="display: inline-block" [innerHTML]="question.content"></span>
             <div *ngIf="question.subject?.name == 'CODING'">
               <mat-list-item>
                 <div style="white-space:nowrap">

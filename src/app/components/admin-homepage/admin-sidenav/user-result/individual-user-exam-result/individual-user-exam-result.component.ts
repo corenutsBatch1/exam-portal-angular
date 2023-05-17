@@ -335,6 +335,16 @@ export class IndividualUserExamResultComponent {
         this.correct = this.usercodes[0].iscorrect?.toString();
         console.log(this.usercodes[0].iscorrect);
         console.log(data);
+        if (this.uid) {
+          // console.log(this.usercodes[0].iscorrect)
+          this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data =>
+            this.questions = data);
+
+
+          this.http.get<useranswer[]>(`http://localhost:8089/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data =>
+            this.userAnswers = data);
+
+        }
       } else {
         if (this.uid) {
           // console.log(this.usercodes[0].iscorrect)

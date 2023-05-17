@@ -51,7 +51,7 @@ export class CodingComponent {
 
 
   runCode(code:string) {
-
+      console.log(this.id+"in runcode")
     console.log("code")
     console.log(code)
     if(!this.selectedLanguage){
@@ -125,6 +125,7 @@ export class CodingComponent {
   }
 
   submitCode(code: string) {
+    console.log(this.id)
     console.log(this.iscorrect)
     console.log('code');
     console.log(code);

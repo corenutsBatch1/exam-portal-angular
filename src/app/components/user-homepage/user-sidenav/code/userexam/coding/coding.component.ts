@@ -33,12 +33,15 @@ export class CodingComponent {
   response?: any[];
   passedTestCases: number = 0;
   runCodeSuccessfull: boolean = false;
+  iscorrect:string="wrong";
+
   constructor(
     private apiService: CodingApiService,
     private service: MyserviceService,
     private http: HttpClient
   ) {}
   ngOnInit(): void {
+
     this.examid = this.service.sendeid();
     this.userid = this.service.sendid();
     console.log(this.id);
@@ -98,6 +101,9 @@ export class CodingComponent {
                   console.log('F -' + this.count);
                   console.log('F -' + this.passedTestCases);
                   this.passedTestCases = this.count;
+                  if (this.passedTestCases == this.Testcase?.length) {
+                    this.iscorrect = "correct";
+                  }
                 } else {
                   this.flag = false;
                   console.log('your program is incorrect');
@@ -119,6 +125,7 @@ export class CodingComponent {
   }
 
   submitCode(code: string) {
+    console.log(this.iscorrect)
     console.log('code');
     console.log(code);
     if (!this.selectedLanguage) {
@@ -138,6 +145,7 @@ export class CodingComponent {
     this.userCode = {
       language: 'java',
       userInputCode: code,
+      iscorrect:this.iscorrect,
       exam: {
         id: this.examid,
       },
@@ -172,9 +180,11 @@ export class CodingComponent {
                   console.log('F -' + this.passedTestCases);
                   this.passedTestCases = this.count;
                   if (this.passedTestCases == this.Testcase?.length) {
+                    this.userCode!.iscorrect = "correct";
                     this.flag = true;
                     this.codingMarks = 5;
                     this.service.codingmarks(this.codingMarks);
+
                     console.log(this.codingMarks + 'in coding component');
                   } else {
                     console.log('no marks');

@@ -101,10 +101,10 @@
                 <div style="white-space:nowrap">
                     <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="A" /> -->
                     <!-- <label class="option">A : {{ question.optionA }}</label> -->
-                    <div style="color:rgb(0, 255, 51);font-size: large;" >Your Code is Correct
+                    <div  *ngIf="usercodes?.iscorrect == 'correct'" style="color:rgb(0, 255, 51);font-size: large;" >Your Code is Correct
 
                     </div>
-                    <div style="color: red;font-size: large;" >Your Code is Wrong
+                    <div *ngIf="usercodes?.iscorrect != 'correct'"  style="color: red;font-size: large;" >Your Code is Wrong
 
                     </div>
                 </div>

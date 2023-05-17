@@ -11,5 +11,6 @@ export class UserCode
   user?:User
   exam?:ScheduleExam;
   codingQuestion?:CodingQuestion
+  iscorrect?:String;
 
 }

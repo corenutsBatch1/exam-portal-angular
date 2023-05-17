@@ -1,3 +1,4 @@
+import { UserCode } from './../../../../../model/model/UserCode';
 import { HttpClient } from '@angular/common/http';
 import { Component,ViewChild, EventEmitter, Output } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
@@ -13,7 +14,7 @@ import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { Question } from 'src/app/model/model/Question';
 import { useranswer } from 'src/app/model/model/useranswer';
-import { UserCode } from 'src/app/model/model/UserCode';
+
 
 
 export interface PeriodicElement {
@@ -38,7 +39,7 @@ export class IndividualUserExamResultComponent {
   goBack() {
     this.loadIndividualUserExamResult.emit(true);
   }
-  usercodes?:UserCode;
+  usercodes?:UserCode[]=[];
   allUserExamResult=true;
   showPieChart: boolean = false;
   marks:Marks[]=[];
@@ -76,6 +77,7 @@ export class IndividualUserExamResultComponent {
   eid:any;
   filteredUsernames:any[]=[]
   searchusername:any;
+  correct?:string
   dataSource = new MatTableDataSource<Marks>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -313,6 +315,8 @@ export class IndividualUserExamResultComponent {
   }
   examresult(name?:string,code?:string)
 {
+  this.filteredCodes = this.uniqueexamcodes;
+  this.filteredUsernames=this.usernames;
   console.log("in exam result")
   this.marks.forEach(a=>{
     if(a.exam && a.exam.code==this.codeControl.value &&  a.user?.name==this.usernamecontrol.value) {
@@ -322,23 +326,29 @@ export class IndividualUserExamResultComponent {
           this.gotmarks=a.marks;
           this.uid=a.user?.id;
           this.eid=a.exam.id;
-          console.log(this.uid)
-          console.log()
+
         }
 
 })
-if(this.uid){
+
+this.http.get<UserCode[]>(`http://localhost:8089/api/getusercodes/${this.uid}/${this.eid}`).subscribe((data: UserCode[]) => {
+  this.usercodes = data;
+  this.correct=this.usercodes[0].iscorrect?.toString();
+  console.log(this.usercodes[0].iscorrect);
+  console.log(data);
+
+
+ if(this.uid){
+    // console.log(this.usercodes[0].iscorrect)
   this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data=>
   this.questions=data);
 
-  this.http.get(`http://localhost:8089/api/getusercodes/${this.uid}/${this.eid}`).subscribe(data=>{this.usercodes=data
-  console.log(this.usercodes.iscorrect)
-  console.log(data)
-});
 
   this.http.get<useranswer[]>(`http://localhost:8089/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data=>
     this.userAnswers=data);
+
 }
+});
 
 
 }

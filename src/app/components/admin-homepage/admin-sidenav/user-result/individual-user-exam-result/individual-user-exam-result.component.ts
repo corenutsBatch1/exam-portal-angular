@@ -13,6 +13,7 @@ import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { Question } from 'src/app/model/model/Question';
 import { useranswer } from 'src/app/model/model/useranswer';
+import { UserCode } from 'src/app/model/model/UserCode';
 
 
 export interface PeriodicElement {
@@ -33,10 +34,11 @@ export class IndividualUserExamResultComponent {
 
   @Output("loadIndividualUserExamResult") loadIndividualUserExamResult = new EventEmitter();
 
+
   goBack() {
     this.loadIndividualUserExamResult.emit(true);
   }
-
+  usercodes?:UserCode;
   allUserExamResult=true;
   showPieChart: boolean = false;
   marks:Marks[]=[];
@@ -321,13 +323,18 @@ export class IndividualUserExamResultComponent {
           this.uid=a.user?.id;
           this.eid=a.exam.id;
           console.log(this.uid)
-          console.log(this.eid+"========================================")
+          console.log()
         }
 
 })
 if(this.uid){
   this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data=>
   this.questions=data);
+
+  this.http.get(`http://localhost:8089/api/getusercodes/${this.uid}/${this.eid}`).subscribe(data=>{this.usercodes=data
+  console.log(this.usercodes.iscorrect)
+  console.log(data)
+});
 
   this.http.get<useranswer[]>(`http://localhost:8089/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data=>
     this.userAnswers=data);

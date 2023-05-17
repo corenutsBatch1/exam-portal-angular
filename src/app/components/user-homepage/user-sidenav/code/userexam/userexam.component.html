@@ -122,7 +122,7 @@
             <div *ngIf="clickedSubject === 'CODING' && this.currentQuestion != null">
               <h3><b> Question No {{this.questionnumber+1}}</b></h3>
              <h1 [innerHTML]="currentQuestion.content"></h1>
-              <app-coding></app-coding>
+             <app-coding [id]="this.codingquestionid"></app-coding>
             </div>
 
 

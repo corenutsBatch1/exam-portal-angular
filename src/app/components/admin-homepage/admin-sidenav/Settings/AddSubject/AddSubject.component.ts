@@ -39,7 +39,7 @@ Subjects:Subject = new Subject();
 
    if (this.isEditOperation && this.id) {
    this.http
-   .get<Subject>(`http://localhost:8089/api/getSubjectById/${this.id}`)
+   .get<Subject>(`http://localhost:8089/api/subject/${this.id}`)
    .subscribe((data) => {
      this.subject = data;
      console.log(this.subject);
@@ -88,7 +88,7 @@ addSubjectInfo()
   console.log(this.myForm.value.name);
 
 
-  this.http.post<any>('http://localhost:8089/api/addsubject',this.myForm.value).subscribe(
+  this.http.post<any>('http://localhost:8089/api/subject',this.myForm.value).subscribe(
     response=>{
 
       Swal.fire({
@@ -107,7 +107,7 @@ addSubjectInfo()
 editSubjectInfo()
 {
   console.log(this.myForm);
-  this.http.put<any>(`http://localhost:8089/api/updatesubject/${this.id}`,this.myForm.value).subscribe(
+  this.http.put<any>(`http://localhost:8089/api/subject/${this.id}`,this.myForm.value).subscribe(
     response=>{
       Swal.fire({
         title: "Subject updated successfully",

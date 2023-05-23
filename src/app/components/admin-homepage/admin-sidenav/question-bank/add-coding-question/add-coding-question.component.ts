@@ -52,8 +52,7 @@ export class AddCodingQuestionComponent {
     });
   }
   ngOnInit(): void {
-
-    this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe(data=>{
+    this.http.get<Subject[]>(`http://localhost:8089/api/subjects`).subscribe(data=>{
       console.log(data);
        this.subjects=data;
        console.log(this.subjects);
@@ -117,7 +116,7 @@ export class AddCodingQuestionComponent {
 
     this.codingQuestion.content=this.questionContent;
 
-    this.http.post(`http://localhost:8089/api/addcodingquestion/${id}`, this.codingQuestion).subscribe(
+    this.http.post(`http://localhost:8089/api/subject/${id}/codingquestion`, this.codingQuestion).subscribe(
 
                   response=>{
                     this.getallcodingquestions(id);
@@ -132,12 +131,13 @@ export class AddCodingQuestionComponent {
 
   }
   getallcodingquestions(id?:number){
-    this.http.get(`http://localhost:8089/api/getallcodingquestions/${id}`).subscribe((data)=>{
+    this.http.get(`http://localhost:8089/api/subject/${id}/codingquestions`).subscribe((data)=>{
       console.log(data)
       this.getCodingQuestion=this.getCodingQuestion.concat(data)
       this.addTestCases()
     })
   }
+  
   addTestCases()
   {
     this.getCodingQuestion.forEach((data)=>{

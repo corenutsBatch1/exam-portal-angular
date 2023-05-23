@@ -5,6 +5,7 @@ import { Subject } from 'src/app/model/model/Subject';
 import Swal from 'sweetalert2';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SubjectService } from 'src/app/services/subject.service';
 @Component({
   selector: 'app-Settings',
   templateUrl: './Settings.component.html',
@@ -19,18 +20,17 @@ export class SettingsComponent implements OnInit {
   subjectId?:number;
   datasource = new MatTableDataSource<Subject>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  constructor(private route: Router,private http:HttpClient) {}
+  constructor(private route: Router,private subjectService:SubjectService) {}
 
   fetchSubjects(){
-    this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe(data=>{
+    this.subjectService.fetchSubjects().subscribe(data=>{
     console.log(data);
     this.dataSource=data;
     this.datasource.data=this.dataSource
     this.datasource.paginator = this.paginator;
     console.log(this.dataSource);
-});
-  // location.reload();
-}
+    });
+  }
 
   ngOnInit(): void {
     this.fetchSubjects()
@@ -50,6 +50,8 @@ export class SettingsComponent implements OnInit {
     this.route.navigate(['adminpage/settings/addsubject'], { queryParams: { action: 'edit' } });
 
   }
+
+
   deleteSubjectInfo(id?:number){
     Swal.fire({
       title: "Are you sure you want to Delete?",
@@ -62,7 +64,7 @@ export class SettingsComponent implements OnInit {
     })
     .then((result) => {
       if (result.isConfirmed) {
-        this.deleteSubject(id).subscribe(
+        this.deleteSubject(id!).subscribe(
           response => {
             Swal.fire("Deleted successfully", "", "success");
             console.log(response);
@@ -81,13 +83,11 @@ export class SettingsComponent implements OnInit {
 
 
   }
-  deleteSubject(id?:number){
-    console.log(id);
-  return  this.http.delete(`http://localhost:8089/api/deleteSubject/${id}`);
+
+  deleteSubject(id  : number){
+    return this.subjectService.deleteSubject(id);
+  }
 
 }
-}
-function ngOnInit() {
-  throw new Error('Function not implemented.');
-}
+
 

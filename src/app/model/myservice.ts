@@ -30,7 +30,7 @@ sendeid()
   return this.eid;
 }
 codingmarks(marks:any){
-  this.codingmark=this.codingmark+marks;
+  this.codingmark = marks;
   console.log("in service"+this.codingmark);
   console.log(this.codingmark +"in service")
 }

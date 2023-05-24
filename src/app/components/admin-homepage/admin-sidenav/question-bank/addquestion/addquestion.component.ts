@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { SubjectService } from 'src/app/services/subject.service';
 
 
 
@@ -27,14 +28,14 @@ export class AddquestionComponent implements OnInit{
    answers : string[] = []
    public Editor = ClassicEditor;
 
-  constructor(private http:HttpClient,private router:Router)
+  constructor(private http:HttpClient,private router:Router,private subjectService : SubjectService)
   {
     this.subjects=[];
     this.uniqueSubjectNames=[];
   }
   ngOnInit(): void {
 
-    this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe(data=>{
+    this.subjectService.fetchSubjects().subscribe(data=>{
       console.log(data);
        this.subjects=data;
        console.log(this.subjects);

@@ -4,6 +4,7 @@ import { catchError, throwError } from 'rxjs';
 import { CodingQuestion } from 'src/app/model/model/CodingQuestion';
 import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
+import { SubjectService } from 'src/app/services/subject.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-manageQuestion',
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class ManageQuestionComponent implements OnInit {
   @Output('loadManageQuestionPage') loadManageQuestionPage = new EventEmitter();
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private subjectService : SubjectService) {}
 
   question: Question = new Question();
   Questions: Question[] = [];
@@ -41,7 +42,7 @@ export class ManageQuestionComponent implements OnInit {
 
 
   ngOnInit() {
-    this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe((data) => {
+    this.subjectService.fetchSubjects().subscribe((data) => {
         console.log(data);
         this.subjects = data;
         console.log(this.subjects);

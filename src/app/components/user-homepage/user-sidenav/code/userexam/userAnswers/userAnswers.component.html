@@ -3,9 +3,19 @@
   <app-header></app-header>
 </header>
 
-<div class="container" id="resultpdf">
+<div class="thank-you-container">
+  <span class="tick-mark">&#10004;</span>
+  <h1>Thank You ! Your Exam submitted successfully</h1>
+</div>
 
-  <div>
+
+
+
+<!-- <div class="container" id="resultpdf"> -->
+
+
+
+  <!-- <div>
     <button class="matbuuton">
       <mat-icon (click)="generatePDF()" class="maticon mt-4">picture_as_pdfdownload</mat-icon>
       <mat-icon (click)="generatePDF()"  class="maticon mt-4">download</mat-icon>
@@ -15,10 +25,11 @@
             <h1 [innerHTML]="question.content">{{i+1}}</h1>
             <div *ngIf="question.subject?.name == 'CODING'">
               <mat-list-item>
-                <div style="white-space:nowrap">
+                <div style="white-space:nowrap"> -->
+
                     <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="A" /> -->
                     <!-- <label class="option">A : {{ question.optionA }}</label> -->
-                    <div style="color:rgb(0, 255, 51);font-size: large;" *ngIf="codeFlag">Your Code is Correct
+                    <!-- <div style="color:rgb(0, 255, 51);font-size: large;" *ngIf="codeFlag">Your Code is Correct
 
                     </div>
                     <div style="color: red;font-size: large;" *ngIf="!codeFlag">Your Code is Wrong
@@ -29,31 +40,31 @@
             </div>
             <div *ngIf="question.subject?.name != 'CODING'">
               <mat-list-item>
-                <div style="white-space:nowrap">
+                <div style="white-space:nowrap"> -->
                     <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="A" /> -->
-                    <label class="option">A : {{ question.optionA }}</label>
+                    <!-- <label class="option">A : {{ question.optionA }}</label>
                 </div>
               </mat-list-item>
 
               <mat-list-item>
-                <div style="white-space:nowrap">
+                <div style="white-space:nowrap"> -->
                   <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="B" /> -->
-                  <label class="option">B : {{ question.optionB }}</label>
+                  <!-- <label class="option">B : {{ question.optionB }}</label>
                 </div>
               </mat-list-item>
 
               <mat-list-item>
-                <div class="white-space:nowrap">
+                <div class="white-space:nowrap"> -->
                   <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="C" /> -->
-                  <label class="option">C : {{ question.optionC }}</label>
+                  <!-- <label class="option">C : {{ question.optionC }}</label>
                 </div>
               </mat-list-item>
 
               <mat-list-item>
-               <div class="white-space:nowrap">
+               <div class="white-space:nowrap"> -->
                 <!-- <input class="radiobutton" type="" [name]="'answer'+question.id" value="D" /> -->
-                  <label class="option">D : {{ question.optionD }}</label>
-               </div>
+                  <!-- <label class="option">D : {{ question.optionD }}</label> -->
+               <!-- </div>
               </mat-list-item>
               <mat-list-item>
                 <div class="white-space:nowrap" *ngFor="let answer of userAnswers">
@@ -69,4 +80,4 @@
 
             </div>
           </mat-list>
-</div>
+</div> -->

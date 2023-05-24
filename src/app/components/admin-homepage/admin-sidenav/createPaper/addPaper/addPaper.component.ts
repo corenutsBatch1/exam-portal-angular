@@ -8,6 +8,7 @@ import { Question } from 'src/app/model/model/Question';
 import { Subject } from 'src/app/model/model/Subject';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
   selector: 'app-addPaper',
@@ -16,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class AddPaperComponent implements OnInit {
   @Output('loadAddPaperpage') loadAddPaperpage = new EventEmitter();
-  constructor(private http :HttpClient) { }
+  constructor(private http :HttpClient,private subjectService : SubjectService) { }
   createPaper=new CreatePaper();
   subjects?:Subject[];
   questionsIdArray:number[]=[];
@@ -40,7 +41,7 @@ export class AddPaperComponent implements OnInit {
   questionsLeft?:number;
   ngOnInit(): void {
 
-    this.http.get<Subject[]>(`http://localhost:8089/api/getAllSubjects`).subscribe(data=>{
+    this.subjectService.fetchSubjects().subscribe(data=>{
       console.log(data);
        this.subjects=data;
        console.log(this.subjects);

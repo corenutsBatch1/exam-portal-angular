@@ -1,4 +1,4 @@
-
+<body (contextmenu)="disableRightClick($event)">
 <mat-toolbar>
   <img src="assets/test.png">
   &nbsp;&nbsp;
@@ -24,7 +24,7 @@
           <table class="subject">
             <tr  >
               <td *ngFor="let subjectName of uniqueSubjectNames;let i = index">
-                <button class="text-center mt-2 ml-4 subject-button btn-group-toggle" data-toggle="buttons" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)"
+                <button type="button" class="text-center mt-2 ml-4 subject-button btn-group-toggle" data-toggle="buttons" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)"
                 [ngClass]="{'active': activeIndex === i}"
                 (click)="setActive(i,this.subjectName)" >
                   {{subjectName}}
@@ -186,3 +186,4 @@
   </div>
 </div>
 
+</body>

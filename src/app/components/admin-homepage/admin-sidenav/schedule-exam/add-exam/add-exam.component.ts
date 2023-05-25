@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { response } from 'express';
 import { CreatePaper } from 'src/app/model/model/CreatePaper';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
@@ -77,6 +78,11 @@ export class AddExamComponent implements OnInit{
        }
     }
   }
+  onCheckboxChange(event: MatCheckboxChange): void {
+    console.log('Checkbox value:', event.checked);
+    this.scheduleExam.showResults = event.checked
+  }
+
   goBack() {
     console.log("go back")
       this.loadAddExampage.emit(true);

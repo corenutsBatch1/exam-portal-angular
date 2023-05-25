@@ -8,6 +8,6 @@ export class ScheduleExam{
   endTime?:string;
   examDuration?:number;
   createPaper?:CreatePaper;
-
+  showResults? : boolean;
 
 }

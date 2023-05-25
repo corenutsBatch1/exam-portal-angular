@@ -21,4 +21,5 @@ id1?:number;
   disableRightClick(event: MouseEvent): void {
     event.preventDefault();
   }
+
 }

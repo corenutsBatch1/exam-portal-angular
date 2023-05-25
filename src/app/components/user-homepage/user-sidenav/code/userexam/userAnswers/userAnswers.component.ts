@@ -1,8 +1,8 @@
 
-import { LocationStrategy } from '@angular/common';
+import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Marks } from 'src/app/model/model/Marks';
 
@@ -34,14 +34,16 @@ export class UserAnswersComponent implements OnInit {
   obtainedMarks?:Marks;
   exam?:ScheduleExam;
   codeFlag?:boolean;
-  constructor(private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService, private locationStrategy: LocationStrategy
-    ) { }
+  constructor(private router : Router, private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService, private location : Location
+    ) {}
+
 
   ngOnInit() {
-    this.locationStrategy.onPopState(() => {
-      history.forward();
-    });
 
+    window.addEventListener('popstate',()=>{
+      console.log("entered popstate")
+      this.location.go('/userpage')
+    })
     this.uid=this.service.sendid();
     this.eid=this.service.sendeid();
     console.log("enter..."+this.uid,this.eid)
@@ -55,13 +57,17 @@ export class UserAnswersComponent implements OnInit {
   this.loadScore().subscribe((data)=>{this.score=data;
                                       this.score=this.score+this.service.getcodingmarks();
                                       console.log("in answers"+this.score);
-                                        this.insertMarks()})
+                                        })
   this.loadUserAnswers().subscribe((data)=>this.userAnswers=data)
 
   this.loadExam().subscribe(data=>{this.exam=data})
   this.codeFlag = this.service.sendCodingBoolean();
 
+  // this.disableBack();
+  this.insertMarks()
 }
+
+
 
   loadQuestions(): Observable<Question[]> {
     return this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.code}`);
@@ -102,7 +108,6 @@ export class UserAnswersComponent implements OnInit {
 
     }
     this.saveScore()
-
   }
 
 

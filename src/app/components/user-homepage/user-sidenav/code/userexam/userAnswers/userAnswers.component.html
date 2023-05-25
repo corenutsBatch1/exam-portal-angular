@@ -3,70 +3,74 @@
   <app-header></app-header>
 </header>
 
-<div class="container" id="resultpdf">
-
-  <div>
-    <button class="matbuuton">
-      <mat-icon (click)="generatePDF()" class="maticon mt-4">picture_as_pdfdownload</mat-icon>
-      <mat-icon (click)="generatePDF()"  class="maticon mt-4">download</mat-icon>
-     </button>
-    <h1 style="text-align: center;" class="score">Your Score is : {{score}} / {{this.exam?.createPaper?.totalMarks}} </h1></div>
-<mat-list *ngFor="let question of questions let i=index">
-            <h1 [innerHTML]="question.content">{{i+1}}</h1>
-            <div *ngIf="question.subject?.name == 'CODING'">
-              <mat-list-item>
-                <div style="white-space:nowrap">
-                    <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="A" /> -->
-                    <!-- <label class="option">A : {{ question.optionA }}</label> -->
-                    <div style="color:rgb(0, 255, 51);font-size: large;" *ngIf="codeFlag">Your Code is Correct
-
-                    </div>
-                    <div style="color: red;font-size: large;" *ngIf="!codeFlag">Your Code is Wrong
-
-                    </div>
-                </div>
-              </mat-list-item>
-            </div>
-            <div *ngIf="question.subject?.name != 'CODING'">
-              <mat-list-item>
-                <div style="white-space:nowrap">
-                    <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="A" /> -->
-                    <label class="option">A : {{ question.optionA }}</label>
-                </div>
-              </mat-list-item>
-
-              <mat-list-item>
-                <div style="white-space:nowrap">
-                  <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="B" /> -->
-                  <label class="option">B : {{ question.optionB }}</label>
-                </div>
-              </mat-list-item>
-
-              <mat-list-item>
-                <div class="white-space:nowrap">
-                  <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="C" /> -->
-                  <label class="option">C : {{ question.optionC }}</label>
-                </div>
-              </mat-list-item>
-
-              <mat-list-item>
-               <div class="white-space:nowrap">
-                <!-- <input class="radiobutton" type="" [name]="'answer'+question.id" value="D" /> -->
-                  <label class="option">D : {{ question.optionD }}</label>
-               </div>
-              </mat-list-item>
-              <mat-list-item>
-                <div class="white-space:nowrap" *ngFor="let answer of userAnswers">
-                  <label class="option" style="color: red;font-size: large;" *ngIf="question.id==answer.question?.id && answer.userAnswer!=question.answer">YourAnswer : {{ answer.userAnswer}}</label>
-                  <label class="option" style="color:rgb(0, 255, 51);font-size: large;" *ngIf="question.id==answer.question?.id && answer.userAnswer==question.answer ">YourAnswer : {{ answer.userAnswer}}</label>
-                </div>
-               </mat-list-item>
-              <mat-list-item>
-                <div class="white-space:nowrap">
-                  <label class="option" style="color: rgb(7, 7, 245);font-size: large;">CorrectAnswer : {{ question.answer}}</label>
-                </div>
-               </mat-list-item>
-
-            </div>
-          </mat-list>
+<div class="thank-you-container" *ngIf="exam?.showResults == false">
+  <span class="tick-mark">&#10004;</span>
+  <h1>Thank You ! Your Exam submitted successfully</h1>
 </div>
+
+<div class="container" id="resultpdf" *ngIf="exam?.showResults == true">
+    <div>
+      <button class="matbuuton">
+        <mat-icon (click)="generatePDF()" class="maticon mt-4">picture_as_pdfdownload</mat-icon>
+        <mat-icon (click)="generatePDF()"  class="maticon mt-4">download</mat-icon>
+       </button>
+      <h1 style="text-align: center;" class="score">Your Score is : {{score}} / {{this.exam?.createPaper?.totalMarks}} </h1></div>
+  <mat-list *ngFor="let question of questions let i=index">
+              <h1 [innerHTML]="question.content">{{i+1}}</h1>
+              <div *ngIf="question.subject?.name == 'CODING'">
+                <mat-list-item>
+                  <div style="white-space:nowrap">
+                      <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="A" /> -->
+                      <!-- <label class="option">A : {{ question.optionA }}</label> -->
+                      <div style="color:rgb(0, 255, 51);font-size: large;" *ngIf="codeFlag">Your Code is Correct
+
+                      </div>
+                      <div style="color: red;font-size: large;" *ngIf="!codeFlag">Your Code is Wrong
+
+                      </div>
+                  </div>
+                </mat-list-item>
+              </div>
+              <div *ngIf="question.subject?.name != 'CODING'">
+                <mat-list-item>
+                  <div style="white-space:nowrap">
+                      <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="A" /> -->
+                      <label class="option">A : {{ question.optionA }}</label>
+                  </div>
+                </mat-list-item>
+
+                <mat-list-item>
+                  <div style="white-space:nowrap">
+                    <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="B" /> -->
+                    <label class="option">B : {{ question.optionB }}</label>
+                  </div>
+                </mat-list-item>
+
+                <mat-list-item>
+                  <div class="white-space:nowrap">
+                    <!-- <input class="radiobutton" type="radio" [name]="'answer'+question.id" value="C" /> -->
+                    <label class="option">C : {{ question.optionC }}</label>
+                  </div>
+                </mat-list-item>
+
+                <mat-list-item>
+                 <div class="white-space:nowrap">
+                  <!-- <input class="radiobutton" type="" [name]="'answer'+question.id" value="D" /> -->
+                    <label class="option">D : {{ question.optionD }}</label>
+                 </div>
+                </mat-list-item>
+                <mat-list-item>
+                  <div class="white-space:nowrap" *ngFor="let answer of userAnswers">
+                    <label class="option" style="color: red;font-size: large;" *ngIf="question.id==answer.question?.id && answer.userAnswer!=question.answer">YourAnswer : {{ answer.userAnswer}}</label>
+                    <label class="option" style="color:rgb(0, 255, 51);font-size: large;" *ngIf="question.id==answer.question?.id && answer.userAnswer==question.answer ">YourAnswer : {{ answer.userAnswer}}</label>
+                  </div>
+                 </mat-list-item>
+                <mat-list-item>
+                  <div class="white-space:nowrap">
+                    <label class="option" style="color: rgb(7, 7, 245);font-size: large;">CorrectAnswer : {{ question.answer}}</label>
+                  </div>
+                 </mat-list-item>
+
+              </div>
+            </mat-list>
+  </div>

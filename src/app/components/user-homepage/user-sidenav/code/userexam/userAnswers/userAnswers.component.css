@@ -23,3 +23,15 @@
 .score{
   margin-top: -2.2rem;
 }
+
+.thank-you-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.tick-mark {
+  font-size: 100px;
+  color:green;
+}

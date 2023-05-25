@@ -7,6 +7,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CodingQuestion } from 'src/app/model/model/CodingQuestion';
 import { Subject } from 'src/app/model/model/Subject';
 import { TestCases } from 'src/app/model/model/TestCases';
+import { SubjectService } from 'src/app/services/subject.service';
 import Swal from 'sweetalert2';
 interface InputField {
   // value: string;
@@ -42,7 +43,8 @@ export class AddCodingQuestionComponent {
   getCodingQuestion: CodingQuestion[]=[]
   testcases:TestCases[]=[];
   public Editor = ClassicEditor;
-  constructor(private http:HttpClient,private router:Router,private formBuilder: FormBuilder)
+  constructor(private http:HttpClient,private router:Router,private formBuilder: FormBuilder,
+    private subjectService : SubjectService)
   {
     // this.subjects=[];
     // this.uniqueSubjectNames=[];
@@ -52,7 +54,7 @@ export class AddCodingQuestionComponent {
     });
   }
   ngOnInit(): void {
-    this.http.get<Subject[]>(`http://localhost:8089/api/subjects`).subscribe(data=>{
+    this.subjectService.fetchSubjects().subscribe(data=>{
       console.log(data);
        this.subjects=data;
        console.log(this.subjects);
@@ -137,7 +139,7 @@ export class AddCodingQuestionComponent {
       this.addTestCases()
     })
   }
-  
+
   addTestCases()
   {
     this.getCodingQuestion.forEach((data)=>{

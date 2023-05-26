@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { MyserviceService } from 'src/app/model/myservice';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import Swal from 'sweetalert2';
 import { LocationStrategy } from '@angular/common';
+import { FullScreenServiceService } from 'src/app/services/full-screen-service.service';
 
 
 @Component({
@@ -56,12 +57,14 @@ export class UserexamComponent {
     private route: ActivatedRoute,
     private service: MyserviceService,
     private router: Router,
-    private locationStrategy: LocationStrategy
+    private locationStrategy: LocationStrategy,
+    private fullscreenService : FullScreenServiceService
   ) {}
 
 
 
   ngOnInit(): void {
+    this.enableFullscreen()
     // this.cId = this.service.getCId();
     // console.log(this.cId);
     this.service.runCodeClicked.subscribe((data)=>{this.cId=data
@@ -101,7 +104,19 @@ export class UserexamComponent {
       });
     });
 
+
   }
+
+
+  enableFullscreen() {
+    this.fullscreenService.enableFullscreen();
+  }
+
+  // @HostListener('document:keydown.escape', ['$event'])
+  // handleEscapeKey(event: KeyboardEvent) {
+  //   this.fullscreenService.preventExitOnEscape(event);
+  // }
+
 
 
 

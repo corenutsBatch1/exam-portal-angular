@@ -1,5 +1,5 @@
 
-import { Location } from '@angular/common';
+import { LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,7 @@ import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
+import { LoginserviceService } from 'src/app/components/loginmodal/loginservice.service';
 
 
 @Component({
@@ -34,16 +35,16 @@ export class UserAnswersComponent implements OnInit {
   obtainedMarks?:Marks;
   exam?:ScheduleExam;
   codeFlag?:boolean;
-  constructor(private router : Router, private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService, private location : Location
-    ) {}
+  marksInserted: boolean = false;
+
+  constructor(private router : Router, private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService, private locationStrategy: LocationStrategy
+   ,private loginService : LoginserviceService) { }
 
 
   ngOnInit() {
-
-    window.addEventListener('popstate',()=>{
-      console.log("entered popstate")
-      this.location.go('/userpage')
-    })
+    this.locationStrategy.onPopState(() => {
+      history.forward();
+    });
     this.uid=this.service.sendid();
     this.eid=this.service.sendeid();
     console.log("enter..."+this.uid,this.eid)
@@ -57,16 +58,22 @@ export class UserAnswersComponent implements OnInit {
   this.loadScore().subscribe((data)=>{this.score=data;
                                       this.score=this.score+this.service.getcodingmarks();
                                       console.log("in answers"+this.score);
-                                        })
+                                      if (!this.marksInserted) { // Insert marks only if they haven't been inserted before
+                                        this.insertMarks();
+                                        this.marksInserted = true; // Set the flag to true after inserting marks
+                                      }
+                                    })
   this.loadUserAnswers().subscribe((data)=>this.userAnswers=data)
 
-  this.loadExam().subscribe(data=>{this.exam=data})
+  this.loadExam().subscribe(data=>{
+    this.exam=data
+  })
   this.codeFlag = this.service.sendCodingBoolean();
-
-  // this.disableBack();
-  this.insertMarks()
+  localStorage.clear();
+  localStorage.removeItem('is_logged_in');
+  this.loginService.isLoggedIn = false;
+  this.router.navigate(['/login']);
 }
-
 
 
   loadQuestions(): Observable<Question[]> {

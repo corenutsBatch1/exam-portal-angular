@@ -189,3 +189,44 @@ h4{
   margin-top: 0.2rem;
 }
 
+
+@media (min-width: 540px ) {
+  .col-md-9 {
+    padding-left: 1rem;
+  }
+}
+
+/* Adjustments for screens larger than 992px */
+/* @media (min-width: 992px) {
+  .lefttop {
+    margin-bottom: 1rem;
+  }
+} */
+
+/* Adjustments for screens larger than 768px */
+/* @media (min-width: 768px) {
+  .row-md-9 {
+    margin-left: 2rem;
+  }
+} */
+
+/* Adjustments for screens larger than 576px */
+/* @media (min-width: 576px) {
+  .bootstrap-wrappper {
+    margin-top: 2rem;
+  }
+} */
+
+/* Adjustments for screens larger than 320px */
+/* @media (min-width: 320px) {
+  .col-md-3 {
+    padding: 0;
+  }
+  .right {
+    padding: 0;
+  }
+  .col {
+    padding: 0;
+  } */
+/* } */
+

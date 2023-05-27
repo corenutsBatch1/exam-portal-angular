@@ -59,20 +59,10 @@ export class CodeComponent implements OnInit {
           )
           .subscribe((data) => {
             if (data == false) {
-              // alert(this.examObject.id+"    "+this.userId)
               this.http.get<UserExamDetails>(`http://localhost:8089/api/ExamDetails/${this.examObject.id}/${this.userId}`).subscribe((response)=>{
                 console.log(response)
-                // alert(response.status+'  '+response.id)
                 if(response !=null){
                 if(response.status=="inprogress"){
-
-                  // const loginTime: moment.Moment = moment(response.loginTime, 'HH:mm:ss'); // Replace with your actual login time
-                  // const logoutTime: moment.Moment = moment(response.logoutTime, 'HH:mm:ss'); // Replace with your actual logout time
-
-                  // const duration: moment.Duration = moment.duration(logoutTime.diff(loginTime));
-                  // const minutes: number =Math.round(duration.asMinutes());
-                  // alert(minutes)
-                  // console.log(minutes)
                     this.conductExam()
                   }
                   }
@@ -135,16 +125,21 @@ conductExam(){
       console.log(this.examObject.id + 'senddddddddddddddd');
       this.service.examid(this.examObject.id);
       // console.log(`Exam code and id present: ${examObject.code} - ${examObject.id}`);
-     
+
       this.http.get<UserExamDetails>(`http://localhost:8089/api/ExamDetails/${this.examObject.id}/${this.userId}`).subscribe((response=>{
-        // alert("response"+response)
+
         if(response ==null){
           this.http.post<UserExamDetails>(`http://localhost:8089/api/userExamDetails/${this.examObject.id}/${this.userId}`,this.examdetails).subscribe((r1)=>{
             console.log(r1)
         })
-        }
-        this.route.navigate(['userexam', this.examObject.code])
+          this.route.navigate(['userexam', this.examObject.code])
           Swal.fire('Exam Started', '', 'success');
+        }
+        else{
+          this.route.navigate(['userexam', this.examObject.code])
+          Swal.fire('Exam Restarted', '', 'success');
+        }
+
       }))
 
 

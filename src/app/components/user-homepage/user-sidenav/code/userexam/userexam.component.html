@@ -1,4 +1,4 @@
-
+<body (contextmenu)="disableRightClick($event)">
 <mat-toolbar>
   <img src="assets/test.png" alt="img">
   &nbsp;&nbsp;
@@ -13,9 +13,12 @@
   <!-- <h1>JAVA EXAM</h1> -->
 </nav>
 
+
 <div class="bootstrap-wrappper">
   <div class="container-fulid">
     <div class="row">
+
+
 
       <!----Left Part-->
       <div class="col-md-9" style="padding: 0rem;padding-left:1rem;">
@@ -25,7 +28,7 @@
             <th></th>
             <tr>
               <td *ngFor="let subjectName of uniqueSubjectNames;let i = index">
-                <button class="text-center mt-2 ml-4 subject-button btn-group-toggle" data-toggle="buttons" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)"
+                <button type="button" class="text-center mt-2 ml-4 subject-button btn-group-toggle" data-toggle="buttons" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)"
                 [ngClass]="{'active': activeIndex === i}"
                 (click)="setActive(i,this.subjectName)" >
                   {{subjectName}}
@@ -156,6 +159,7 @@
           </div>
           <!---End Rigth top part for timer---->
 
+
           <!---Start Rigth buttom part for Question Answered---->
           <div class="answered">
 
@@ -187,3 +191,4 @@
   </div>
 </div>
 
+</body>

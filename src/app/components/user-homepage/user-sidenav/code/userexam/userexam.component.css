@@ -190,6 +190,7 @@ h4{
 }
 
 
+
 /* CSS for small screens (up to 767px) */
 @media only screen  and (max-width: 767px) {
   .bootstrap-wrapper{
@@ -231,3 +232,11 @@ h4{
 
 
 }
+
+@media (min-width: 540px ) {
+  .col-md-9 {
+    padding-left: 1rem;
+  }
+}
+
+

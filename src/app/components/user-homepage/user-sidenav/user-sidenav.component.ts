@@ -60,4 +60,10 @@ export class UserSidenavComponent implements OnInit {
   }
 
 }
+
+//right click disable
+disableRightClick(event: MouseEvent): void {
+  event.preventDefault();
+}
+
 }

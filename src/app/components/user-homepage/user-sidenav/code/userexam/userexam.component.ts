@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,8 +9,13 @@ import { MyserviceService } from 'src/app/model/myservice';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import Swal from 'sweetalert2';
 import { LocationStrategy } from '@angular/common';
+
 import { UserExamDetails } from 'src/app/model/model/UserExamDetails';
 import * as moment from 'moment';
+
+import { FullScreenServiceService } from 'src/app/services/full-screen-service.service';
+
+
 
 @Component({
   selector: 'app-userexam',
@@ -26,7 +31,7 @@ export class UserexamComponent {
   subjectId?: number;
   uid: any;
   eid: any;
-  questions: any[] =[]
+  // questions: any[] =[]
   subjects: Subject[] = [];
   selectedOptions: string[] = [];
   answer:useranswer=new useranswer() ;
@@ -53,16 +58,24 @@ export class UserexamComponent {
   examtime1?:number
   checkboxoption?:string[]=[];
   checkboxState: { [key: number]: string[] } = {};
+
   examdetails: UserExamDetails=new UserExamDetails();
+  activeSubject: string | undefined;
+  questions: any[] = [];
+
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     private service: MyserviceService,
     private router: Router,
-    private locationStrategy: LocationStrategy
+    private locationStrategy: LocationStrategy,
+    private fullscreenService : FullScreenServiceService
   ) {}
 
+
+
   ngOnInit(): void {
+    this.enableFullscreen()
     // this.cId = this.service.getCId();
     // console.log(this.cId);
     this.service.runCodeClicked.subscribe((data)=>{this.cId=data
@@ -128,6 +141,17 @@ export class UserexamComponent {
   }
 
 
+  enableFullscreen() {
+    this.fullscreenService.enableFullscreen();
+  }
+
+  // @HostListener('document:keydown.escape', ['$event'])
+  // handleEscapeKey(event: KeyboardEvent) {
+  //   this.fullscreenService.preventExitOnEscape(event);
+  // }
+
+
+
 
 // Initialize the timer properties
 minutes = this.remainingTime;
@@ -173,16 +197,21 @@ startTimer() {
   }
 
 
-  getQuestionsBySubjectName(subjectName:String):void{
-    this.questions=[];
-    this.subjects.forEach((subject)=>{
-                  if(subject.name==subjectName){
-                    this.loadQuestions(subject.id).subscribe((data)=>{this.questions=this.questions.concat(data)
-                    this.questionnumber=0;
-                    this.nextquestions(0,this.questions[0].optionA,this.questions[0].id);
-                  })
-                  }})
+  getQuestionsBySubjectName(subjectName: any): void {
+    if (subjectName !== this.activeSubject) {
+      this.activeSubject = subjectName;
+      this.questions = [];
+      const subject = this.subjects.find((subject) => subject.name === subjectName);
+      if (subject) {
+        this.loadQuestions(subject.id).subscribe((data) => {
+          this.questions = data as any[];
+          this.questionnumber = 0;
+          this.nextquestions(0, this.questions[0].optionA, this.questions[0].id);
+        });
+      }
+    }
   }
+
 
   loadQuestions(subjectid?: number) {
     console.log("lq"+this.questions.length);
@@ -396,5 +425,12 @@ setActive(index: number, subjectName:String) {
   this.clickedSubject = subjectName;
   this.activeIndex = index;
   this.nextquestions(this.activeIndex)
+}
+
+
+//disable right click
+disableRightClick(event: MouseEvent): void {
+  event.preventDefault();
+
 }
 }

@@ -160,4 +160,12 @@ conductExam(){
       ...new Set(uniqueExamNames.map((item) => JSON.stringify(item))),
     ].map((item) => JSON.parse(item));
   }
+
+
+
+//disable Event
+  disableRightClick(event: MouseEvent): void {
+    event.preventDefault();
+  }
+
 }

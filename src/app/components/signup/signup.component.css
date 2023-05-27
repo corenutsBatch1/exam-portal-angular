@@ -53,3 +53,69 @@ height: 20rem;
  header{
   height: 3rem;
  }
+
+
+@media only screen  and (max-width: 767px) {
+  .bootstrap-wrapper{
+    height:32rem;
+    width: 23rem;
+
+   }
+   .usericon{
+    width: 50%;
+    height: 11%;
+    position: relative;
+    bottom: 100px;
+    left: 24%;
+   }
+   .register{
+    position: absolute;
+    top: 39%;
+    padding: 0;
+    width: 19rem;
+}
+.cardform{
+  width: 23rem;
+  height: 120%;
+
+ }
+
+
+}
+
+
+
+
+/* @media only screen and (max-width: 992px) {
+  .bootstrap-wrapper{
+    height:32rem;
+    width: 27rem;
+
+   }
+   .usericon{
+    width: 50%;
+    height: 11%;
+    position: relative;
+    bottom: 100px;
+    left: 24%;
+   }
+   .register{
+    position: absolute;
+    top: 39%;
+    padding: 0;
+    width: 19rem;
+}
+.cardform{
+  width: 27rem;
+  height: 120%;
+
+ }
+
+ } */
+/* @media only screen and (min-width: 993px) and (max-width: 1250px) {
+
+
+
+
+} */
+

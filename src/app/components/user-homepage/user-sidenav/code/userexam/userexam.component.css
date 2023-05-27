@@ -91,7 +91,7 @@ main::-webkit-scrollbar-thumb,
   list-style-type: none;
 }
 
-radio::after{
+.radiobutton::after{
   color: aqua;
 }
 
@@ -189,3 +189,45 @@ h4{
   margin-top: 0.2rem;
 }
 
+
+/* CSS for small screens (up to 767px) */
+@media only screen  and (max-width: 767px) {
+  .bootstrap-wrapper{
+    height:32rem;
+    width: 23rem;
+    /* padding-left: 3%; */
+   }
+   .usericon{
+    width: 50%;
+    height: 11%;
+    position: relative;
+    bottom: 100px;
+    left: 24%;
+   }
+   .register{
+    position: absolute;
+    top: 39%;
+    padding: 0;
+    width: 19rem;
+}
+.cardform{
+  width: 23rem;
+  height: 120%;
+
+ }
+
+
+}
+
+
+
+/* CSS for large screens (992px and above) */
+@media only screen and (max-width: 992px) {
+  .bootstrap-wrapper{
+    height:32rem;
+    width: 27rem;
+
+   }
+
+
+}

@@ -34,6 +34,7 @@
     "jspdf-autotable": "^3.5.28",
     "luxon": "^3.3.0",
     "makepdf": "^0.1.2",
+    "moment": "^2.29.4",
     "ng2-charts": "^4.1.1",
     "ngx-bootstrap": "^10.2.0",
     "pdfmake": "^0.2.7",

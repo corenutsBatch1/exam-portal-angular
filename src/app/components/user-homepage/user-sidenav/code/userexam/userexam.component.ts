@@ -9,7 +9,8 @@ import { MyserviceService } from 'src/app/model/myservice';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import Swal from 'sweetalert2';
 import { LocationStrategy } from '@angular/common';
-
+import { UserExamDetails } from 'src/app/model/model/UserExamDetails';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-userexam',
@@ -46,10 +47,13 @@ export class UserexamComponent {
   remainingQuestion:number=0;
   timeexpire?:boolean=false;
   cId?:number;
+  id?:number;
   codeId?:String;
+  minutes1?:number=0
+  examtime1?:number
   checkboxoption?:string[]=[];
   checkboxState: { [key: number]: string[] } = {};
-
+  examdetails: UserExamDetails=new UserExamDetails();
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -78,12 +82,33 @@ export class UserexamComponent {
     this.uid = this.service.sendid();
     this.eid = this.service.sendeid();
     this.startTimer()
+    this.http.get<UserExamDetails>(`http://localhost:8089/api/ExamDetails/${this.eid}/${this.uid}`).subscribe((response)=>{
+      if (response && response.loginTime && response.logoutTime){
+      const loginTime: moment.Moment = moment(response.loginTime, 'HH:mm:ss'); // Replace with your actual login time
+      const logoutTime: moment.Moment = moment(response.logoutTime, 'HH:mm:ss'); // Replace with your actual logout time
+
+      const duration: moment.Duration = moment.duration(logoutTime.diff(loginTime));
+      this.minutes1 =Math.round(duration.asMinutes());
+      }
+    })
     this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
-    const examtime = this.examtime.examDuration;
-  if(examtime){
-      this.remainingTime=60*examtime;
-     }
-        });
+
+    if(this.minutes1){
+      alert(this.minutes1+"minus minutes")
+    this.examtime1 = this.examtime.examDuration!-this.minutes1
+      alert(this.examtime1+"  examtime when restarted")
+    if(this.examtime1){
+      this.remainingTime=60*this.examtime1;
+      }
+    }
+    else{
+      this.examtime1 = this.examtime.examDuration
+      alert(this.examtime1+"  examtime when started ")
+    if(this.examtime1){
+      this.remainingTime=60*this.examtime1;
+      }
+    }
+    });
 
     this.route.params.subscribe((params) => {
       this.code = params['code'];
@@ -97,6 +122,8 @@ export class UserexamComponent {
         console.log(subjects);
       });
     });
+
+
 
   }
 
@@ -198,6 +225,10 @@ startTimer() {
        this.http.post(`http://localhost:8089/api/saveanswer`,this.answer).subscribe(data=>{
        console.log("188");
        this.selectedOption=option1;
+      //  alert(this.eid +"   n   "+ this.uid)
+       this.http.put<UserExamDetails>(`http://localhost:8089/api/userExamDetailsbyid/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+
+       }))
       });
   }
   sendoption2(qid:number,option2:string){
@@ -268,6 +299,10 @@ clickEvent(exam: any) {
     .then((result) => {
       if (result.isConfirmed) {
         this.router.navigate(['answers', this.code]);
+        this.http.put<UserExamDetails>(`http://localhost:8089/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+        alert("submitted"+response)
+      }))
+
       } else {
       }
        });
@@ -284,14 +319,21 @@ clickEvent(exam: any) {
     .then((result) => {
       if (result.isConfirmed) {
         this.router.navigate(['answers', this.code]);
+        this.http.put<UserExamDetails>(`http://localhost:8089/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+        alert("submitted"+response)
+      }))
       } else {
       }
        });
   }
+
 }
 
 clickEvent2(){
   this.router.navigate(['answers', this.code]);
+  this.http.put<UserExamDetails>(`http://localhost:8089/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+        alert("submitted"+response)
+      }))
 }
 
 

@@ -34,7 +34,7 @@ th{
 .addButton:hover{
   opacity: 80%;
   font-size: 110%;
-  transition-duration: 1sec;
+  transition-duration: 1s;
 }
 
 .headingAnswers{

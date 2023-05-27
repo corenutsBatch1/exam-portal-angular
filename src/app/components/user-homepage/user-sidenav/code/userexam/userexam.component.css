@@ -91,7 +91,7 @@ main::-webkit-scrollbar-thumb,
   list-style-type: none;
 }
 
-radio::after{
+.radiobutton::after{
   color: aqua;
 }
 
@@ -190,43 +190,53 @@ h4{
 }
 
 
+
+/* CSS for small screens (up to 767px) */
+@media only screen  and (max-width: 767px) {
+  .bootstrap-wrapper{
+    height:32rem;
+    width: 23rem;
+    /* padding-left: 3%; */
+   }
+   .usericon{
+    width: 50%;
+    height: 11%;
+    position: relative;
+    bottom: 100px;
+    left: 24%;
+   }
+   .register{
+    position: absolute;
+    top: 39%;
+    padding: 0;
+    width: 19rem;
+}
+.cardform{
+  width: 23rem;
+  height: 120%;
+
+ }
+
+
+}
+
+
+
+/* CSS for large screens (992px and above) */
+@media only screen and (max-width: 992px) {
+  .bootstrap-wrapper{
+    height:32rem;
+    width: 27rem;
+
+   }
+
+
+}
+
 @media (min-width: 540px ) {
   .col-md-9 {
     padding-left: 1rem;
   }
 }
 
-/* Adjustments for screens larger than 992px */
-/* @media (min-width: 992px) {
-  .lefttop {
-    margin-bottom: 1rem;
-  }
-} */
-
-/* Adjustments for screens larger than 768px */
-/* @media (min-width: 768px) {
-  .row-md-9 {
-    margin-left: 2rem;
-  }
-} */
-
-/* Adjustments for screens larger than 576px */
-/* @media (min-width: 576px) {
-  .bootstrap-wrappper {
-    margin-top: 2rem;
-  }
-} */
-
-/* Adjustments for screens larger than 320px */
-/* @media (min-width: 320px) {
-  .col-md-3 {
-    padding: 0;
-  }
-  .right {
-    padding: 0;
-  }
-  .col {
-    padding: 0;
-  } */
-/* } */
 

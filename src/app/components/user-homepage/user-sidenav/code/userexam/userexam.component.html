@@ -1,6 +1,6 @@
 <body (contextmenu)="disableRightClick($event)">
 <mat-toolbar>
-  <img src="assets/test.png">
+  <img src="assets/test.png" alt="img">
   &nbsp;&nbsp;
   <span>
     Scoresharp</span>
@@ -25,7 +25,8 @@
         <!---Start Left Top part for Swtich Subject---->
         <div class="row-md-3 lefttop text-center" >
           <table class="subject">
-            <tr  >
+            <th></th>
+            <tr>
               <td *ngFor="let subjectName of uniqueSubjectNames;let i = index">
                 <button type="button" class="text-center mt-2 ml-4 subject-button btn-group-toggle" data-toggle="buttons" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)"
                 [ngClass]="{'active': activeIndex === i}"

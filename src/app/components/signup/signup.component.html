@@ -3,15 +3,15 @@
     <header><app-header></app-header></header>
     <div class="container">
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4 user-img">
           <div><img src="assets/user.svg" class="usericon" alt="usericonpic" class="usericon"/></div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 register">
           <form [formGroup]="signUpForm" (ngSubmit)="registerNewUser(this.userLogin)" class="mat-elevation-z8">
             <mat-card color="primary" id="form-card" class="cardform">
               <mat-card-content>
-                <div class="form-group">
-                  <p class="text-center"><span class="right"><h1 style="font-weight: bold; margin-top: 1rem">Register</h1></span></p>
+                <div class="form-group ">
+                  <p class="text-center hregister"><span class="right"><h1 style="font-weight: bold; margin-top: 1rem" class="">Register</h1></span></p>
                 </div>
                 <div class="form-group">
                   <label for="Name" style="font-weight: bold">Name</label>

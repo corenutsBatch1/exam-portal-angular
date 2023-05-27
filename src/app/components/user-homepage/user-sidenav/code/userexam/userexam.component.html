@@ -86,21 +86,21 @@
     <ng-template #radioButtons>
               <mat-list-item>
                 <div style="white-space:nowrap">
-                    <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="A" (click)="sendoption(currentQuestion.id, 'A');isRadioButtonSelected = true;" [checked]="isOptionSelected(currentQuestion.id, 'A')" ng-class="{checked: isChecked == A}"/>
+                  <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="A" [checked]="isCheckedA" (click)="sendoption(currentQuestion.id, 'A');isRadioButtonSelected = true;" ng-class="{checked: isChecked == A}"/>
                     <label class="option">{{ currentQuestion.optionA }}</label>
                 </div>
               </mat-list-item>
 
               <mat-list-item>
                 <div style="white-space:nowrap">
-                  <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="B" (click)="sendoption(currentQuestion.id, 'B');isRadioButtonSelected = true;" [checked]="isOptionSelected(currentQuestion.id, 'B')" ng-class="{checked: isChecked == B}"/>
+                  <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="B" [checked]="isCheckedB" (click)="sendoption(currentQuestion.id, 'B');isRadioButtonSelected = true;"  ng-class="{checked: isChecked == B}"/>
                   <label class="option">{{ currentQuestion.optionB }}</label>
                 </div>
               </mat-list-item>
 
               <mat-list-item>
                 <div class="white-space:nowrap">
-                  <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="C" (click)="sendoption(currentQuestion.id, 'C');isRadioButtonSelected = true;" [checked]="isOptionSelected(currentQuestion.id, 'C')" ng-class="{checked: isChecked == C}">
+                  <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="C" [checked]="isCheckedC" (click)="sendoption(currentQuestion.id, 'C');isRadioButtonSelected = true;"  ng-class="{checked: isChecked == C}">
                   <label class="option">{{ currentQuestion.optionC }}</label>
 
                 </div>
@@ -108,9 +108,15 @@
 
               <mat-list-item>
                <div class="white-space:nowrap">
-                <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="D" (click)="sendoption(currentQuestion.id, 'D'); isRadioButtonSelected = true;" [checked]="isOptionSelected(currentQuestion.id, 'D')" ng-class="{checked: isChecked == D}"/>
+                <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="D" [checked]="isCheckedD" (click)="sendoption(currentQuestion.id, 'D'); isRadioButtonSelected = true;"  ng-class="{checked: isChecked == D}"/>
                   <label class="option">{{ currentQuestion.optionD }}</label>
                </div>
+              </mat-list-item>
+              <mat-list-item style="display: none;">
+                <div style="white-space:nowrap">
+                    <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="E" [checked]="isChecked" (click)="sendoption(currentQuestion.id, 'E');isRadioButtonSelected = true;" ng-class="{checked: isChecked == E}"/>
+                    <!-- <label class="option">{{ currentQuestion.optionA }}</label> -->
+                </div>
               </mat-list-item>
             </ng-template>
 

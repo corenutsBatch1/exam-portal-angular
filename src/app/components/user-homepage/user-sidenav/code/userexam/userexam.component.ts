@@ -33,7 +33,7 @@ export class UserexamComponent {
   eid: any;
   // questions: any[] =[]
   subjects: Subject[] = [];
-  selectedOptions: string[] = [];
+  selectedOptions =new Map();
   answer:useranswer=new useranswer() ;
   uniqueSubjectNames: String[] =[];
   selected:boolean=false;
@@ -56,6 +56,13 @@ export class UserexamComponent {
   codeId?:String;
   minutes1?:number=0
   examtime1?:number
+  answerMap=new Map();
+  answerArray:any[]=[];
+  isCheckedA:boolean=false;
+  isCheckedB:boolean=false;
+  isCheckedC:boolean=false;
+  isCheckedD:boolean=false;
+  isChecked:boolean=false;
   checkboxoption?:string[]=[];
   checkboxState: { [key: number]: string[] } = {};
 
@@ -95,33 +102,9 @@ export class UserexamComponent {
     this.uid = this.service.sendid();
     this.eid = this.service.sendeid();
     this.startTimer()
-    this.http.get<UserExamDetails>(`http://localhost:8089/api/ExamDetails/${this.eid}/${this.uid}`).subscribe((response)=>{
-      if (response && response.loginTime && response.logoutTime){
-      const loginTime: moment.Moment = moment(response.loginTime, 'HH:mm:ss'); // Replace with your actual login time
-      const logoutTime: moment.Moment = moment(response.logoutTime, 'HH:mm:ss'); // Replace with your actual logout time
-
-      const duration: moment.Duration = moment.duration(logoutTime.diff(loginTime));
-      this.minutes1 =Math.round(duration.asMinutes());
-      }
+    this.fetchExamTime().then(()=>{
+      this.afterFetchExamTime();
     })
-    this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
-
-    if(this.minutes1){
-      alert(this.minutes1+"minus minutes")
-    this.examtime1 = this.examtime.examDuration!-this.minutes1
-      alert(this.examtime1+"  examtime when restarted")
-    if(this.examtime1){
-      this.remainingTime=60*this.examtime1;
-      }
-    }
-    else{
-      this.examtime1 = this.examtime.examDuration
-      alert(this.examtime1+"  examtime when started ")
-    if(this.examtime1){
-      this.remainingTime=60*this.examtime1;
-      }
-    }
-    });
 
     this.route.params.subscribe((params) => {
       this.code = params['code'];
@@ -144,7 +127,48 @@ export class UserexamComponent {
   enableFullscreen() {
     this.fullscreenService.enableFullscreen();
   }
+  async fetchExamTime(){
 
+    this.http.get<UserExamDetails>(`http://localhost:8089/api/ExamDetails/${this.eid}/${this.uid}`).subscribe(async (response)=>{
+      if (response && response.loginTime && response.logoutTime){
+      const loginTime: moment.Moment = moment(response.loginTime, 'HH:mm:ss'); // Replace with your actual login time
+      const logoutTime: moment.Moment = moment(response.logoutTime, 'HH:mm:ss'); // Replace with your actual logout time
+
+      const duration: moment.Duration = moment.duration(logoutTime.diff(loginTime));
+      this.minutes1 =Math.round(duration.asMinutes());
+      console.warn(this.minutes1+"minus minutes in response")
+      await this.asyncOperation()
+
+      }
+    })}
+    afterFetchExamTime(){
+      this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
+      console.warn("into the object"+this.minutes1)
+      if(this.minutes1 != 0){
+        console.warn(this.minutes1+"minus minutes")
+      this.examtime1 = this.examtime.examDuration!-this.minutes1!
+        console.warn(this.examtime1+"  examtime when restarted")
+      if(this.examtime1){
+        this.remainingTime=60*this.examtime1;
+        this.remainingTime
+        }
+      }
+      else{
+        this.examtime1 = this.examtime.examDuration
+        console.warn(this.examtime1+"  examtime when started ")
+      if(this.examtime1){
+        this.remainingTime=60*this.examtime1;
+        }
+      }
+      });}
+      async asyncOperation() {
+        // Simulating an asynchronous operation
+        return new Promise<void>(resolve => {
+          setTimeout(() => {
+            resolve();
+          }, 2000);
+        });
+      }
   // @HostListener('document:keydown.escape', ['$event'])
   // handleEscapeKey(event: KeyboardEvent) {
   //   this.fullscreenService.preventExitOnEscape(event);
@@ -197,21 +221,16 @@ startTimer() {
   }
 
 
-  getQuestionsBySubjectName(subjectName: any): void {
-    if (subjectName !== this.activeSubject) {
-      this.activeSubject = subjectName;
-      this.questions = [];
-      const subject = this.subjects.find((subject) => subject.name === subjectName);
-      if (subject) {
-        this.loadQuestions(subject.id).subscribe((data) => {
-          this.questions = data as any[];
-          this.questionnumber = 0;
-          this.nextquestions(0, this.questions[0].optionA, this.questions[0].id);
-        });
-      }
-    }
+  getQuestionsBySubjectName(subjectName:String):void{
+    this.questions=[];
+    this.subjects.forEach((subject)=>{
+                  if(subject.name==subjectName){
+                    this.loadQuestions(subject.id).subscribe((data)=>{this.questions=this.questions.concat(data)
+                    this.questionnumber=0;
+                    this.nextquestions(0,this.questions[0].optionA,this.questions[0].id);
+                  })
+                  }})
   }
-
 
   loadQuestions(subjectid?: number) {
     console.log("lq"+this.questions.length);
@@ -237,7 +256,7 @@ startTimer() {
     if(!this.stateChange.includes(normalQuestionOptionId)){
       this.stateChange.push(normalQuestionOptionId);
     }
-    this.selectedOptions[qid] = option1;
+    this.selectedOptions.set(qid,option1);
     console.log("option"+option1);
     this.answer = {
       user: {
@@ -254,7 +273,7 @@ startTimer() {
        this.http.post(`http://localhost:8089/api/saveanswer`,this.answer).subscribe(data=>{
        console.log("188");
        this.selectedOption=option1;
-      //  alert(this.eid +"   n   "+ this.uid)
+       console.warn(this.eid +"   n   "+ this.uid)
        this.http.put<UserExamDetails>(`http://localhost:8089/api/userExamDetailsbyid/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
 
        }))
@@ -299,20 +318,23 @@ startTimer() {
   }
 
 
-isOptionSelected(questionId: number, option: string): boolean {
-       this.selectedOption=option;
-    return this.selectedOptions[questionId] ===option;
-  }
+  isOptionSelected(questionId: number, option: string): boolean {
+    // console.log("31-34");
+    console.log(this.answerArray,"is oprtion selected");
+   console.log( this.answerArray.filter(e=>e.question_id==questionId),"after filtering ")
+    this.selectedOption=option;
+ return this.answerArray.filter(e=>e.question_id==questionId)[0].user_answer==option;
+}
 
 
-  isOptionSelected2(qid: number, option: string) {
-    const selectedOptions = this.checkboxState[qid] || [];
-
-    return selectedOptions.includes(option);
-  }
+isOptionSelected2(qid: number, option: string): boolean {
+  // console.log("35");
+  const selectedOptions = this.checkboxState[qid] || [];
+  return selectedOptions.includes(option);
+}
 
 clickEvent(exam: any) {
-  this.timeexpire=true;
+
   var remainingQuestion=(this.totalQuestions-this.stateChange.length);
   console.log("remainingQuestion"+remainingQuestion);
   if(remainingQuestion>0){
@@ -329,7 +351,7 @@ clickEvent(exam: any) {
       if (result.isConfirmed) {
         this.router.navigate(['answers', this.code]);
         this.http.put<UserExamDetails>(`http://localhost:8089/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
-        alert("submitted"+response)
+        console.log("submitted"+response)
       }))
 
       } else {
@@ -349,33 +371,92 @@ clickEvent(exam: any) {
       if (result.isConfirmed) {
         this.router.navigate(['answers', this.code]);
         this.http.put<UserExamDetails>(`http://localhost:8089/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
-        alert("submitted"+response)
+        console.log("submitted"+response)
       }))
       } else {
       }
        });
   }
-
+  this.timeexpire=true;
 }
 
 clickEvent2(){
   this.router.navigate(['answers', this.code]);
   this.http.put<UserExamDetails>(`http://localhost:8089/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
-        alert("submitted"+response)
+      console.log("submitted"+response)
       }))
+      this.timeexpire=true;
 }
 
 
-      nextquestion(){
-        this.questionnumber++;
-        this.currentQuestion= this.questions[this.questionnumber];
+nextquestion(){
+  this.isCheckedA=false;
+  this.isCheckedB=false;
+  this.isCheckedC=false;
+  this.isCheckedD=false;
+  this.isChecked=false;
+  console.log("39");
+  this.questionnumber++;
+  this.currentQuestion= this.questions[this.questionnumber];
+  console.log(this.currentQuestion);
+  this.http.get<any[]>(`http://localhost:8089/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
 
-        if(this.stateChange.includes(this.currentQuestion?.id)){
-          this.isRadioButtonSelected = true;
-        }else{
-          this.isRadioButtonSelected =false;
-        }
+    console.log("30");
+    console.log(data);
+    this.answerArray=data;
+    if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
+    {
+      alert("Something")
+      console.log("ok option is getting");
+      let qMap=this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id)[0]
+      console.log(qMap)
+      alert(qMap.user_answer);
+      if(qMap.user_answer=='A')
+      {
+        this.isCheckedA=true;
+        console.log("qmapA")
       }
+      else if(qMap.user_answer=='B')
+      {
+        this.isCheckedB=true;
+        console.log("qMapB");
+      }
+      else if(qMap.user_answer=='C')
+      {
+        this.isCheckedC=true;
+        console.log("qMapC");
+      }
+      else if(qMap.user_answer=='D')
+      {
+        this.isCheckedD=true;
+        console.log("qMapD");
+      }
+    }
+    else
+    {
+      this.isChecked=true;
+      this.isCheckedA=false;
+      // alert("Nothing1"+this.isCheckedA)
+      this.isCheckedB=false;
+      this.isCheckedC=false;
+      this.isCheckedD=false;
+      // this.isCheckedA=false;
+      // alert("Nothing"+this.isCheckedA)
+
+    }
+  });
+
+
+  if(this.stateChange.includes(this.currentQuestion?.id)){
+    this.isRadioButtonSelected = true;
+    console.log("40");
+    // this.isRadioButtonSelected = true;
+  }else{
+    this.isRadioButtonSelected =false;
+    console.log("41");
+    // this.isRadioButtonSelected =false;
+  }
+}
 
       nextquestions(id:any,option?:any,qid?:any){
         if(option==undefined)
@@ -396,14 +477,75 @@ clickEvent2(){
 
       previousquestion(id:any)
       {
+
+        this.isCheckedA=false;
+        this.isCheckedB=false;
+        this.isCheckedC=false;
+        this.isCheckedD=false;
+        this.isChecked=false;
+        console.log("46");
         id--;
         this.currentQuestion= this.questions[id];
+        console.log(this.currentQuestion);
         this.questionnumber--;
+        this.http.get<any[]>(`http://localhost:8089/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
+
+          console.log("30");
+          console.log(data);
+          this.answerArray=data;
+
+          if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
+          {
+            console.log("ok option is getting");
+            let qMap=this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id)[0]
+            console.log(qMap)
+            alert(qMap.user_answer);
+            if(qMap.user_answer=='A')
+            {
+              this.isCheckedA=true;
+              console.log("qmapA")
+            }
+            else if(qMap.user_answer=='B')
+            {
+              this.isCheckedB=true;
+              console.log("qMapB");
+            }
+            else if(qMap.user_answer=='C')
+            {
+              this.isCheckedC=true;
+              console.log("qMapC");
+            }
+            else if(qMap.user_answer=='D')
+            {
+              this.isCheckedD=true;
+              console.log("qMapD");
+            }
+          }
+          else
+          {
+            this.isChecked=true;
+            this.isCheckedA=false;
+            // alert("Nothing1"+this.isCheckedA)
+            this.isCheckedB=false;
+            this.isCheckedC=false;
+            this.isCheckedD=false;
+            // this.isCheckedA=false;
+            // alert("Nothing"+this.isCheckedA)
+
+          }
+        });
+
+
+
         if(this.stateChange.includes(this.currentQuestion?.id)){
           this.isRadioButtonSelected = true;
+          console.log("47");
+          // this.isRadioButtonSelected = true;
 
         }else{
           this.isRadioButtonSelected =false;
+          console.log("48");
+          // this.isRadioButtonSelected =false;
         }
       }
 

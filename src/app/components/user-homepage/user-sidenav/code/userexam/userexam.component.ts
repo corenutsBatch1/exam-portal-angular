@@ -83,8 +83,6 @@ export class UserexamComponent {
 
   ngOnInit(): void {
     this.enableFullscreen()
-    // this.cId = this.service.getCId();
-    // console.log(this.cId);
     this.service.runCodeClicked.subscribe((data)=>{this.cId=data
 
       if(this.cId!=undefined){
@@ -141,6 +139,7 @@ export class UserexamComponent {
 
       }
     })}
+
     afterFetchExamTime(){
       this.http.get(`http://localhost:8089/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
       console.warn("into the object"+this.minutes1)
@@ -406,11 +405,11 @@ nextquestion(){
     this.answerArray=data;
     if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
     {
-      alert("Something")
+      // alert("Something")
       console.log("ok option is getting");
       let qMap=this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id)[0]
       console.log(qMap)
-      alert(qMap.user_answer);
+      // alert(qMap.user_answer);
       if(qMap.user_answer=='A')
       {
         this.isCheckedA=true;
@@ -440,39 +439,70 @@ nextquestion(){
       this.isCheckedB=false;
       this.isCheckedC=false;
       this.isCheckedD=false;
-      // this.isCheckedA=false;
-      // alert("Nothing"+this.isCheckedA)
 
     }
   });
 
-
-  if(this.stateChange.includes(this.currentQuestion?.id)){
-    this.isRadioButtonSelected = true;
-    console.log("40");
-    // this.isRadioButtonSelected = true;
-  }else{
-    this.isRadioButtonSelected =false;
-    console.log("41");
-    // this.isRadioButtonSelected =false;
-  }
 }
 
       nextquestions(id:any,option?:any,qid?:any){
+        this.isCheckedA=false;
+        this.isCheckedB=false;
+        this.isCheckedC=false;
+        this.isCheckedD=false;
+        this.isChecked=false;
         if(option==undefined)
         {
           this.codingquestionid=qid
         }
-        console.log(option)
         this.showbuttons=true;
         this.questionnumber= id;
         this.currentQuestion= this.questions[id];
         id++;
-        if(this.stateChange.includes(this.currentQuestion?.id)){
-          this.isRadioButtonSelected = true;
-        }else{
-          this.isRadioButtonSelected =false;
-        }
+        this.http.get<any[]>(`http://localhost:8089/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
+          this.answerArray=data;
+          if(data.length>0){
+            // alert(data.length);
+            this.answerArray.map(
+              q =>{
+                const normalQuestionOptionId = "N" + q.question_id;
+                if(!this.stateChange.includes(normalQuestionOptionId)){
+                this.stateChange.push(normalQuestionOptionId);
+              }
+            }
+
+            )
+          }
+          if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
+          {
+            let qMap=this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id)[0]
+            if(qMap.user_answer=='A')
+            {
+              this.isCheckedA=true;
+            }
+            else if(qMap.user_answer=='B')
+            {
+              this.isCheckedB=true;
+            }
+            else if(qMap.user_answer=='C')
+            {
+              this.isCheckedC=true;
+            }
+            else if(qMap.user_answer=='D')
+            {
+              this.isCheckedD=true;
+            }
+          }
+          else
+          {
+            this.isChecked=true;
+            this.isCheckedA=false;
+            this.isCheckedB=false;
+            this.isCheckedC=false;
+            this.isCheckedD=false;
+          }
+        });
+
       }
 
       previousquestion(id:any)
@@ -486,72 +516,45 @@ nextquestion(){
         console.log("46");
         id--;
         this.currentQuestion= this.questions[id];
-        console.log(this.currentQuestion);
         this.questionnumber--;
         this.http.get<any[]>(`http://localhost:8089/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
-
-          console.log("30");
-          console.log(data);
           this.answerArray=data;
-
           if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
           {
-            console.log("ok option is getting");
             let qMap=this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id)[0]
-            console.log(qMap)
-            alert(qMap.user_answer);
             if(qMap.user_answer=='A')
             {
               this.isCheckedA=true;
-              console.log("qmapA")
             }
             else if(qMap.user_answer=='B')
             {
               this.isCheckedB=true;
-              console.log("qMapB");
             }
             else if(qMap.user_answer=='C')
             {
               this.isCheckedC=true;
-              console.log("qMapC");
             }
             else if(qMap.user_answer=='D')
             {
               this.isCheckedD=true;
-              console.log("qMapD");
             }
           }
           else
           {
             this.isChecked=true;
             this.isCheckedA=false;
-            // alert("Nothing1"+this.isCheckedA)
             this.isCheckedB=false;
             this.isCheckedC=false;
             this.isCheckedD=false;
-            // this.isCheckedA=false;
-            // alert("Nothing"+this.isCheckedA)
-
           }
         });
 
-
-
-        if(this.stateChange.includes(this.currentQuestion?.id)){
-          this.isRadioButtonSelected = true;
-          console.log("47");
-          // this.isRadioButtonSelected = true;
-
-        }else{
-          this.isRadioButtonSelected =false;
-          console.log("48");
-          // this.isRadioButtonSelected =false;
-        }
       }
 
 
 stateChangeCheck(qid:number, subject : Subject)
 {
+  console.log(this.stateChange)
   if(subject.name == 'CODING'){
     const codingQuestionId = 'C' + qid
     return this.stateChange.includes(codingQuestionId);

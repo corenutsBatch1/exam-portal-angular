@@ -80,7 +80,7 @@ export class CodingComponent {
     };
     this.service.setCId(this.id);
     this.http
-      .get(`http://localhost:8089/api/getalltestcases/${this.id}`)
+      .get(`http://localhost:9033/api/getalltestcases/${this.id}`)
       .subscribe((data) => {
         this.Testcase?.splice(0, this.Testcase.length);
         this.Testcase = this.Testcase?.concat(data);
@@ -142,7 +142,7 @@ export class CodingComponent {
       Swal.fire('Fill All Fields', 'Must be write programming code', 'error');
       return;
     }
-    const javaUrl='http://localhost:8089/api/savecode'
+    const javaUrl='http://localhost:9033/api/savecode'
     this.userCode = {
       language: 'java',
       userInputCode: code,
@@ -159,7 +159,7 @@ export class CodingComponent {
     };
     this.service.setCId(this.id);
     this.http
-      .get(`http://localhost:8089/api/getalltestcases/${this.id}`)
+      .get(`http://localhost:9033/api/getalltestcases/${this.id}`)
       .subscribe((data) => {
         this.Testcase?.splice(0, this.Testcase.length);
         this.Testcase = this.Testcase?.concat(data);

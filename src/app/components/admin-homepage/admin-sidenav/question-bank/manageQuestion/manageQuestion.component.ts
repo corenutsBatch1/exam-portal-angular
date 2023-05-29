@@ -79,14 +79,14 @@ export class ManageQuestionComponent implements OnInit {
     this.Topic_id = id;
     if(this.selectedsubject!= 'CODING'){
       this.http
-      .get<Question[]>(`http://localhost:8089/api/getallquestions/${id}`)
+      .get<Question[]>(`http://localhost:9033/api/getallquestions/${id}`)
       .subscribe((data) => {
         console.log(data);
         this.Questions = data;
       });
     }else{
       this.http
-      .get<CodingQuestion[]>(`http://localhost:8089/api/fetchcodingquestions`)
+      .get<CodingQuestion[]>(`http://localhost:9033/api/fetchcodingquestions`)
       .subscribe((data) => {
         console.log(data);
         this.codingQuestion = data;
@@ -97,7 +97,7 @@ export class ManageQuestionComponent implements OnInit {
 
   getQuestionsById(id: any) {
     this.http
-      .get<Question>(`http://localhost:8089/api/getquestionbyid/${id}`)
+      .get<Question>(`http://localhost:9033/api/getquestionbyid/${id}`)
       .subscribe((data) => {
         console.log(data);
         this.question = data;
@@ -106,7 +106,7 @@ export class ManageQuestionComponent implements OnInit {
   }
   editquestion(question: Question) {
     this.http
-      .put<Question>(`http://localhost:8089/api/updatequestion`, question)
+      .put<Question>(`http://localhost:9033/api/updatequestion`, question)
       .subscribe((data) => {
         // console.log(data)
         console.log('------------------------------------');
@@ -158,7 +158,7 @@ export class ManageQuestionComponent implements OnInit {
    }
   deleteQuestion(id?:number){
     console.log(id);
-   return this.http.delete(`http://localhost:8089/api/deleteQuestion/${id}`)
+   return this.http.delete(`http://localhost:9033/api/deleteQuestion/${id}`)
   }
   goBack() {
     this.loadManageQuestionPage.emit(true);

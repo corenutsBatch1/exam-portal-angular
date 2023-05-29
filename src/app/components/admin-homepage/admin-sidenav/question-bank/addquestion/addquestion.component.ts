@@ -80,7 +80,7 @@ export class AddquestionComponent implements OnInit{
     this.Questions.answer = this.answers.join('');
 
     console.log(this.Questions.answer)
-    this.http.post(`http://localhost:8089/api/addquestion/${id}`, Questions).subscribe(
+    this.http.post(`http://localhost:9033/api/addquestion/${id}`, Questions).subscribe(
 
       response=>{
         Swal.fire("Question added successfully","", "success");

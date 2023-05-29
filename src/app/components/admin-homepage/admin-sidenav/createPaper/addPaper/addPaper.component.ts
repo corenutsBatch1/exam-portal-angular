@@ -122,13 +122,13 @@ export class AddPaperComponent implements OnInit {
   getquestions(id:any)
   {
     if(this.selectedsubject != 'CODING'){
-      this.http.get<Question[]>(`http://localhost:8089/api/getallquestions/${id}`).subscribe(data=>{
+      this.http.get<Question[]>(`http://localhost:9033/api/getallquestions/${id}`).subscribe(data=>{
       console.log(data);
         this.question123=data;
              })
     }else{
       this.http
-      .get<CodingQuestion[]>(`http://localhost:8089/api/fetchcodingquestions`)
+      .get<CodingQuestion[]>(`http://localhost:9033/api/fetchcodingquestions`)
       .subscribe((data) => {
         console.log(data);
         this.codingQuestion = data;
@@ -146,7 +146,7 @@ addpaper(createPaper:CreatePaper)
     this.questionsLeft=this.noOfQuestions-this.questionCount;
     Swal.fire("You have to add "+this.questionsLeft+" more .", "", "error");
   }else{
-    this.http.post<CreatePaper>(`http://localhost:8089/api/addpaper`,createPaper).subscribe(
+    this.http.post<CreatePaper>(`http://localhost:9033/api/addpaper`,createPaper).subscribe(
       data=>{
 
         Swal.fire("Paper created successfully","", "success");

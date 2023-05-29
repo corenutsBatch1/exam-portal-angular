@@ -28,7 +28,7 @@ export class AddExamComponent implements OnInit{
   end?:any;
   ngOnInit(): void {
 
-    this.http.get<CreatePaper[]>(`http://localhost:8089/api/getpaper`).subscribe(data=>{
+    this.http.get<CreatePaper[]>(`http://localhost:9033/api/getpaper`).subscribe(data=>{
       console.log(data);
        this.papers=data;
        console.log(this.papers);
@@ -63,7 +63,7 @@ export class AddExamComponent implements OnInit{
 
       }
        else{
-        this.http.post<ScheduleExam>(`http://localhost:8089/api/addexam/${this.paperId}`,scheduleExam).subscribe(
+        this.http.post<ScheduleExam>(`http://localhost:9033/api/addexam/${this.paperId}`,scheduleExam).subscribe(
 
     response=>{
       Swal.fire("Exam scheduled successfully","", "success");

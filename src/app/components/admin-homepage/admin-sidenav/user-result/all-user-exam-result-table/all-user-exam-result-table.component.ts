@@ -75,7 +75,7 @@ export class AllUserExamResultTableComponent {
   }
 
   getMarks():Observable<Marks[]>{
-    return this.http.get<Marks[]>(`http://localhost:8089/api/getmarks`)
+    return this.http.get<Marks[]>(`http://localhost:9033/api/getmarks`)
   }
 
   displayedColumns: string[] = ['serialNumber', 'examCode', 'name', 'totalMarks', 'obtainedMarks'];

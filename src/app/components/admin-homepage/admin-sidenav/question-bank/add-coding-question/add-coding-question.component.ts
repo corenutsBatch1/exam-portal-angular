@@ -118,7 +118,7 @@ export class AddCodingQuestionComponent {
 
     this.codingQuestion.content=this.questionContent;
 
-    this.http.post(`http://localhost:8089/api/subject/${id}/codingquestion`, this.codingQuestion).subscribe(
+    this.http.post(`http://localhost:9033/api/subject/${id}/codingquestion`, this.codingQuestion).subscribe(
 
                   response=>{
                     this.getallcodingquestions(id);
@@ -133,7 +133,7 @@ export class AddCodingQuestionComponent {
 
   }
   getallcodingquestions(id?:number){
-    this.http.get(`http://localhost:8089/api/subject/${id}/codingquestions`).subscribe((data)=>{
+    this.http.get(`http://localhost:9033/api/subject/${id}/codingquestions`).subscribe((data)=>{
       console.log(data)
       this.getCodingQuestion=this.getCodingQuestion.concat(data)
       this.addTestCases()
@@ -154,14 +154,14 @@ console.log(this.inputs)
       this.testCases.input=data.input;
       this.testCases.expectedOutput=data.output
       console.log(this.testCases)
-      this.http.post(`http://localhost:8089/api/addtestcases/${this.codingQuestionId}`,this.testCases).subscribe((data)=>console.log(data))
+      this.http.post(`http://localhost:9033/api/addtestcases/${this.codingQuestionId}`,this.testCases).subscribe((data)=>console.log(data))
       // this.testCasesArray=this.testCasesArray.concat(this.testCases)
       // console.log(this.testCasesArray);
       // console.log("*************")
 
     })
 
-    // this.http.post(`http://localhost:8089/api/addtestcases/${this.codingQuestionId}`,this.testCasesArray).subscribe((data)=>console.log(data))
+    // this.http.post(`http://localhost:9033/api/addtestcases/${this.codingQuestionId}`,this.testCasesArray).subscribe((data)=>console.log(data))
 
   }
 
@@ -174,7 +174,7 @@ console.log(this.inputs)
   //   this.answers.sort();
   //   this.Questions.answer = this.answers.join('');
   //   console.log(this.Questions.answer)
-  //   this.http.post(`http://localhost:8089/api/addquestion/${id}`, Questions).subscribe(
+  //   this.http.post(`http://localhost:9033/api/addquestion/${id}`, Questions).subscribe(
   //     response=>{
   //       swal("Question added successfully","", "success");
   //       // this.goBack();

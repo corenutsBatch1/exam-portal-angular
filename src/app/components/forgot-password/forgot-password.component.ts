@@ -15,7 +15,7 @@
 //     private router: Router,
 //   ) { }
 //   resetpassword(user:User) {
-//     const resetUrl = 'http://localhost:8088/api/forgotpassword';
+//     const resetUrl = 'http://localhost:9032/api/forgotpassword';
 //     console.log(user.password);
 //     this.http.put(resetUrl,user).subscribe(data => {
 //       console.log(user.password);
@@ -101,7 +101,7 @@ resetpassword(user: User) {
     if(this.submitted){
    console.log(this.userReset.password);
     this.http
-      .put(`http://localhost:8088/api/forgotpassword`, user)
+      .put(`http://localhost:9032/api/forgotpassword`, user)
       .subscribe((data) => {
 
         if (data == true  ) {

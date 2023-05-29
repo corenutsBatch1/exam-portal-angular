@@ -20,7 +20,7 @@ export class ScheduleExamComponent implements OnInit {
   constructor(private http:HttpClient) { }
 
   fetchExam(){
-    this.http.get<ScheduleExam[]>(`http://localhost:8089/api/getallexams`).subscribe(data=>{
+    this.http.get<ScheduleExam[]>(`http://localhost:9033/api/getallexams`).subscribe(data=>{
     this.exams=data;
     this.dataSource.data=this.exams
     this.dataSource.paginator = this.paginator;
@@ -40,7 +40,7 @@ export class ScheduleExamComponent implements OnInit {
 
 
   deleteexam(id:any){
-       return this.http.delete(`http://localhost:8089/api/deleteExam/${id}`);
+       return this.http.delete(`http://localhost:9033/api/deleteExam/${id}`);
 
   }
   delete(id:any){

@@ -243,7 +243,7 @@ export class IndividualUserExamResultComponent {
 
 
   getMarks(): Observable<Marks[]> {
-    return this.http.get<Marks[]>(`http://localhost:8089/api/getmarks`)
+    return this.http.get<Marks[]>(`http://localhost:9033/api/getmarks`)
   }
 
   exampiechart(code?: string) {
@@ -329,7 +329,7 @@ export class IndividualUserExamResultComponent {
 
     })
 
-    this.http.get<UserCode[]>(`http://localhost:8089/api/getusercodes/${this.uid}/${this.eid}`).subscribe((data: UserCode[]) => {
+    this.http.get<UserCode[]>(`http://localhost:9033/api/getusercodes/${this.uid}/${this.eid}`).subscribe((data: UserCode[]) => {
       if (data.length > 0) {
         this.usercodes = data;
         this.correct = this.usercodes[0].iscorrect?.toString();
@@ -337,22 +337,22 @@ export class IndividualUserExamResultComponent {
         console.log(data);
         if (this.uid) {
           // console.log(this.usercodes[0].iscorrect)
-          this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data =>
+          this.http.get<Question[]>(`http://localhost:9033/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data =>
             this.questions = data);
 
 
-          this.http.get<useranswer[]>(`http://localhost:8089/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data =>
+          this.http.get<useranswer[]>(`http://localhost:9033/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data =>
             this.userAnswers = data);
 
         }
       } else {
         if (this.uid) {
           // console.log(this.usercodes[0].iscorrect)
-          this.http.get<Question[]>(`http://localhost:8089/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data =>
+          this.http.get<Question[]>(`http://localhost:9033/api/getquestionsBySubjectId/${this.codeControl.value}`).subscribe(data =>
             this.questions = data);
 
 
-          this.http.get<useranswer[]>(`http://localhost:8089/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data =>
+          this.http.get<useranswer[]>(`http://localhost:9033/api/getUserAnswers/${this.uid}/${this.eid}`).subscribe(data =>
             this.userAnswers = data);
 
         }

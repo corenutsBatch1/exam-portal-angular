@@ -47,7 +47,7 @@ login(user: User) {
     if(this.submitted){
 
     this.http
-      .post(`http://localhost:8088/api/loginUser`, user)
+      .post(`http://localhost:9032/api/loginUser`, user)
       .subscribe((data) => {
         this.validUser = data;
         if (this.validUser != null ) {
@@ -63,7 +63,7 @@ login(user: User) {
             console.log(this.id);
           }
         } else {
-          
+
           Swal.fire({
             title: "Invalid Credentials",
             text: "Register and try again",

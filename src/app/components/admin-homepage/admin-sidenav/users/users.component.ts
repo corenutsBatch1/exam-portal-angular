@@ -37,7 +37,7 @@ export class UsersComponent {
 
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`http://localhost:8088/api/getallusers`)
+    return this.http.get<User[]>(`http://localhost:9032/api/getallusers`)
   }
 
   applyFilter(): void {

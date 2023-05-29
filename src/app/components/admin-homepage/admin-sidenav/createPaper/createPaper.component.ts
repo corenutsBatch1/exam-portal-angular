@@ -21,7 +21,7 @@ export class CreatePaperComponent implements OnInit {
   constructor(private http:HttpClient) { }
 
   fetchPaper(){
-    this.http.get<CreatePaper[]>(`http://localhost:8089/api/getpaper`).subscribe(data=>{
+    this.http.get<CreatePaper[]>(`http://localhost:9033/api/getpaper`).subscribe(data=>{
 
     console.log(data)
     this.papers=data;
@@ -49,7 +49,7 @@ export class CreatePaperComponent implements OnInit {
   }
   delete(id:any)
   {
-    return this.http.delete(`http://localhost:8089/api/deletePaper/${id}`);
+    return this.http.delete(`http://localhost:9033/api/deletePaper/${id}`);
     // .subscribe(data=>{
     //  this.ngOnInit();
     // console.log(data)})

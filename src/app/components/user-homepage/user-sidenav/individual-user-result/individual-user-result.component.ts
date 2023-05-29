@@ -53,7 +53,7 @@ export class IndividualUserResultComponent {
       switchMap(params => {
         const id2 = params.get('id2');
         console.log("id result" + id2); // Use the retrieved value as needed
-        return this.http.get<Marks[]>(`http://localhost:8089/api/getmarks/${id2}`);
+        return this.http.get<Marks[]>(`http://localhost:9033/api/getmarks/${id2}`);
       })
     );
   }

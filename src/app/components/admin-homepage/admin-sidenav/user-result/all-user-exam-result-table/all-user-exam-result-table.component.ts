@@ -121,7 +121,7 @@ export class AllUserExamResultTableComponent {
             widths: ['auto', 'auto', 'auto', 'auto', 'auto'],
             body: [
               [
-                'Serial Number',
+                'S.No',
                 'Exam Code',
                 'User Name',
                 'Total Marks',

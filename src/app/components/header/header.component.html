@@ -4,6 +4,7 @@
   <span>Scoresharp</span>
   <span class="example-spacer"></span>
   <button *ngIf="router.url !== '/home' && !loginservice.isLoggedIn" mat-button routerLink="/home">Home</button>
+  <button *ngIf="loginservice.isResultPage === true && loginservice.isLoggedIn" mat-button (click)="goBack()">User Home</button>
   <button *ngIf="!loginservice.isLoggedIn && !isLoginPage" mat-button routerLink="/login">Login</button>
   <button *ngIf="!loginservice.isLoggedIn && isLoginPage" mat-button routerLink="/signup">Register</button>
   <button id="logout-button" *ngIf="loginservice.isLoggedIn" (click)="logOut()" mat-button>Logout</button>

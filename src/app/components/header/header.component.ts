@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginserviceService } from './../loginmodal/loginservice.service';
 import { Router } from '@angular/router';
+import { MyserviceService } from 'src/app/model/myservice';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   isLoginPage: boolean = false;
 
-  constructor(public loginservice : LoginserviceService, public router: Router){}
+  constructor(public loginservice : LoginserviceService, public router: Router,
+    private service : MyserviceService){}
 
   ngOnInit() {
     this.isLoginPage = this.router.url === '/login';
@@ -21,5 +23,10 @@ export class HeaderComponent implements OnInit {
     localStorage.clear();
     this.loginservice.logout();
   }
+
+  goBack(){
+    this.router.navigate(['userpage/' + this.service.uid])
+  }
+
 }
 

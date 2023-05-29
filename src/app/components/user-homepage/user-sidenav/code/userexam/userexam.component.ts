@@ -1,17 +1,17 @@
-import { Component, HostListener } from '@angular/core';
+import { LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Question } from 'src/app/model/model/Question';
+import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { Subject } from 'src/app/model/model/Subject';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
-import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import Swal from 'sweetalert2';
-import { LocationStrategy } from '@angular/common';
 
-import { UserExamDetails } from 'src/app/model/model/UserExamDetails';
 import * as moment from 'moment';
+import { UserExamDetails } from 'src/app/model/model/UserExamDetails';
 
 import { FullScreenServiceService } from 'src/app/services/full-screen-service.service';
 
@@ -116,8 +116,6 @@ export class UserexamComponent {
         console.log(subjects);
       });
     });
-
-
 
   }
 

@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import {  ActivatedRoute } from '@angular/router';
+import { LoginserviceService } from '../loginmodal/loginservice.service';
 // import { User } from 'src/app/model/model/User';
 
 @Component({
@@ -11,14 +12,15 @@ import {  ActivatedRoute } from '@angular/router';
 export class UserHomepageComponent implements OnInit {
 id1?:number;
 elem: any;
-  constructor(@Inject(DOCUMENT) private document: any, private route:ActivatedRoute) {
-
+  constructor(@Inject(DOCUMENT) private document: any, private route:ActivatedRoute,
+  private service : LoginserviceService) {
   }
 
   ngOnInit() {
     this.id1=this.route.snapshot.params['id'];
     console.log(this.id1);
     this.elem = document.documentElement;
+    this.service.isResultPage = false
     this.openFullscreen()
   }
 

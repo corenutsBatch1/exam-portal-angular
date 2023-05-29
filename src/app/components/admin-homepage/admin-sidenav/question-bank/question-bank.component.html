@@ -66,6 +66,49 @@
    </div>
 </div>
 
+<div class="div4">
+  <mat-card class="card ml-5">
+    <mat-card-header>
+      <div mat-card-avatar><img src="assets/Excel.svg" alt=""></div>
+      <mat-card-title class="text-center ml-2">UPLOAD QUESTIONS</mat-card-title>
+      <mat-card-subtitle class="text-center ml-2">Uploading files</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="mgm">
+      <p class="mgp">Upload a excel file to add questions to repository</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <input type="file" name="fileUpload" id="fileUpload" style="display: none;" accept=".xlsx, .xls" (change)="handleFileUpload($event)">
+      <button id="upload-button" style="margin-left:6rem;" mat-button onclick="document.getElementById('fileUpload').click()">
+        <mat-icon>upload</mat-icon>Upload File</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+
+<!-- //--------------------------------------// -->
+
+<div class="div5">
+  <mat-card class="card ml-5">
+    <mat-card-header>
+      <div mat-card-avatar><img src="assets/Download-Excel.svg" alt=""></div>
+      <mat-card-title class="text-center ml-2">DOWNLOAD QUESTIONS</mat-card-title>
+      <mat-card-subtitle class="text-center ml-2">Download Excel file and add Questions to it</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="mgm">
+      <p class="mgp"></p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button id="download-button" style="margin-left:6rem;" mat-button (click)="generateExcelFile()">
+        <mat-icon>download</mat-icon>Download Excel File
+      </button>
+
+    </mat-card-actions>
+  </mat-card>
+</div>
+
 <!-- //--------------------------------------// -->
 </div>
 </div>

@@ -7,6 +7,9 @@ import Swal from 'sweetalert2';
 })
 export class LoginserviceService {
   isLoggedIn = false;
+
+  isResultPage = false;
+
   constructor(private router: Router) {
     this.isLoggedIn = !!localStorage.getItem('is_logged_in');
   }

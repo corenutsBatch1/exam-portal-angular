@@ -1,20 +1,20 @@
 
 import { LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Marks } from 'src/app/model/model/Marks';
 
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { Question } from 'src/app/model/model/Question';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
-import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { LoginserviceService } from 'src/app/components/loginmodal/loginservice.service';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
@@ -37,8 +37,9 @@ export class UserAnswersComponent implements OnInit {
   codeFlag?:boolean;
   marksInserted: boolean = false;
 
-  constructor(private router : Router, private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService, private locationStrategy: LocationStrategy
-   ,private loginService : LoginserviceService) { }
+  constructor(private router : Router, private http: HttpClient,private route:ActivatedRoute,private service:MyserviceService,
+    private locationStrategy: LocationStrategy, private loginService : LoginserviceService
+    ) { }
 
 
   ngOnInit() {
@@ -68,13 +69,8 @@ export class UserAnswersComponent implements OnInit {
   this.loadExam().subscribe(data=>{
     this.exam=data
   })
-  this.codeFlag = this.service.sendCodingBoolean();
-  localStorage.clear();
-  localStorage.removeItem('is_logged_in');
-  this.loginService.isLoggedIn = false;
-  this.router.navigate(['/login']);
+  this.loginService.isResultPage = true
 }
-
 
   loadQuestions(): Observable<Question[]> {
     return this.http.get<Question[]>(`http://localhost:9033/api/getquestionsBySubjectId/${this.code}`);

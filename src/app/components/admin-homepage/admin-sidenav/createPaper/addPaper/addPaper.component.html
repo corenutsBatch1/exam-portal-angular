@@ -10,14 +10,14 @@
   <label for="noOfQuestions">Enter no of questions</label>
   <input type="text" class="form-control" id="noOfQuestions" placeholder="Enter no of questions" [(ngModel)]="createPaper.numberOfQuestions"  [(ngModel)]="noOfQuestions" name="noofquestions" (ngModelChange)="checkAllFieldsFilled()">
   <div class="invalid-feedback" id="noOfQuestionsError">
-    Please enter only numbers
+    Please enter only positive numbers
   </div>
 </div>
 <div class="form-group">
   <label for="totalMarks">Enter total marks</label>
   <input type="text" class="form-control" id="totalMarks" placeholder="Enter total marks" [(ngModel)]="createPaper.totalMarks" name="total_Marks" (ngModelChange)="checkAllFieldsFilled()">
   <div class="invalid-feedback" id="totalMarksError">
-    Please enter only numbers
+    Please enter only positive numbers
   </div>
 </div>
 </div>
@@ -53,7 +53,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let question of question123 let i=index">
-     <td>{{question.id}}</td>
+     <td>{{i+1}}</td>
       <td [innerHTML]="question.content"></td>
       <td>{{question.optionA}}</td>
       <td>{{question.optionB}}</td>
@@ -63,7 +63,8 @@
       <td>{{question.qtype}}</td>
       <td>
 
-        <mat-checkbox [disabled]="isDisabled" class="example-margin" color="primary" (change)="checkboxChanged($event,question.id,question.subject?.name)"></mat-checkbox>
+        <mat-checkbox [disabled]="isDisabled" class="example-margin" color="primary" (change)="checkboxChanged($event,question.id,question.subject?.name)"
+        [checked]="questionsIdArray.includes(question.id)" ></mat-checkbox>
 
         <!-- <input type="checkbox" class="checkbox" (click)="addquestions(question.id)"> -->
 
@@ -82,10 +83,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let question of codingQuestion let i=index">
-      <td>{{question.id}}</td>
+      <td>{{i+1}}</td>
       <td [innerHTML]="question.content"></td>
       <td>
-        <mat-checkbox [disabled]="isDisabled" class="example-margin" color="primary" (change)="checkboxChanged($event,question.id,question.subject?.name)"></mat-checkbox>
+        <mat-checkbox [disabled]="isDisabled" class="example-margin" color="primary" (change)="checkboxChanged($event,question.id,question.subject?.name)"
+        [checked]="codingQuestionsIdArray.includes(question.id!)"></mat-checkbox>
 </td>
 </tr>
 </tbody>

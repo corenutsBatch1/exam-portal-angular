@@ -1,199 +1,339 @@
 <body (contextmenu)="disableRightClick($event)">
-<mat-toolbar>
-  <img src="assets/test.png" alt="img">
-  &nbsp;&nbsp;
-  <span>
-    Scoresharp</span>
-  <span class="example-spacer"></span>
-  <h2 id="timer">Remaining Time: {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <button type="button" class="btn btn-success submitbutton"  (click)="clickEvent(this.code)" >Submit Exam</button>
-</mat-toolbar>
-<nav class="text-center">
+  <mat-toolbar>
+    <img src="assets/test.png" alt="img" />
+    &nbsp;&nbsp;
+    <span> Scoresharp</span>
+    <span class="example-spacer"></span>
+    <h2 id="timer">
+      Remaining Time: {{ minutes }}:{{ seconds < 10 ? "0" + seconds : seconds }}
+    </h2>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button
+      type="button"
+      class="btn btn-success submitbutton"
+      (click)="clickEvent(this.code)"
+    >
+      Submit Exam
+    </button>
+  </mat-toolbar>
+  <nav class="text-center">
+    <!-- <h1>JAVA EXAM</h1> -->
+  </nav>
 
-  <!-- <h1>JAVA EXAM</h1> -->
-</nav>
-
-
-<div class="bootstrap-wrappper">
-  <div class="container-fulid">
-    <div class="row">
-
-
-
-      <!----Left Part-->
-      <div class="col-md-9" style="padding: 0rem;padding-left:1rem;">
-        <!---Start Left Top part for Swtich Subject---->
-        <div class="row-md-3 lefttop text-center" >
-          <table class="subject">
-            <th></th>
-            <tr>
-              <td *ngFor="let subjectName of uniqueSubjectNames;let i = index">
-                <button type="button" class="text-center mt-2 ml-4 subject-button btn-group-toggle" data-toggle="buttons" mat-raised-button color="primary" (click)="getQuestionsBySubjectName(subjectName)"
-                [ngClass]="{'active': activeIndex === i}"
-                (click)="setActive(i,this.subjectName)" >
-                  {{subjectName}}
-                 </button>
-              </td>
-            </tr>
-
-          </table>
-          <div class="row">
-
+  <div class="bootstrap-wrappper">
+    <div class="container-fulid">
+      <div class="row">
+        <!----Left Part-->
+        <div class="col-md-9" style="padding: 0rem; padding-left: 1rem">
+          <!---Start Left Top part for Swtich Subject---->
+          <div class="row-md-3 lefttop text-center">
+            <table class="subject">
+              <th></th>
+              <tr>
+                <td
+                  *ngFor="let subjectName of uniqueSubjectNames; let i = index"
+                >
+                  <button
+                    type="button"
+                    class="text-center mt-2 ml-4 subject-button btn-group-toggle"
+                    data-toggle="buttons"
+                    mat-raised-button
+                    color="primary"
+                    (click)="getQuestionsBySubjectName(subjectName)"
+                    [ngClass]="{ active: activeIndex === i }"
+                    (click)="setActive(i, this.subjectName)"
+                  >
+                    {{ subjectName }}
+                  </button>
+                </td>
+              </tr>
+            </table>
+            <div class="row"></div>
           </div>
-        </div>
 
-         <!---End Left Top part for Swtich Subject---->
+          <!---End Left Top part for Swtich Subject---->
 
           <!---Start Left Buttom part for Question---->
-        <div class="row-md-9 leftbottom ml-2" *ngIf="(currentQuestion?.subject?.name?.toLowerCase()!='coding' && this.showbuttons) " class="question">
+          <div
+            class="row-md-9 leftbottom ml-2"
+            *ngIf="
+              currentQuestion?.subject?.name?.toLowerCase() != 'coding' &&
+              this.showbuttons
+            "
+            class="question"
+          >
+            <mat-list>
+              <div
+                *ngIf="
+                  clickedSubject != 'Coding' && this.currentQuestion != null
+                "
+              >
+                <h3>
+                  <b> Question No {{ questionnumber + 1 }}</b>
+                </h3>
+                <h3 [innerHTML]="currentQuestion.content"></h3>
 
-          <mat-list >
-            <div *ngIf="clickedSubject != 'Coding' && this.currentQuestion != null">
-              <h3><b> Question No {{this.questionnumber+1}}</b></h3>
-             <h3 [innerHTML]="currentQuestion.content"></h3>
+                <!-- <ng-container *ngIf="currentQuestion.answer && currentQuestion.answer.length()>1; else radioButtons"> -->
+                <ng-container
+                  *ngIf="
+                    currentQuestion.answer && currentQuestion.answer.length > 1;
+                    else radioButtons
+                  "
+                >
+                  <mat-list-item>
+                    <div style="white-space: nowrap">
+                      <input
+                        type="checkbox"
+                        [name]="'answer' + currentQuestion.id"
+                        value="A"
+                        (click)="sendoption2(currentQuestion.id, 'A')"
+                        [checked]="isOptionSelected(currentQuestion.id, 'A')"
+                        [checked]="isOptionSelected2(currentQuestion.id, 'A')"
+                        ng-class="{ checked: isChecked == A }"
+                      />
+                      <label class="option">{{
+                        currentQuestion.optionA
+                      }}</label>
+                    </div>
+                  </mat-list-item>
 
-    <!-- <ng-container *ngIf="currentQuestion.answer && currentQuestion.answer.length()>1; else radioButtons"> -->
-      <ng-container *ngIf="currentQuestion.answer && currentQuestion.answer.length > 1; else radioButtons">
-      <mat-list-item>
-        <div style="white-space:nowrap">
-          <input type="checkbox" [name]="'answer'+currentQuestion.id" value="A" (click)="sendoption2(currentQuestion.id, 'A')" [checked]="isOptionSelected(currentQuestion.id, 'A')" [checked]="isOptionSelected2(currentQuestion.id, 'A')" ng-class="{checked: isChecked == A}">
-          <label class="option">{{currentQuestion.optionA}}</label>
+                  <mat-list-item>
+                    <div style="white-space: nowrap">
+                      <input
+                        type="checkbox"
+                        [name]="'answer' + currentQuestion.id"
+                        value="B"
+                        (click)="sendoption2(currentQuestion.id, 'B')"
+                        [checked]="isOptionSelected(currentQuestion.id, 'B')"
+                        [checked]="isOptionSelected2(currentQuestion.id, 'B')"
+                        ng-class="{ checked: isChecked == C }"
+                      />
+                      <label class="option">{{
+                        currentQuestion.optionB
+                      }}</label>
+                    </div>
+                  </mat-list-item>
+
+                  <mat-list-item>
+                    <div class="white-space:nowrap">
+                      <input
+                        type="checkbox"
+                        [name]="'answer' + currentQuestion.id"
+                        value="C"
+                        (click)="sendoption2(currentQuestion.id, 'C')"
+                        [checked]="isOptionSelected(currentQuestion.id, 'C')"
+                        [checked]="isOptionSelected2(currentQuestion.id, 'C')"
+                        ng-class="{ checked: isChecked == C }"
+                      />
+                      <label class="option">{{
+                        currentQuestion.optionC
+                      }}</label>
+                    </div>
+                  </mat-list-item>
+
+                  <mat-list-item>
+                    <div class="white-space:nowrap">
+                      <input
+                        type="checkbox"
+                        [name]="'answer' + currentQuestion.id"
+                        value="D"
+                        (click)="sendoption2(currentQuestion.id, 'D')"
+                        [checked]="isOptionSelected(currentQuestion.id, 'D')"
+                        [checked]="isOptionSelected2(currentQuestion.id, 'D')"
+                        ng-class="{ checked: isChecked == D }"
+                      />
+                      <label class="option">{{
+                        currentQuestion.optionD
+                      }}</label>
+                    </div>
+                  </mat-list-item>
+                  <button
+                    class="bt btn-success btn-sm"
+                    (click)="
+                      submitoption(currentQuestion.id, this.checkboxoption)
+                    "
+                    ;
+                  >
+                    Save</button
+                  >&nbsp;&nbsp;
+                </ng-container>
+                <ng-template #radioButtons>
+                  <mat-list-item>
+                    <div style="white-space: nowrap">
+                      <input
+                        class="radiobutton"
+                        type="radio"
+                        [name]="'answer' + currentQuestion.id"
+                        value="A"
+                        [checked]="isCheckedA"
+                        (click)="sendoption(currentQuestion.id, 'A')"
+                        ng-class="{ checked: isChecked == A }"
+                      />
+                      <label class="option">{{
+                        currentQuestion.optionA
+                      }}</label>
+                    </div>
+                  </mat-list-item>
+
+                  <mat-list-item>
+                    <div style="white-space: nowrap">
+                      <input
+                        class="radiobutton"
+                        type="radio"
+                        [name]="'answer' + currentQuestion.id"
+                        value="B"
+                        [checked]="isCheckedB"
+                        (click)="sendoption(currentQuestion.id, 'B')"
+                        ng-class="{ checked: isChecked == B }"
+                      />
+                      <label class="option">{{
+                        currentQuestion.optionB
+                      }}</label>
+                    </div>
+                  </mat-list-item>
+
+                  <mat-list-item>
+                    <div class="white-space:nowrap">
+                      <input
+                        class="radiobutton"
+                        type="radio"
+                        [name]="'answer' + currentQuestion.id"
+                        value="C"
+                        [checked]="isCheckedC"
+                        (click)="sendoption(currentQuestion.id, 'C')"
+                        ng-class="{ checked: isChecked == C }"
+                      />
+                      <label class="option">{{
+                        currentQuestion.optionC
+                      }}</label>
+                    </div>
+                  </mat-list-item>
+
+                  <mat-list-item>
+                    <div class="white-space:nowrap">
+                      <input
+                        class="radiobutton"
+                        type="radio"
+                        [name]="'answer' + currentQuestion.id"
+                        value="D"
+                        [checked]="isCheckedD"
+                        (click)="sendoption(currentQuestion.id, 'D')"
+                        ng-class="{ checked: isChecked == D }"
+                      />
+                      <label class="option">{{
+                        currentQuestion.optionD
+                      }}</label>
+                    </div>
+                  </mat-list-item>
+                  <mat-list-item style="display: none">
+                    <div style="white-space: nowrap">
+                      <input
+                        class="radiobutton"
+                        type="radio"
+                        [name]="'answer' + currentQuestion.id"
+                        value="E"
+                        [checked]="isChecked"
+                        (click)="sendoption(currentQuestion.id, 'E')"
+                        ng-class="{ checked: isChecked == E }"
+                      />
+                      <!-- <label class="option">{{ currentQuestion.optionA }}</label> -->
+                    </div>
+                  </mat-list-item>
+                </ng-template>
+
+                <!-- <div > -->
+                <button
+                  *ngIf="this.questionnumber > 0"
+                  type="none"
+                  class="btn btn-primary btn-sm"
+                  (click)="previousquestion(this.questionnumber)"
+                >
+                  Previous
+                </button>
+                <!-- </div> -->
+                &nbsp;&nbsp;
+                <button
+                  type="none"
+                  *ngIf="this.questionnumber < questions.length - 1"
+                  class="btn btn-primary btn-sm"
+                  (click)="nextquestion()"
+                >
+                  Next
+                </button>
+              </div>
+
+              <div
+                *ngIf="
+                  clickedSubject === 'CODING' && this.currentQuestion != null
+                "
+              >
+                <h3>
+                  <b> Question No {{ this.questionnumber + 1 }}</b>
+                </h3>
+                <h1 [innerHTML]="currentQuestion.content"></h1>
+                <app-coding [id]="this.codingquestionid"></app-coding>
+              </div>
+            </mat-list>
+            <mat-list dense> </mat-list>
+          </div>
+          <div
+            class="row-md-9 leftbottom ml-2"
+            *ngIf="currentQuestion?.subject?.name == 'CODING'"
+            class="question"
+          >
+            <mat-list>
+              <h3>
+                <b> Question No {{ this.questionnumber + 1 }}</b>
+              </h3>
+              <h1 [innerHTML]="currentQuestion?.content"></h1>
+              <app-coding [id]="this.codingquestionid"></app-coding>
+            </mat-list>
+          </div>
         </div>
-      </mat-list-item>
-
-      <mat-list-item>
-        <div style="white-space:nowrap">
-          <input type="checkbox" [name]="'answer'+currentQuestion.id" value="B" (click)="sendoption2(currentQuestion.id, 'B')" [checked]="isOptionSelected(currentQuestion.id, 'B')"  [checked]="isOptionSelected2(currentQuestion.id, 'B')" ng-class="{checked: isChecked == C}">
-          <label class="option">{{currentQuestion.optionB}}</label>
-        </div>
-      </mat-list-item>
-
-      <mat-list-item>
-        <div class="white-space:nowrap">
-          <input type="checkbox" [name]="'answer'+currentQuestion.id" value="C" (click)="sendoption2(currentQuestion.id, 'C')" [checked]="isOptionSelected(currentQuestion.id, 'C')"  [checked]="isOptionSelected2(currentQuestion.id, 'C')" ng-class="{checked: isChecked == C}">
-          <label class="option">{{currentQuestion.optionC}}</label>
-        </div>
-      </mat-list-item>
-
-      <mat-list-item>
-        <div class="white-space:nowrap">
-          <input type="checkbox" [name]="'answer'+currentQuestion.id" value="D" (click)="sendoption2(currentQuestion.id, 'D')" [checked]="isOptionSelected(currentQuestion.id, 'D')"  [checked]="isOptionSelected2(currentQuestion.id, 'D')" ng-class="{checked: isChecked == D}">
-          <label class="option">{{currentQuestion.optionD}}</label>
-        </div>
-      </mat-list-item>
-       <button class="bt btn-success btn-sm" (click)="submitoption(currentQuestion.id,this.checkboxoption)" isRadioButtonSelected = true;>Save</button>&nbsp;&nbsp;
-    </ng-container>
-    <ng-template #radioButtons>
-              <mat-list-item>
-                <div style="white-space:nowrap">
-                  <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="A" [checked]="isCheckedA" (click)="sendoption(currentQuestion.id, 'A');isRadioButtonSelected = true;" ng-class="{checked: isChecked == A}"/>
-                    <label class="option">{{ currentQuestion.optionA }}</label>
-                </div>
-              </mat-list-item>
-
-              <mat-list-item>
-                <div style="white-space:nowrap">
-                  <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="B" [checked]="isCheckedB" (click)="sendoption(currentQuestion.id, 'B');isRadioButtonSelected = true;"  ng-class="{checked: isChecked == B}"/>
-                  <label class="option">{{ currentQuestion.optionB }}</label>
-                </div>
-              </mat-list-item>
-
-              <mat-list-item>
-                <div class="white-space:nowrap">
-                  <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="C" [checked]="isCheckedC" (click)="sendoption(currentQuestion.id, 'C');isRadioButtonSelected = true;"  ng-class="{checked: isChecked == C}">
-                  <label class="option">{{ currentQuestion.optionC }}</label>
-
-                </div>
-              </mat-list-item>
-
-              <mat-list-item>
-               <div class="white-space:nowrap">
-                <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="D" [checked]="isCheckedD" (click)="sendoption(currentQuestion.id, 'D'); isRadioButtonSelected = true;"  ng-class="{checked: isChecked == D}"/>
-                  <label class="option">{{ currentQuestion.optionD }}</label>
-               </div>
-              </mat-list-item>
-              <mat-list-item style="display: none;">
-                <div style="white-space:nowrap">
-                    <input class="radiobutton" type="radio" [name]="'answer'+currentQuestion.id" value="E" [checked]="isChecked" (click)="sendoption(currentQuestion.id, 'E');isRadioButtonSelected = true;" ng-class="{checked: isChecked == E}"/>
-                    <!-- <label class="option">{{ currentQuestion.optionA }}</label> -->
-                </div>
-              </mat-list-item>
-            </ng-template>
-
-      <!-- <div > -->
-        <button  *ngIf="this.questionnumber>0" type="none" class="btn btn-primary btn-sm" (click)="previousquestion(this.questionnumber);">Previous</button>
-      <!-- </div> -->
-      &nbsp;&nbsp;
-      <button type="none" *ngIf="this.questionnumber<(questions.length-1)"class="btn btn-primary btn-sm" (click)="nextquestion()">Next</button>
-
-
-            </div>
-
-            <div *ngIf="clickedSubject === 'CODING' && this.currentQuestion != null">
-              <h3><b> Question No {{this.questionnumber+1}}</b></h3>
-             <h1 [innerHTML]="currentQuestion.content"></h1>
-             <app-coding [id]="this.codingquestionid"></app-coding>
-            </div>
-
-
-          </mat-list>
-          <mat-list dense>
-
-
-
-          </mat-list>
-        </div>
-        <div class="row-md-9 leftbottom ml-2" *ngIf="currentQuestion?.subject?.name=='CODING'" class="question">
-          <mat-list >
-            <!-- <mat-list-item> <h1 ><span>{{this.questionnumber+1}} </span> {{ currentQuestion?.content }}</h1></mat-list-item> -->
-            <h3><b> Question No {{this.questionnumber+1}}</b></h3>
-             <h1  [innerHTML]="currentQuestion?.content"> </h1>
-            <app-coding [id]="this.codingquestionid"></app-coding>
-          </mat-list>
-        </div>
-      </div>
-       <!---End Left buttom part for Question---->
+        <!---End Left buttom part for Question---->
 
         <!---Start Rigth part---->
-        <div class="col-md-3 right" style="padding: 0;">
-        <div class="col" style="padding: 0;">
-          <!---Start Rigth top part for timer---->
+        <div class="col-md-3 right" style="padding: 0">
+          <div class="col" style="padding: 0">
+            <!---Start Rigth top part for timer---->
 
+            <!-- Start the timer when the component loads -->
+            <div *ngIf="showTimer"></div>
+            <!---End Rigth top part for timer---->
 
-          <!-- Start the timer when the component loads -->
-          <div *ngIf="showTimer">
-          </div>
-          <!---End Rigth top part for timer---->
-
-
-          <!---Start Rigth buttom part for Question Answered---->
-          <div class="answered">
-
-            <h4 class="totalquestion">Total Questions= {{totalQuestions}}</h4>
-            <h4>Attempted Questions= {{stateChange.length}}</h4>
-          </div>
-          <div class="row-md-9 rigthbottom">
-            <div class="question-list__items">
-              <ul>
-                <li *ngFor="let question of questions let i=index">
-
-                  <a class="numberOfQuestion ml-1.2" (click)="nextquestions(i,question.optionA,question.id)" [ngStyle]="{'background-color' : stateChangeCheck(question.id, question.subject) ? 'green' : 'Gray'}" >{{i+1 }} </a>
-
-                </li>
-              </ul>
+            <!---Start Rigth buttom part for Question Answered---->
+            <div class="answered">
+              <h4 class="totalquestion">
+                Total Questions= {{ totalQuestions }}
+              </h4>
+              <h4>Attempted Questions= {{ stateChange.length }}</h4>
             </div>
+            <div class="row-md-9 rigthbottom">
+              <div class="question-list__items">
+                <ul>
+                  <li *ngFor="let question of questions; let i = index">
+                    <a
+                      class="numberOfQuestion ml-1.2"
+                      (click)="nextquestions(i, question.optionA, question.id)"
+                      [ngStyle]="{
+                        'background-color': stateChangeCheck(
+                          question.id,
+                          question.subject
+                        )
+                          ? 'green'
+                          : 'Gray'
+                      }"
+                      >{{ i + 1 }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!---End Rigth buttom part for Question Answered---->
           </div>
-             <!---End Rigth buttom part for Question Answered---->
-
-
         </div>
+        <!---End Rigth part---->
       </div>
-      <!---End Rigth part---->
-
-
-
     </div>
   </div>
-</div>
-
 </body>

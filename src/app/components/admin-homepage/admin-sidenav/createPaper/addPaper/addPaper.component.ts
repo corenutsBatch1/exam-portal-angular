@@ -56,7 +56,7 @@ export class AddPaperComponent implements OnInit {
       noOfQuestionsInput.addEventListener('input', (event) => {
         const inputElement = event.target as HTMLInputElement;
         const numQuestions = inputElement.value;
-        if (!isNaN(Number(numQuestions))) {
+        if (!isNaN(Number(numQuestions)) && Number(numQuestions) > 0) {
           inputElement.classList.remove('is-invalid');
           noOfQuestionsError.style.display = 'none';
         } else {
@@ -68,7 +68,7 @@ export class AddPaperComponent implements OnInit {
       totalMarksInput.addEventListener('input', (event) => {
         const inputElement = event.target as HTMLInputElement;
         const totalMarks = inputElement.value;
-        if (!isNaN(Number(totalMarks))) {
+        if (!isNaN(Number(totalMarks)) && Number(totalMarks) > 0) {
           inputElement.classList.remove('is-invalid');
           totalMarksError.style.display = 'none';
         } else {
@@ -178,16 +178,12 @@ goBack() {
   console.log(this.loadAddPaperpage)
      this.loadAddPaperpage.emit(true);
      console.log(this.loadAddPaperpage)
-    //  location.reload();
 
      }
 checkboxChanged(event: any, optionValue?: number, subjectName?:string) {
 
       if (event.checked) {
-        // Checkbox is checked
-
         if (this.noOfQuestions && this.questionCount < this.noOfQuestions) {
-
          if(subjectName?.toLowerCase()===('coding')){
 
          this.codingQuestionsIdArray.push(optionValue as number);

@@ -1,7 +1,7 @@
 
-<form [formGroup]="questionForm" >
+<form [formGroup]="questionForm" class="ml-2 mt-2">
 
-  <div class="mt-2">
+  <div class="mt-4">
     <mat-form-field appearance="fill" classs="left">
       <mat-label>Select a subject</mat-label>
       <mat-select [(ngModel)]="selectedsubject" name="selectedSubject" [ngModelOptions]="{standalone: true}"
@@ -20,26 +20,21 @@
    </div>
 
 
-  <div class="form-group">
-    <!-- <textarea class="form-control" id="question" formControlName="question" [(ngModel)]="questionContent"></textarea> -->
+  <div class="form-group ml-3">
     <div id="question-editor">
       <label for="question">Question:</label>
-    <!-- <ngx-codemirror formControlName="question" [(ngModel)]="questionContent" name="content" [options]="{
-      theme: 'paraiso-light',
-      mode: 'markdown'
-      }">
-    </ngx-codemirror> -->
     <ckeditor [editor]="Editor" formControlName="question" [(ngModel)]="questionContent" name="content" ></ckeditor>
     </div>
   </div>
-  <div *ngFor="let input of inputs; let i = index">
+  <div *ngFor="let input of inputs; let i = index" class="ml-3">
     <label for="input-{{i}}">Input {{i + 1}}:</label>
     <input type="text" id="input-{{i}}" name="input{{i}}" [(ngModel)]="input.input" [ngModelOptions]="{standalone: true}">
     &nbsp;
     <label for="output-{{i}}">Expected output {{i + 1}}:</label>
     <input type="text" id="output-{{i}}" name="output{{i}}" [(ngModel)]="input.output" [ngModelOptions]="{standalone: true}">
   </div>
-  <button class="btn btn-primary btn-sm mt-2" (click)="addInput()">Add Input</button>&nbsp;
+  <button class="btn btn-primary btn-sm mt-2 ml-3" (click)="addInput()">Add Input</button>&nbsp;
   <button class="btn btn-warning btn-sm mt-2" (click)="removeInput()">Remove Input</button>&nbsp;
   <button class="btn btn-success btn-sm mt-2 submit" type="submit" (click)="onSubmit(subject_id)">Save Question</button>
+  <button class="btn btn-danger btn-sm mt-2 ml-2" type="reset" (click)="clearForm()">Clear</button>
 </form>

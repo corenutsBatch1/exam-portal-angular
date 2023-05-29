@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { saveAs } from 'file-saver';
@@ -12,7 +13,7 @@ export class QuestionBankComponent implements OnInit {
   showQuestion:boolean=true;
   manageQuestions:boolean=true;
   showCodingQuestions:boolean=true;
-  constructor(private route:Router) { }
+  constructor(private route:Router,private http : HttpClient) { }
 
   ngOnInit() {
 
@@ -36,6 +37,16 @@ export class QuestionBankComponent implements OnInit {
     const file = event.target.files[0];
     // Perform the necessary file handling logic
     console.log('Uploaded file:', file);
+    this.sendFileToServer(file)
+  }
+
+  sendFileToServer(file : File){
+    const formData = new FormData();
+    formData.append('file', file);
+
+    this.http.post('http://localhost:9033/api/questions/upload',formData).subscribe(response => {
+      console.log("File uploaded successfully")
+    });
   }
 
 

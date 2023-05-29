@@ -1,4 +1,4 @@
-<div *ngIf="showCodingQuestions" class="mt-4">
+<div *ngIf="showCodingQuestions" class="mt-4 mb-4">
   <div *ngIf="manageQuestions" >
   <div class="allign" *ngIf="showQuestion" >
 <div class="warapper">
@@ -79,7 +79,7 @@
     </mat-card-content>
     <mat-card-actions>
       <input type="file" name="fileUpload" id="fileUpload" style="display: none;" accept=".xlsx, .xls" (change)="handleFileUpload($event)">
-      <button id="upload-button" style="margin-left:6rem;" mat-button onclick="document.getElementById('fileUpload').click()">
+      <button id="add-button" style="margin-left:6rem;" mat-button onclick="document.getElementById('fileUpload').click()">
         <mat-icon>upload</mat-icon>Upload File</button>
     </mat-card-actions>
   </mat-card>
@@ -94,17 +94,18 @@
     <mat-card-header>
       <div mat-card-avatar><img src="assets/Download-Excel.svg" alt=""></div>
       <mat-card-title class="text-center ml-2">DOWNLOAD QUESTIONS</mat-card-title>
-      <mat-card-subtitle class="text-center ml-2">Download Excel file and add Questions to it</mat-card-subtitle>
+      <mat-card-subtitle class="text-center ml-2">Download Excel file format</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content class="mgm">
-      <p class="mgp"></p>
+      <p class="mgp">
+        Download Excel file and add Questions to it
+      </p>
     </mat-card-content>
     <mat-card-actions>
-      <button id="download-button" style="margin-left:6rem;" mat-button (click)="generateExcelFile()">
+      <button id="add-button" style="margin-left:6rem;" mat-button (click)="generateExcelFile()">
         <mat-icon>download</mat-icon>Download Excel File
       </button>
-
     </mat-card-actions>
   </mat-card>
 </div>

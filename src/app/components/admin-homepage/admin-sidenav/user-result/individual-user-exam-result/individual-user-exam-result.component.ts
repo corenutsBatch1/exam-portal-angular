@@ -120,19 +120,6 @@ export class IndividualUserExamResultComponent {
     const filterValue = value.toLowerCase();
     return this.usernames.filter(code => code.toLowerCase().includes(filterValue));
   }
-  // onUsernameChange() {
-  //   console.log("in onusernamechange");
-  //   console.log(this.filteredUsernames);
-
-  //   const filterValue = this.usernamecontrol.value.toLowerCase().trim();
-  //   console.log(filterValue+"i-----------------")
-  //   console.log(this.usernamecontrol.value)
-  //   this.filteredUsernames = this.usernames.filter(username =>
-  //     username.toLowerCase().includes(filterValue)
-  //   );
-
-  //   console.log(this.filteredUsernames);
-  // }
 
   oncodeSelection() {
     this.usernames.splice(0, this.usernames.length)
@@ -180,7 +167,7 @@ export class IndividualUserExamResultComponent {
     if (this.questions) {
       const docDefinition: TDocumentDefinitions = {
         content: [
-          { text: 'Exam Result Data', style: 'header' },
+          { text: 'Exam Result', style: 'header' },
           `User Name: ${this.username3 || ""}\n`,
           `Exam Name: ${this.examname || ""}\n`,
           `Total Marks: ${this.totalmarks || 0}\n`,
@@ -212,7 +199,7 @@ export class IndividualUserExamResultComponent {
                 const answer = this.userAnswers.find(answer => answer?.question?.id === question?.id);
 
                 if (answer) {
-                  listItems.push(`YourAnswer : ${answer.userAnswer}`);
+                  listItems.push(`UserAnswer : ${answer.userAnswer}`);
                 }
 
                 listItems.push(`CorrectAnswer : ${question?.answer}`);

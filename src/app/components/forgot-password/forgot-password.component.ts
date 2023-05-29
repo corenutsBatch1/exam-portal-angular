@@ -1,37 +1,8 @@
-// import { Component, OnInit } from '@angular/core';
-// import { User } from 'src/app/model/model/User';
-// import { HttpClient } from '@angular/common/http';
-// import { Router } from '@angular/router';
-
-// @Component({
-//   selector: 'app-forgot-password',
-//   templateUrl: './forgot-password.component.html',
-//   styleUrls: ['./forgot-password.component.css']
-// })
-// export class ForgotPasswordComponent {
-//   user: User = new User();
-//   constructor(
-//     private http: HttpClient,
-//     private router: Router,
-//   ) { }
-//   resetpassword(user:User) {
-//     const resetUrl = 'http://localhost:9032/api/forgotpassword';
-//     console.log(user.password);
-//     this.http.put(resetUrl,user).subscribe(data => {
-//       console.log(user.password);
-//       console.log(data);
-//     });
-
-//   }
-// }
-// --------------------------------------------------------------------
-
 
 import { HttpClient } from '@angular/common/http';
 import { Component,OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { User } from '../../model/model/User';
-// import { LoginserviceService } from './loginservice.service';
 import { FormGroup,Validators,FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
 
@@ -45,7 +16,6 @@ import Swal from 'sweetalert2';
 export class ForgotPasswordComponent {
 hide = true;
 hidec=true;
-//Form variables
 resetForm:any = FormGroup;
 submitted = false;
 userReset:User = new User();

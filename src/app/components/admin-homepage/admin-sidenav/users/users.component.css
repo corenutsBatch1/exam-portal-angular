@@ -1,6 +1,7 @@
 .table{
   width: 90%;
-  margin-left: 10px;
+  margin-left: 1rem;
+  margin-top: 1rem;
 }
 
 th{
@@ -15,9 +16,9 @@ th{
 .pdfImg{
   height: 3rem;
   width: 3rem;
-  margin-top: 1rem;
-  margin-left: 0.5rem;
-
+  display: flex;
+  margin-left: 16rem;
+  margin-top: -4.5rem;
 }
 
 .search{

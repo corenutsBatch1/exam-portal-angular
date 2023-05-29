@@ -166,10 +166,7 @@ export class UserexamComponent {
           }, 2000);
         });
       }
-  // @HostListener('document:keydown.escape', ['$event'])
-  // handleEscapeKey(event: KeyboardEvent) {
-  //   this.fullscreenService.preventExitOnEscape(event);
-  // }
+
 
 
 
@@ -276,9 +273,9 @@ startTimer() {
        }))
       });
   }
+
+
   sendoption2(qid:number,option2:string){
-
-
     //this.checkboxoption=this.checkboxoption?.concat(option2);
     const selectedOptions = this.checkboxState[qid] || [];
     if (selectedOptions.includes(option2)) {
@@ -289,8 +286,8 @@ startTimer() {
       this.checkboxState[qid] = [...selectedOptions, option2];
     }
   }
-  submitoption(qid:any,optionarray?:any){
 
+  submitoption(qid:any,optionarray?:any){
     const normalQuestionOptionId = "N" + qid;
     if(!this.stateChange.includes(normalQuestionOptionId)){
       this.stateChange.push(normalQuestionOptionId);
@@ -331,7 +328,6 @@ isOptionSelected2(qid: number, option: string): boolean {
 }
 
 clickEvent(exam: any) {
-
   var remainingQuestion=(this.totalQuestions-this.stateChange.length);
   console.log("remainingQuestion"+remainingQuestion);
   if(remainingQuestion>0){

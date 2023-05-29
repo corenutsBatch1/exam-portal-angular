@@ -45,16 +45,13 @@ export class AddExamComponent implements OnInit{
     if (typeof scheduleExam.startTime === 'string' && typeof scheduleExam.endTime === 'string') {
      this.start = new Date(scheduleExam.startTime);
      this.end = new Date(scheduleExam.endTime);
-      console.log(this.start);
-      console.log(this.end);
-      // Rest of your code here
-    } else {
-      // Handle the error or do nothing
     }
      if(scheduleExam.name==undefined || scheduleExam.code==undefined || scheduleExam.startTime==undefined || scheduleExam.endTime==undefined || scheduleExam.examDuration==undefined || this.paperId==undefined )
      {
-
       Swal.fire("All field must be required","", "error");
+     }
+     else if(scheduleExam.examDuration<0 || typeof scheduleExam.examDuration !== 'number'){
+      Swal.fire("ExamDuration must be positive number","", "error");
      }
      else{
 
@@ -70,8 +67,6 @@ export class AddExamComponent implements OnInit{
       this.goBack();
     },
     error=>{
-      //console.error('Error:', error.message);
-      //console.log('Error details:', JSON.stringify(error));
       Swal.fire("All field must be required","", "error");
     }
   );

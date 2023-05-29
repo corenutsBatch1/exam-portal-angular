@@ -72,26 +72,21 @@ export class AddquestionComponent implements OnInit{
   }
 
   addQuestion(Questions:Question,id?:number){
-    console.log(Questions)
-    console.log(this.subject_id)
-    console.log(this.selectedsubject)
-    console.log(id)
     this.answers.sort();
     this.Questions.answer = this.answers.join('');
+     if(this.answers.length>0){
+      this.http.post(`http://localhost:9033/api/addquestion/${id}`, Questions).subscribe(
+        response=>{
+          Swal.fire("Question added successfully","", "success");
+        },
+        error=>{
+          Swal.fire("All field must be required","", "error");
+        }
+      );
+     }else{
+      Swal.fire("All field must be required","", "error");
+     }
 
-    console.log(this.Questions.answer)
-    this.http.post(`http://localhost:9033/api/addquestion/${id}`, Questions).subscribe(
-
-      response=>{
-        Swal.fire("Question added successfully","", "success");
-        // location.reload();
-        // this.goBack();
-      },
-
-      error=>{
-        Swal.fire("All field must be required","", "error");
-      }
-    );
   }
 
   checkboxChanged(event: any, optionValue: string) {
@@ -108,7 +103,10 @@ export class AddquestionComponent implements OnInit{
       }
     }
   }
+resetForm(){
+    (<HTMLFormElement>document.getElementById("questionBank")).reset();
 
+}
 goBack() {
   this.loadAddQuestionPage.emit(true);
 }

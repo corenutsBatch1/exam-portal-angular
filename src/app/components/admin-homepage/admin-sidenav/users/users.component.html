@@ -1,9 +1,10 @@
 <div class="pdf">
-  <img id="pdf-icon" class="pdfImg" (click)="generatePDF()" src="assets/5467016.svg" alt="">
-  <mat-form-field class="search float-right">
-    <mat-label>Search</mat-label>
+
+  <mat-form-field class="search ml-3">
+    <mat-label>Search here</mat-label>
     <input matInput [(ngModel)]="nameFilterValue" (keyup)="applyFilter()" #input>
   </mat-form-field>
+  <img id="pdf-icon" class="pdfImg" (click)="generatePDF()" src="assets/5467016.svg" alt="">
 </div>
 
 

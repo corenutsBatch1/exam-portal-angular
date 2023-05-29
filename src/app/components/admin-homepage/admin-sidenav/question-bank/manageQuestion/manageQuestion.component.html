@@ -43,8 +43,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let question of Questions let i=index">
-        <td>{{question.id}}</td>
+      <tr *ngFor="let question of Questions ; let i=index">
+        <td>{{i+1}}</td>
         <td [innerHTML]="question.content"></td>
         <td>{{question.optionA}}</td>
         <td>{{question.optionB}}</td>

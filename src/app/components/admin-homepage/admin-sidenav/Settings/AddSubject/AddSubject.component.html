@@ -1,60 +1,110 @@
-<button class="arrowbutton" (click)="goBack()"> <mat-icon>arrow_back</mat-icon>
+<button class="arrowbutton" (click)="goBack()">
+  <mat-icon>arrow_back</mat-icon>
 </button>
 
-    <mat-card color="primary" class="card mat-elevation-z8" style="height:300px;width:300%;display:flex;justify-content:center;align-items:center;"  >
-
-      <form  [formGroup]="myForm" (ngSubmit)="onSubmit()"  >
-      <mat-card-content >
-      <h2 style="text-align: center;">{{ isAddOperation ? 'Add Subject' : 'Edit Subject' }}</h2>
+<mat-card
+  color="primary"
+  class="card mat-elevation-z8"
+  style="
+    height: 300px;
+    width: 300%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <mat-card-content>
+      <h2 style="text-align: center">
+        {{ isAddOperation ? "Add Subject" : "Edit Subject" }}
+      </h2>
       <div class="form-group">
-      <div class="row">
-          <div class="col-75 form-group labelname" >
-              <label for="subject" style="margin-right: 10px;">Subject Name </label>
+        <div class="row">
+          <div class="col-75 form-group labelname">
+            <label for="subject" style="margin-right: 10px"
+              >Subject Name
+            </label>
           </div>
 
-          <!-- <div class="col-75 form-group">
-              <input class="form-control" type="text" formControlName="name" placeholder="Enter name" [ngModel]="subject.name" [ngClass]="{ 'is-invalid':(submitted && f.name.errors)|| (f.name.touched && f.name.errors) }" >
-              <div *ngIf="(submitted && f.name.errors) || (f.name.touched && f.name.errors)" class="invalid-feedback">
-                <div *ngIf="f.name.errors?.required">Subject name required</div>
-              </div>
-          </div> -->
           <div class="col-75 form-group">
-            <input class="form-control" type="text" formControlName="name" placeholder="Enter name"
-              (ngModelChange)="subject.name = $event.toUpperCase(); inputvalue = subject.name"
-              [ngModel]="subject.name" [ngClass]="{ 'is-invalid':(submitted && f.name.errors)|| (f.name.touched && f.name.errors) }">
+            <input
+              class="form-control"
+              type="text"
+              formControlName="name"
+              placeholder="Enter name"
+              (ngModelChange)="
+                subject.name = $event.toUpperCase(); inputvalue = subject.name
+              "
+              [ngModel]="subject.name"
+              [ngClass]="{
+                'is-invalid':
+                  (submitted && f.name.errors) ||
+                  (f.name.touched && f.name.errors)
+              }"
+            />
 
-            <div *ngIf="(submitted && f.name.errors) || (f.name.touched && f.name.errors)" class="invalid-feedback">
+            <div
+              *ngIf="
+                (submitted && f.name.errors) ||
+                (f.name.touched && f.name.errors)
+              "
+              class="invalid-feedback"
+            >
               <div *ngIf="f.name.errors?.required">Subject name required</div>
             </div>
           </div>
-
         </div>
-
-
-
-    </div>
+      </div>
 
       <div class="row form-group">
-          <div class="col-75 form-group labelname">
-              <label for="topic" style="margin-right: 22px;">Topic Name </label>
-          </div>
-          <div class="col-75 form-group">
-            <input class="form-control" type="text" formControlName="description" placeholder="Enter Topic" [ngModel]="subject.description" [ngClass]="{ 'is-invalid': (submitted && f.description.errors) || (f.description.touched && f.description.errors) }">
-            <div *ngIf="(submitted && f.description.errors) ||(f.description.touched && f.description.errors)" class="invalid-feedback">
-              <div *ngIf="f.description.errors?.required">Description required</div>
+        <div class="col-75 form-group labelname">
+          <label for="topic" style="margin-right: 22px">Topic Name </label>
+        </div>
+        <div class="col-75 form-group">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="description"
+            placeholder="Enter Topic"
+            [ngModel]="subject.description"
+            [ngClass]="{
+              'is-invalid':
+                (submitted && f.description.errors) ||
+                (f.description.touched && f.description.errors)
+            }"
+          />
+          <div
+            *ngIf="
+              (submitted && f.description.errors) ||
+              (f.description.touched && f.description.errors)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.description.errors?.required">
+              Description required
             </div>
           </div>
+        </div>
       </div>
 
-      <br>
-      <div class="text-center"><input class="btn btn-success btn-sm submit"  type="submit" value="{{ subject.id ? 'Update' : 'Add' }}">
-        <button class="btn btn-warning btn-sm ml-4" type="reset">Clear</button>
-        <button class="btn btn-secondary btn-sm ml-4" (click)="goBack()">Go back</button>
+      <br />
+      <div class="text-center">
+        <input
+          class="btn btn-success btn-sm submit"
+          type="submit"
+          value="{{ subject.id ? 'Update' : 'Add' }}"
+        />
+        <button
+          class="btn btn-warning btn-sm ml-4"
+          type="reset"
+          (click)="clearForm()"
+        >
+          Clear
+        </button>
+        <button class="btn btn-secondary btn-sm ml-4" (click)="goBack()">
+          Go back
+        </button>
       </div>
-
-
-      </mat-card-content></form>
-
-    </mat-card>
-
-
+    </mat-card-content>
+  </form>
+</mat-card>

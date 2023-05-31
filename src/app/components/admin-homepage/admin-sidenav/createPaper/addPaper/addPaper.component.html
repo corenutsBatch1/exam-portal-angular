@@ -52,7 +52,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let question of question123 let i=index">
+    <tr *ngFor="let question of question123 ;let i=index">
      <td>{{i+1}}</td>
       <td [innerHTML]="question.content"></td>
       <td>{{question.optionA}}</td>

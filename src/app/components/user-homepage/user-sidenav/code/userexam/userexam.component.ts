@@ -1,4 +1,3 @@
-import { useranswer } from './../../../../../model/model/useranswer';
 import { LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
@@ -7,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Question } from 'src/app/model/model/Question';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { Subject } from 'src/app/model/model/Subject';
-
+import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
 import Swal from 'sweetalert2';
 
@@ -286,9 +285,6 @@ startTimer() {
       // Add the option if it is not already selected
       this.checkboxState[qid] = [...selectedOptions, option2];
     }
-    this.http.put<UserExamDetails>(`http://localhost:9033/api/userExamDetailsbyid/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
-
-  }))
   }
 
   submitoption(qid:any,optionarray?:any){
@@ -315,6 +311,21 @@ startTimer() {
     });
   }
 
+
+  isOptionSelected(questionId: number, option: string): boolean {
+    // console.log("31-34");
+    console.log(this.answerArray,"is oprtion selected");
+   console.log( this.answerArray.filter(e=>e.question_id==questionId),"after filtering ")
+    this.selectedOption=option;
+ return this.answerArray.filter(e=>e.question_id==questionId)[0].user_answer==option;
+}
+
+
+isOptionSelected2(qid: number, option: string): boolean {
+  // console.log("35");
+  const selectedOptions = this.checkboxState[qid] || [];
+  return selectedOptions.includes(option);
+}
 
 clickEvent(exam: any) {
   var remainingQuestion=(this.totalQuestions-this.stateChange.length);
@@ -369,114 +380,29 @@ clickEvent2(){
       }))
       this.timeexpire=true;
 }
-nextquestion() {
-  this.isCheckedA = false;
-  this.isCheckedB = false;
-  this.isCheckedC = false;
-  this.isCheckedD = false;
-  this.isChecked = false;
-  //console.log("39");
-  this.questionnumber++;
 
+
+nextquestion(){
+  this.isCheckedA=false;
+  this.isCheckedB=false;
+  this.isCheckedC=false;
+  this.isCheckedD=false;
+  this.isChecked=false;
+  console.log("39");
+  this.questionnumber++;
+  this.currentQuestion= this.questions[this.questionnumber];
+  console.log(this.currentQuestion);
   this.http.get<any[]>(`http://localhost:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
+
     console.log("30");
     console.log(data);
-    this.answerArray = data;
-    if (this.answerArray.filter(q => q.question_id == this.currentQuestion?.id).length != 0) {
-      // alert("Something")
-      console.log("ok option is getting");
-      let qMap = this.answerArray.filter(q => q.question_id == this.currentQuestion?.id)[0];
-      console.log(qMap);
-      this.currentQuestion = this.questions[this.questionnumber];
-      console.log(this.currentQuestion);
-      if (qMap.user_answer.length > 1) {
-        this.isCheckedA = qMap.user_answer.includes('A');
-        this.isCheckedB = qMap.user_answer.includes('B');
-        this.isCheckedC = qMap.user_answer.includes('C');
-        this.isCheckedD = qMap.user_answer.includes('D');
-        this.isChecked = false;
-        if (!this.isCheckedA && !this.isCheckedB && !this.isCheckedC && !this.isCheckedD) {
-          this.isChecked = true;
-        }
-      } else {
-        // alert(qMap.user_answer);
-        if (qMap.user_answer == 'A') {
-          this.isCheckedA = true;
-          console.log("qmapA");
-        } else if (qMap.user_answer == 'B') {
-          this.isCheckedB = true;
-          console.log("qMapB");
-        } else if (qMap.user_answer == 'C') {
-          this.isCheckedC = true;
-          console.log("qMapC");
-        } else if (qMap.user_answer == 'D') {
-          this.isCheckedD = true;
-          console.log("qMapD");
-        } else {
-          this.isChecked = true;
-          this.isCheckedA = false;
-          // alert("Nothing1"+this.isCheckedA)
-          this.isCheckedB = false;
-          this.isCheckedC = false;
-          this.isCheckedD = false;
-        }
-      }
-    }
-  });
-}
-
-
-      nextquestions(id:any,option?:any,qid?:any){
-
-        this.isCheckedA=false;
-        this.isCheckedB=false;
-        this.isCheckedC=false;
-        this.isCheckedD=false;
-        this.isChecked=false;
-        if(option==undefined)
-        {
-          this.codingquestionid=qid
-        }
-        this.showbuttons=true;
-        this.questionnumber= id;
-        this.currentQuestion= this.questions[id];
-
-        id++
-        this.http.get<any[]>(`http://localhost:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
-          this.answerArray=data;
-
-          console.log(data)
-          if(data.length>0){
-            // alert(data.length);
-            this.answerArray.map(
-              q =>{
-                const normalQuestionOptionId = "N" + q.question_id;
-                if(!this.stateChange.includes(normalQuestionOptionId)){
-                this.stateChange.push(normalQuestionOptionId);
-              }
-            }
-
-            )
-          }
-          if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
+    this.answerArray=data;
+    if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
     {
       // alert("Something")
       console.log("ok option is getting");
       let qMap=this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id)[0]
       console.log(qMap)
-      if (qMap.user_answer.length > 1) {
-        this.isCheckedA = qMap.user_answer.includes('A');
-        this.isCheckedB = qMap.user_answer.includes('B');
-        this.isCheckedC = qMap.user_answer.includes('C');
-        this.isCheckedD = qMap.user_answer.includes('D');
-        this.isChecked = false;
-        if(!this.isCheckedA && !this.isCheckedB && !this.isCheckedC && !this.isCheckedD){
-          this.isChecked =true;
-        }
-      }
-
-
-      else{
       // alert(qMap.user_answer);
       if(qMap.user_answer=='A')
       {
@@ -498,7 +424,7 @@ nextquestion() {
         this.isCheckedD=true;
         console.log("qMapD");
       }
-
+    }
     else
     {
       this.isChecked=true;
@@ -509,8 +435,66 @@ nextquestion() {
       this.isCheckedD=false;
 
     }
-  }
+  });
+
 }
+
+      nextquestions(id:any,option?:any,qid?:any){
+        this.isCheckedA=false;
+        this.isCheckedB=false;
+        this.isCheckedC=false;
+        this.isCheckedD=false;
+        this.isChecked=false;
+        if(option==undefined)
+        {
+          this.codingquestionid=qid
+        }
+        this.showbuttons=true;
+        this.questionnumber= id;
+        this.currentQuestion= this.questions[id];
+        id++;
+        this.http.get<any[]>(`http://localhost:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
+          this.answerArray=data;
+          if(data.length>0){
+            // alert(data.length);
+            this.answerArray.map(
+              q =>{
+                const normalQuestionOptionId = "N" + q.question_id;
+                if(!this.stateChange.includes(normalQuestionOptionId)){
+                this.stateChange.push(normalQuestionOptionId);
+              }
+            }
+
+            )
+          }
+          if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
+          {
+            let qMap=this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id)[0]
+            if(qMap.user_answer=='A')
+            {
+              this.isCheckedA=true;
+            }
+            else if(qMap.user_answer=='B')
+            {
+              this.isCheckedB=true;
+            }
+            else if(qMap.user_answer=='C')
+            {
+              this.isCheckedC=true;
+            }
+            else if(qMap.user_answer=='D')
+            {
+              this.isCheckedD=true;
+            }
+          }
+          else
+          {
+            this.isChecked=true;
+            this.isCheckedA=false;
+            this.isCheckedB=false;
+            this.isCheckedC=false;
+            this.isCheckedD=false;
+          }
         });
 
       }
@@ -530,56 +514,33 @@ nextquestion() {
         this.http.get<any[]>(`http://localhost:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
           this.answerArray=data;
           if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
-    {
-      // alert("Something")
-      console.log("ok option is getting");
-      let qMap=this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id)[0]
-      console.log(qMap)
-      if (qMap.user_answer.length > 1) {
-        this.isCheckedA = qMap.user_answer.includes('A');
-        this.isCheckedB = qMap.user_answer.includes('B');
-        this.isCheckedC = qMap.user_answer.includes('C');
-        this.isCheckedD = qMap.user_answer.includes('D');
-        this.isChecked = false;
-        if(!this.isCheckedA && !this.isCheckedB && !this.isCheckedC && !this.isCheckedD){
-          this.isChecked =true;
-        }
-      }
-      else{
-      // alert(qMap.user_answer);
-      if(qMap.user_answer=='A')
-      {
-        this.isCheckedA=true;
-        console.log("qmapA")
-      }
-      else if(qMap.user_answer=='B')
-      {
-        this.isCheckedB=true;
-        console.log("qMapB");
-      }
-      else if(qMap.user_answer=='C')
-      {
-        this.isCheckedC=true;
-        console.log("qMapC");
-      }
-      else if(qMap.user_answer=='D')
-      {
-        this.isCheckedD=true;
-        console.log("qMapD");
-      }
-
-    else
-    {
-      this.isChecked=true;
-      this.isCheckedA=false;
-      // alert("Nothing1"+this.isCheckedA)
-      this.isCheckedB=false;
-      this.isCheckedC=false;
-      this.isCheckedD=false;
-
-    }
-  }
-}
+          {
+            let qMap=this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id)[0]
+            if(qMap.user_answer=='A')
+            {
+              this.isCheckedA=true;
+            }
+            else if(qMap.user_answer=='B')
+            {
+              this.isCheckedB=true;
+            }
+            else if(qMap.user_answer=='C')
+            {
+              this.isCheckedC=true;
+            }
+            else if(qMap.user_answer=='D')
+            {
+              this.isCheckedD=true;
+            }
+          }
+          else
+          {
+            this.isChecked=true;
+            this.isCheckedA=false;
+            this.isCheckedB=false;
+            this.isCheckedC=false;
+            this.isCheckedD=false;
+          }
         });
 
       }
@@ -587,7 +548,7 @@ nextquestion() {
 
 stateChangeCheck(qid:number, subject : Subject)
 {
-  // console.log(this.stateChange)
+  console.log(this.stateChange)
   if(subject.name == 'CODING'){
     const codingQuestionId = 'C' + qid
     return this.stateChange.includes(codingQuestionId);
@@ -599,7 +560,7 @@ stateChangeCheck(qid:number, subject : Subject)
 
 
 setActive(index: number, subjectName:String) {
-  // console.log(subjectName)
+  console.log(subjectName)
   this.clickedSubject = subjectName;
   this.activeIndex = index;
   this.nextquestions(this.activeIndex)

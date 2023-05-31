@@ -76,7 +76,7 @@ resetpassword(user: User) {
 
         if (data == true  ) {
           Swal.fire("Password changed sucessfully!!", "Now,login with new password", "success");
-
+          this.router.navigateByUrl("/login");
         } else {
           Swal.fire("Invalid Credentials", "Register and try again", "error");
         }

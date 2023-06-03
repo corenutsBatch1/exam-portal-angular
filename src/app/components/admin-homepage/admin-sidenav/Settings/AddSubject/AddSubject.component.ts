@@ -40,7 +40,7 @@ export class AddSubjectComponent implements OnInit {
 
     if (this.isEditOperation && this.id) {
       this.http
-        .get<Subject>(`http://localhost:9033/api/subject/${this.id}`)
+        .get<Subject>(`http://54.64.6.102:9033/api/subject/${this.id}`)
         .subscribe((data) => {
           this.subject = data;
           console.log(this.subject);
@@ -75,7 +75,7 @@ export class AddSubjectComponent implements OnInit {
   //add Category info
   addSubjectInfo() {
     this.http
-      .post<any>('http://localhost:9033/api/subject', this.myForm.value)
+      .post<any>('http://54.64.6.102:9033/api/subject', this.myForm.value)
       .subscribe(
         (response) => {
           Swal.fire({
@@ -96,7 +96,7 @@ export class AddSubjectComponent implements OnInit {
     console.log(this.myForm);
     this.http
       .put<any>(
-        `http://localhost:9033/api/subject/${this.id}`,
+        `http://54.64.6.102:9033/api/subject/${this.id}`,
         this.myForm.value
       )
       .subscribe((response) => {

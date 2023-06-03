@@ -11,13 +11,13 @@ export class SubjectService {
   constructor(private http : HttpClient) { }
 
   fetchSubjects(){
-    return this.http.get<Subject[]>(`http://localhost:9033/api/subjects`)
+    return this.http.get<Subject[]>(`http://54.64.6.102:9033/api/subjects`)
   }
 
 
   deleteSubject(id : number){
     console.log(id);
-    return  this.http.delete(`http://localhost:9033/api/subject/${id}`);
+    return  this.http.delete(`http://54.64.6.102:9033/api/subject/${id}`);
   }
 
 

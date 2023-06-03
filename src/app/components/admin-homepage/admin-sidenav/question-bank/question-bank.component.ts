@@ -48,7 +48,7 @@ export class QuestionBankComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', file);
 
-    this.http.post('http://localhost:9033/api/questions/upload', formData).subscribe(response => {
+    this.http.post('http://54.64.6.102:9033/api/questions/upload', formData).subscribe(response => {
       console.log("File uploaded successfully")
     });
   }
@@ -58,9 +58,9 @@ export class QuestionBankComponent implements OnInit {
     const worksheet: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet([
       ['subject', 'topic', 'answer', 'content', 'option_a', 'option_b', 'option_c', 'option_d', 'q_type'],
       ['', '', '', '', '', '', '', '', ''], // Add empty row
-    ]);  
+    ]);
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-  
+
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
     const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
     saveAs(data, 'excel_file.xlsx');

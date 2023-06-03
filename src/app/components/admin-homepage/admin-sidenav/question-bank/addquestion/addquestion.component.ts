@@ -98,7 +98,7 @@ onClearClick() {
     this.answers.sort();
     this.Questions.answer = this.answers.join('');
      if(this.answers.length>0){
-      this.http.post(`http://localhost:9033/api/addquestion/${id}`, Questions).subscribe(
+      this.http.post(`http://54.64.6.102:9033/api/addquestion/${id}`, Questions).subscribe(
         response=>{
           Swal.fire("Question added successfully","", "success");
 

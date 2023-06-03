@@ -1,3 +1,4 @@
+import { useranswer } from './../../../../../model/model/useranswer';
 import { LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
@@ -6,7 +7,7 @@ import { Observable } from 'rxjs';
 import { Question } from 'src/app/model/model/Question';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { Subject } from 'src/app/model/model/Subject';
-import { useranswer } from 'src/app/model/model/useranswer';
+
 import { MyserviceService } from 'src/app/model/myservice';
 import Swal from 'sweetalert2';
 
@@ -513,38 +514,45 @@ nextquestion(){
         this.questionnumber--;
         this.http.get<any[]>(`http://localhost:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
           this.answerArray=data;
-          if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
-          {
-            let qMap=this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id)[0]
-            if(qMap.user_answer=='A')
-            {
-              this.isCheckedA=true;
-            }
-            else if(qMap.user_answer=='B')
-            {
-              this.isCheckedB=true;
-            }
-            else if(qMap.user_answer=='C')
-            {
-              this.isCheckedC=true;
-            }
-            else if(qMap.user_answer=='D')
-            {
-              this.isCheckedD=true;
-            }
-          }
-          else
-          {
-            this.isChecked=true;
-            this.isCheckedA=false;
-            this.isCheckedB=false;
-            this.isCheckedC=false;
-            this.isCheckedD=false;
-          }
+
         });
 
       }
+            updatecheckbox()
+            {
+              if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
+              {
 
+                let qMap=this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id)[0]
+                if(qMap.user_answer.length>1){
+
+                }
+                if(qMap.user_answer=='A')
+                {
+                  this.isCheckedA=true;
+                }
+                else if(qMap.user_answer=='B')
+                {
+                  this.isCheckedB=true;
+                }
+                else if(qMap.user_answer=='C')
+                {
+                  this.isCheckedC=true;
+                }
+                else if(qMap.user_answer=='D')
+                {
+                  this.isCheckedD=true;
+                }
+              }
+              else
+              {
+                this.isChecked=true;
+                this.isCheckedA=false;
+                this.isCheckedB=false;
+                this.isCheckedC=false;
+                this.isCheckedD=false;
+              }
+            }
 
 stateChangeCheck(qid:number, subject : Subject)
 {

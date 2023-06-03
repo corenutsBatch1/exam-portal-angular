@@ -47,7 +47,7 @@ login(user: User) {
     if(this.submitted){
 
     this.http
-      .post(`http://localhost:9032/api/loginUser`, user)
+      .post(`http://54.64.6.102:9032/api/loginUser`, user)
       .subscribe((data) => {
         this.validUser = data;
         if (this.validUser != null ) {

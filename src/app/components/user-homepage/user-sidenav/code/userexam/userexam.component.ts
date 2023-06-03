@@ -107,7 +107,7 @@ export class UserexamComponent {
 
     this.route.params.subscribe((params) => {
       this.code = params['code'];
-      this.http.get<any>(`http://localhost:9033/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>{this.questions=data,
+      this.http.get<any>(`http://54.64.6.102:9033/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>{this.questions=data,
         this.totalQuestions=data.length;
         this.nextquestions(0,this.questions[0].optionA,this.questions[0].id);
     });
@@ -126,7 +126,7 @@ export class UserexamComponent {
   }
   async fetchExamTime(){
 
-    this.http.get<UserExamDetails>(`http://localhost:9033/api/ExamDetails/${this.eid}/${this.uid}`).subscribe(async (response)=>{
+    this.http.get<UserExamDetails>(`http://54.64.6.102:9033/api/ExamDetails/${this.eid}/${this.uid}`).subscribe(async (response)=>{
       if (response && response.loginTime && response.logoutTime){
       const loginTime: moment.Moment = moment(response.loginTime, 'HH:mm:ss'); // Replace with your actual login time
       const logoutTime: moment.Moment = moment(response.logoutTime, 'HH:mm:ss'); // Replace with your actual logout time
@@ -140,7 +140,7 @@ export class UserexamComponent {
     })}
 
     afterFetchExamTime(){
-      this.http.get(`http://localhost:9033/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
+      this.http.get(`http://54.64.6.102:9033/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
       console.warn("into the object"+this.minutes1)
       if(this.minutes1 != 0){
         console.warn(this.minutes1+"minus minutes")
@@ -206,7 +206,7 @@ startTimer() {
 
   loadSubjects(): Observable<Subject[]> {
     return this.http.post<Subject[]>(
-      `http://localhost:9033/api/getsubjectsBycode/${this.code}`,
+      `http://54.64.6.102:9033/api/getsubjectsBycode/${this.code}`,
       this.code
     );
   }
@@ -230,7 +230,7 @@ startTimer() {
   loadQuestions(subjectid?: number) {
     console.log("lq"+this.questions.length);
     return this.http.get(
-      `http://localhost:9033/api/getquestionsBySubjectId/${subjectid}/${this.code}`
+      `http://54.64.6.102:9033/api/getquestionsBySubjectId/${subjectid}/${this.code}`
     );
   }
 
@@ -265,11 +265,11 @@ startTimer() {
       },
       userAnswer: option1,
     };
-       this.http.post(`http://localhost:9033/api/saveanswer`,this.answer).subscribe(data=>{
+       this.http.post(`http://54.64.6.102:9033/api/saveanswer`,this.answer).subscribe(data=>{
        console.log("188");
        this.selectedOption=option1;
        console.warn(this.eid +"   n   "+ this.uid)
-       this.http.put<UserExamDetails>(`http://localhost:9033/api/userExamDetailsbyid/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+       this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailsbyid/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
 
        }))
       });
@@ -307,7 +307,7 @@ startTimer() {
       },
       userAnswer: selectedOptions.join(''),
     };
-    this.http.post(`http://localhost:9033/api/saveanswer`, this.answer).subscribe((data) => {
+    this.http.post(`http://54.64.6.102:9033/api/saveanswer`, this.answer).subscribe((data) => {
       //this.selectedOption = selectedOptions;
     });
   }
@@ -344,7 +344,7 @@ clickEvent(exam: any) {
     .then((result) => {
       if (result.isConfirmed) {
         this.router.navigate(['answers', this.code]);
-        this.http.put<UserExamDetails>(`http://localhost:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+        this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
         console.log("submitted"+response)
       }))
 
@@ -364,7 +364,7 @@ clickEvent(exam: any) {
     .then((result) => {
       if (result.isConfirmed) {
         this.router.navigate(['answers', this.code]);
-        this.http.put<UserExamDetails>(`http://localhost:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+        this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
         console.log("submitted"+response)
       }))
       } else {
@@ -376,7 +376,7 @@ clickEvent(exam: any) {
 
 clickEvent2(){
   this.router.navigate(['answers', this.code]);
-  this.http.put<UserExamDetails>(`http://localhost:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+  this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
       console.log("submitted"+response)
       }))
       this.timeexpire=true;
@@ -393,7 +393,7 @@ nextquestion(){
   this.questionnumber++;
   this.currentQuestion= this.questions[this.questionnumber];
   console.log(this.currentQuestion);
-  this.http.get<any[]>(`http://localhost:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
+  this.http.get<any[]>(`http://54.64.6.102:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
 
     console.log("30");
     console.log(data);
@@ -454,7 +454,7 @@ nextquestion(){
         this.questionnumber= id;
         this.currentQuestion= this.questions[id];
         id++;
-        this.http.get<any[]>(`http://localhost:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
+        this.http.get<any[]>(`http://54.64.6.102:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
           this.answerArray=data;
           if(data.length>0){
             // alert(data.length);
@@ -512,7 +512,7 @@ nextquestion(){
         id--;
         this.currentQuestion= this.questions[id];
         this.questionnumber--;
-        this.http.get<any[]>(`http://localhost:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
+        this.http.get<any[]>(`http://54.64.6.102:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
           this.answerArray=data;
 
         });

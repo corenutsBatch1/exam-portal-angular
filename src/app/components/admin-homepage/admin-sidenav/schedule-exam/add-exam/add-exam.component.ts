@@ -25,7 +25,7 @@ export class AddExamComponent implements OnInit{
   end?:any;
 
   ngOnInit(): void {
-    this.http.get<CreatePaper[]>(`http://localhost:9033/api/getpaper`).subscribe(data=>{
+    this.http.get<CreatePaper[]>(`http://54.64.6.102:9033/api/getpaper`).subscribe(data=>{
        this.papers=data;
     })
    }
@@ -54,7 +54,7 @@ export class AddExamComponent implements OnInit{
         Swal.fire("strat time  must be less than end time","", "error");
       }
        else{
-        this.http.post<ScheduleExam>(`http://localhost:9033/api/addexam/${this.paperId}`,scheduleExam).subscribe(
+        this.http.post<ScheduleExam>(`http://54.64.6.102:9033/api/addexam/${this.paperId}`,scheduleExam).subscribe(
     response=>{
       Swal.fire("Exam scheduled successfully","", "success");
       this.goBack();

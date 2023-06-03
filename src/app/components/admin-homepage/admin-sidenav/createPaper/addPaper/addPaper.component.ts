@@ -116,13 +116,13 @@ export class AddPaperComponent implements OnInit {
   getquestions(id: any) {
     if (this.selectedsubject != 'CODING') {
       this.http
-        .get<Question[]>(`http://localhost:9033/api/getallquestions/${id}`)
+        .get<Question[]>(`http://54.64.6.102:9033/api/getallquestions/${id}`)
         .subscribe((data) => {
           this.question123 = data.filter((q) => q.status == 'active');
         });
     } else {
       this.http
-        .get<CodingQuestion[]>(`http://localhost:9033/api/fetchcodingquestions`)
+        .get<CodingQuestion[]>(`http://54.64.6.102:9033/api/fetchcodingquestions`)
         .subscribe((data) => {
           this.codingQuestion = data.filter((q) => q.status == 'active');
         });
@@ -141,7 +141,7 @@ export class AddPaperComponent implements OnInit {
       );
     } else {
       this.http
-        .post<CreatePaper>(`http://localhost:9033/api/addpaper`, createPaper)
+        .post<CreatePaper>(`http://54.64.6.102:9033/api/addpaper`, createPaper)
         .subscribe(
           (data) => {
             Swal.fire('Paper created successfully', '', 'success');

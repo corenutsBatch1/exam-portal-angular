@@ -36,7 +36,7 @@ paper:CreatePaper=new CreatePaper();
 
 
   viewPaperQuestions(paper2:CreatePaper){
-  this.http.post(`http://localhost:9033/api/questionsbypaper`,paper2).subscribe(data=>{
+  this.http.post(`http://54.64.6.102:9033/api/questionsbypaper`,paper2).subscribe(data=>{
   console.log(data)
   this.questionsArray=this.questionsArray.concat(data);
   console.log(this.questionsArray)

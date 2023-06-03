@@ -97,7 +97,7 @@ export class AddCodingQuestionComponent {
     this.codingQuestion.content = this.questionContent;
     this.http
       .post(
-        `http://localhost:9033/api/subject/${id}/codingquestion`,
+        `http://54.64.6.102:9033/api/subject/${id}/codingquestion`,
         this.codingQuestion
       )
       .subscribe(
@@ -116,7 +116,7 @@ export class AddCodingQuestionComponent {
 
   getallcodingquestions(id?: number) {
     this.http
-      .get(`http://localhost:8089/api/subject/${id}/codingquestions`)
+      .get(`http://54.64.6.102:8089/api/subject/${id}/codingquestions`)
       .subscribe((data) => {
         this.getCodingQuestion = this.getCodingQuestion.concat(data);
         this.addTestCases();
@@ -134,7 +134,7 @@ export class AddCodingQuestionComponent {
       this.testCases.expectedOutput = data.output;
       this.http
         .post(
-          `http://localhost:9033/api/addtestcases/${this.codingQuestionId}`,
+          `http://54.64.6.102:9033/api/addtestcases/${this.codingQuestionId}`,
           this.testCases
         )
         .subscribe((data) => console.log(data));

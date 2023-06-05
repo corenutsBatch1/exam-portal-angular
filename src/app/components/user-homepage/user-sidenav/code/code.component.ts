@@ -61,7 +61,25 @@ export class CodeComponent implements OnInit {
             if (data == false) {
               this.http.get<UserExamDetails>(`http://54.64.6.102:9033/api/ExamDetails/${this.examObject.id}/${this.userId}`).subscribe((response)=>{
                 console.log(response)
+                const examObject1=response;
                 if(response !=null){
+                  if (examObject1 && examObject1.loginTime && examObject1.logoutTime){
+                    const loginTime: moment.Moment = moment(examObject1.loginTime, 'HH:mm:ss'); // Replace with your actual login time
+                    const logoutTime: moment.Moment = moment(examObject1.logoutTime, 'HH:mm:ss'); // Replace with your actual logout time
+
+                    const duration: moment.Duration = moment.duration(logoutTime.diff(loginTime));
+                    const minutes =examObject1.examDuration! - Math.round(duration.asMinutes());
+                    console.warn(Math.round(duration.asMinutes())+'  '+minutes+' duration:'+examObject1.examDuration)
+                    console.warn(response.status +'status outside'+ minutes)
+                    if(minutes<0){
+                      this.http.put<UserExamDetails>(`http://localhost:9033/api/userExamDetailssubmit/${this.examObject.id}/${this.userId}`,this.examdetails).subscribe((response=>{
+                      console.warn(response)
+                      console.warn(response.status +'status inside')
+                      this.route.navigate(['answers', this.examObject.code]);
+                      Swal.fire('You already attempted exam or exam duration is completed', '', 'error');
+                    }))
+                    }
+                  }
                 if(response.status=="inprogress"){
                     this.conductExam()
                   }
@@ -129,8 +147,10 @@ conductExam(){
       this.http.get<UserExamDetails>(`http://54.64.6.102:9033/api/ExamDetails/${this.examObject.id}/${this.userId}`).subscribe((response=>{
 
         if(response ==null){
-          this.http.post<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetails/${this.examObject.id}/${this.userId}`,this.examdetails).subscribe((r1)=>{
-            console.log(r1)
+
+          this.http.post<UserExamDetails>(`http://localhost:9033/api/userExamDetails/${this.examObject.id}/${this.userId}`,this.examdetails).subscribe((r1)=>{
+           const examObject=r1;
+
         })
           this.route.navigate(['userexam', this.examObject.code])
           Swal.fire('Exam Started', '', 'success');

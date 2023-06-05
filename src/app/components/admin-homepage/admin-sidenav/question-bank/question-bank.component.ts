@@ -18,8 +18,9 @@ export class QuestionBankComponent implements OnInit {
   showCodingQuestions:boolean=true;
   selectedFile: File | null = null;
   currentDateTime?: string;
+  subjects?:Subject[];
 document: any;
-  constructor(private route:Router,private http : HttpClient) {
+  constructor(private route:Router,private http : HttpClient,private subjectService:SubjectService) {
     this.getCurrentDateTime();
    }
   ngOnInit() {
@@ -62,7 +63,7 @@ document: any;
     uploadHeaders.append('Content-Type', 'multipart/form-data');
     uploadHeaders.append('Accept', 'application/json');
 
-    this.http.post(`http://localhost:9033/api/questions/upload`, formData, { headers: uploadHeaders, responseType: 'blob' })
+    this.http.post(`http://54.64.6.102:9033/api/questions/upload`, formData, { headers: uploadHeaders, responseType: 'blob' })
       .subscribe((blob: Blob) => {
         if (blob.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
           const currentDateTime = new Date().toISOString();

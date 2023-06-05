@@ -106,9 +106,27 @@ export class UserexamComponent {
     this.uid = this.service.sendid();
     this.eid = this.service.sendeid();
     this.startTimer()
-    this.fetchExamTime().then(()=>{
-      this.afterFetchExamTime();
-    })
+    // this.fetchExamTime().then(()=>{
+    //   this.afterFetchExamTime();
+    // })
+    
+    let method1Completed = false; // Synchronization variable
+
+    const handleMethod1Completion = () => {
+      if (method1Completed) {
+        this.afterFetchExamTime(); // Execute method 2 only if method 1 has completed
+      } else {
+        method1Completed = true; // Update the synchronization variable
+      }
+    };
+  
+    this.fetchExamTime()
+      .then(handleMethod1Completion)
+      .catch(error => {
+        // Handle errors from method1 if needed
+      });
+  
+    handleMethod1Completion(); // Check if method1 has already completed
 
     this.route.params.subscribe((params) => {
       this.code = params['code'];
@@ -159,9 +177,16 @@ export class UserexamComponent {
         console.warn(this.minutes1+"minus minutes")
       this.examtime1 = this.examtime.examDuration!-this.minutes1!
         console.warn(this.examtime1+"  examtime when restarted")
-      if(this.examtime1){
-        this.remainingTime=60*this.examtime1;
-        this.remainingTime
+      if(this.examtime1 <= 0){
+        this.router.navigate(['answers', this.code]);
+        this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+            console.log("submitted"+response)
+            Swal.fire('You already attempted exam or exam duration is completed', '', 'error');
+            }))
+        }
+        else{
+          this.remainingTime=60*this.examtime1;
+          this.remainingTime
         }
       }
       else{
@@ -172,12 +197,13 @@ export class UserexamComponent {
         }
       }
       });}
+
       async asyncOperation() {
         // Simulating an asynchronous operation
         return new Promise<void>(resolve => {
           setTimeout(() => {
             resolve();
-          }, 2000);
+          }, 3000);
         });
       }
 

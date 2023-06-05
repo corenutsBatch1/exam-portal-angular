@@ -2,6 +2,8 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { saveAs } from 'file-saver';
+import { Subject } from 'src/app/model/model/Subject';
+import { SubjectService } from 'src/app/services/subject.service';
 import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
 @Component({
@@ -10,6 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./question-bank.component.css']
 })
 export class QuestionBankComponent implements OnInit {
+
   showQuestion:boolean=true;
   manageQuestions:boolean=true;
   showCodingQuestions:boolean=true;
@@ -19,22 +22,22 @@ document: any;
   constructor(private route:Router,private http : HttpClient) {
     this.getCurrentDateTime();
    }
-
   ngOnInit() {
-
-
+    this.subjectService.fetchSubjects().subscribe((data) => {
+      this.subjects = data;
+    });
   }
-  loadAddQuestionPage(flag:boolean){
+  loadAddQuestionPage(flag: boolean) {
     // alert("route ")
-    this.showQuestion=flag;
+    this.showQuestion = flag;
   }
-  loadManageQuestionPage(flag:boolean){
+  loadManageQuestionPage(flag: boolean) {
     // alert("route ")
-    this.manageQuestions=flag;
+    this.manageQuestions = flag;
   }
 
-  loadAddCodingQuestionPage(flag:boolean){
-    this.showCodingQuestions=flag;
+  loadAddCodingQuestionPage(flag: boolean) {
+    this.showCodingQuestions = flag;
   }
 
   onFileSelected(event: any): void {
@@ -53,6 +56,7 @@ document: any;
     const formData: FormData = new FormData();
     formData.append('file', this.selectedFile);
 
+
     const uploadHeaders = new HttpHeaders();
 
     uploadHeaders.append('Content-Type', 'multipart/form-data');
@@ -64,6 +68,7 @@ document: any;
           const currentDateTime = new Date().toISOString();
         const downloadLink = document.createElement('a');
         const url = window.URL.createObjectURL(blob);
+
 
         downloadLink.href = url;
 
@@ -87,6 +92,7 @@ document: any;
 
   generateExcelFile() {
     const worksheet: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet([
+
       ['subject', 'topic', 'answer', 'content', 'option_a', 'option_b', 'option_c','option_d','q_type'],
       ['', '', '', '', '', '', ''], // Add empty row
     ]);
@@ -97,5 +103,6 @@ document: any;
     const questions: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
     saveAs(questions, 'excel_file.xlsx');
 }
+
 
 }

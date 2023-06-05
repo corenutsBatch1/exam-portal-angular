@@ -72,13 +72,13 @@ export class ManageQuestionComponent implements OnInit {
     this.Topic_id = id;
     if (this.selectedsubject !== 'CODING') {
       this.http
-        .get<any[]>(`http://localhost:9033/api/getallquestions/${id}`)
+        .get<any[]>(`http://54.64.6.102:9033/api/getallquestions/${id}`)
         .subscribe((data) => {
           this.Questions = data.filter(question => question.status === 'active');
         });
     } else {
       this.http
-        .get<any[]>(`http://localhost:9033/api/fetchcodingquestions`)
+        .get<any[]>(`http://54.64.6.102:9033/api/fetchcodingquestions`)
         .subscribe((data) => {
           console.log(data);
           this.codingQuestion = data.filter(question => question.status === 'active');
@@ -92,7 +92,7 @@ export class ManageQuestionComponent implements OnInit {
 
   getQuestionsById(id: any) {
     this.http
-      .get<Question>(`http://localhost:9033/api/getquestionbyid/${id}`)
+      .get<Question>(`http://54.64.6.102:9033/api/getquestionbyid/${id}`)
       .subscribe((data) => {
         console.log(data);
         this.question = data;
@@ -101,7 +101,7 @@ export class ManageQuestionComponent implements OnInit {
   }
   editquestion(question: Question) {
     this.http
-      .put<Question>(`http://localhost:9033/api/updatequestion`, question)
+      .put<Question>(`http://54.64.6.102:9033/api/updatequestion`, question)
       .subscribe((data) => {
         this.getQuestionsBySubId(this.Topic_id);
       });
@@ -144,7 +144,7 @@ export class ManageQuestionComponent implements OnInit {
 
   deleteQuestion(id?:number){
     console.log(id);
-   return this.http.delete(`http://localhost:9033/api/deleteQuestion/${id}`)
+   return this.http.delete(`http://54.64.6.102:9033/api/deleteQuestion/${id}`)
   }
 
   goBack() {

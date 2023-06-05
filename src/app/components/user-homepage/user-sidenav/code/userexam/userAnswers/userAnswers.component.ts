@@ -73,24 +73,24 @@ export class UserAnswersComponent implements OnInit {
 }
 
   loadQuestions(): Observable<Question[]> {
-    return this.http.get<Question[]>(`http://localhost:9033/api/getquestionsBySubjectId/${this.code}`);
+    return this.http.get<Question[]>(`http://54.64.6.102:9033/api/getquestionsBySubjectId/${this.code}`);
   }
 
 
 
   loadScore(): Observable<number>{
-    return this.http.get<number>(`http://localhost:9034/api/getScore/${this.uid}/${this.eid}`);
+    return this.http.get<number>(`http://54.64.6.102:9034/api/getScore/${this.uid}/${this.eid}`);
   }
 
   loadUserAnswers(): Observable<useranswer[]>{
-    return this.http.get<useranswer[]>(`http://localhost:9033/api/getUserAnswers/${this.uid}/${this.eid}`);
+    return this.http.get<useranswer[]>(`http://54.64.6.102:9033/api/getUserAnswers/${this.uid}/${this.eid}`);
   }
 
   loadExam():Observable<ScheduleExam>{
-    return this.http.get<ScheduleExam>(`http://localhost:9033/api/getexam/${this.eid}`)
+    return this.http.get<ScheduleExam>(`http://54.64.6.102:9033/api/getexam/${this.eid}`)
   }
   saveScore(){
-    this.http.post(`http://localhost:9033/api/savemarks`,this.obtainedMarks).subscribe((data)=>console.log(data+"saved"));
+    this.http.post(`http://54.64.6.102:9033/api/savemarks`,this.obtainedMarks).subscribe((data)=>console.log(data+"saved"));
   }
 
   insertMarks(){

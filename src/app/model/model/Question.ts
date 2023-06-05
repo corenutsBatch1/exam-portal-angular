@@ -10,5 +10,6 @@ export class Question{
   answer?:string;
   qtype?:string;
   subject?:Subject
+  status?:string;
 
 }

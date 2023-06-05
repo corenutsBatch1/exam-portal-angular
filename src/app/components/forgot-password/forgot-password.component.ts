@@ -71,12 +71,12 @@ resetpassword(user: User) {
     if(this.submitted){
    console.log(this.userReset.password);
     this.http
-      .put(`http://localhost:9032/api/forgotpassword`, user)
+      .put(`http://54.64.6.102:9032/api/forgotpassword`, user)
       .subscribe((data) => {
 
         if (data == true  ) {
           Swal.fire("Password changed sucessfully!!", "Now,login with new password", "success");
-
+          this.router.navigateByUrl("/login");
         } else {
           Swal.fire("Invalid Credentials", "Register and try again", "error");
         }

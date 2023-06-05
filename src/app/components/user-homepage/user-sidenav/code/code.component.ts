@@ -37,7 +37,7 @@ export class CodeComponent implements OnInit {
   }
 
   clickEvent() {
-    this.http.get(`http://localhost:9033/api/getallexams`).subscribe((data) => {
+    this.http.get(`http://54.64.6.102:9033/api/getallexams`).subscribe((data) => {
       console.log(data);
       this.exam1 = this.exam1.concat(data);
       console.log(this.exam1);
@@ -55,11 +55,11 @@ export class CodeComponent implements OnInit {
         console.log(this.userId)
         this.http
           .get(
-            `http://localhost:9033/api/examstatus/${this.examObject.id}/user/${this.userId}`
+            `http://54.64.6.102:9033/api/examstatus/${this.examObject.id}/user/${this.userId}`
           )
           .subscribe((data) => {
             if (data == false) {
-              this.http.get<UserExamDetails>(`http://localhost:9033/api/ExamDetails/${this.examObject.id}/${this.userId}`).subscribe((response)=>{
+              this.http.get<UserExamDetails>(`http://54.64.6.102:9033/api/ExamDetails/${this.examObject.id}/${this.userId}`).subscribe((response)=>{
                 console.log(response)
                 const examObject1=response;
                 if(response !=null){
@@ -98,7 +98,7 @@ export class CodeComponent implements OnInit {
   }
 conductExam(){
   this.http
-  .get(`http://localhost:9033/api/getquestions/${this.examObject.id}`)
+  .get(`http://54.64.6.102:9033/api/getquestions/${this.examObject.id}`)
   .subscribe((data) => {
     this.examtime = data;
     console.log('7777777777777');
@@ -144,11 +144,13 @@ conductExam(){
       this.service.examid(this.examObject.id);
       // console.log(`Exam code and id present: ${examObject.code} - ${examObject.id}`);
 
-      this.http.get<UserExamDetails>(`http://localhost:9033/api/ExamDetails/${this.examObject.id}/${this.userId}`).subscribe((response=>{
+      this.http.get<UserExamDetails>(`http://54.64.6.102:9033/api/ExamDetails/${this.examObject.id}/${this.userId}`).subscribe((response=>{
 
         if(response ==null){
+
           this.http.post<UserExamDetails>(`http://localhost:9033/api/userExamDetails/${this.examObject.id}/${this.userId}`,this.examdetails).subscribe((r1)=>{
            const examObject=r1;
+
         })
           this.route.navigate(['userexam', this.examObject.code])
           Swal.fire('Exam Started', '', 'success');

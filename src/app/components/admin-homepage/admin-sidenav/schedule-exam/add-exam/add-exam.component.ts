@@ -14,24 +14,19 @@ import Swal from 'sweetalert2';
 })
 export class AddExamComponent implements OnInit{
   @Output('loadAddExampage') loadAddExampage = new EventEmitter();
-
   constructor(private http :HttpClient) { }
   scheduleExam=new ScheduleExam();
-
   papers: CreatePaper[] = [];
   paperId?: number;
   selected = null;
   subjectControl = new FormControl();
-
   exams:ScheduleExam[]=[];
   start?:any;
   end?:any;
-  ngOnInit(): void {
 
-    this.http.get<CreatePaper[]>(`http://localhost:9033/api/getpaper`).subscribe(data=>{
-      console.log(data);
+  ngOnInit(): void {
+    this.http.get<CreatePaper[]>(`http://54.64.6.102:9033/api/getpaper`).subscribe(data=>{
        this.papers=data;
-       console.log(this.papers);
     })
    }
 
@@ -42,6 +37,7 @@ export class AddExamComponent implements OnInit{
 
   addexam(scheduleExam:ScheduleExam)
   {
+
     if (typeof scheduleExam.startTime === 'string' && typeof scheduleExam.endTime === 'string') {
      this.start = new Date(scheduleExam.startTime);
      this.end = new Date(scheduleExam.endTime);
@@ -50,18 +46,15 @@ export class AddExamComponent implements OnInit{
      {
       Swal.fire("All field must be required","", "error");
      }
-     else if(scheduleExam.examDuration<0 || typeof scheduleExam.examDuration !== 'number'){
+     else if(Number(scheduleExam.examDuration) < 0){
       Swal.fire("ExamDuration must be positive number","", "error");
      }
      else{
-
       if(this.start>this.end) {
         Swal.fire("strat time  must be less than end time","", "error");
-
       }
        else{
-        this.http.post<ScheduleExam>(`http://localhost:9033/api/addexam/${this.paperId}`,scheduleExam).subscribe(
-
+        this.http.post<ScheduleExam>(`http://54.64.6.102:9033/api/addexam/${this.paperId}`,scheduleExam).subscribe(
     response=>{
       Swal.fire("Exam scheduled successfully","", "success");
       this.goBack();
@@ -73,13 +66,12 @@ export class AddExamComponent implements OnInit{
        }
     }
   }
+
   onCheckboxChange(event: MatCheckboxChange): void {
-    console.log('Checkbox value:', event.checked);
     this.scheduleExam.showResults = event.checked
   }
 
   goBack() {
-    console.log("go back")
       this.loadAddExampage.emit(true);
      }
 

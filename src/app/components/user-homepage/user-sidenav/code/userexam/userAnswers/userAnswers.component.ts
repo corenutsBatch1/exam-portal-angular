@@ -106,7 +106,7 @@ export class UserAnswersComponent implements OnInit {
       exam:{
         id:this.eid
       },
-      totalMarks:this.exam?.createPaper?.totalMarks,
+      totalMarks: this.totalmarks,
       marks:this.score,
 
     }

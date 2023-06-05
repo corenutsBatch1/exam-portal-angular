@@ -78,9 +78,12 @@
       <p class="mgp">Upload a excel file to add questions to repository</p>
     </mat-card-content>
     <mat-card-actions>
-      <input type="file" name="fileUpload" id="fileUpload" style="display: none;" accept=".xlsx, .xls" (change)="handleFileUpload($event)">
-      <button id="upload-button" style="margin-left:6rem;" mat-button onclick="document.getElementById('fileUpload').click()">
-        <mat-icon>upload</mat-icon>Upload File</button>
+        <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+        <input accept=".xlsx, .xls " hidden (change)="onFileSelected($event)" #fileInput type="file">
+        <span class="file-name">{{selectedFile?.name}}</span>
+        <!-- <input id="fileUpload"  type="file" accept=".xlsx, .xls " (change)="onFileSelected($event)" /> -->
+        <button id="add-button"  mat-button (click)="uploadFile()"><mat-icon>upload</mat-icon>Upload</button>
+
     </mat-card-actions>
   </mat-card>
 </div>
@@ -101,7 +104,7 @@
       <p class="mgp"></p>
     </mat-card-content>
     <mat-card-actions>
-      <button id="download-button" style="margin-left:6rem;" mat-button (click)="generateExcelFile()">
+      <button id="add-button" style="margin-left:6rem;" mat-button (click)="generateExcelFile()">
         <mat-icon>download</mat-icon>Download Excel File
       </button>
 

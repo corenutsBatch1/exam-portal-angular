@@ -55,3 +55,13 @@
   margin-top:24rem;
   margin-left:-56rem;
 }
+/* input[type="file"]:hover{
+  background-color: #1f2937;
+  color: white;
+  cursor: pointer;
+
+} */
+.file-name:hover{
+
+  margin-left: rem; /* or whatever margin you require */
+}

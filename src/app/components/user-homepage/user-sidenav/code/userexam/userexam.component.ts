@@ -1,6 +1,7 @@
+import { LoginserviceService } from 'src/app/components/loginmodal/loginservice.service';
 import { LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Question } from 'src/app/model/model/Question';
@@ -76,7 +77,8 @@ export class UserexamComponent {
     private service: MyserviceService,
     private router: Router,
     private locationStrategy: LocationStrategy,
-    private fullscreenService : FullScreenServiceService
+    private fullscreenService : FullScreenServiceService,
+    private loginService : LoginserviceService
   ) {}
 
 
@@ -119,6 +121,14 @@ export class UserexamComponent {
 
   }
 
+
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload(event: BeforeUnloadEvent) {
+    localStorage.removeItem('is_logged_in');
+    localStorage.clear();
+    this.loginService.isLoggedIn = false
+
+  }
 
   enableFullscreen() {
     this.fullscreenService.enableFullscreen();

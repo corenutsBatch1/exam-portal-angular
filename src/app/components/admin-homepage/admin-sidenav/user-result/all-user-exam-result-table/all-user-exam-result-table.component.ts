@@ -9,7 +9,37 @@ import 'chartjs-plugin-datalabels';
 import { MatPaginator } from '@angular/material/paginator';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
+import { FormControl } from '@angular/forms';
+import {
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 
+const moment = _rollupMoment || _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'YYYY',
+  },
+  display: {
+    dateInput: 'YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 
 export interface PeriodicElement {
   serialNumber: number;
@@ -23,11 +53,26 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-all-user-exam-result-table',
   templateUrl: './all-user-exam-result-table.component.html',
-  styleUrls: ['./all-user-exam-result-table.component.css']
+  styleUrls: ['./all-user-exam-result-table.component.css'],
+  providers: [
+    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
+    // application's root module. We provide it at the component level here, due to limitations of
+    // our example generation script.
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class AllUserExamResultTableComponent {
 
   @Output("loadAllUserExamResultTable")  loadAllUserExamResultTable=new EventEmitter();
+  Exams?: ScheduleExam[];
+  examnames: any;
+  selectedexam?:any;
 
   goBack(){
     this.loadAllUserExamResultTable.emit(true);
@@ -59,6 +104,7 @@ export class AllUserExamResultTableComponent {
   codeFilterValue = '';
   ueseexammarks?:number[]=[];
   examcode:string[]=[]
+  isHidden:boolean=false;
 
   dataSource = new MatTableDataSource<Marks>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -68,10 +114,11 @@ export class AllUserExamResultTableComponent {
 
 
   ngOnInit(): void {
-    this.getMarks().subscribe((data)=>{this.marks=data
-                                    this.dataSource.data=this.marks
-                                    this.dataSource.paginator = this.paginator;
-                                })
+    // this.getMarks().subscribe((data)=>{this.marks=data
+    //                                 this.dataSource.data=this.marks
+    //                                 this.dataSource.paginator = this.paginator;
+    //                             })
+ 
   }
 
   getMarks():Observable<Marks[]>{
@@ -149,6 +196,57 @@ export class AllUserExamResultTableComponent {
     };
     pdfMake.createPdf(docDefinition).open();
   }
+
+
+
+  byExamId(){
+    this.http.get<Marks[]>(`http://54.64.6.102:9033/api/marks/1`).subscribe((data)=>{
+      console.warn(data)
+    })
+  }
+  date = new FormControl(moment());
+  chosenYearHandler(normalizedYear: Moment, dp: any) {
+    this.isHidden=true
+    const ctrlValue = this.date.value;
+    ctrlValue?.year(normalizedYear.year());
+    this.date.setValue(ctrlValue);
+    dp.close();
+    console.warn(normalizedYear.year())
+    console.log(this.date.value, ctrlValue);
+    this.http.get<ScheduleExam[]>(`http://54.64.6.102:9033/api/getexamsbyyear/${normalizedYear.year()}`)
+    .subscribe((data: ScheduleExam[]) => {
+      this.Exams = data;
+      console.warn(this.Exams+'exams')
+      if(this.Exams.length==0){
+        this.dataSource.data=[];
+      }
+      this.Exams.forEach(e => {
+        const examName = (e.code?.toString() || '') + (e.name?.toString() || '');
+        this.examnames.push(examName);
+      });
+    });
+  }
+  onExamSelection(){
+
+    console.log(this.selectedexam);
+    return this.http.get<Marks[]>(`http://54.64.6.102:9033/api/marks/${this.selectedexam}`).subscribe((data)=>{this.marks=data
+    this.dataSource.data = this.marks.sort((a, b) => {
+      if (a.marks === undefined && b.marks === undefined) {
+        return 0;
+      }
+      if (a.marks === undefined) {
+        return 1;
+      }
+      if (b.marks === undefined) {
+        return -1;
+      }
+      return b.marks - a.marks;
+    });
+  
+    this.dataSource.paginator = this.paginator;
+  })
+  
+   }
 
 
 

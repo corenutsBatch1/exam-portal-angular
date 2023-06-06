@@ -24,6 +24,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IndividualUserResultComponent } from './components/user-homepage/user-sidenav/individual-user-result/individual-user-result.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 @NgModule({
   declarations: [
     routingComponents,
@@ -55,6 +56,7 @@ import { IndividualUserResultComponent } from './components/user-homepage/user-s
     CKEditorModule,
     MatPaginatorModule,
     MatAutocompleteModule,
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

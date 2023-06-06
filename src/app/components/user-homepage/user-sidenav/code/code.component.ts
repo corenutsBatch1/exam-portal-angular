@@ -125,7 +125,7 @@ conductExam(){
       // console.log(`Exam code and id present: ${examObject.code} - ${examObject.id}`);
 
       this.http.get<UserExamDetails>(`http://54.64.6.102:9033/api/ExamDetails/${this.examObject.id}/${this.userId}`).subscribe((response=>{
-        alert(response)
+        // alert(response)
         if(response ==null){
 
           this.http.post<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetails/${this.examObject.id}/${this.userId}`,this.examdetails).subscribe((r1)=>{

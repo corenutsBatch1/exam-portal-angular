@@ -98,3 +98,22 @@ th{
   /* background-color: brown; */
   /* margin-left: 10px; */
 }
+
+.example-month-picker .mat-calendar-period-button {
+  pointer-events: none;
+}
+
+.example-month-picker .mat-calendar-arrow {
+  display: none;
+}
+.form-container {
+  display: flex;
+  align-items: center;
+}
+
+.mat-form-field {
+  flex: 1;
+  margin-right: 10px;
+}
+
+

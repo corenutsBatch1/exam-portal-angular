@@ -98,3 +98,8 @@ th{
   /* background-color: brown; */
   /* margin-left: 10px; */
 }
+@media only screen and (min-width:370px) and (max-width:650px){
+  .pagination{
+    display: none;
+  }
+}

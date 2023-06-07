@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'src/app/model/model/Subject';
 import Swal from 'sweetalert2';
+import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
   selector: 'app-AddSubject',
@@ -18,13 +19,16 @@ export class AddSubjectComponent implements OnInit {
   isAddOperation?: boolean;
   isEditOperation?: boolean;
   subject: Subject = new Subject();
+  selectedSubject ?: string;
+  selectedValue ? : string
   inputvalue?: string;
   @Input() id: any;
   @Output('loadAddSubjectPage') loadAddSubjectPage = new EventEmitter();
   Subjects: Subject = new Subject();
+  availableSubjects? : Set<string | undefined> = new Set();
   constructor(
     private http: HttpClient,
-    private router: Router,
+    private subService : SubjectService,
     private formbBuilder: FormBuilder,
     private route: ActivatedRoute
   ) {}
@@ -37,10 +41,9 @@ export class AddSubjectComponent implements OnInit {
     this.isAddOperation = this.route.snapshot.queryParams['action'] === 'add';
     this.isEditOperation = this.route.snapshot.queryParams['action'] === 'edit';
     this.subject.name = '';
-
     if (this.isEditOperation && this.id) {
       this.http
-        .get<Subject>(`http://localhost:9033/api/subject/${this.id}`)
+        .get<Subject>(`http://54.64.6.102:9033/api/subject/${this.id}`)
         .subscribe((data) => {
           this.subject = data;
           console.log(this.subject);
@@ -50,6 +53,17 @@ export class AddSubjectComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
     });
+
+    this.subService.fetchSubjects().subscribe((data : Subject[]) => {
+      const newdata = data.map((subject) => subject.name)
+      this.availableSubjects = new Set(newdata)
+      console.log("available subjects -> " + this.availableSubjects)
+    })
+    
+  }
+
+  convertToUppercase(){
+    this.subject.name = this.subject.name?.toUpperCase()
   }
 
   onSubmit() {
@@ -67,6 +81,8 @@ export class AddSubjectComponent implements OnInit {
         return;
       }
       if (this.submitted) {
+        this.myForm.value.name = this.myForm.value.name.replace(/\s+/g, '');
+        this.myForm.value.description = this.myForm.value.description.replace(/\s+/g, '');
         this.addSubjectInfo();
       }
     }
@@ -74,8 +90,11 @@ export class AddSubjectComponent implements OnInit {
 
   //add Category info
   addSubjectInfo() {
+    console.log(this.myForm.value.name)
+    console.log(this.myForm.value.description)
+
     this.http
-      .post<any>('http://localhost:9033/api/subject', this.myForm.value)
+      .post<any>('http://54.64.6.102:9033/api/subject', this.myForm.value)
       .subscribe(
         (response) => {
           Swal.fire({
@@ -96,7 +115,7 @@ export class AddSubjectComponent implements OnInit {
     console.log(this.myForm);
     this.http
       .put<any>(
-        `http://localhost:9033/api/subject/${this.id}`,
+        `http://54.64.6.102:9033/api/subject/${this.id}`,
         this.myForm.value
       )
       .subscribe((response) => {

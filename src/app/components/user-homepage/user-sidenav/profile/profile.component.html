@@ -1,59 +1,81 @@
-<div class="bootstrap-wrapper">
+<!-- <div class="bootstrap-wrapper">
   <div class="container">
-    <h1 class="text-center"><b>USER PROFILE</b></h1>
-    <div class="row">
-      <mat-card class="card">
-          <div class="card-body">
-            <div>
-              <div class="left">
-                <!-- <mat-icon class="mat-18">person</mat-icon> -->
-                <img src="assets/user.svg" alt="">
-              </div>
-            </div>
-            <!-- <h1 class="card-title text-center"><mat-icon class="mat-icon">person</mat-icon><b class="user">User Profile</b></h1> -->
-            <div>
-              <ul class="list-group list-group-flush">
-                <!-- <li class="list-group-item"><strong>ID:</strong> {{user2.id}}</li> -->
-                <li class="list-group-item"><strong>Name : </strong> {{user2.name}}</li>
-                <li class="list-group-item"><strong>Email : </strong> {{user2.email}}</li>
-                <!-- <li class="list-group-item"><strong>PASSWORD:</strong> {{user2.password}}</li> -->
-                <li class="list-group-item"><strong>Phone No. : </strong> {{user2.phoneNumber}}</li>
-              </ul>
-            </div>
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#staticBackdrop">
-              Edit profile
-            </button>
+    <h1 class="text-center profil"><b>USER PROFILE</b></h1>
+    <div class="row"> -->
 
-          </div>
-      </mat-card>
-    </div>
+      <!-- <mat-card class="card"> -->
+          <!-- <div class="card-body">
+            <div>
+              <div class="left"> -->
+                <!-- <mat-icon class="mat-18">person</mat-icon> -->
+                <!-- <img src="assets/user.svg" alt="" class="imga">
+              </div>
+            </div> -->
+            <!-- <h1 class="card-title text-center"><mat-icon class="mat-icon">person</mat-icon><b class="user">User Profile</b></h1> -->
+            <!-- <div>
+              <ul class="list-group list-group-flush"> -->
+                <!-- <li class="list-group-item"><strong>ID:</strong> {{user2.id}}</li> -->
+                <!-- <li class="list-group-item"><strong>Name : </strong> {{user2.name}}</li>
+                <li class="list-group-item"><strong>Email : </strong> {{user2.email}}</li> -->
+                <!-- <li class="list-group-item"><strong>PASSWORD:</strong> {{user2.password}}</li> -->
+                <!-- <li class="list-group-item"><strong>Phone No. : </strong> {{user2.phoneNumber}}</li>
+                <li  class="list-group-item"> <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#staticBackdrop">
+                  Edit profile
+                </button></li>
+              </ul>
+             
+            </div> -->
+            
+
+          <!-- </div> -->
+      <!-- </mat-card> -->
+    <!-- </div>
   </div>
-</div>
+</div> -->
 <!-- Button trigger modal -->
 
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel"><b>Update Profile</b></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <label for="totalMarks">Enter name</label>
-          <input type="text" class="form-control" id=" " placeholder="Enter name"  [(ngModel)]="user3.name"  name="" value="{{user3.name}}">
-          <label for="totalMarks">Enter email</label>
-          <input type="text" class="form-control" id=" " placeholder="Enter email"  [(ngModel)]="user3.email " name="" value="{{user3.email}}" >
-           <label for="totalMarks">Enter phone number</label>
-          <input type="text" class="form-control" id=" " placeholder="Enter phoneNumber"  [(ngModel)]="user3.phoneNumber" name="" value="{{user3.phoneNumber}}">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" (click)="updateprofile()">Update</button>
-      </div>
-    </div>
-  </div>
-</div>
+<mat-card class="example-card" style="width: 50%;">
+  <mat-card-header>
+    <mat-card-title-group *ngIf="!isEditMode">
+      <mat-card-title>{{user2.name}}</mat-card-title>
+      <mat-card-subtitle>{{user2.email}}</mat-card-subtitle>
+      <mat-card-subtitle>{{user2.phoneNumber}}</mat-card-subtitle>
+      <img mat-card-lg-image src="assets/Profile.svg" >
+    </mat-card-title-group>
+
+    <mat-card-title-group *ngIf="isEditMode">
+      <mat-card-subtitle><input type="text" [(ngModel)]="user3.name" placeholder="Name"></mat-card-subtitle>
+      <mat-card-subtitle><input type="email" [(ngModel)]="user3.email" placeholder="Email"></mat-card-subtitle>
+      <mat-card-subtitle><input type="tel" [(ngModel)]="user3.phoneNumber" placeholder="Phone number"></mat-card-subtitle>
+      <img mat-card-lg-image src="assets/Profile.svg" >
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-container *ngIf="!isEditMode">
+      <button type="button" class="btn btn-primary btn-sm" (click)="enableEditMode()">
+        Edit profile
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="isEditMode">
+    <button type="button" class="btn btn-success btn-sm" (click)="updateprofile(); disableEditMode()">
+      Update
+    </button>
+    </ng-container>
+    
+    <!-- <ng-container *ngIf="isEditMode"> -->
+      <!-- Show input fields for editing profile -->
+      <!-- <input type="text" [(ngModel)]="user3.name" placeholder="Name">
+      <input type="email" [(ngModel)]="user3.email" placeholder="Email">
+      <input type="tel" [(ngModel)]="user3.phoneNumber" placeholder="Phone number">
+      <button type="button" class="btn btn-primary btn-sm" (click)="updateprofile()">
+        Save
+      </button>
+      <button type="button" class="btn btn-success btn-sm" (click)="disableEditMode()">
+        Update
+      </button>
+    </ng-container> -->
+  </mat-card-content>
+</mat-card>
 

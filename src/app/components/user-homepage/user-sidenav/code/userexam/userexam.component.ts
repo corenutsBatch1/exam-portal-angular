@@ -1,6 +1,6 @@
 import { LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Question } from 'src/app/model/model/Question';
@@ -8,7 +8,7 @@ import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { Subject } from 'src/app/model/model/Subject';
 import { useranswer } from 'src/app/model/model/useranswer';
 import { MyserviceService } from 'src/app/model/myservice';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertResult } from 'sweetalert2';
 
 import * as moment from 'moment';
 import { UserExamDetails } from 'src/app/model/model/UserExamDetails';
@@ -69,6 +69,7 @@ export class UserexamComponent {
   examdetails: UserExamDetails=new UserExamDetails();
   activeSubject: string | undefined;
   questions: any[] = [];
+  once: boolean = true;
 
   constructor(
     private http: HttpClient,
@@ -76,7 +77,8 @@ export class UserexamComponent {
     private service: MyserviceService,
     private router: Router,
     private locationStrategy: LocationStrategy,
-    private fullscreenService : FullScreenServiceService
+    private fullscreenService : FullScreenServiceService,
+    private elementRef : ElementRef
   ) {}
 
 
@@ -106,7 +108,7 @@ export class UserexamComponent {
 
     this.route.params.subscribe((params) => {
       this.code = params['code'];
-      this.http.get<any>(`http://localhost:9033/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>{this.questions=data,
+      this.http.get<any>(`http://54.64.6.102:9033/api/getquestionsBySubjectId/${this.code}`).subscribe(data=>{this.questions=data,
         this.totalQuestions=data.length;
         this.nextquestions(0,this.questions[0].optionA,this.questions[0].id);
     });
@@ -117,7 +119,83 @@ export class UserexamComponent {
       });
     });
 
+     // Get the root element
+     this.openFullscreen();
+     document.addEventListener(
+       'fullscreenchange',
+       this.onFullscreenChange.bind(this)
+     );
   }
+
+
+  
+
+  openFullscreen() {
+    const ele = this.elementRef.nativeElement;
+    console.log(ele);
+    ele.requestFullscreen();
+    if (ele.requestFullscreen) {
+      console.log(ele.requestFullscreen);
+      // ele.requestFullscreen();
+    } else if (ele.mozRequestFullScreen) {
+      /* Firefox */
+      ele.mozRequestFullScreen();
+    } else if (ele.webkitRequestFullscreen) {
+      /* Chrome, Safari and Opera */
+      ele.webkitRequestFullscreen();
+    } else if (ele.msRequestFullscreen) {
+      /* IE/Edge */
+      ele.msRequestFullscreen();
+    }
+  }
+
+  onFullscreenChange(event: Event) {
+    console.log('onFullscreenChange excecut');
+
+    if (document.fullscreenElement === null) {
+      // event.preventDefault()
+      this.showConfirmationDialog();
+    }
+  }
+
+  showConfirmationDialog() {
+    if (this.once) {
+      Swal.fire({
+        title: 'If you try to exit again the exam will be auto submited ! click submit to submit the exam',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        cancelButtonText: 'Cancel',
+
+      }).then((result: SweetAlertResult) => {
+        if (result.isConfirmed) {
+          console.log('Confirmed');
+          this.router.navigate(['answers', this.code]);
+        this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+        console.log("submitted"+response)
+      }))
+          // this.exitFullScreen();
+        } else {
+          this.once = !this.once;
+          console.log('Cancelled');
+          this.openFullscreen();
+          // Handle the cancellation if needed
+        }
+      });
+    } else {
+      console.log('2nd time auto submit');
+
+      this.router.navigate(['answers', this.code]);
+        this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+        console.log("submitted"+response)
+      }))
+      
+      // this.exitFullScreen();
+    }
+  }
+
+
+
 
 
   enableFullscreen() {
@@ -125,7 +203,7 @@ export class UserexamComponent {
   }
   async fetchExamTime(){
 
-    this.http.get<UserExamDetails>(`http://localhost:9033/api/ExamDetails/${this.eid}/${this.uid}`).subscribe(async (response)=>{
+    this.http.get<UserExamDetails>(`http://54.64.6.102:9033/api/ExamDetails/${this.eid}/${this.uid}`).subscribe(async (response)=>{
       if (response && response.loginTime && response.logoutTime){
       const loginTime: moment.Moment = moment(response.loginTime, 'HH:mm:ss'); // Replace with your actual login time
       const logoutTime: moment.Moment = moment(response.logoutTime, 'HH:mm:ss'); // Replace with your actual logout time
@@ -139,7 +217,7 @@ export class UserexamComponent {
     })}
 
     afterFetchExamTime(){
-      this.http.get(`http://localhost:9033/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
+      this.http.get(`http://54.64.6.102:9033/api/getquestions/${this.eid}`).subscribe(data=>{this.examtime=data
       console.warn("into the object"+this.minutes1)
       if(this.minutes1 != 0){
         console.warn(this.minutes1+"minus minutes")
@@ -205,13 +283,17 @@ startTimer() {
 
   loadSubjects(): Observable<Subject[]> {
     return this.http.post<Subject[]>(
-      `http://localhost:9033/api/getsubjectsBycode/${this.code}`,
+      `http://54.64.6.102:9033/api/getsubjectsBycode/${this.code}`,
       this.code
     );
   }
 
   ngOnDestroy(): void {
     clearInterval(this.timerId);
+    document.removeEventListener(
+      'fullscreenchange',
+      this.onFullscreenChange.bind(this)
+    );
   }
 
 
@@ -229,7 +311,7 @@ startTimer() {
   loadQuestions(subjectid?: number) {
     console.log("lq"+this.questions.length);
     return this.http.get(
-      `http://localhost:9033/api/getquestionsBySubjectId/${subjectid}/${this.code}`
+      `http://54.64.6.102:9033/api/getquestionsBySubjectId/${subjectid}/${this.code}`
     );
   }
 
@@ -264,11 +346,11 @@ startTimer() {
       },
       userAnswer: option1,
     };
-       this.http.post(`http://localhost:9033/api/saveanswer`,this.answer).subscribe(data=>{
+       this.http.post(`http://54.64.6.102:9033/api/saveanswer`,this.answer).subscribe(data=>{
        console.log("188");
        this.selectedOption=option1;
        console.warn(this.eid +"   n   "+ this.uid)
-       this.http.put<UserExamDetails>(`http://localhost:9033/api/userExamDetailsbyid/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+       this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailsbyid/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
 
        }))
       });
@@ -306,7 +388,7 @@ startTimer() {
       },
       userAnswer: selectedOptions.join(''),
     };
-    this.http.post(`http://localhost:9033/api/saveanswer`, this.answer).subscribe((data) => {
+    this.http.post(`http://54.64.6.102:9033/api/saveanswer`, this.answer).subscribe((data) => {
       //this.selectedOption = selectedOptions;
     });
   }
@@ -339,11 +421,12 @@ clickEvent(exam: any) {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, Submit",
       cancelButtonText: "Cancel"
+      
     })
     .then((result) => {
       if (result.isConfirmed) {
         this.router.navigate(['answers', this.code]);
-        this.http.put<UserExamDetails>(`http://localhost:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+        this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
         console.log("submitted"+response)
       }))
 
@@ -363,7 +446,7 @@ clickEvent(exam: any) {
     .then((result) => {
       if (result.isConfirmed) {
         this.router.navigate(['answers', this.code]);
-        this.http.put<UserExamDetails>(`http://localhost:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+        this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
         console.log("submitted"+response)
       }))
       } else {
@@ -375,7 +458,7 @@ clickEvent(exam: any) {
 
 clickEvent2(){
   this.router.navigate(['answers', this.code]);
-  this.http.put<UserExamDetails>(`http://localhost:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+  this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
       console.log("submitted"+response)
       }))
       this.timeexpire=true;
@@ -392,7 +475,7 @@ nextquestion(){
   this.questionnumber++;
   this.currentQuestion= this.questions[this.questionnumber];
   console.log(this.currentQuestion);
-  this.http.get<any[]>(`http://localhost:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
+  this.http.get<any[]>(`http://54.64.6.102:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
 
     console.log("30");
     console.log(data);
@@ -453,7 +536,7 @@ nextquestion(){
         this.questionnumber= id;
         this.currentQuestion= this.questions[id];
         id++;
-        this.http.get<any[]>(`http://localhost:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
+        this.http.get<any[]>(`http://54.64.6.102:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
           this.answerArray=data;
           if(data.length>0){
             // alert(data.length);
@@ -511,7 +594,7 @@ nextquestion(){
         id--;
         this.currentQuestion= this.questions[id];
         this.questionnumber--;
-        this.http.get<any[]>(`http://localhost:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
+        this.http.get<any[]>(`http://54.64.6.102:9033/api/byquestionnumber/${this.uid}/${this.eid}`).subscribe((data) => {
           this.answerArray=data;
           if(this.answerArray.filter(q=> q.question_id==this.currentQuestion?.id).length!=0)
           {

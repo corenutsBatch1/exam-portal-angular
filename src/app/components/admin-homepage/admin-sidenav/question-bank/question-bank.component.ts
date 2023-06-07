@@ -48,7 +48,7 @@ export class QuestionBankComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', file);
 
-    this.http.post('http://localhost:9033/api/questions/upload', formData).subscribe(response => {
+    this.http.post('http://54.64.6.102:9033/api/questions/upload', formData).subscribe(response => {
       console.log("File uploaded successfully")
     });
   }

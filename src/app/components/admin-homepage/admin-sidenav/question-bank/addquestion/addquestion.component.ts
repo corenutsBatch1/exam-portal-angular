@@ -41,6 +41,7 @@ export class AddquestionComponent implements OnInit{
        console.log(this.subjects);
        console.log("---------------")
       this.uniqueSubjectNames= this.getUniqueSubjectNames(this.subjects);
+      console.log("-------=-" + this.uniqueSubjectNames)
     })
   }
 
@@ -75,7 +76,7 @@ export class AddquestionComponent implements OnInit{
     this.answers.sort();
     this.Questions.answer = this.answers.join('');
      if(this.answers.length>0){
-      this.http.post(`http://localhost:9033/api/addquestion/${id}`, Questions).subscribe(
+      this.http.post(`http://54.64.6.102:9033/api/addquestion/${id}`, Questions).subscribe(
         response=>{
           Swal.fire("Question added successfully","", "success");
         },
@@ -91,6 +92,8 @@ export class AddquestionComponent implements OnInit{
 
   checkboxChanged(event: any, optionValue: string) {
     console.log(event.checked)
+    
+    console.log(event.unchecked)
     if (event.checked) {
       // Checkbox is checked
       this.answers.push(optionValue);

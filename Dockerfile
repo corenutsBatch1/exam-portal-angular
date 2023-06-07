@@ -18,4 +18,5 @@ RUN rm -rf ./*
 
 COPY --from=builder /ang23/dist/exam-portal-ui .
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-g","daemon off;"]
+

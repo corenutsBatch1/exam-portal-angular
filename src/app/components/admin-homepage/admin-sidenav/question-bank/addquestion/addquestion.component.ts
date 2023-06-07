@@ -26,6 +26,10 @@ export class AddquestionComponent implements OnInit{
    subjects?:Subject[];
    uniqueSubjectNames: string[] = [];
    answers : string[] = []
+    isCheckedA:boolean=false;
+    isCheckedB:boolean=false;
+    isCheckedC:boolean=false;
+    isCheckedD:boolean=false;
    public Editor = ClassicEditor;
 
   constructor(private http:HttpClient,private router:Router,private subjectService : SubjectService)
@@ -71,6 +75,25 @@ export class AddquestionComponent implements OnInit{
      // this.filteredTopics = undefined;
     }
   }
+// Inside your component code
+
+// Function to clear the form fields
+clearFormFields() {
+  this.Questions = { content: '', optionA: '', optionB: '', optionC: '', optionD: '', answer: '', qtype: '' };
+  this.isCheckedA=false;
+  this.isCheckedB=false;
+  this.isCheckedC=false;
+  this.isCheckedD=false;
+
+  this.subject_id = undefined;
+  this.selectedsubject = ''; // Restore the selected subject
+  this.filteredTopics = []; // Update the filtered topics based on the selected subject
+}
+
+// Function to handle the "Clear" button click event
+onClearClick() {
+  this.clearFormFields();
+}
 
   addQuestion(Questions:Question,id?:number){
     this.answers.sort();
@@ -79,6 +102,13 @@ export class AddquestionComponent implements OnInit{
       this.http.post(`http://54.64.6.102:9033/api/addquestion/${id}`, Questions).subscribe(
         response=>{
           Swal.fire("Question added successfully","", "success");
+
+          this.Questions = { content: '', optionA: '', optionB: '', optionC: '', optionD: '', answer: '', qtype: '' };
+          this.isCheckedA=false;
+          this.isCheckedB=false;
+          this.isCheckedC=false;
+          this.isCheckedD=false;
+
         },
         error=>{
           Swal.fire("All field must be required","", "error");
@@ -91,9 +121,18 @@ export class AddquestionComponent implements OnInit{
   }
 
   checkboxChanged(event: any, optionValue: string) {
-    console.log(event.checked)
-    
-    console.log(event.unchecked)
+    // console.log(event.checked)
+    if(optionValue == 'A'){
+      this.isCheckedA=true;
+    }
+    if(optionValue == 'B'){
+      this.isCheckedB=true;
+    } if(optionValue == 'C'){
+      this.isCheckedC=true;
+    } if(optionValue == 'D'){
+      this.isCheckedD=true;
+    }
+    console.log(this.isCheckedA);
     if (event.checked) {
       // Checkbox is checked
       this.answers.push(optionValue);

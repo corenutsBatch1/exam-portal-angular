@@ -1,13 +1,11 @@
-import { response } from 'express';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { MyserviceService } from 'src/app/model/myservice';
 import { DateTime } from 'luxon';
 import Swal from 'sweetalert2';
 import { UserExamDetails } from 'src/app/model/model/UserExamDetails';
-import * as moment from 'moment';
 @Component({
   selector: 'app-code',
   templateUrl: './code.component.html',
@@ -61,10 +59,10 @@ export class CodeComponent implements OnInit {
             if (data == false) {
               this.http.get<UserExamDetails>(`http://54.64.6.102:9033/api/ExamDetails/${this.examObject.id}/${this.userId}`).subscribe((response)=>{
                 console.log(response)
-                if(response !=null){
-                if(response.status=="inprogress"){
-                    this.conductExam()
-                  }
+                if(response !=null){                 
+                  if(response.status=="inprogress"){
+                        this.conductExam()
+                      }
                   }
                   else{
                     this.conductExam()
@@ -127,10 +125,11 @@ conductExam(){
       // console.log(`Exam code and id present: ${examObject.code} - ${examObject.id}`);
 
       this.http.get<UserExamDetails>(`http://54.64.6.102:9033/api/ExamDetails/${this.examObject.id}/${this.userId}`).subscribe((response=>{
-
+        // alert(response)
         if(response ==null){
+
           this.http.post<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetails/${this.examObject.id}/${this.userId}`,this.examdetails).subscribe((r1)=>{
-            console.log(r1)
+           const examObject=r1;
         })
           this.route.navigate(['userexam', this.examObject.code])
           Swal.fire('Exam Started', '', 'success');

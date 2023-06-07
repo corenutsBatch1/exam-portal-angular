@@ -1,7 +1,27 @@
 <button class="arrowbutton" (click)="goBack()"> <mat-icon>arrow_back</mat-icon>
 </button>
 <ng-container>
+  <div class="form-container">
+    <mat-form-field>
+      <mat-label>Select a Year</mat-label>
+      <input matInput [hidden]="!isHidden" [matDatepicker]="dp" placeholder="Select Year" [formControl]="date" [value]="null">
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event, dp)" panelClass="example-month-picker">
+      </mat-datepicker>
+    </mat-form-field>
+  &nbsp;&nbsp;
+    <mat-form-field appearance="fill" classs="left">
+      <mat-label>Select an exam</mat-label>
+      <mat-select [(ngModel)]="selectedexam" name="selectedexam" (selectionChange)="onExamSelection()">
+        <mat-option *ngFor="let exam of Exams" [value]="exam.id">
+          <div *ngIf="exam.code && exam.name">{{ exam.code +"-"+ exam.name }}</div>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  
   <!-- Show table here -->
+
   <div class="row">
     <div class="col-md-10">
 

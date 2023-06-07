@@ -68,7 +68,7 @@
                 <label>
                   <mat-checkbox
                     (change)="checkboxChanged($event, 'A')"
-                   
+                    [checked]="isCheckedA"
                   ></mat-checkbox>
                   Option A
                 </label>
@@ -92,6 +92,7 @@
                   <!-- <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionB"> -->
                   <mat-checkbox
                     (change)="checkboxChanged($event, 'B')"
+                    [checked]="isCheckedB"
                   ></mat-checkbox>
                   Option B
                 </label>
@@ -115,6 +116,7 @@
                   <!-- <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionC"> -->
                   <mat-checkbox
                     (change)="checkboxChanged($event, 'C')"
+                    [checked]="isCheckedC"
                   ></mat-checkbox>
                   Option C
                 </label>
@@ -138,6 +140,7 @@
                   <!-- <input type="radio" [(ngModel)]="Questions.answer" name="answer" [value]="Questions.optionD"> -->
                   <mat-checkbox
                     (change)="checkboxChanged($event, 'D')"
+                    [checked]="isCheckedD"
                   ></mat-checkbox>
                   Option D
                 </label>
@@ -159,9 +162,8 @@
               class="btn btn-primary btn-sm addButton">
               Add question
             </button>
-            <button type="reset" class="btn btn-danger ml-3 btn-sm clear">
-              Clear
-            </button>
+            <button (click)="onClearClick()" class="btn btn-danger ml-3 btn-sm clear">Clear</button>
+
             <button
               (click)="goBack()"
               class="btn btn-secondary btn-sm Back ml-3"

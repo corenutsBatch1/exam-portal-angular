@@ -1,12 +1,17 @@
+
+import { LoginserviceService } from 'src/app/components/loginmodal/loginservice.service';
+
+import { useranswer } from './../../../../../model/model/useranswer';
+
 import { LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef,  HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Question } from 'src/app/model/model/Question';
 import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { Subject } from 'src/app/model/model/Subject';
-import { useranswer } from 'src/app/model/model/useranswer';
+
 import { MyserviceService } from 'src/app/model/myservice';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
@@ -78,7 +83,8 @@ export class UserexamComponent {
     private router: Router,
     private locationStrategy: LocationStrategy,
     private fullscreenService : FullScreenServiceService,
-    private elementRef : ElementRef
+    private elementRef : ElementRef,
+    private loginService : LoginserviceService
   ) {}
 
 
@@ -102,9 +108,27 @@ export class UserexamComponent {
     this.uid = this.service.sendid();
     this.eid = this.service.sendeid();
     this.startTimer()
-    this.fetchExamTime().then(()=>{
-      this.afterFetchExamTime();
-    })
+    // this.fetchExamTime().then(()=>{
+    //   this.afterFetchExamTime();
+    // })
+    
+    let method1Completed = false; // Synchronization variable
+
+    const handleMethod1Completion = () => {
+      if (method1Completed) {
+        this.afterFetchExamTime(); // Execute method 2 only if method 1 has completed
+      } else {
+        method1Completed = true; // Update the synchronization variable
+      }
+    };
+  
+    this.fetchExamTime()
+      .then(handleMethod1Completion)
+      .catch(error => {
+        // Handle errors from method1 if needed
+      });
+  
+    handleMethod1Completion(); // Check if method1 has already completed
 
     this.route.params.subscribe((params) => {
       this.code = params['code'];
@@ -129,7 +153,6 @@ export class UserexamComponent {
 
 
   
-
   openFullscreen() {
     const ele = this.elementRef.nativeElement;
     console.log(ele);
@@ -196,8 +219,13 @@ export class UserexamComponent {
 
 
 
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload(event: BeforeUnloadEvent) {
+    localStorage.removeItem('is_logged_in');
+    localStorage.clear();
+    this.loginService.isLoggedIn = false
 
-
+  }
   enableFullscreen() {
     this.fullscreenService.enableFullscreen();
   }
@@ -223,9 +251,16 @@ export class UserexamComponent {
         console.warn(this.minutes1+"minus minutes")
       this.examtime1 = this.examtime.examDuration!-this.minutes1!
         console.warn(this.examtime1+"  examtime when restarted")
-      if(this.examtime1){
-        this.remainingTime=60*this.examtime1;
-        this.remainingTime
+      if(this.examtime1 <= 0){
+        this.router.navigate(['answers', this.code]);
+        this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+            console.log("submitted"+response)
+            Swal.fire('You already attempted exam or exam duration is completed', '', 'error');
+            }))
+        }
+        else{
+          this.remainingTime=60*this.examtime1;
+          this.remainingTime
         }
       }
       else{
@@ -236,12 +271,13 @@ export class UserexamComponent {
         }
       }
       });}
+
       async asyncOperation() {
         // Simulating an asynchronous operation
         return new Promise<void>(resolve => {
           setTimeout(() => {
             resolve();
-          }, 2000);
+          }, 3000);
         });
       }
 
@@ -328,6 +364,18 @@ startTimer() {
 
   sendoption(qid:number,option1:string)
   {
+    if(option1=='A'){
+      this.isCheckedA=true;
+    }
+    if(option1=='B'){
+      this.isCheckedB=true;
+    }
+    if(option1=='C'){
+      this.isCheckedC=true;
+    }
+    if(option1=='D'){
+      this.isCheckedD=true;
+    }
     const normalQuestionOptionId = "N" + qid;
     if(!this.stateChange.includes(normalQuestionOptionId)){
       this.stateChange.push(normalQuestionOptionId);
@@ -470,7 +518,7 @@ nextquestion(){
   this.isCheckedB=false;
   this.isCheckedC=false;
   this.isCheckedD=false;
-  this.isChecked=false;
+  // this.isChecked=false;
   console.log("39");
   this.questionnumber++;
   this.currentQuestion= this.questions[this.questionnumber];
@@ -510,7 +558,7 @@ nextquestion(){
     }
     else
     {
-      this.isChecked=true;
+      // this.isChecked=true;
       this.isCheckedA=false;
       // alert("Nothing1"+this.isCheckedA)
       this.isCheckedB=false;
@@ -527,7 +575,7 @@ nextquestion(){
         this.isCheckedB=false;
         this.isCheckedC=false;
         this.isCheckedD=false;
-        this.isChecked=false;
+        // this.isChecked=false;
         if(option==undefined)
         {
           this.codingquestionid=qid
@@ -572,7 +620,7 @@ nextquestion(){
           }
           else
           {
-            this.isChecked=true;
+            // this.isChecked=true;
             this.isCheckedA=false;
             this.isCheckedB=false;
             this.isCheckedC=false;
@@ -589,7 +637,7 @@ nextquestion(){
         this.isCheckedB=false;
         this.isCheckedC=false;
         this.isCheckedD=false;
-        this.isChecked=false;
+        // this.isChecked=false;
         console.log("46");
         id--;
         this.currentQuestion= this.questions[id];
@@ -618,7 +666,7 @@ nextquestion(){
           }
           else
           {
-            this.isChecked=true;
+            // this.isChecked=true;
             this.isCheckedA=false;
             this.isCheckedB=false;
             this.isCheckedC=false;
@@ -627,7 +675,6 @@ nextquestion(){
         });
 
       }
-
 
 stateChangeCheck(qid:number, subject : Subject)
 {

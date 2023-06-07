@@ -678,7 +678,7 @@ nextquestion(){
 
 stateChangeCheck(qid:number, subject : Subject)
 {
-  console.log(this.stateChange)
+//   console.log(this.stateChange)
   if(subject.name == 'CODING'){
     const codingQuestionId = 'C' + qid
     return this.stateChange.includes(codingQuestionId);

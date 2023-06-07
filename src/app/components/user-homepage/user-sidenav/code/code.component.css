@@ -21,4 +21,6 @@ body
     background-color: rgb(203, 220, 236);
   }
 
-
+  @media only screen  and (max-width: 767px) {
+    
+  }

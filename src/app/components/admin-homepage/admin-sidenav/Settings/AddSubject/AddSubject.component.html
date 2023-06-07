@@ -7,7 +7,7 @@
   class="card mat-elevation-z8"
   style="
     height: 300px;
-    width: 300%;
+    width: 400%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +16,9 @@
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <mat-card-content>
       <h2 style="text-align: center">
-        {{ isAddOperation ? "Add Subject" : "Edit Subject" }}
+        <b>
+          {{ isAddOperation ? "Add Subject" : "Edit Subject" }}
+        </b>
       </h2>
       <div class="form-group">
         <div class="row">
@@ -26,23 +28,24 @@
             </label>
           </div>
 
-          <div class="col-75 form-group">
+          <div class="row">
+          <div class="col form-group">
             <input
               class="form-control"
               type="text"
               formControlName="name"
               placeholder="Enter name"
+              (input)="convertToUppercase()"
+              [value]="selectedSubject"
               (ngModelChange)="
-                subject.name = $event.toUpperCase(); inputvalue = subject.name
+              selectedSubject = $event.toUpperCase(); inputvalue = selectedSubject
               "
-              [ngModel]="subject.name"
               [ngClass]="{
                 'is-invalid':
                   (submitted && f.name.errors) ||
                   (f.name.touched && f.name.errors)
               }"
-            />
-
+            /> 
             <div
               *ngIf="
                 (submitted && f.name.errors) ||
@@ -53,6 +56,14 @@
               <div *ngIf="f.name.errors?.required">Subject name required</div>
             </div>
           </div>
+
+          <div class="col form-group">
+            <mat-select class="form-control" name="selectedSubject" [(value)]="selectedSubject" placeholder="Available subjects">
+              <mat-option *ngFor="let subject of availableSubjects" [value]="subject">{{ subject }}</mat-option>
+            </mat-select>
+          </div>
+          
+        </div>
         </div>
       </div>
 

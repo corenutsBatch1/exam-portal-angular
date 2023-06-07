@@ -45,6 +45,7 @@ export class AddquestionComponent implements OnInit{
        console.log(this.subjects);
        console.log("---------------")
       this.uniqueSubjectNames= this.getUniqueSubjectNames(this.subjects);
+      console.log("-------=-" + this.uniqueSubjectNames)
     })
   }
 

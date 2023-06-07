@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   user2:User=new User();
   user3:User=new User();
   id:any;
+  isEditMode?:boolean;
   constructor(private route:ActivatedRoute,private http:HttpClient) { }
 
   ngOnInit() {
@@ -36,11 +37,21 @@ this.route.paramMap.subscribe(params=>{
 
 })
   }
+
+
   updateprofile()
 {
   this.user3.id=this.id;
     this.http.post(`http://54.64.6.102:9032/api/updateUser`,this.user3).subscribe(data=>{console.log(data)
     this.ngOnInit();
   })
+}
+
+enableEditMode(){
+  this.isEditMode = true;
+}
+
+disableEditMode(){
+  this.isEditMode = false;
 }
 }

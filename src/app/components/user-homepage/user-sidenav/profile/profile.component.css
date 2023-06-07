@@ -30,3 +30,26 @@
   margin-top: -3.5rem;
   margin-right: 15rem;
 }
+
+@media only screen  and (min-width: 360px) {
+.profil{
+  font-size:12px ;
+}
+
+.imga{
+  position: relative;
+  right: 185px;
+
+
+.list-group-flush{
+  position: absolute;
+  top: 170px;
+  right: 250px;
+  width: 250px;
+  height: 300px;
+}
+.card{
+  width: 0;
+}
+
+}}

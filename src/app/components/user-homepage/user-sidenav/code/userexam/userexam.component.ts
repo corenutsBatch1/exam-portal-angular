@@ -5,7 +5,7 @@ import { useranswer } from './../../../../../model/model/useranswer';
 
 import { LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef,  HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Question } from 'src/app/model/model/Question';
@@ -13,7 +13,7 @@ import { ScheduleExam } from 'src/app/model/model/ScheduleExam';
 import { Subject } from 'src/app/model/model/Subject';
 
 import { MyserviceService } from 'src/app/model/myservice';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertResult } from 'sweetalert2';
 
 import * as moment from 'moment';
 import { UserExamDetails } from 'src/app/model/model/UserExamDetails';
@@ -74,6 +74,7 @@ export class UserexamComponent {
   examdetails: UserExamDetails=new UserExamDetails();
   activeSubject: string | undefined;
   questions: any[] = [];
+  once: boolean = true;
 
   constructor(
     private http: HttpClient,
@@ -82,6 +83,7 @@ export class UserexamComponent {
     private router: Router,
     private locationStrategy: LocationStrategy,
     private fullscreenService : FullScreenServiceService,
+    private elementRef : ElementRef,
     private loginService : LoginserviceService
   ) {}
 
@@ -141,7 +143,80 @@ export class UserexamComponent {
       });
     });
 
+     // Get the root element
+     this.openFullscreen();
+     document.addEventListener(
+       'fullscreenchange',
+       this.onFullscreenChange.bind(this)
+     );
   }
+
+
+  
+  openFullscreen() {
+    const ele = this.elementRef.nativeElement;
+    console.log(ele);
+    ele.requestFullscreen();
+    if (ele.requestFullscreen) {
+      console.log(ele.requestFullscreen);
+      // ele.requestFullscreen();
+    } else if (ele.mozRequestFullScreen) {
+      /* Firefox */
+      ele.mozRequestFullScreen();
+    } else if (ele.webkitRequestFullscreen) {
+      /* Chrome, Safari and Opera */
+      ele.webkitRequestFullscreen();
+    } else if (ele.msRequestFullscreen) {
+      /* IE/Edge */
+      ele.msRequestFullscreen();
+    }
+  }
+
+  onFullscreenChange(event: Event) {
+    console.log('onFullscreenChange excecut');
+
+    if (document.fullscreenElement === null) {
+      // event.preventDefault()
+      this.showConfirmationDialog();
+    }
+  }
+
+  showConfirmationDialog() {
+    if (this.once) {
+      Swal.fire({
+        title: 'If you try to exit again the exam will be auto submited ! click submit to submit the exam',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        cancelButtonText: 'Cancel',
+
+      }).then((result: SweetAlertResult) => {
+        if (result.isConfirmed) {
+          console.log('Confirmed');
+          this.router.navigate(['answers', this.code]);
+        this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+        console.log("submitted"+response)
+      }))
+          // this.exitFullScreen();
+        } else {
+          this.once = !this.once;
+          console.log('Cancelled');
+          this.openFullscreen();
+          // Handle the cancellation if needed
+        }
+      });
+    } else {
+      console.log('2nd time auto submit');
+
+      this.router.navigate(['answers', this.code]);
+        this.http.put<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetailssubmit/${this.eid}/${this.uid}`,this.examdetails).subscribe((response=>{
+        console.log("submitted"+response)
+      }))
+      
+      // this.exitFullScreen();
+    }
+  }
+
 
 
   @HostListener('window:beforeunload', ['$event'])
@@ -151,7 +226,6 @@ export class UserexamComponent {
     this.loginService.isLoggedIn = false
 
   }
-
   enableFullscreen() {
     this.fullscreenService.enableFullscreen();
   }
@@ -252,6 +326,10 @@ startTimer() {
 
   ngOnDestroy(): void {
     clearInterval(this.timerId);
+    document.removeEventListener(
+      'fullscreenchange',
+      this.onFullscreenChange.bind(this)
+    );
   }
 
 
@@ -391,6 +469,7 @@ clickEvent(exam: any) {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, Submit",
       cancelButtonText: "Cancel"
+      
     })
     .then((result) => {
       if (result.isConfirmed) {

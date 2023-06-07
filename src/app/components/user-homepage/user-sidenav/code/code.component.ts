@@ -130,7 +130,6 @@ conductExam(){
 
           this.http.post<UserExamDetails>(`http://54.64.6.102:9033/api/userExamDetails/${this.examObject.id}/${this.userId}`,this.examdetails).subscribe((r1)=>{
            const examObject=r1;
-
         })
           this.route.navigate(['userexam', this.examObject.code])
           Swal.fire('Exam Started', '', 'success');

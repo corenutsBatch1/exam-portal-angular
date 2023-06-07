@@ -57,7 +57,6 @@ document: any;
     const formData: FormData = new FormData();
     formData.append('file', this.selectedFile);
 
-
     const uploadHeaders = new HttpHeaders();
 
     uploadHeaders.append('Content-Type', 'multipart/form-data');

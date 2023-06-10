@@ -108,6 +108,7 @@ onClearClick() {
           this.isCheckedB=false;
           this.isCheckedC=false;
           this.isCheckedD=false;
+          this.answers=[];
 
         },
         error=>{

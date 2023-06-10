@@ -37,6 +37,7 @@
               placeholder="Enter name"
               (input)="convertToUppercase()"
               [value]="selectedSubject"
+              [ngModel]="subject.name"
               (ngModelChange)="
               selectedSubject = $event.toUpperCase(); inputvalue = selectedSubject
               "
@@ -57,7 +58,7 @@
             </div>
           </div>
 
-          <div class="col form-group">
+          <div class="col form-group" *ngIf="!isEditOperation">
             <mat-select class="form-control" name="selectedSubject" [(value)]="selectedSubject" placeholder="Available subjects">
               <mat-option *ngFor="let subject of availableSubjects" [value]="subject">{{ subject }}</mat-option>
             </mat-select>
